@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://bd7jdvcxay8jg"]
+
+[ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
+[ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
+[ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6gk5"]
+animation = &"Pipe Animations/charge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s5ga2"]
+animation = &"Pipe Animations/hold_charge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0yobm"]
+animation = &"Pipe Animations/idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rfoto"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0wg56"]
+advance_mode = 2
+advance_condition = &"charge"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w105o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u1x4c"]
+"states/Pipe Animations_charge/node" = SubResource("AnimationNodeAnimation_w6gk5")
+"states/Pipe Animations_charge/position" = Vector2(604, 169)
+"states/Pipe Animations_hold_charge/node" = SubResource("AnimationNodeAnimation_s5ga2")
+"states/Pipe Animations_hold_charge/position" = Vector2(616, 234)
+"states/Pipe Animations_idle/node" = SubResource("AnimationNodeAnimation_0yobm")
+"states/Pipe Animations_idle/position" = Vector2(355, 100)
+transitions = ["Start", "Pipe Animations_idle", SubResource("AnimationNodeStateMachineTransition_rfoto"), "Pipe Animations_idle", "Pipe Animations_charge", SubResource("AnimationNodeStateMachineTransition_0wg56"), "Pipe Animations_charge", "Pipe Animations_hold_charge", SubResource("AnimationNodeStateMachineTransition_w105o")]
+
+[node name="Base" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.968204, -0.0638475, -0.241875, 0.25016, 0.247111, 0.936139, 0, -0.966881, 0.255226, 0, 0, 0)
+light_energy = 1.5
+
+[node name="DummyPlayer" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="DummyPlayer"]
+
+[node name="PipeAnimator" type="AnimationPlayer" parent="DummyPlayer"]
+root_node = NodePath("../..")
+libraries = {
+&"Pipe Animations": ExtResource("1_5jbmu")
+}
+autoplay = "Pipe Animations/idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="DummyPlayer"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_u1x4c")
+anim_player = NodePath("../PipeAnimator")
+parameters/conditions/charge = false
+
+[node name="Models" type="Node3D" parent="DummyPlayer"]
+transform = Transform3D(0.0492202, -0.995939, -0.0753835, 0.753676, 0.0865615, -0.651521, 0.655401, -0.0247467, 0.754876, 0.395128, 0.206986, -0.501366)
+
+[node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_5jbmu")
+skeleton = NodePath("../../..")
+
+[node name="Arm" type="MeshInstance3D" parent="DummyPlayer/Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("3_w6gk5")
+skeleton = NodePath("../../..")
