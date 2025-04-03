@@ -1,30 +1,32 @@
 extends Node3D
 
 enum AttackState {IDLE, CHARGING, CHARGED, SWINGING}
+var state: AttackState
 
 @export var animator: AnimationPlayer
-
-var state: AttackState
 
 
 func _ready() -> void:
     animator.animation_finished.connect(_on_animation_finished)
 
 func _process(_delta: float) -> void:
-    var charge_pressed = Input.is_action_pressed("attack")
+    if Input.is_action_pressed("attack"):
+        if state == AttackState.IDLE: set_state(AttackState.CHARGING)
+    else: match state:
+        # AttackState.CHARGING: set_state(AttackState.IDLE)
+        AttackState.CHARGED: set_state(AttackState.SWINGING)
 
-    match state:
-        AttackState.IDLE:
-            if charge_pressed: animator.play("charge")
-        AttackState.CHARGED:
-            if !charge_pressed: animator.play("swing")
+
+func set_state(new_state: AttackState):
+    match new_state:
+        AttackState.IDLE: animator.play("idle")
+        AttackState.CHARGING: animator.play("charge")
+        AttackState.CHARGED: animator.play("hold_charge")
+        AttackState.SWINGING: animator.play("swing")
+    state = new_state
 
 
 func _on_animation_finished(animation_name: String):
     match animation_name:
-        "charge":
-            animator.play("hold_charge")
-            state = AttackState.CHARGED
-        "swing":
-            animator.play("idle")
-            state = AttackState.IDLE
+        "charge": set_state(AttackState.CHARGED)
+        "swing": set_state(AttackState.IDLE)
