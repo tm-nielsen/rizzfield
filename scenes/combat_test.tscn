@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=15 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
 [ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6gk5"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6gk5"]
 animation = &"Pipe Animations/charge"
@@ -12,6 +14,9 @@ animation = &"Pipe Animations/hold_charge"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0yobm"]
 animation = &"Pipe Animations/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfoto"]
+animation = &"Pipe Animations/swing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rfoto"]
 advance_mode = 2
@@ -24,6 +29,14 @@ advance_condition = &"charge"
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u1x4c"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2nw7r"]
+advance_mode = 2
+advance_condition = &"swing"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u1x4c"]
 "states/Pipe Animations_charge/node" = SubResource("AnimationNodeAnimation_w6gk5")
 "states/Pipe Animations_charge/position" = Vector2(604, 169)
@@ -31,7 +44,10 @@ advance_mode = 2
 "states/Pipe Animations_hold_charge/position" = Vector2(616, 234)
 "states/Pipe Animations_idle/node" = SubResource("AnimationNodeAnimation_0yobm")
 "states/Pipe Animations_idle/position" = Vector2(355, 100)
-transitions = ["Start", "Pipe Animations_idle", SubResource("AnimationNodeStateMachineTransition_rfoto"), "Pipe Animations_idle", "Pipe Animations_charge", SubResource("AnimationNodeStateMachineTransition_0wg56"), "Pipe Animations_charge", "Pipe Animations_hold_charge", SubResource("AnimationNodeStateMachineTransition_w105o")]
+"states/Pipe Animations_swing/node" = SubResource("AnimationNodeAnimation_rfoto")
+"states/Pipe Animations_swing/position" = Vector2(337, 239)
+transitions = ["Start", "Pipe Animations_idle", SubResource("AnimationNodeStateMachineTransition_rfoto"), "Pipe Animations_idle", "Pipe Animations_charge", SubResource("AnimationNodeStateMachineTransition_0wg56"), "Pipe Animations_charge", "Pipe Animations_hold_charge", SubResource("AnimationNodeStateMachineTransition_w105o"), "Pipe Animations_swing", "Pipe Animations_idle", SubResource("AnimationNodeStateMachineTransition_u1x4c"), "Pipe Animations_hold_charge", "Pipe Animations_swing", SubResource("AnimationNodeStateMachineTransition_2nw7r")]
+graph_offset = Vector2(-46, 67)
 
 [node name="Base" type="Node3D"]
 
@@ -46,6 +62,7 @@ light_energy = 1.5
 [node name="PipeAnimator" type="AnimationPlayer" parent="DummyPlayer"]
 root_node = NodePath("../..")
 libraries = {
+&"": SubResource("AnimationLibrary_w6gk5"),
 &"Pipe Animations": ExtResource("1_5jbmu")
 }
 autoplay = "Pipe Animations/idle"
@@ -55,9 +72,10 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_u1x4c")
 anim_player = NodePath("../PipeAnimator")
 parameters/conditions/charge = false
+parameters/conditions/swing = false
 
 [node name="Models" type="Node3D" parent="DummyPlayer"]
-transform = Transform3D(0.0492202, -0.995939, -0.0753835, 0.753676, 0.0865615, -0.651521, 0.655401, -0.0247467, 0.754876, 0.395128, 0.206986, -0.501366)
+transform = Transform3D(0.978143, 0.207911, -0.00277504, -0.207912, 0.978148, -1.2671e-09, 0.0027144, 0.000576966, 0.999996, 0.462, -0.17, -0.61)
 
 [node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/Models"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

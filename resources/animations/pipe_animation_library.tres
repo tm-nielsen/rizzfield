@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=5 format=3 uid="uid://c82hleej4cuwm"]
+[gd_resource type="AnimationLibrary" load_steps=6 format=3 uid="uid://c82hleej4cuwm"]
 
 [sub_resource type="Animation" id="Animation_ekcfv"]
 resource_name = "idle"
@@ -141,10 +141,40 @@ tracks/1/keys = {
 "values": [Vector3(0.709588, -0.0995321, 1.45644), Vector3(0.570296, -0.0377446, 1.38446)]
 }
 
+[sub_resource type="Animation" id="Animation_0sqvk"]
+resource_name = "swing"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DummyPlayer/Models:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-7.45058e-09, 0.0833333, 0.166667, 0.25, 0.5, 0.583333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.296425, 0.176973, -0.47535), Vector3(-0.930339, -0.462228, -0.8295), Vector3(-0.814989, -0.429267, -0.758806), Vector3(-0.398512, -0.310679, -0.637266), Vector3(-0.185742, -0.310679, -0.637266), Vector3(0.563262, -0.203082, -0.562045)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DummyPlayer/Models:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-7.45058e-09, 0.0833333, 0.166667, 0.25, 0.5, 0.583333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.986535, -0.682338, -1.4291), Vector3(-0.186774, 0.647597, 1.55115), Vector3(-0.184052, 0.785902, 1.38232), Vector3(-0.116366, 0.980646, 0.635949), Vector3(-0.370728, 0.496074, 0.280253), Vector3(0.116524, -0.161318, -0.322788)]
+}
+
 [resource]
 _data = {
 &"RESET": SubResource("Animation_5jbmu"),
 &"charge": SubResource("Animation_w6gk5"),
 &"hold_charge": SubResource("Animation_rlw5b"),
-&"idle": SubResource("Animation_ekcfv")
+&"idle": SubResource("Animation_ekcfv"),
+&"swing": SubResource("Animation_0sqvk")
 }
