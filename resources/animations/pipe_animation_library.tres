@@ -68,6 +68,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.376901, -0.804522, 0.430348), Vector3(-0.133651, -0.913673, 0.799051), Vector3(0.811412, 0.183816, 3.1137), Vector3(0.709588, -0.0995321, 1.45644), Vector3(0.570296, -0.0377446, 1.38446)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Models/Pipe:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0833333, 0.166667, 0.25, 0.333333, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.782061, 0.104434, -0.237223), Vector3(0, 0, 0), Vector3(0.383574, 0.00261376, 0.157298), Vector3(-0.214172, -0.0239034, -0.00612751)]
+}
 
 [sub_resource type="Animation" id="Animation_rlw5b"]
 resource_name = "hold_charge"
@@ -168,6 +180,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0.986535, -0.682338, -1.4291), Vector3(-0.186774, 0.647597, 1.55115), Vector3(-0.184052, 0.785902, 1.38232), Vector3(-0.116366, 0.980646, 0.635949), Vector3(-0.370728, 0.496074, 0.280253), Vector3(0.116524, -0.161318, -0.322788)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Models/Pipe:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.166667, 0.25, 0.333333, 0.5, 0.583333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.26483, -0.209563, 0.0865067), Vector3(0, 0, 0), Vector3(-0.0120639, 0.306741, 0.299086), Vector3(0, 0, 0)]
 }
 
 [resource]
