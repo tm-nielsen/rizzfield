@@ -21,7 +21,7 @@ light_energy = 1.5
 [node name="Camera3D" type="Camera3D" parent="DummyPlayer"]
 
 [node name="mannequin" parent="DummyPlayer" instance=ExtResource("1_w105o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, -0.5)
 
 [node name="AttackManager" type="Node3D" parent="DummyPlayer" node_paths=PackedStringArray("animator")]
 script = ExtResource("1_w6gk5")

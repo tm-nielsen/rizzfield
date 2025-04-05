@@ -8,4 +8,7 @@
 [node name="Skeleton3D" parent="skeleton" index="0"]
 animate_physical_bones = false
 script = ExtResource("2_q8lao")
-randomize_delay = 0.1
+angle = 0.25
+max_step_delay = 0.4
+min_step_distance = Vector2(-0.1, 0)
+max_step_distance = Vector2(0.5, 2)
