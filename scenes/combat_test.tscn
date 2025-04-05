@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=6 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_w6gk5"]
 [ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
+[ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_s5ga2"]
 
 [node name="Base" type="Node3D"]
 
@@ -29,10 +30,14 @@ autoplay = "idle"
 transform = Transform3D(0.978143, 0.207911, -0.00277505, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999996, 0.462, -0.17, -0.61)
 
 [node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("2_5jbmu")
 skeleton = NodePath("../../../..")
 
 [node name="Arm" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
 mesh = ExtResource("3_w6gk5")
 skeleton = NodePath("../../../..")
+
+[node name="Smear" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
+transform = Transform3D(-0.638384, 0.488448, -0.594881, -0.744856, -0.586861, 0.317463, -0.194048, 0.645764, 0.738467, 0.0224981, 0.00349995, -0.119393)
+visible = false
+mesh = ExtResource("5_s5ga2")
