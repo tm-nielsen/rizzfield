@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_w6gk5"]
 [ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
+[ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_0wg56"]
 [ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_s5ga2"]
+[ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_w105o"]
+[ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="7_0wg56"]
 
 [node name="Base" type="Node3D"]
 
@@ -32,12 +35,15 @@ transform = Transform3D(0.978143, 0.207911, -0.00277505, -0.207912, 0.978148, -1
 [node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
 mesh = ExtResource("2_5jbmu")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_0wg56")
 
 [node name="Arm" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
 mesh = ExtResource("3_w6gk5")
 skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("6_w105o")
 
 [node name="Smear" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-transform = Transform3D(-0.638384, 0.488448, -0.594881, -0.744856, -0.586861, 0.317463, -0.194048, 0.645764, 0.738467, 0.0224981, 0.00349995, -0.119393)
+transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744854, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
 visible = false
 mesh = ExtResource("5_s5ga2")
+surface_material_override/0 = ExtResource("7_0wg56")
