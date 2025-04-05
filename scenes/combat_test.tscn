@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=10 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_w6gk5"]
+[ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/mannequin.tscn" id="1_w105o"]
 [ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
 [ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_0wg56"]
@@ -19,6 +20,9 @@ light_energy = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="DummyPlayer"]
 
+[node name="mannequin" parent="DummyPlayer" instance=ExtResource("1_w105o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
 [node name="AttackManager" type="Node3D" parent="DummyPlayer" node_paths=PackedStringArray("animator")]
 script = ExtResource("1_w6gk5")
 animator = NodePath("PipeAnimator")
@@ -30,7 +34,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="Models" type="Node3D" parent="DummyPlayer/AttackManager"]
-transform = Transform3D(0.978143, 0.207911, -0.00277505, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999996, 0.462, -0.17, -0.61)
+transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999995, 0.462, -0.17, -0.61)
 
 [node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
 mesh = ExtResource("2_5jbmu")
@@ -43,7 +47,7 @@ skeleton = NodePath("../../../..")
 surface_material_override/0 = ExtResource("6_w105o")
 
 [node name="Smear" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744854, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
+transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
 visible = false
 mesh = ExtResource("5_s5ga2")
 surface_material_override/0 = ExtResource("7_0wg56")
