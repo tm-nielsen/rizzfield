@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bjcmfgiew676s"]
+
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_xi3w6"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xi3w6")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0.866667, 0.866667, 0.866667, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
