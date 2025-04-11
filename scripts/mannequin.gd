@@ -8,7 +8,11 @@ extends Skeleton3D
 @export var min_step_distance := Vector2(0.1, 0.5)
 @export var max_step_distance := Vector2(0.3, 1)
 
+@export var animator: AnimationPlayer
+
 var step_direction: int = 1
+
+var last_step_rotations: Dictionary[int, Quaternion]
 var step_rotations: Dictionary[int, Quaternion]
 
 
@@ -19,6 +23,7 @@ func _ready() -> void:
 func take_step():
     move_with_step()
     set_base_position()
+    apply_default_step_pose()
     generate_step_pose()
     apply_overshot_step_pose()
     var tween = create_tween()
@@ -46,21 +51,27 @@ func set_base_position():
     set_bone_pose(0, base_t)
 
 
+func apply_default_step_pose():
+    animator.play("step")
+    animator.advance(0)
+
+
 func generate_step_pose():
+    last_step_rotations = step_rotations.duplicate()
     iterate_bones(func (i: int):
-        var rest_basis := get_bone_rest(i).basis
-        var rest_rotation := rest_basis.get_rotation_quaternion()
+        var base_rotation := get_bone_pose_rotation(i)
 
         var random_rotation := Quaternion.from_euler(
             Vector3(rand_angle(), rand_angle(), rand_angle())
         )
-        step_rotations[i] = rest_rotation * random_rotation
+        step_rotations[i] = base_rotation * random_rotation
     )
 
 func apply_overshot_step_pose():
     iterate_bones(func (i: int):
-        var current_rotation := get_bone_pose_rotation(i)
-        var overshot_rotation = current_rotation.slerp(step_rotations[i], overshoot_factor)
+        var last := last_step_rotations[i] if last_step_rotations.has(i) else get_bone_pose_rotation(i)
+        var next := step_rotations[i]
+        var overshot_rotation = last.slerp(next, overshoot_factor)
         set_bone_pose_rotation(i, overshot_rotation)
     )
 
@@ -70,7 +81,7 @@ func apply_step_pose():
     )
 
 
-func iterate_bones(method: Callable):
+func iterate_bones(method: Callable, root_index: int = 0):
     for i in range(1, get_bone_count()):
         if get_bone_name(i) == "Right Foot": continue
         method.call(i)
