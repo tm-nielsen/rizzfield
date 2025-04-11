@@ -1,6 +1,7 @@
 extends Skeleton3D
 
 @export var angle: float = PI/12
+@export var overshoot_factor: float = 1.1
 @export var min_step_delay: float = 0.05
 @export var max_step_delay: float = 0.15
 
@@ -8,6 +9,7 @@ extends Skeleton3D
 @export var max_step_distance := Vector2(0.3, 1)
 
 var step_direction: int = 1
+var step_rotations: Dictionary[int, Quaternion]
 
 
 func _ready() -> void:
@@ -17,8 +19,11 @@ func _ready() -> void:
 func take_step():
     move_with_step()
     set_base_position()
-    randomize_pose()
+    generate_step_pose()
+    apply_overshot_step_pose()
     var tween = create_tween()
+    tween.tween_interval(1 / 12.0)
+    tween.tween_callback(apply_step_pose)
     tween.tween_interval(randf_range(min_step_delay, max_step_delay))
     tween.tween_callback(take_step)
 
@@ -41,16 +46,34 @@ func set_base_position():
     set_bone_pose(0, base_t)
 
 
-func randomize_pose():
+func generate_step_pose():
+    iterate_bones(func (i: int):
+        var rest_basis := get_bone_rest(i).basis
+        var rest_rotation := rest_basis.get_rotation_quaternion()
 
-    for i in range(1, get_bone_count()):
-        if get_bone_name(i) == "Right Foot": continue
-        
-        var q := get_bone_rest(i).basis.get_rotation_quaternion()
-        var rot = Quaternion.from_euler(
+        var random_rotation := Quaternion.from_euler(
             Vector3(rand_angle(), rand_angle(), rand_angle())
         )
-        set_bone_pose_rotation(i, q * rot)
+        step_rotations[i] = rest_rotation * random_rotation
+    )
+
+func apply_overshot_step_pose():
+    iterate_bones(func (i: int):
+        var current_rotation := get_bone_pose_rotation(i)
+        var overshot_rotation = current_rotation.slerp(step_rotations[i], overshoot_factor)
+        set_bone_pose_rotation(i, overshot_rotation)
+    )
+
+func apply_step_pose():
+    iterate_bones(func (i):
+        set_bone_pose_rotation(i, step_rotations[i])
+    )
+
+
+func iterate_bones(method: Callable):
+    for i in range(1, get_bone_count()):
+        if get_bone_name(i) == "Right Foot": continue
+        method.call(i)
 
 
 func rand_angle(a: float = angle) -> float:
