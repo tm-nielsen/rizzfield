@@ -82,9 +82,12 @@ func apply_step_pose():
 
 
 func iterate_bones(method: Callable, root_index: int = 0):
-    for i in range(1, get_bone_count()):
-        if get_bone_name(i) == "Right Foot": continue
-        method.call(i)
+    for bone_index in get_bone_children(root_index):
+        var bone_name := get_bone_name(bone_index)
+        if ["Right Foot", "Left Hip"].has(bone_name): continue
+        if !["Right Shin", "Right Thigh", "Right Hip"].has(bone_name):
+            method.call(bone_index)
+        iterate_bones(method, bone_index)
 
 
 func rand_angle(a: float = angle) -> float:
