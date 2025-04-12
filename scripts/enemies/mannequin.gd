@@ -27,8 +27,8 @@ func _ready() -> void:
     animator.animation_finished.connect(_on_animation_finished)
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
-    step_animator.take_step()
     ragdoll.active = false
+    step_animator.take_step()
 
 func _process(_delta: float) -> void:
     if target:
@@ -60,8 +60,11 @@ func attack():
 
 
 func move_with_step(distance: float):
-    transform = transform.looking_at(target_position, Vector3.UP, true)
-    position += transform.basis.z * distance
+    var target_offset = target_position - global_position
+    target_offset.y = 0
+    var look_target = global_position + target_offset
+    look_at(look_target, Vector3.UP, true)
+    global_position += basis.z * distance
 
 func _on_animation_finished(_animation_name: String):
     if state == ATTACKING:
