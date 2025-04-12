@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuwbviq8y2olc"]
+
+[ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_56dyf"]
+[ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="2_6o77n"]
+[ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="3_6v0jn"]
+[ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_jybep"]
+[ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="4_r053x"]
+[ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_jybep"]
+[ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_50rl7"]
+[ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="8_oqq3r"]
+
+[node name="Player" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="AttackManager" type="Node3D" parent="." node_paths=PackedStringArray("animator")]
+script = ExtResource("1_56dyf")
+animator = NodePath("PipeAnimator")
+
+[node name="PipeAnimator" type="AnimationPlayer" parent="AttackManager"]
+libraries = {
+&"": ExtResource("2_6o77n")
+}
+autoplay = "idle"
+
+[node name="Models" type="Node3D" parent="AttackManager"]
+transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999994, 0.462, -0.17, -0.61)
+
+[node name="Pipe" type="MeshInstance3D" parent="AttackManager/Models"]
+mesh = ExtResource("3_6v0jn")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("4_jybep")
+
+[node name="Arm" type="MeshInstance3D" parent="AttackManager/Models"]
+mesh = ExtResource("4_r053x")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = ExtResource("6_50rl7")
+
+[node name="Smear" type="MeshInstance3D" parent="AttackManager/Models"]
+transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
+visible = false
+mesh = ExtResource("5_jybep")
+surface_material_override/0 = ExtResource("8_oqq3r")
