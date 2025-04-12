@@ -1,14 +1,15 @@
 extends Skeleton3D
 
-@export var angle: float = PI/12
-@export var overshoot_factor: float = 1.1
-@export var min_step_delay: float = 0.05
-@export var max_step_delay: float = 0.15
-
-@export var min_step_distance := Vector2(0.1, 0.5)
-@export var max_step_distance := Vector2(0.3, 1)
-
 @export var animator: AnimationPlayer
+
+@export_subgroup("step parameters")
+@export var random_angle_range: float = 0.4
+@export var overshoot_factor: float = 1.2
+@export var min_step_delay: float = 0.0
+@export var max_step_delay: float = 0.3
+
+@export var min_step_distance := Vector2(-0.1, 0.6)
+@export var max_step_distance := Vector2(0.5, 1.4)
 
 var step_direction: int = 1
 
@@ -90,5 +91,5 @@ func iterate_bones(method: Callable, root_index: int = 0):
         iterate_bones(method, bone_index)
 
 
-func rand_angle(a: float = angle) -> float:
+func rand_angle(a: float = random_angle_range) -> float:
     return randf_range(-a, a)
