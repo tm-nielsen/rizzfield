@@ -1,4 +1,7 @@
+class_name ProceduralStepAnimator
 extends Skeleton3D
+
+signal step_taken(distance: float)
 
 @export var animator: AnimationPlayer
 
@@ -12,32 +15,32 @@ extends Skeleton3D
 @export var max_step_distance := Vector2(0.5, 1.4)
 
 var step_direction: int = 1
+var step_tween: Tween
 
 var last_step_rotations: Dictionary[int, Quaternion]
 var step_rotations: Dictionary[int, Quaternion]
 
 
-func _ready() -> void:
-    take_step()
-
-
 func take_step():
-    move_with_step()
+    if step_tween: step_tween.kill()
     set_base_position()
     apply_default_step_pose()
     generate_step_pose()
     apply_overshot_step_pose()
-    var tween = create_tween()
-    tween.tween_interval(1 / 12.0)
-    tween.tween_callback(apply_step_pose)
-    tween.tween_interval(randf_range(min_step_delay, max_step_delay))
-    tween.tween_callback(take_step)
+    move_with_step()
+    step_tween = create_tween()
+    step_tween.tween_interval(1 / 12.0)
+    step_tween.tween_callback(apply_step_pose)
+    step_tween.tween_interval(randf_range(min_step_delay, max_step_delay))
+    step_tween.tween_callback(take_step)
+
+func stop_step():
+    step_tween.kill()
 
 
 func move_with_step():
-    position.z += randf_range(min_step_distance.y, max_step_distance.y)
-    if position.z > 0:
-        position.z -= 10
+    var distance = randf_range(min_step_distance.y, max_step_distance.y)
+    step_taken.emit(distance)
 
 
 func set_base_position():

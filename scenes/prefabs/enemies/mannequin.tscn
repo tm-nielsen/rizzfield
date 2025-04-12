@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=4 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
-[ext_resource type="Script" uid="uid://ceqw1wpmritw8" path="res://scripts/enemies/procedural_step_animator.gd" id="2_q8lao"]
+[ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin.gd" id="2_q8lao"]
+[ext_resource type="Script" uid="uid://ceqw1wpmritw8" path="res://scripts/enemies/procedural_step_animator.gd" id="3_wi8gg"]
 
-[node name="mannequin" instance=ExtResource("1_wva5t")]
+[node name="mannequin" node_paths=PackedStringArray("animator", "step_animator") instance=ExtResource("1_wva5t")]
+script = ExtResource("2_q8lao")
+animator = NodePath("AnimationPlayer")
+step_animator = NodePath("skeleton/Skeleton3D")
 
 [node name="Skeleton3D" parent="skeleton" index="0" node_paths=PackedStringArray("animator")]
 animate_physical_bones = false
@@ -45,5 +49,5 @@ bones/34/rotation = Quaternion(0.0621973, 0.709683, -0.0271242, 0.701246)
 bones/35/rotation = Quaternion(0.259555, 0.295411, 0.629287, 0.670345)
 bones/36/rotation = Quaternion(0.0094442, -0.000644202, -0.0120115, 0.999883)
 bones/37/rotation = Quaternion(-0.72095, -0.0649207, -0.0604875, 0.687283)
-script = ExtResource("2_q8lao")
+script = ExtResource("3_wi8gg")
 animator = NodePath("../../AnimationPlayer")
