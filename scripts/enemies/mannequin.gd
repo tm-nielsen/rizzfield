@@ -8,6 +8,8 @@ const ATTACKING = State.ATTACKING
 
 @export var animator: AnimationPlayer
 @export var step_animator: ProceduralStepAnimator
+@export var ragdoll: PhysicalBoneSimulator3D
+@export var force_node: PhysicalBone3D
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
@@ -26,11 +28,21 @@ func _ready() -> void:
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
     step_animator.take_step()
+    ragdoll.active = false
 
 func _process(_delta: float) -> void:
     if target:
         target_position = target.global_position
         target_position -= target.global_basis.z * target_lead_distance
+
+    if Input.is_key_pressed(KEY_1) && !ragdoll.active:
+        ragdoll.active = true
+        ragdoll.physical_bones_start_simulation()
+        force_node.apply_central_impulse(Vector3.FORWARD * 100)
+    if Input.is_key_pressed(KEY_2) && ragdoll.active:
+        ragdoll.active = false
+        ragdoll.physical_bones_stop_simulation()
+
 
     match state:
         TRACKING:
