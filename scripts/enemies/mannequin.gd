@@ -20,15 +20,17 @@ var target_position: Vector3
 
 
 func _ready() -> void:
-    target = get_viewport().get_camera_3d().get_parent()
+    target = get_viewport().get_camera_3d()
+    if target: target = target.get_parent()
     animator.animation_finished.connect(_on_animation_finished)
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
-    target_position = target.global_position
-    target_position -= target.global_basis.z * target_lead_distance
+    if target:
+        target_position = target.global_position
+        target_position -= target.global_basis.z * target_lead_distance
 
     match state:
         TRACKING:
