@@ -18,10 +18,10 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = texture(albedo_texture, UV).rgb * albedo_colour;
-	
+
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
 	SPECULAR = specular;
-	
+
 	EMISSION = emission;
 }
