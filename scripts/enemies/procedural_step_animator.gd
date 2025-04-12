@@ -74,7 +74,8 @@ func generate_step_pose():
 func apply_overshot_step_pose():
     iterate_bones(func (i: int):
         var last := last_step_rotations[i] if last_step_rotations.has(i) else get_bone_pose_rotation(i)
-        var next := step_rotations[i]
+        last = last.normalized()
+        var next := step_rotations[i].normalized()
         var overshot_rotation = last.slerp(next, overshoot_factor)
         set_bone_pose_rotation(i, overshot_rotation)
     )
