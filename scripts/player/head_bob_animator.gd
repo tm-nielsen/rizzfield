@@ -8,7 +8,7 @@ extends Node3D
 var frame_timer: float = 0.0
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
     frame_timer += delta
     if frame_timer > 1 / framerate:
         frame_timer -= 1 / framerate

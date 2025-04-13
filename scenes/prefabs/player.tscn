@@ -49,6 +49,7 @@ script = ExtResource("5_lagtt")
 target = NodePath("../Camera3D")
 elastic_position = SubResource("Resource_lagtt")
 elastic_rotation = SubResource("Resource_gkb8g")
+framerate = 18.0
 
 [node name="AttackManager" type="Node3D" parent="ElasticJoint" node_paths=PackedStringArray("animator", "movement_body")]
 script = ExtResource("1_56dyf")
