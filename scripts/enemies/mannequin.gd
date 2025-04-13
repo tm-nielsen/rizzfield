@@ -37,13 +37,14 @@ func _process(_delta: float) -> void:
         target_position = target.global_position
         target_position -= target.global_basis.z * target_lead_distance
 
-    if Input.is_key_pressed(KEY_1) && !ragdoll.active:
-        ragdoll.active = true
-        ragdoll.physical_bones_start_simulation()
-        force_node.apply_central_impulse(Vector3.FORWARD * 100)
+    # if Input.is_key_pressed(KEY_1) && !ragdoll.active:
+    #     ragdoll.active = true
+    #     ragdoll.physical_bones_start_simulation()
+    #     force_node.apply_central_impulse(Vector3.FORWARD * 100)
     if Input.is_key_pressed(KEY_2) && ragdoll.active:
         ragdoll.active = false
         ragdoll.physical_bones_stop_simulation()
+        step_animator.take_step()
 
     if state == TRACKING && is_target_in_range: attack()
 
@@ -71,6 +72,13 @@ func look_at_target():
     target_offset.y = 0
     var look_target = global_position + target_offset
     look_at(look_target, Vector3.UP, true)
+
+
+func receive_damage(damage: int, force: Vector3):
+    step_animator.stop_step()
+    ragdoll.active = true
+    ragdoll.physical_bones_start_simulation()
+    force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
 
 
 func _on_animation_finished(_animation_name: String):

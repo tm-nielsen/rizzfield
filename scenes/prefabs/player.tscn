@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=19 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
@@ -13,6 +13,7 @@
 [ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_50rl7"]
 [ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="6_gkb8g"]
 [ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="8_oqq3r"]
+[ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="14_c1k3r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r053x"]
 radius = 0.3
@@ -30,7 +31,12 @@ elasticity = Vector2(0.8, 0.1)
 friction = Vector2(1, 0.2)
 metadata/_custom_type_script = "uid://ctu3lj87dt74c"
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xtlg4"]
+radius = 0.8
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
+collision_layer = 10
+collision_mask = 5
 script = ExtResource("1_jybep")
 head_node = NodePath("Camera3D")
 look_speed = Vector2(0.75, 0.5)
@@ -90,3 +96,15 @@ transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.
 visible = false
 mesh = ExtResource("5_jybep")
 surface_material_override/0 = ExtResource("8_oqq3r")
+
+[node name="HurtBox" type="Area3D" parent="ElasticJoint/AttackManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.418, -0.2, -0.9)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+script = ExtResource("14_c1k3r")
+impact_direction = Vector3(-0.2, -0.2, 1)
+impact_scale = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/AttackManager/HurtBox"]
+shape = SubResource("SphereShape3D_xtlg4")
