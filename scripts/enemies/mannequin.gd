@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
 enum State {
-    TRACKING, ATTACKING
+    TRACKING, ATTACKING, DEAD
 }
 const TRACKING = State.TRACKING
 const ATTACKING = State.ATTACKING
+const DEAD = State.DEAD
 
 @export var animator: AnimationPlayer
 @export var step_animator: ProceduralStepAnimator
@@ -44,6 +45,8 @@ func _process(_delta: float) -> void:
     if Input.is_key_pressed(KEY_2) && ragdoll.active:
         ragdoll.active = false
         ragdoll.physical_bones_stop_simulation()
+        state = TRACKING
+        collision_layer = 12
         step_animator.take_step()
 
     if state == TRACKING && is_target_in_range: attack()
@@ -76,6 +79,8 @@ func look_at_target():
 
 func receive_damage(damage: int, force: Vector3):
     step_animator.stop_step()
+    state = DEAD
+    collision_layer = 0
     ragdoll.active = true
     ragdoll.physical_bones_start_simulation()
     force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
