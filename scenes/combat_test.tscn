@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/mannequin.tscn" id="1_w105o"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="2_ekcfv"]
 [ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="3_5jbmu"]
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="3_s5ga2"]
+[ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="4_0yobm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfoto"]
+render_priority = 0
+shader = ExtResource("3_s5ga2")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("4_0yobm")
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(200, 200)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w105o"]
+material = SubResource("ShaderMaterial_rfoto")
 size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u1x4c"]
@@ -14,7 +28,9 @@ size = Vector3(100, 0.1, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.968204, -0.0638475, -0.241875, 0.25016, 0.247111, 0.936139, 0, -0.966881, 0.255226, 0, 0, 0)
+light_color = Color(0.481789, 0.481789, 0.481789, 1)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="mannequin" parent="." instance=ExtResource("1_w105o")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.2, -3)
