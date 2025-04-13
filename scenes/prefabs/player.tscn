@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=17 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
 [ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="2_6o77n"]
 [ext_resource type="Script" uid="uid://c1u7d0iq8w80q" path="res://scripts/player/head_bob_animator.gd" id="2_50rl7"]
 [ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="3_6v0jn"]
+[ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="3_gkb8g"]
 [ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_jybep"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="4_r053x"]
 [ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_jybep"]
@@ -33,23 +34,28 @@ metadata/_custom_type_script = "uid://ctu3lj87dt74c"
 script = ExtResource("1_jybep")
 head_node = NodePath("Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body", "update_timer")]
 current = true
 script = ExtResource("2_50rl7")
 movement_body = NodePath("..")
+update_timer = NodePath("../FrameTimer")
 frequency = 1.2
-framerate = 18.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 shape = SubResource("CapsuleShape3D_r053x")
 
-[node name="ElasticJoint" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+[node name="FrameTimer" type="Node" parent="."]
+script = ExtResource("3_gkb8g")
+frame_rate = 18.0
+metadata/_custom_type_script = "uid://dhpprbs6cek1p"
+
+[node name="ElasticJoint" type="Node3D" parent="." node_paths=PackedStringArray("target", "update_timer")]
 script = ExtResource("5_lagtt")
 target = NodePath("../Camera3D")
+update_timer = NodePath("../FrameTimer")
 elastic_position = SubResource("Resource_lagtt")
 elastic_rotation = SubResource("Resource_gkb8g")
-framerate = 18.0
 
 [node name="AttackManager" type="Node3D" parent="ElasticJoint" node_paths=PackedStringArray("animator", "movement_body")]
 script = ExtResource("1_56dyf")

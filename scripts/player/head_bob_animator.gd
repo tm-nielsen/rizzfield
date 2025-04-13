@@ -1,18 +1,13 @@
 extends Node3D
 
 @export var movement_body: PlayerController
+@export var update_timer: FrameTimer
 @export var amplitude := Vector2(0.1, 0.1)
 @export var frequency: float = 1.0
-@export_range(12, 24) var framerate: float = 12.0
-
-var frame_timer: float = 0.0
 
 
-func _process(delta: float) -> void:
-    frame_timer += delta
-    if frame_timer > 1 / framerate:
-        frame_timer -= 1 / framerate
-        update_position()
+func _ready() -> void:
+    update_timer.frame_out.connect(update_position)
 
 
 func update_position():
