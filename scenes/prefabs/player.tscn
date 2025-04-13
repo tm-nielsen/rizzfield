@@ -23,6 +23,7 @@ head_node = NodePath("Camera3D")
 current = true
 script = ExtResource("2_50rl7")
 movement_body = NodePath("..")
+frequency = 1.2
 framerate = 18.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
