@@ -2,7 +2,7 @@ shader_type spatial;
 render_mode specular_toon;
 
 uniform vec3 albedo_colour: source_color = vec3(1);
-uniform sampler2D albedo_texture: hint_default_white;
+uniform sampler2D albedo_texture: hint_default_white, filter_nearest;
 
 uniform float roughness = 0.5;
 uniform float metallic = 0;

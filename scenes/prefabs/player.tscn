@@ -1,0 +1,92 @@
+[gd_scene load_steps=17 format=3 uid="uid://cuwbviq8y2olc"]
+
+[ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_56dyf"]
+[ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
+[ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="2_6o77n"]
+[ext_resource type="Script" uid="uid://c1u7d0iq8w80q" path="res://scripts/player/head_bob_animator.gd" id="2_50rl7"]
+[ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="3_6v0jn"]
+[ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="3_gkb8g"]
+[ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_jybep"]
+[ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="4_r053x"]
+[ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_jybep"]
+[ext_resource type="Script" uid="uid://cn4wc20kg8tge" path="res://scripts/utilities/elastic_transform_follow.gd" id="5_lagtt"]
+[ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_50rl7"]
+[ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="6_gkb8g"]
+[ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="8_oqq3r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r053x"]
+radius = 0.3
+height = 1.3
+
+[sub_resource type="Resource" id="Resource_lagtt"]
+script = ExtResource("6_gkb8g")
+elasticity = Vector2(0.1, 0.1)
+friction = Vector2(0.2, 0.3)
+metadata/_custom_type_script = "uid://ctu3lj87dt74c"
+
+[sub_resource type="Resource" id="Resource_gkb8g"]
+script = ExtResource("6_gkb8g")
+elasticity = Vector2(0.8, 0.1)
+friction = Vector2(1, 0.2)
+metadata/_custom_type_script = "uid://ctu3lj87dt74c"
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
+script = ExtResource("1_jybep")
+head_node = NodePath("Camera3D")
+look_speed = Vector2(0.75, 0.5)
+minimum_look_angle = -0.8
+maximum_look_angle = 0.4
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body", "update_timer")]
+current = true
+script = ExtResource("2_50rl7")
+movement_body = NodePath("..")
+update_timer = NodePath("../FrameTimer")
+amplitude = Vector2(0.06, 0.04)
+frequency = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+shape = SubResource("CapsuleShape3D_r053x")
+
+[node name="FrameTimer" type="Node" parent="."]
+script = ExtResource("3_gkb8g")
+frame_rate = 18.0
+metadata/_custom_type_script = "uid://dhpprbs6cek1p"
+
+[node name="ElasticJoint" type="Node3D" parent="." node_paths=PackedStringArray("target", "update_timer")]
+script = ExtResource("5_lagtt")
+target = NodePath("../Camera3D")
+update_timer = NodePath("../FrameTimer")
+elastic_position = SubResource("Resource_lagtt")
+elastic_rotation = SubResource("Resource_gkb8g")
+
+[node name="AttackManager" type="Node3D" parent="ElasticJoint" node_paths=PackedStringArray("animator", "movement_body")]
+script = ExtResource("1_56dyf")
+animator = NodePath("PipeAnimator")
+movement_body = NodePath("../..")
+
+[node name="PipeAnimator" type="AnimationPlayer" parent="ElasticJoint/AttackManager"]
+libraries = {
+&"": ExtResource("2_6o77n")
+}
+autoplay = "idle"
+
+[node name="Models" type="Node3D" parent="ElasticJoint/AttackManager"]
+transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999994, 0.462, -0.17, -0.61)
+
+[node name="Pipe" type="MeshInstance3D" parent="ElasticJoint/AttackManager/Models"]
+mesh = ExtResource("3_6v0jn")
+skeleton = NodePath("../../../../root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141")
+surface_material_override/0 = ExtResource("4_jybep")
+
+[node name="Arm" type="MeshInstance3D" parent="ElasticJoint/AttackManager/Models"]
+mesh = ExtResource("4_r053x")
+skeleton = NodePath("../../../../root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141")
+surface_material_override/0 = ExtResource("6_50rl7")
+
+[node name="Smear" type="MeshInstance3D" parent="ElasticJoint/AttackManager/Models"]
+transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
+visible = false
+mesh = ExtResource("5_jybep")
+surface_material_override/0 = ExtResource("8_oqq3r")

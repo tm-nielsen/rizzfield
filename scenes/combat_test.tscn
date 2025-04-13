@@ -1,16 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
 
-[ext_resource type="AnimationLibrary" uid="uid://c82hleej4cuwm" path="res://resources/animations/pipe_animation_library.tres" id="1_5jbmu"]
-[ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/attack_manager.gd" id="1_w6gk5"]
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/mannequin.tscn" id="1_w105o"]
-[ext_resource type="ArrayMesh" uid="uid://xnl4r0rayrgo" path="res://models/pipe.res" id="2_5jbmu"]
-[ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="3_w6gk5"]
-[ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_0wg56"]
-[ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_s5ga2"]
-[ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_w105o"]
-[ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="7_0wg56"]
+[ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="2_ekcfv"]
+[ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="3_5jbmu"]
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="3_s5ga2"]
+[ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="4_0yobm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfoto"]
+render_priority = 0
+shader = ExtResource("3_s5ga2")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("4_0yobm")
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(200, 200)
 
 [sub_resource type="BoxMesh" id="BoxMesh_w105o"]
+material = SubResource("ShaderMaterial_rfoto")
 size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u1x4c"]
@@ -20,43 +28,14 @@ size = Vector3(100, 0.1, 100)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.968204, -0.0638475, -0.241875, 0.25016, 0.247111, 0.936139, 0, -0.966881, 0.255226, 0, 0, 0)
+light_color = Color(0.481789, 0.481789, 0.481789, 1)
 light_energy = 1.5
+shadow_enabled = true
 
 [node name="mannequin" parent="." instance=ExtResource("1_w105o")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.2, -3)
 
-[node name="DummyPlayer" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="DummyPlayer"]
-
-[node name="AttackManager" type="Node3D" parent="DummyPlayer" node_paths=PackedStringArray("animator")]
-script = ExtResource("1_w6gk5")
-animator = NodePath("PipeAnimator")
-
-[node name="PipeAnimator" type="AnimationPlayer" parent="DummyPlayer/AttackManager"]
-libraries = {
-&"": ExtResource("1_5jbmu")
-}
-autoplay = "idle"
-
-[node name="Models" type="Node3D" parent="DummyPlayer/AttackManager"]
-transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999994, 0.462, -0.17, -0.61)
-
-[node name="Pipe" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-mesh = ExtResource("2_5jbmu")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("4_0wg56")
-
-[node name="Arm" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-mesh = ExtResource("3_w6gk5")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = ExtResource("6_w105o")
-
-[node name="Smear" type="MeshInstance3D" parent="DummyPlayer/AttackManager/Models"]
-transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
-visible = false
-mesh = ExtResource("5_s5ga2")
-surface_material_override/0 = ExtResource("7_0wg56")
+[node name="Player" parent="." instance=ExtResource("2_ekcfv")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -67,3 +46,6 @@ mesh = SubResource("BoxMesh_w105o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
 shape = SubResource("BoxShape3D_u1x4c")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_5jbmu")
