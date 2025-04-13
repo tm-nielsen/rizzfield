@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/mannequin.blend-8c5d0f9cf7cac19c05d5fb87bb509
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="CharacterBody3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 enum State {
     TRACKING, ATTACKING
@@ -50,6 +50,10 @@ func _process(_delta: float) -> void:
                 attack()
         ATTACKING: pass
 
+func _physics_process(_delta: float) -> void:
+    velocity += get_gravity()
+    move_and_slide()
+
 
 func attack():
     state = ATTACKING
@@ -64,7 +68,9 @@ func move_with_step(distance: float):
     target_offset.y = 0
     var look_target = global_position + target_offset
     look_at(look_target, Vector3.UP, true)
-    global_position += basis.z * distance
+    velocity = basis.z * distance * Engine.physics_ticks_per_second
+    move_and_slide()
+    velocity *= Vector3.UP
 
 func _on_animation_finished(_animation_name: String):
     if state == ATTACKING:
