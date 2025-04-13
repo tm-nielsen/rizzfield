@@ -103,7 +103,7 @@ collision_layer = 0
 collision_mask = 8
 monitoring = false
 script = ExtResource("14_c1k3r")
-impact_direction = Vector3(-0.2, -0.2, 1)
+impact_direction = Vector3(-0.2, -0.2, -1)
 impact_scale = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/AttackManager/HurtBox"]

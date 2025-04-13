@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var damage: int = 1
-@export var impact_direction := Vector3.MODEL_FRONT
+@export var impact_direction := Vector3.FORWARD
 @export var impact_scale: float = 1
 
 func _ready():
