@@ -33,6 +33,7 @@ metadata/_custom_type_script = "uid://ctu3lj87dt74c"
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
 script = ExtResource("1_jybep")
 head_node = NodePath("Camera3D")
+look_speed = Vector2(0.75, 0.5)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body", "update_timer")]
 current = true
