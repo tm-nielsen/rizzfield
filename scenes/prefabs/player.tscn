@@ -19,14 +19,14 @@ height = 1.3
 
 [sub_resource type="Resource" id="Resource_lagtt"]
 script = ExtResource("6_gkb8g")
-elasticity = Vector2(10, 10)
-damping = Vector2(0.5, 0.1)
+elasticity = Vector2(0.05, 0.05)
+friction = Vector2(0.2, 0.2)
 metadata/_custom_type_script = "uid://ctu3lj87dt74c"
 
 [sub_resource type="Resource" id="Resource_gkb8g"]
 script = ExtResource("6_gkb8g")
-elasticity = Vector2(10, 10)
-damping = Vector2(0.2, 0.1)
+elasticity = Vector2(0.8, 0.1)
+friction = Vector2(1, 0.2)
 metadata/_custom_type_script = "uid://ctu3lj87dt74c"
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
