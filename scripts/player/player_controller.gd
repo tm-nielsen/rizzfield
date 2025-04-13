@@ -32,3 +32,7 @@ func look(delta: float):
         head_node.rotation.x - look_delta.y,
         minimum_look_angle, maximum_look_angle
     )
+
+
+func get_normalized_speed() -> float:
+    return (velocity * Vector3(1, 0, 1)).length() / movement_speed

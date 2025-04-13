@@ -18,8 +18,7 @@ func _physics_process(delta: float) -> void:
 func update_position():
     var s := 0.0
     if movement_body.is_on_floor():
-        var velocity = movement_body.velocity
-        s = velocity.length() / movement_body.movement_speed
+        s = movement_body.get_normalized_speed()
 
     var t = Time.get_ticks_msec() * frequency / 1000
     position.x = cos(t * TAU) * amplitude.x * s
