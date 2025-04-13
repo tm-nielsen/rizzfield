@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody3D
 
 @export var head_node: Node3D
