@@ -14,13 +14,12 @@ func _physics_process(delta: float) -> void:
 
 
 func move():
+    velocity *= Vector3.UP
     var input_direction = Input.get_vector(
-        "left", "right", "forward", "backward"
+        "left", "right", "backward", "forward"
     )
-    var planar_velocity = input_direction * movement_speed
-
-    velocity.x = planar_velocity.x
-    velocity.z = planar_velocity.y
+    velocity -= input_direction.y * basis.z * movement_speed
+    velocity += input_direction.x * basis.x * movement_speed
     velocity += get_gravity()
 
 
