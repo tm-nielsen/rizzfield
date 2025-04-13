@@ -1,11 +1,17 @@
 class_name PlayerController
 extends CharacterBody3D
 
+signal started_moving
+signal stopped_moving
+
 @export var head_node: Node3D
 @export var movement_speed: float = 6.0
 @export var look_speed := Vector2(2, 1)
 @export var minimum_look_angle: float = -PI/8
 @export var maximum_look_angle: float = PI/8
+
+var is_moving: bool
+var was_moving_last_update: bool
 
 
 func _physics_process(delta: float) -> void:
@@ -16,9 +22,17 @@ func _physics_process(delta: float) -> void:
 
 func move():
     velocity *= Vector3.UP
+
     var input_direction = Input.get_vector(
         "left", "right", "backward", "forward"
     )
+    was_moving_last_update = is_moving
+    is_moving = !input_direction.is_zero_approx()
+    if is_moving && !was_moving_last_update:
+        started_moving.emit()
+    elif !is_moving && was_moving_last_update:
+        stopped_moving.emit()
+
     velocity -= input_direction.y * basis.z * movement_speed
     velocity += input_direction.x * basis.x * movement_speed
     velocity += get_gravity()

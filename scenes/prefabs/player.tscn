@@ -30,9 +30,10 @@ framerate = 18.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 shape = SubResource("CapsuleShape3D_r053x")
 
-[node name="AttackManager" type="Node3D" parent="." node_paths=PackedStringArray("animator")]
+[node name="AttackManager" type="Node3D" parent="." node_paths=PackedStringArray("animator", "movement_body")]
 script = ExtResource("1_56dyf")
 animator = NodePath("PipeAnimator")
+movement_body = NodePath("..")
 
 [node name="PipeAnimator" type="AnimationPlayer" parent="AttackManager"]
 libraries = {
