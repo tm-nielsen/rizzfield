@@ -4,10 +4,14 @@ extends CharacterBody3D
 signal started_moving
 signal stopped_moving
 
+@export_subgroup("moving")
 @export var move_force: float = 10.0
-@export_range(0, 1) var friction: float = 0.04
 @export var maximum_speed: float = 4.0
+@export_range(0, 1) var moving_friction: float = 0.04
+@export_range(0, 1) var stopped_friction: float = 0.1
+@export_range(0, 1) var air_friction: float = 0.01
 
+@export_subgroup("looking")
 @export var head_node: Node3D
 @export var look_speed := Vector2(2, 1)
 @export var minimum_look_angle: float = -PI/8
@@ -21,7 +25,7 @@ var was_moving_last_update: bool
 func _physics_process(delta: float) -> void:
     look(delta)
     move(delta)
-    if is_on_floor(): apply_friction(delta)
+    apply_friction(delta)
     limit_planar_velocity()
     move_and_slide()
 
@@ -55,11 +59,17 @@ func move(delta):
 
 
 func apply_friction(delta):
+    var friction = air_friction
+    if is_on_floor():
+        if is_moving: friction = moving_friction
+        else: friction = stopped_friction
+
     var delta_scale = delta * Engine.physics_ticks_per_second
     velocity.x = ElasticValue.apply_friction(velocity.x, friction, delta_scale)
     velocity.z = ElasticValue.apply_friction(velocity.z, friction, delta_scale)
 
 func limit_planar_velocity():
+    if !is_on_floor(): return
     var floor_velocity = get_floor_velocity()
     velocity -= floor_velocity
     if floor_velocity.length() > maximum_speed:
