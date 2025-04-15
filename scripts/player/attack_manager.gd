@@ -53,7 +53,7 @@ func _on_animation_finished(_animation_name: String):
 
 
 func _on_player_movement_started():
-    if state == IDLE: animator.play("idle_static")
+    if state == IDLE: animator.play("idle_static", 0.5)
 
 func _on_player_movement_ended():
-    if state == IDLE: animator.play("idle")
+    if state == IDLE: animator.play("idle", 0.5)
