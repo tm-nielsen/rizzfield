@@ -1,13 +1,18 @@
 extends Node3D
 
+signal started_charging
+signal finished_charging
+signal started_uncharged_swing
+signal started_charged_swing
+
 enum AttackState {
     IDLE, CHARGING, CHARGED,
-    STARTING_WEAK_SWING, SWINGING
+    STARTING_UNCHARGED_SWING, SWINGING
 }
 const IDLE = AttackState.IDLE
 const CHARGING = AttackState.CHARGING
 const CHARGED = AttackState.CHARGED
-const STARTING_WEAK_SWING = AttackState.STARTING_WEAK_SWING
+const STARTING_UNCHARGED_SWING = AttackState.STARTING_UNCHARGED_SWING
 const SWINGING = AttackState.SWINGING
 
 var state: AttackState
@@ -36,10 +41,18 @@ func set_state(new_state: AttackState):
             if movement_body.is_moving:
                 animator.play("idle_static")
             else: animator.play("idle")
-        CHARGING: animator.play("charge")
-        CHARGED: animator.play("hold_charge")
-        STARTING_WEAK_SWING: animator.play("swing_windup")
-        SWINGING: animator.play("swing")
+        CHARGING:
+            animator.play("charge")
+            started_charging.emit()
+        CHARGED:
+            animator.play("hold_charge")
+            finished_charging.emit()
+        STARTING_UNCHARGED_SWING:
+            animator.play("swing_windup")
+            started_uncharged_swing.emit()
+        SWINGING:
+            animator.play("swing")
+            started_charged_swing.emit()
     state = new_state
 
 
@@ -47,8 +60,8 @@ func _on_animation_finished(_animation_name: String):
     match state:
         CHARGING: 
             if (attack_pressed): set_state(CHARGED)
-            else: set_state(STARTING_WEAK_SWING)
-        STARTING_WEAK_SWING: set_state(SWINGING)
+            else: set_state(STARTING_UNCHARGED_SWING)
+        STARTING_UNCHARGED_SWING: set_state(SWINGING)
         SWINGING: set_state(IDLE)
 
 
