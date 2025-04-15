@@ -1,4 +1,4 @@
-extends Node3D
+extends AnimationPlayer
 
 signal started_charging
 signal finished_charging
@@ -17,14 +17,13 @@ const SWINGING = AttackState.SWINGING
 
 var state: AttackState
 
-@export var animator: AnimationPlayer
 @export var movement_body: PlayerController
 
 var attack_pressed: bool;
 
 
 func _ready() -> void:
-    animator.animation_finished.connect(_on_animation_finished)
+    animation_finished.connect(_on_animation_finished)
     movement_body.started_moving.connect(_on_player_movement_started)
     movement_body.stopped_moving.connect(_on_player_movement_ended)
 
@@ -39,19 +38,19 @@ func set_state(new_state: AttackState):
     match new_state:
         IDLE:
             if movement_body.is_moving:
-                animator.play("idle_static")
-            else: animator.play("idle")
+                play("idle_static")
+            else: play("idle")
         CHARGING:
-            animator.play("charge")
+            play("charge")
             started_charging.emit()
         CHARGED:
-            animator.play("hold_charge")
+            play("hold_charge")
             finished_charging.emit()
         STARTING_UNCHARGED_SWING:
-            animator.play("swing_windup")
+            play("swing_windup")
             started_uncharged_swing.emit()
         SWINGING:
-            animator.play("swing")
+            play("swing")
             started_charged_swing.emit()
     state = new_state
 
@@ -66,7 +65,7 @@ func _on_animation_finished(_animation_name: String):
 
 
 func _on_player_movement_started():
-    if state == IDLE: animator.play("idle_static", 0.5)
+    if state == IDLE: play("idle_static", 0.5)
 
 func _on_player_movement_ended():
-    if state == IDLE: animator.play("idle", 0.5)
+    if state == IDLE: play("idle", 0.5)
