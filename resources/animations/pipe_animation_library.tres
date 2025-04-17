@@ -135,6 +135,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("..:movement_input_scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_w6gk5"]
 resource_name = "charge"
@@ -175,6 +187,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.782061, 0.104434, -0.237223), Vector3(0, 0, 0), Vector3(0.383574, 0.00261376, 0.157298), Vector3(-0.214172, -0.0239034, -0.00612751)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:movement_input_scale")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_rlw5b"]
@@ -253,6 +277,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [2.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("..:movement_input_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
 }
 
 [sub_resource type="Animation" id="Animation_ekcfv"]
@@ -341,7 +377,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_0sqvk"]
 resource_name = "swing"
-length = 0.583341
+length = 0.750008
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -350,10 +386,10 @@ tracks/0/path = NodePath("Models:position")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0833337, 0.166667, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0833337, 0.166667, 0.416667, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.930339, -0.462228, -0.8295), Vector3(-0.814989, -0.429267, -0.758806), Vector3(-0.398512, -0.310679, -0.637266), Vector3(-0.185742, -0.310679, -0.637266), Vector3(0.563262, -0.203082, -0.562045)]
+"values": [Vector3(-0.930339, -0.462228, -0.8295), Vector3(-0.814989, -0.429267, -0.758806), Vector3(-0.398512, -0.310679, -0.637266), Vector3(-0.34532, -0.310679, -0.637266), Vector3(0.663, -0.203, -0.562), Vector3(0.563262, -0.203082, -0.562045)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -362,10 +398,10 @@ tracks/1/path = NodePath("Models:rotation")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0833337, 0.166667, 0.416667, 0.5),
+"times": PackedFloat32Array(0, 0.0833337, 0.166667, 0.5, 0.666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.186774, 0.647597, 1.55115), Vector3(-0.184052, 0.785902, 1.38232), Vector3(-0.116366, 0.980646, 0.635949), Vector3(-0.370728, 0.496074, 0.280253), Vector3(0.116524, -0.161318, -0.322788)]
+"values": [Vector3(-0.186774, 0.647597, 1.55115), Vector3(-0.184052, 0.785902, 1.38232), Vector3(-0.116366, 0.980646, 0.635949), Vector3(0.18675, -0.666716, -0.488692), Vector3(0.116524, -0.161318, -0.322788)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -374,10 +410,10 @@ tracks/2/path = NodePath("Models/Pipe:rotation")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.0833337, 0.166667, 0.25, 0.416667, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.0833337, 0.166667, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.26483, -0.209563, 0.0865067), Vector3(0, 0, 0), Vector3(-0.0120639, 0.306741, 0.299086), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-0.26483, -0.209563, 0.0865067), Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -451,6 +487,35 @@ tracks/8/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("..:movement_input_scale")
+tracks/9/interp = 0
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("..")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.416667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [Vector3(-1, 0, -5)],
+"method": &"apply_impulse"
+}, {
+"args": [Vector3(3, 0, 1)],
+"method": &"apply_impulse"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_jkwwg"]
 resource_name = "swing_windup"
@@ -503,6 +568,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [Vector3(0, 0, 2)],
+"method": &"apply_impulse"
+}]
 }
 
 [resource]
