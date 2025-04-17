@@ -1,9 +1,11 @@
+class_name PlayerAttackAnimator
 extends AnimationPlayer
 
 signal started_charging
 signal finished_charging
 signal started_uncharged_swing
 signal started_charged_swing
+signal finished_swing
 
 enum AttackState {
     IDLE, CHARGING, CHARGED,
@@ -51,7 +53,7 @@ func set_state(new_state: AttackState):
             started_uncharged_swing.emit()
         SWINGING:
             play("swing")
-            started_charged_swing.emit()
+            if state == CHARGED: started_charged_swing.emit()
     state = new_state
 
 
@@ -61,7 +63,9 @@ func _on_animation_finished(_animation_name: String):
             if (attack_pressed): set_state(CHARGED)
             else: set_state(STARTING_UNCHARGED_SWING)
         STARTING_UNCHARGED_SWING: set_state(SWINGING)
-        SWINGING: set_state(IDLE)
+        SWINGING:
+            set_state(IDLE)
+            finished_swing.emit()
 
 
 func _on_player_movement_started():

@@ -7,6 +7,15 @@ signal stopped_moving
 @export_subgroup("moving")
 @export var move_force: float = 10.0
 @export var maximum_speed: float = 4.0
+
+@export_subgroup("attack modifiers")
+@export var attack_animator: PlayerAttackAnimator
+@export_range(0, 1) var attack_charging_speed: float = 0.0
+@export_range(0, 1) var attack_charged_speed: float = 0.4
+@export var uncharged_swing_impulse := Vector3(-30, 0, -20)
+@export var charged_swing_impulse := Vector3(-10, 0, -40)
+
+@export_subgroup("friction")
 @export_range(0, 1) var moving_friction: float = 0.04
 @export_range(0, 1) var stopped_friction: float = 0.1
 @export_range(0, 1) var air_friction: float = 0.01
@@ -20,7 +29,15 @@ signal stopped_moving
 var is_moving: bool
 var was_moving_last_update: bool
 
-# TODO: limit movement during windup, stop movement during swing
+var movement_input_scale: float = 1.0
+
+func _ready() -> void:
+    attack_animator.started_charging.connect(_on_started_charging)
+    attack_animator.finished_charging.connect(_on_finished_charging)
+    attack_animator.started_uncharged_swing.connect(_on_started_uncharged_swing)
+    attack_animator.started_charged_swing.connect(_on_started_charged_swing)
+    attack_animator.finished_swing.connect(_on_finished_swing)
+
 
 func _physics_process(delta: float) -> void:
     look(delta)
@@ -44,6 +61,8 @@ func move(delta):
     var input_direction = Input.get_vector(
         "left", "right", "backward", "forward"
     )
+    input_direction *= movement_input_scale
+
     was_moving_last_update = is_moving
     is_moving = !input_direction.is_zero_approx()
     if is_moving && !was_moving_last_update:
@@ -84,3 +103,20 @@ func get_normalized_speed() -> float:
 func get_floor_velocity() -> Vector3:
     var floor_plane = Plane(get_floor_normal())
     return floor_plane.project(velocity)
+
+
+func _on_started_charging():
+    movement_input_scale = attack_charging_speed
+
+func _on_finished_charging():
+    movement_input_scale = attack_charged_speed
+
+func _on_started_uncharged_swing():
+    velocity += basis * uncharged_swing_impulse
+    movement_input_scale = 0
+
+func _on_started_charged_swing():
+    velocity += basis * charged_swing_impulse
+
+func _on_finished_swing():
+    movement_input_scale = 1.0
