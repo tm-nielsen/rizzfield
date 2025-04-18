@@ -67,13 +67,14 @@ update_timer = NodePath("../FrameTimer")
 elastic_position = SubResource("Resource_lagtt")
 elastic_rotation = SubResource("Resource_gkb8g")
 
-[node name="PipeAnimator" type="AnimationPlayer" parent="ElasticJoint" node_paths=PackedStringArray("movement_body")]
+[node name="PipeAnimator" type="AnimationPlayer" parent="ElasticJoint" node_paths=PackedStringArray("movement_body", "view_bob_frame_timer")]
 libraries = {
 &"": ExtResource("2_6o77n")
 }
 autoplay = "idle"
 script = ExtResource("1_56dyf")
 movement_body = NodePath("../..")
+view_bob_frame_timer = NodePath("../../FrameTimer")
 
 [node name="Models" type="Node3D" parent="ElasticJoint"]
 transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999994, 0.462, -0.17, -0.61)
@@ -105,3 +106,5 @@ impact_scale = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/HurtBox"]
 shape = SubResource("SphereShape3D_xtlg4")
+
+[connection signal="damage_sent" from="ElasticJoint/HurtBox" to="ElasticJoint/PipeAnimator" method="_on_damaged_enemy"]

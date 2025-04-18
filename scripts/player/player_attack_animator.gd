@@ -20,6 +20,8 @@ const SWINGING = AttackState.SWINGING
 var state: AttackState
 
 @export var movement_body: PlayerController
+@export var base_hit_stop_duration: float = 0.08
+@export var view_bob_frame_timer: FrameTimer
 
 var attack_pressed: bool;
 
@@ -55,6 +57,15 @@ func set_state(new_state: AttackState):
             play("swing")
             if state == CHARGED: started_charged_swing.emit()
     state = new_state
+
+
+func _on_damaged_enemy(damage: int):
+    pause()
+    var pause_duration = base_hit_stop_duration * damage
+    view_bob_frame_timer.pause_for(pause_duration)
+    var pause_tween = create_tween()
+    pause_tween.tween_interval(pause_duration)
+    pause_tween.tween_callback(play)
 
 
 func _on_animation_finished(_animation_name: String):
