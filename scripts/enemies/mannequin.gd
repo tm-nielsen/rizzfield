@@ -1,16 +1,24 @@
 extends CharacterBody3D
 
 enum State {
-    TRACKING, ATTACKING, DEAD
+    TRACKING, ATTACKING, DAMAGED, DEAD
 }
 const TRACKING = State.TRACKING
 const ATTACKING = State.ATTACKING
+const DAMAGED = State.DAMAGED
 const DEAD = State.DEAD
 
+@export_subgroup("damage")
+@export var maximum_health: int = 4
+@export var flinch_colour := Color.WHITE
+@export var flinch_duration: float = 0.08
+
+@export_subgroup("references")
 @export var animator: AnimationPlayer
 @export var step_animator: ProceduralStepAnimator
 @export var ragdoll: PhysicalBoneSimulator3D
 @export var force_node: PhysicalBone3D
+@export var surface_material: ShaderMaterial
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
@@ -18,6 +26,8 @@ const DEAD = State.DEAD
 @export var attack_step_distance: float = 0.8
 
 var state: State
+var health: int
+
 var target: Node3D
 var target_position: Vector3
 
@@ -25,6 +35,7 @@ var is_target_in_range: bool: get = _get_is_target_in_range
 
 
 func _ready() -> void:
+    health = maximum_health
     target = get_viewport().get_camera_3d()
     if target: target = target.get_parent()
     animator.animation_finished.connect(_on_animation_finished)
@@ -38,15 +49,12 @@ func _process(_delta: float) -> void:
         target_position = target.global_position
         target_position -= target.global_basis.z * target_lead_distance
 
-    # if Input.is_key_pressed(KEY_1) && !ragdoll.active:
-    #     ragdoll.active = true
-    #     ragdoll.physical_bones_start_simulation()
-    #     force_node.apply_central_impulse(Vector3.FORWARD * 100)
     if Input.is_key_pressed(KEY_2) && ragdoll.active:
         ragdoll.active = false
         ragdoll.physical_bones_stop_simulation()
-        state = TRACKING
         collision_layer = 12
+        health = maximum_health
+        state = TRACKING
         step_animator.take_step()
 
     if state == TRACKING && is_target_in_range: attack()
@@ -78,6 +86,30 @@ func look_at_target():
 
 
 func receive_damage(damage: int, force: Vector3):
+    health -= damage
+    start_flinch()
+    if health <= 0: die(force)
+
+
+func start_flinch():
+    var previous_state = state
+    state = DAMAGED
+    step_animator.stop_step()
+    animator.pause()
+    surface_material.set_shader_parameter("emission", flinch_colour)
+
+    var flinch_tween = create_tween()
+    flinch_tween.tween_interval(flinch_duration)
+    flinch_tween.tween_callback(end_flinch.bind(previous_state))
+
+func end_flinch(previous_state: State):
+    state = previous_state
+    if state == TRACKING: step_animator.take_step()
+    animator.play()
+    surface_material.set_shader_parameter("emission", Color.BLACK)
+
+
+func die(force: Vector3):
     step_animator.stop_step()
     state = DEAD
     collision_layer = 0
