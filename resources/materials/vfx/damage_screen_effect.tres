@@ -40,6 +40,6 @@ shader = ExtResource("1_yprch")
 shader_parameter/angle = 1.0
 shader_parameter/influence = 1.0
 shader_parameter/offset = 0.5
-shader_parameter/scale = 0.8
+shader_parameter/scale = 1.0
 shader_parameter/main_tex = SubResource("NoiseTexture2D_20t1h")
 shader_parameter/noise = SubResource("NoiseTexture2D_1a8bf")

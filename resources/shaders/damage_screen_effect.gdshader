@@ -20,10 +20,12 @@ void fragment() {
 	pos.y += offset * sin(angle);
 	float d = pos.x * pos.x + pos.y * pos.y;
 	float a = step(s, d);
+
 	a *= step(s / d, texture(noise, UV).r);
 	ALPHA = a;
-	
+
 	vec4 tex_colour = texture(main_tex, pos / 2.0);
-	ALBEDO = tex_colour.rgb;
+	ALBEDO = mix(vec3(0), tex_colour.rgb, a) * influence;
 	ALPHA *= tex_colour.a;
+	ALPHA += influence / 2.0;
 }
