@@ -72,10 +72,10 @@ func look_at_target():
     look_at(look_target, Vector3.UP, true)
 
 
-func receive_damage(damage: int, force: Vector3):
-    super(damage, force)
+func receive_damage(amount: int, impact: Vector3):
+    super(amount, impact)
     if health > 0:
-        var angle_range = flinch_bone_angle_range * damage
+        var angle_range = flinch_bone_angle_range * amount
         step_animator.randomize_pose(angle_range)
 
 

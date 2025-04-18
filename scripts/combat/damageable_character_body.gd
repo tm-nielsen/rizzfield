@@ -1,6 +1,8 @@
 class_name DamageableCharacterBody3D
 extends CharacterBody3D
 
+signal damaged(amount: int, impact: Vector3)
+
 enum State {
     TRACKING, ATTACKING, DAMAGED, DEAD
 }
@@ -24,10 +26,11 @@ const DEAD = State.DEAD
 var state: State
 
 
-func receive_damage(damage: int, force: Vector3):
-    health -= damage
+func receive_damage(amount: int, impact: Vector3):
+    health -= amount
     start_flinch()
-    if health <= 0: die(force)
+    if health <= 0: die(impact)
+    damaged.emit(amount, impact)
 
 
 func start_flinch():

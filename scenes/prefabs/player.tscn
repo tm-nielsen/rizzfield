@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=23 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/player_attack_animator.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
@@ -8,12 +8,22 @@
 [ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="3_gkb8g"]
 [ext_resource type="Material" uid="uid://dckdvy84gi6fn" path="res://resources/materials/pipe_material.tres" id="4_jybep"]
 [ext_resource type="ArrayMesh" uid="uid://of51k8i8d7c6" path="res://models/arm.res" id="4_r053x"]
+[ext_resource type="Material" uid="uid://cmaoil6tqji72" path="res://resources/materials/vfx/damage_screen_effect.tres" id="4_xtlg4"]
 [ext_resource type="ArrayMesh" uid="uid://bqxtp2i4bwatx" path="res://models/big_smear.res" id="5_jybep"]
 [ext_resource type="Script" uid="uid://cn4wc20kg8tge" path="res://scripts/utilities/elastic_transform_follow.gd" id="5_lagtt"]
+[ext_resource type="Script" uid="uid://ggmsq2sbn6ch" path="res://scripts/player/damaged_screen_effect.gd" id="5_va4sl"]
 [ext_resource type="Material" uid="uid://bset4ivy14oc6" path="res://resources/materials/player_skin_material.tres" id="6_50rl7"]
 [ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="6_gkb8g"]
 [ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="8_oqq3r"]
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="14_c1k3r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_c1k3r"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Curve" id="Curve_va4sl"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r053x"]
 radius = 0.3
@@ -53,6 +63,20 @@ movement_body = NodePath("..")
 update_timer = NodePath("../FrameTimer")
 amplitude = Vector2(0.06, 0.04)
 frequency = 1.5
+
+[node name="DamageIndicator" type="MeshInstance3D" parent="Camera3D" node_paths=PackedStringArray("frame_timer")]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_c1k3r")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("4_xtlg4")
+script = ExtResource("5_va4sl")
+curve = SubResource("Curve_va4sl")
+base_duration = 0.66
+frame_timer = NodePath("FrameTimer")
+
+[node name="FrameTimer" type="Node" parent="Camera3D/DamageIndicator"]
+script = ExtResource("3_gkb8g")
+metadata/_custom_type_script = "uid://dhpprbs6cek1p"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
@@ -110,4 +134,5 @@ impact_scale = 10.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/HurtBox"]
 shape = SubResource("SphereShape3D_xtlg4")
 
+[connection signal="damaged" from="." to="Camera3D/DamageIndicator" method="_on_player_damaged"]
 [connection signal="damage_sent" from="ElasticJoint/HurtBox" to="ElasticJoint/PipeAnimator" method="_on_damaged_enemy"]
