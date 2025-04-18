@@ -42,6 +42,9 @@ head_node = NodePath("Camera3D")
 look_speed = Vector2(0.75, 0.5)
 minimum_look_angle = -0.8
 maximum_look_angle = 0.4
+flinch_colour = Color(0.4, 0, 0, 1)
+flinch_duration = 0.16
+surface_material = ExtResource("6_50rl7")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body", "update_timer")]
 current = true

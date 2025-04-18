@@ -1,5 +1,5 @@
 class_name PlayerController
-extends CharacterBody3D
+extends DamageableCharacterBody3D
 
 signal started_moving
 signal stopped_moving
@@ -92,3 +92,8 @@ func get_floor_velocity() -> Vector3:
 
 func apply_impulse(impulse: Vector3):
     velocity += basis * impulse
+
+
+func start_flinch():
+    super()
+    print("Player Damaged")
