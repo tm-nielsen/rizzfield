@@ -1,0 +1,45 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://cmaoil6tqji72"]
+
+[ext_resource type="Shader" uid="uid://hs5me6hkalnr" path="res://resources/shaders/damage_screen_effect.gdshader" id="1_yprch"]
+
+[sub_resource type="Gradient" id="Gradient_xtlg4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0833333, 0.505952, 0.636905)
+colors = PackedColorArray(1, 0.29, 0.29, 1, 0.121569, 0, 0, 1, 1, 1, 1, 1, 0.201816, 7.0692e-08, 5.41471e-08, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_va4sl"]
+noise_type = 2
+frequency = 0.05
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_20t1h"]
+width = 480
+height = 270
+seamless = true
+color_ramp = SubResource("Gradient_xtlg4")
+noise = SubResource("FastNoiseLite_va4sl")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aal4f"]
+noise_type = 2
+frequency = 0.05
+fractal_type = 3
+fractal_octaves = 3
+fractal_gain = 1.5
+fractal_ping_pong_strength = 1.0
+cellular_jitter = 1.5
+cellular_return_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1a8bf"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_aal4f")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yprch")
+shader_parameter/angle = 1.0
+shader_parameter/influence = 1.0
+shader_parameter/offset = 0.5
+shader_parameter/scale = 0.8
+shader_parameter/main_tex = SubResource("NoiseTexture2D_20t1h")
+shader_parameter/noise = SubResource("NoiseTexture2D_1a8bf")
