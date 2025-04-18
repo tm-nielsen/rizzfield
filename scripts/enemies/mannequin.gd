@@ -88,7 +88,7 @@ func start_flinch():
 func end_flinch(previous_state: State):
     super(previous_state)
     if state == TRACKING: step_animator.take_step()
-    animator.play()
+    if state != DEAD: animator.play()
 
 
 func die(force: Vector3):

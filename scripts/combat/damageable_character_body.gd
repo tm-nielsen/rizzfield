@@ -37,7 +37,7 @@ func start_flinch():
     flinch_tween.tween_callback(end_flinch.bind(state))
 
 func end_flinch(previous_state):
-    state = previous_state
+    if state != DEAD: state = previous_state
     set_material_emission(default_emission)
 
 func die(_force: Vector3): pass
