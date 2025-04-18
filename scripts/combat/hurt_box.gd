@@ -11,7 +11,13 @@ func _ready():
 
 
 func _on_body_entered(body):
+    if _is_parent(body, self): return
     if body.has_method("receive_damage"):
         var impact = global_basis * impact_direction
         body.receive_damage(damage, impact * impact_scale)
         damage_sent.emit(damage)
+
+func _is_parent(node: Node, child: Node) -> bool:
+    if !child: return false
+    if child == node: return true
+    return _is_parent(node, child.get_parent());
