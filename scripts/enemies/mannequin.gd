@@ -12,7 +12,6 @@ extends DamageableCharacterBody3D
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
 @export var attack_trigger_distance: float = 3.0
-@export var attack_step_distance: float = 0.8
 
 var target: Node3D
 var target_position: Vector3
@@ -54,11 +53,14 @@ func attack():
     step_animator.stop_step()
     animator.play("attack")
     animator.advance(0)
-    move_with_step(attack_step_distance)
+    step_animator.move_with_step()
 
 
-func move_with_step(distance: float):
-    velocity = basis.z * distance * Engine.physics_ticks_per_second
+func move_with_step(distance: Vector2):
+    var displacement = Vector3.ZERO
+    displacement += basis.z * distance.y
+    displacement += basis.x * distance.x
+    velocity = displacement * Engine.physics_ticks_per_second
     move_and_slide()
     look_at_target()
     velocity *= Vector3.UP

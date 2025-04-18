@@ -1,7 +1,7 @@
 class_name ProceduralStepAnimator
 extends Skeleton3D
 
-signal step_taken(distance: float)
+signal step_taken(distance: Vector2)
 
 @export var animator: AnimationPlayer
 
@@ -39,14 +39,15 @@ func stop_step():
 
 
 func move_with_step():
-    var distance = randf_range(min_step_distance.y, max_step_distance.y)
-    step_taken.emit(distance)
+    var x_distance = randf_range(min_step_distance.x, max_step_distance.x)
+    x_distance *= step_direction
+    var y_distance = randf_range(min_step_distance.y, max_step_distance.y)
+    step_taken.emit(Vector2(x_distance, y_distance))
 
 
 func set_base_position():
     step_direction *= -1
     var base_position := get_bone_rest(0).origin
-    base_position.x += step_direction * randf_range(min_step_distance.x, max_step_distance.x)
     var base_scale = Vector3(-step_direction, 1, 1)
 
     var base_t = Transform3D(
