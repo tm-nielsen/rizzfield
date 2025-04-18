@@ -65,9 +65,7 @@ func generate_step_pose():
     iterate_bones(func (i: int):
         var base_rotation := get_bone_pose_rotation(i)
 
-        var random_rotation := Quaternion.from_euler(
-            Vector3(rand_angle(), rand_angle(), rand_angle())
-        )
+        var random_rotation := rand_quaternion()
         step_rotations[i] = base_rotation * random_rotation
     )
 
@@ -86,6 +84,15 @@ func apply_step_pose():
     )
 
 
+func randomize_pose(angle_range: float):
+    iterate_bones(func(i: int):
+        var base_rotation = get_bone_pose_rotation(i)
+        var random_rotation = rand_quaternion(angle_range)
+        var offset_rotation = base_rotation * random_rotation
+        set_bone_pose_rotation(i, offset_rotation)
+    )
+
+
 func iterate_bones(method: Callable, root_index: int = 0):
     for bone_index in get_bone_children(root_index):
         var bone_name := get_bone_name(bone_index)
@@ -94,6 +101,11 @@ func iterate_bones(method: Callable, root_index: int = 0):
             method.call(bone_index)
         iterate_bones(method, bone_index)
 
+
+func rand_quaternion(angle: float = random_angle_range) -> Quaternion:
+    return Quaternion.from_euler(
+        Vector3(rand_angle(angle), rand_angle(angle), rand_angle(angle))
+    )
 
 func rand_angle(a: float = random_angle_range) -> float:
     return randf_range(-a, a)

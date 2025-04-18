@@ -12,6 +12,7 @@ const DEAD = State.DEAD
 @export var maximum_health: int = 4
 @export var flinch_colour := Color.WHITE
 @export var flinch_duration: float = 0.08
+@export var flinch_bone_angle_range: float = 0.6
 
 @export_subgroup("references")
 @export var animator: AnimationPlayer
@@ -89,6 +90,7 @@ func receive_damage(damage: int, force: Vector3):
     health -= damage
     start_flinch()
     if health <= 0: die(force)
+    else: step_animator.randomize_pose(flinch_bone_angle_range)
 
 
 func start_flinch():
