@@ -27,12 +27,22 @@ meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
-animation/fps=30
-animation/trimming=true
-animation/remove_immutable_tracks=true
+animation/fps=12
+animation/trimming=false
+animation/remove_immutable_tracks=false
 animation/import_rest_as_RESET=true
 import_script/path=""
-_subresources={}
+_subresources={
+"animations": {
+"attack": {
+"save_to_file/enabled": true,
+"save_to_file/keep_custom_tracks": true,
+"save_to_file/path": "res://resources/animations/enemies/mannequin_attack.tres",
+"settings/loop_mode": 0,
+"slices/amount": 0
+}
+}
+}
 blender/nodes/visible=1
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

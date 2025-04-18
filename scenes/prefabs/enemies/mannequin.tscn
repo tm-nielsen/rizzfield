@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=22 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
 [ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin.gd" id="2_q8lao"]
 [ext_resource type="Script" uid="uid://ceqw1wpmritw8" path="res://scripts/enemies/procedural_step_animator.gd" id="3_wi8gg"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="4_1refm"]
+[ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="5_7nf3y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1refm"]
 radius = 0.05
@@ -60,6 +61,9 @@ height = 0.435607
 radius = 0.4
 height = 1.4
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7t5wa"]
+radius = 0.4
+
 [node name="mannequin" node_paths=PackedStringArray("animator", "step_animator", "ragdoll", "force_node") instance=ExtResource("1_wva5t")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 12
@@ -81,6 +85,7 @@ animator = NodePath("../../AnimationPlayer")
 surface_material_override/0 = ExtResource("4_1refm")
 
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="skeleton/Skeleton3D" index="1"]
+active = false
 
 [node name="Physical Bone Base" type="PhysicalBone3D" parent="skeleton/Skeleton3D/PhysicalBoneSimulator3D" index="0"]
 transform = Transform3D(0.833333, 0, 0, 0, 0.833333, 0, 0, 0, 0.833333, -0.0994428, -0.789351, -0.0333534)
@@ -400,3 +405,15 @@ shape = SubResource("CapsuleShape3D_4o85r")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.3)
 shape = SubResource("CapsuleShape3D_7t5wa")
+
+[node name="HurtBox" type="Area3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.418, -0.2, 0.809701)
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+script = ExtResource("5_7nf3y")
+impact_direction = Vector3(0, -0.2, -1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.150856)
+shape = SubResource("SphereShape3D_7t5wa")
