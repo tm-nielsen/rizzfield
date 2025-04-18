@@ -6,7 +6,7 @@ uniform float influence: hint_range(0, 1) = 1;
 uniform float offset = 0.5;
 uniform float scale = 1.0;
 
-uniform sampler2D main_tex: filter_nearest;
+uniform vec4 colour: source_color = vec4(1);
 uniform sampler2D noise: filter_nearest;
 
 void vertex() {
@@ -24,8 +24,7 @@ void fragment() {
 	a *= step(s / d, texture(noise, UV).r);
 	ALPHA = a;
 
-	vec4 tex_colour = texture(main_tex, pos / 2.0);
-	ALBEDO = mix(vec3(0), tex_colour.rgb, a) * influence;
-	ALPHA *= tex_colour.a;
+	ALBEDO = mix(vec3(0), colour.rgb, a) * influence;
+	ALPHA *= colour.a;
 	ALPHA += influence / 2.0;
 }
