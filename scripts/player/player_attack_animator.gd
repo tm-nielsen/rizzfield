@@ -1,17 +1,13 @@
 class_name PlayerAttackAnimator
 extends AnimationPlayer
 
-signal started_charging
-signal finished_charging
-signal started_uncharged_swing
-signal started_charged_swing
-signal finished_swing
-
 enum AttackState {
     IDLE, CHARGING, CHARGED,
-    STARTING_UNCHARGED_SWING, SWINGING
+    STARTING_UNCHARGED_SWING, SWINGING,
+    BLOCKING
 }
 const IDLE = AttackState.IDLE
+const BLOCKING = AttackState.BLOCKING
 const CHARGING = AttackState.CHARGING
 const CHARGED = AttackState.CHARGED
 const STARTING_UNCHARGED_SWING = AttackState.STARTING_UNCHARGED_SWING
@@ -23,7 +19,8 @@ var state: AttackState
 @export var base_hit_stop_duration: float = 0.08
 @export var view_bob_frame_timer: FrameTimer
 
-var attack_pressed: bool;
+var attack_pressed: bool
+var block_pressed: bool
 
 
 func _ready() -> void:
@@ -33,9 +30,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
     attack_pressed = Input.is_action_pressed("attack")
+    block_pressed = Input.is_action_pressed("block")
     match state:
-        IDLE: if attack_pressed: set_state(CHARGING)
+        IDLE:
+            if attack_pressed: set_state(CHARGING)
+            elif block_pressed: set_state(BLOCKING)
         CHARGED: if !attack_pressed: set_state(SWINGING)
+        BLOCKING: if !block_pressed: set_state(IDLE)
 
 
 func set_state(new_state: AttackState):
@@ -44,18 +45,11 @@ func set_state(new_state: AttackState):
             if movement_body.is_moving:
                 play("idle_static")
             else: play("idle")
-        CHARGING:
-            play("charge")
-            started_charging.emit()
-        CHARGED:
-            play("hold_charge")
-            finished_charging.emit()
-        STARTING_UNCHARGED_SWING:
-            play("swing_windup")
-            started_uncharged_swing.emit()
-        SWINGING:
-            play("swing")
-            if state == CHARGED: started_charged_swing.emit()
+        CHARGING: play("charge")
+        CHARGED: play("hold_charge")
+        STARTING_UNCHARGED_SWING: play("swing_windup")
+        SWINGING: play("swing")
+        BLOCKING: play("block")
     state = new_state
 
 
@@ -74,9 +68,7 @@ func _on_animation_finished(_animation_name: String):
             if (attack_pressed): set_state(CHARGED)
             else: set_state(STARTING_UNCHARGED_SWING)
         STARTING_UNCHARGED_SWING: set_state(SWINGING)
-        SWINGING:
-            set_state(IDLE)
-            finished_swing.emit()
+        SWINGING: set_state(IDLE)
 
 
 func _on_player_movement_started():
