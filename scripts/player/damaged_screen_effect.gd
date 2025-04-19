@@ -10,6 +10,7 @@ var linear_influence: float
 
 func _ready() -> void:
     set_influence(0)
+    hide()
     frame_timer.frame_out.connect(update_influence)
 
 func update_influence():
@@ -29,9 +30,11 @@ func _on_player_damaged(amount: int, impulse: Vector3):
     set_angle(atan2(-z_diff, x_diff))
 
     linear_influence = 1
+    show()
     update_influence()
 
     var influence_tween = create_tween()
     influence_tween.tween_property(
         self, "linear_influence", 0.0, base_duration * amount
     )
+    influence_tween.tween_callback(hide)

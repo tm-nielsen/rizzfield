@@ -65,6 +65,7 @@ amplitude = Vector2(0.06, 0.04)
 frequency = 1.5
 
 [node name="DamageIndicator" type="MeshInstance3D" parent="Camera3D" node_paths=PackedStringArray("frame_timer")]
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_c1k3r")
 skeleton = NodePath("../..")
