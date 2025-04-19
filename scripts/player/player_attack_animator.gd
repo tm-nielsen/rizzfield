@@ -4,7 +4,7 @@ extends AnimationPlayer
 enum AttackState {
     IDLE, CHARGING, CHARGED,
     STARTING_UNCHARGED_SWING, SWINGING,
-    BLOCKING, BLOCK_RECOVERY,
+    BLOCKING, BLOCK_RECOVERY, PARRYING,
     COUNTER_CHARGED, COUNTER_SWINGING
 }
 const IDLE = AttackState.IDLE
@@ -14,6 +14,7 @@ const STARTING_UNCHARGED_SWING = AttackState.STARTING_UNCHARGED_SWING
 const SWINGING = AttackState.SWINGING
 const BLOCKING = AttackState.BLOCKING
 const BLOCK_RECOVERY = AttackState.BLOCK_RECOVERY
+const PARRYING = AttackState.PARRYING
 const COUNTER_CHARGED = AttackState.COUNTER_CHARGED
 const COUNTER_SWINGING = AttackState.COUNTER_SWINGING
 
@@ -56,6 +57,7 @@ func set_state(new_state: AttackState):
         SWINGING: play("swing")
         BLOCKING: play("block")
         BLOCK_RECOVERY: play("block_recovery")
+        PARRYING: play("parry")
         COUNTER_CHARGED: play("hold_parry_charge")
         COUNTER_SWINGING: play("parry_swing")
     state = new_state
@@ -70,7 +72,7 @@ func _on_damaged_enemy(damage: int):
     pause_tween.tween_callback(play)
 
 func _on_player_damage_parried():
-    set_state(COUNTER_CHARGED)
+    set_state(PARRYING)
 
 func _on_animation_finished(_animation_name: String):
     match state:
@@ -79,6 +81,7 @@ func _on_animation_finished(_animation_name: String):
             else: set_state(STARTING_UNCHARGED_SWING)
         STARTING_UNCHARGED_SWING: set_state(SWINGING)
         SWINGING, BLOCK_RECOVERY, COUNTER_SWINGING: set_state(IDLE)
+        PARRYING: set_state(COUNTER_CHARGED)
 
 
 func _on_player_movement_started():
