@@ -69,7 +69,7 @@ func _on_damaged_enemy(damage: int):
     pause_tween.tween_interval(pause_duration)
     pause_tween.tween_callback(play)
 
-func _on_player_parried():
+func _on_player_damage_parried():
     set_state(COUNTER_CHARGED)
 
 func _on_animation_finished(_animation_name: String):

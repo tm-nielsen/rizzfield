@@ -417,3 +417,5 @@ impact_direction = Vector3(0, -0.2, -1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.150856)
 shape = SubResource("SphereShape3D_7t5wa")
+
+[connection signal="parried" from="HurtBox" to="." method="start_parry_flinch"]

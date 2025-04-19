@@ -2,23 +2,27 @@ class_name DamageableCharacterBody3D
 extends CharacterBody3D
 
 signal damaged(amount: int, impact: Vector3)
-signal parried
+signal damage_parried
+signal damage_blocked
 
 enum State {
-    TRACKING, ATTACKING, DAMAGED, DEAD
+    TRACKING, ATTACKING, DAMAGED, STUNNED, DEAD
 }
 const TRACKING = State.TRACKING
 const ATTACKING = State.ATTACKING
 const DAMAGED = State.DAMAGED
+const STUNNED = State.STUNNED
 const DEAD = State.DEAD
 
 @export var maximum_health: int = 4
+@export var block_reduction: int = 1
 
 @export_subgroup("flinch", "flinch")
 @export var flinch_colour := Color.WHITE
 @export var flinch_duration: float = 0.08
 
 @export var surface_material: ShaderMaterial
+@export var blocking: bool = false
 @export var parry_window_active: bool = false
 
 @onready var health: int = maximum_health
@@ -28,20 +32,18 @@ const DEAD = State.DEAD
 var state: State
 
 
-func receive_damage(amount: int, impact: Vector3) -> bool:
+func receive_damage(amount: int, impact: Vector3):
     if parry_window_active:
-        parry()
-        parried.emit()
-        return false
+        damage_parried.emit()
     else:
+        if blocking:
+            amount -= block_reduction
+            damage_blocked.emit()
+            if amount <= 0: return
         health -= amount
         start_flinch()
         if health <= 0: die(impact)
         damaged.emit(amount, impact)
-        return true
-
-
-func parry(): pass
 
 
 func start_flinch():

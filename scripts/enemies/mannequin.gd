@@ -2,6 +2,8 @@ extends DamageableCharacterBody3D
 
 @export_subgroup("flinch")
 @export var flinch_bone_angle_range: float = 0.5
+@export var parry_flinch_duration: float = 1.0
+@export var parry_flinch_recoil_distance: float = 0.4
 
 @export_subgroup("references")
 @export var animator: AnimationPlayer
@@ -87,8 +89,21 @@ func start_flinch():
 
 func end_flinch(previous_state: State):
     super(previous_state)
+    if state == STUNNED: state = TRACKING
     if state == TRACKING: step_animator.take_step()
     if state != DEAD: animator.play()
+
+
+func start_parry_flinch():
+    var previous_state = state
+    state = STUNNED
+    animator.play("step")
+    animator.advance(1)
+    step_animator.randomize_pose(flinch_bone_angle_range)
+    move_with_step(Vector2.UP * parry_flinch_recoil_distance)
+    var end_tween = create_tween()
+    end_tween.tween_interval(parry_flinch_duration)
+    end_tween.tween_callback(end_flinch.bind(previous_state))
 
 
 func die(force: Vector3):

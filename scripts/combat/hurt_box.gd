@@ -1,6 +1,8 @@
 extends Area3D
 
-signal damage_sent(damage: int)
+signal damage_dealt(damage: int)
+signal blocked
+signal parried
 
 @export var damage: int = 1
 @export var impact_direction := Vector3.FORWARD
@@ -16,7 +18,13 @@ func _on_body_entered(body):
     if body.has_method("receive_damage"):
         var impact = global_basis * impact_direction
         body.receive_damage(damage, impact * impact_scale)
-        damage_sent.emit(damage)
+        if body.parry_window_active:
+            parried.emit()
+            set_deferred("monitoring", false)
+        else:
+            if body.blocking:
+                blocked.emit()
+            damage_dealt.emit(damage - body.block_reduction)
 
 func _is_parent(node: Node, child: Node) -> bool:
     if !child: return false
