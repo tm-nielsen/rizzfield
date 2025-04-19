@@ -4,14 +4,15 @@ extends AnimationPlayer
 enum AttackState {
     IDLE, CHARGING, CHARGED,
     STARTING_UNCHARGED_SWING, SWINGING,
-    BLOCKING
+    BLOCKING, BLOCK_RECOVERY
 }
 const IDLE = AttackState.IDLE
-const BLOCKING = AttackState.BLOCKING
 const CHARGING = AttackState.CHARGING
 const CHARGED = AttackState.CHARGED
 const STARTING_UNCHARGED_SWING = AttackState.STARTING_UNCHARGED_SWING
 const SWINGING = AttackState.SWINGING
+const BLOCKING = AttackState.BLOCKING
+const BLOCK_RECOVERY = AttackState.BLOCK_RECOVERY
 
 var state: AttackState
 
@@ -36,7 +37,7 @@ func _process(_delta: float) -> void:
             if attack_pressed: set_state(CHARGING)
             elif block_pressed: set_state(BLOCKING)
         CHARGED: if !attack_pressed: set_state(SWINGING)
-        BLOCKING: if !block_pressed: set_state(IDLE)
+        BLOCKING: if !block_pressed: set_state(BLOCK_RECOVERY)
 
 
 func set_state(new_state: AttackState):
@@ -50,6 +51,7 @@ func set_state(new_state: AttackState):
         STARTING_UNCHARGED_SWING: play("swing_windup")
         SWINGING: play("swing")
         BLOCKING: play("block")
+        BLOCK_RECOVERY: play("block_recovery")
     state = new_state
 
 
@@ -69,6 +71,7 @@ func _on_animation_finished(_animation_name: String):
             else: set_state(STARTING_UNCHARGED_SWING)
         STARTING_UNCHARGED_SWING: set_state(SWINGING)
         SWINGING: set_state(IDLE)
+        BLOCK_RECOVERY: set_state(IDLE)
 
 
 func _on_player_movement_started():

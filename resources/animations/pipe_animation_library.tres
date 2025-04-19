@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=9 format=3 uid="uid://c82hleej4cuwm"]
+[gd_resource type="AnimationLibrary" load_steps=10 format=3 uid="uid://c82hleej4cuwm"]
 
 [sub_resource type="Animation" id="Animation_5jbmu"]
 resource_name = "RESET"
@@ -637,10 +637,64 @@ tracks/3/keys = {
 "values": [0.0, 0.8]
 }
 
+[sub_resource type="Animation" id="Animation_b1d2p"]
+resource_name = "block_recovery"
+length = 0.250008
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Models:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0479198, -0.102464, -0.419589), Vector3(0.593967, -0.279318, -0.61), Vector3(0.575649, -0.26012, -0.61)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Models:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.654258, 1.76407, -0.0188796), Vector3(-0.0760004, -0.199201, -0.194113), Vector3(-0.014223, -0.101531, -0.249806)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Models/Pipe:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0220602, 0.00962442, 0.229318), Vector3(0, 0, 0), Vector3(0, 0, -0.10472)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:movement_input_scale")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [resource]
 _data = {
 &"RESET": SubResource("Animation_5jbmu"),
 &"block": SubResource("Animation_ik8ti"),
+&"block_recovery": SubResource("Animation_b1d2p"),
 &"charge": SubResource("Animation_w6gk5"),
 &"hold_charge": SubResource("Animation_rlw5b"),
 &"idle": SubResource("Animation_ekcfv"),
