@@ -96,4 +96,3 @@ func apply_impulse(impulse: Vector3):
 
 func start_flinch():
     super()
-    print("Player Damaged")
