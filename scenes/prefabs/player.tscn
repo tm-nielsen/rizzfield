@@ -136,4 +136,5 @@ impact_scale = 10.0
 shape = SubResource("SphereShape3D_xtlg4")
 
 [connection signal="damaged" from="." to="Camera3D/DamageIndicator" method="_on_player_damaged"]
+[connection signal="parried" from="." to="ElasticJoint/PipeAnimator" method="_on_player_parried"]
 [connection signal="damage_sent" from="ElasticJoint/HurtBox" to="ElasticJoint/PipeAnimator" method="_on_damaged_enemy"]

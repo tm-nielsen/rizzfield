@@ -4,7 +4,8 @@ extends AnimationPlayer
 enum AttackState {
     IDLE, CHARGING, CHARGED,
     STARTING_UNCHARGED_SWING, SWINGING,
-    BLOCKING, BLOCK_RECOVERY
+    BLOCKING, BLOCK_RECOVERY,
+    COUNTER_CHARGED, COUNTER_SWINGING
 }
 const IDLE = AttackState.IDLE
 const CHARGING = AttackState.CHARGING
@@ -13,6 +14,8 @@ const STARTING_UNCHARGED_SWING = AttackState.STARTING_UNCHARGED_SWING
 const SWINGING = AttackState.SWINGING
 const BLOCKING = AttackState.BLOCKING
 const BLOCK_RECOVERY = AttackState.BLOCK_RECOVERY
+const COUNTER_CHARGED = AttackState.COUNTER_CHARGED
+const COUNTER_SWINGING = AttackState.COUNTER_SWINGING
 
 var state: AttackState
 
@@ -38,6 +41,7 @@ func _process(_delta: float) -> void:
             elif block_pressed: set_state(BLOCKING)
         CHARGED: if !attack_pressed: set_state(SWINGING)
         BLOCKING: if !block_pressed: set_state(BLOCK_RECOVERY)
+        COUNTER_CHARGED: if !block_pressed: set_state(COUNTER_SWINGING)
 
 
 func set_state(new_state: AttackState):
@@ -52,6 +56,8 @@ func set_state(new_state: AttackState):
         SWINGING: play("swing")
         BLOCKING: play("block")
         BLOCK_RECOVERY: play("block_recovery")
+        COUNTER_CHARGED: play("hold_parry_charge")
+        COUNTER_SWINGING: play("parry_swing")
     state = new_state
 
 
@@ -63,6 +69,8 @@ func _on_damaged_enemy(damage: int):
     pause_tween.tween_interval(pause_duration)
     pause_tween.tween_callback(play)
 
+func _on_player_parried():
+    set_state(COUNTER_CHARGED)
 
 func _on_animation_finished(_animation_name: String):
     match state:
@@ -70,8 +78,7 @@ func _on_animation_finished(_animation_name: String):
             if (attack_pressed): set_state(CHARGED)
             else: set_state(STARTING_UNCHARGED_SWING)
         STARTING_UNCHARGED_SWING: set_state(SWINGING)
-        SWINGING: set_state(IDLE)
-        BLOCK_RECOVERY: set_state(IDLE)
+        SWINGING, BLOCK_RECOVERY, COUNTER_SWINGING: set_state(IDLE)
 
 
 func _on_player_movement_started():
