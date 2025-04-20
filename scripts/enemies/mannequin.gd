@@ -18,6 +18,7 @@ const RETREATING = 6
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
 @export var attack_trigger_distance: float = 3.0
+@export var attack_distance: float = 1.5
 
 var target: Node3D
 var target_position: Vector3
@@ -60,13 +61,21 @@ func attack():
     step_animator.stop_step()
     animator.play("attack")
     animator.advance(0)
-    step_animator.move_with_step()
+    step_animator.set_base_position()
+
+    var target_offset = global_position - target_position
+    var attack_offset = target_offset.normalized() * attack_distance
+    var attack_position = target_position + attack_offset
+    move_units(attack_position - global_position)
 
 
 func move_with_step(distance: Vector2):
     var displacement = Vector3.ZERO
     displacement += basis.z * distance.y
     displacement += basis.x * distance.x
+    move_units(displacement)
+
+func move_units(displacement: Vector3):
     velocity = displacement * Engine.physics_ticks_per_second
     move_and_slide()
     look_at_target()
