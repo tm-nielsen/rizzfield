@@ -17,8 +17,10 @@ func _on_body_entered(body):
     if _is_parent(body, self): return
     if body.has_method("receive_damage"):
         var impact = global_basis * impact_direction
+        var was_parried = body.parry_window_active
         body.receive_damage(damage, impact * impact_scale)
-        if body.parry_window_active:
+
+        if was_parried:
             parried.emit()
             set_deferred("monitoring", false)
         else:

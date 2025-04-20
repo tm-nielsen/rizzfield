@@ -135,6 +135,7 @@ impact_scale = 10.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/HurtBox"]
 shape = SubResource("SphereShape3D_xtlg4")
 
-[connection signal="damage_parried" from="." to="ElasticJoint/PipeAnimator" method="_on_player_damage_parried"]
+[connection signal="damage_blocked" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_blocked"]
+[connection signal="damage_parried" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_parried"]
 [connection signal="damaged" from="." to="Camera3D/DamageIndicator" method="_on_player_damaged"]
 [connection signal="damage_dealt" from="ElasticJoint/HurtBox" to="ElasticJoint/PipeAnimator" method="_on_damaged_enemy"]

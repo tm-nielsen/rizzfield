@@ -24,9 +24,6 @@ var is_moving: bool
 var was_moving_last_update: bool
 
 
-func _ready():
-    damage_blocked.connect(show_block)
-
 func _physics_process(delta: float) -> void:
     look(delta)
     move(delta)
@@ -95,7 +92,3 @@ func get_floor_velocity() -> Vector3:
 
 func apply_impulse(impulse: Vector3):
     velocity += basis * impulse
-
-
-func show_block():
-    start_flinch()

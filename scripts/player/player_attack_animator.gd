@@ -71,8 +71,8 @@ func _on_damaged_enemy(damage: int):
     pause_tween.tween_interval(pause_duration)
     pause_tween.tween_callback(play)
 
-func _on_player_damage_parried():
-    set_state(PARRYING)
+func _on_damage_parried(): set_state(PARRYING)
+func _on_damage_blocked(): set_state(BLOCKING)
 
 func _on_animation_finished(_animation_name: String):
     match state:
