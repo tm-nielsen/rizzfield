@@ -2,6 +2,7 @@ class_name ProceduralStepAnimator
 extends Skeleton3D
 
 signal step_taken(distance: Vector2)
+const FRAME_TIME = 1.0 / 12.0
 
 @export var animator: AnimationPlayer
 
@@ -22,26 +23,43 @@ var step_rotations: Dictionary[int, Quaternion]
 
 
 func take_step():
+    _start_step()
+    _finish_step(randf_range(min_step_delay, max_step_delay))
+
+func take_steps_back(step_count: int, callback: Callable):
+    if step_count <= 0:
+        callback.call()
+    else:
+        _start_step(true)
+        var next = take_steps_back.bind(step_count - 1, callback)
+        _finish_step(0, next)
+
+func stop_step():
     if step_tween: step_tween.kill()
+
+
+func _start_step(move_backwards := false):
+    stop_step()
     set_base_position()
     apply_default_step_pose()
     generate_step_pose()
     apply_overshot_step_pose()
-    move_with_step()
+    move_with_step(move_backwards)
+
+func _finish_step(next_step_delay: float, next_step_method: Callable = take_step):
     step_tween = create_tween()
-    step_tween.tween_interval(1 / 12.0)
+    step_tween.tween_interval(FRAME_TIME)
     step_tween.tween_callback(apply_step_pose)
-    step_tween.tween_interval(randf_range(min_step_delay, max_step_delay))
-    step_tween.tween_callback(take_step)
-
-func stop_step():
-    step_tween.kill()
+    step_tween.tween_interval(FRAME_TIME)
+    step_tween.tween_interval(next_step_delay)
+    step_tween.tween_callback(next_step_method)
 
 
-func move_with_step():
+func move_with_step(move_backwards := false):
     var x_distance = randf_range(min_step_distance.x, max_step_distance.x)
     x_distance *= step_direction
     var y_distance = randf_range(min_step_distance.y, max_step_distance.y)
+    if move_backwards: y_distance *= -1
     step_taken.emit(Vector2(x_distance, y_distance))
 
 

@@ -1,5 +1,9 @@
 extends DamageableCharacterBody3D
 
+const TRACKING = 4
+const ATTACKING = 5
+const RETREATING = 6
+
 @export_subgroup("flinch")
 @export var flinch_bone_angle_range: float = 0.5
 @export var parry_flinch_duration: float = 1.0
@@ -28,6 +32,7 @@ func _ready() -> void:
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
     ragdoll.active = false
+    state = TRACKING
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
@@ -82,28 +87,27 @@ func receive_damage(amount: int, impact: Vector3):
 
 
 func start_flinch():
+    if state == STUNNED: state = RETREATING
     super()
-    state = DAMAGED
     step_animator.stop_step()
     animator.pause()
 
-func end_flinch(previous_state: State):
+func end_flinch(previous_state: int):
     super(previous_state)
     if state == STUNNED: state = TRACKING
     if state == TRACKING: step_animator.take_step()
+    if state == STUNNED || state == RETREATING:
+        step_animator.take_steps_back(5, _on_retreat_completed)
     if state != DEAD: animator.play()
 
 
 func start_parry_flinch():
-    var previous_state = state
     state = STUNNED
     animator.play("step")
     animator.advance(1)
     step_animator.randomize_pose(flinch_bone_angle_range)
     move_with_step(Vector2.UP * parry_flinch_recoil_distance)
-    var end_tween = create_tween()
-    end_tween.tween_interval(parry_flinch_duration)
-    end_tween.tween_callback(end_flinch.bind(previous_state))
+    _end_flinch_in(parry_flinch_duration, RETREATING)
 
 
 func die(force: Vector3):
@@ -116,12 +120,17 @@ func die(force: Vector3):
 
 func _on_animation_finished(_animation_name: String):
     if state == ATTACKING:
-        if is_target_in_range:
-            step_animator.set_base_position()
-            attack()
-        else:
-            state = TRACKING
-            step_animator.take_step()
+        state = RETREATING
+        step_animator.take_steps_back(2 + randi() % 2, _on_retreat_completed)
+
+func _on_retreat_completed():
+    state = IDLE
+    var tween = create_tween()
+    tween.tween_interval(randf())
+    tween.tween_callback(func():
+        state = TRACKING
+        step_animator.take_step()
+    )
 
 
 func _get_is_target_in_range() -> bool:
