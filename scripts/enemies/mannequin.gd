@@ -61,7 +61,7 @@ func attack():
     step_animator.stop_step()
     animator.play("attack")
     animator.advance(0)
-    step_animator.set_base_position()
+    step_animator.flip_base()
 
     var target_offset = global_position - target_position
     var attack_offset = target_offset.normalized() * attack_distance
@@ -112,6 +112,7 @@ func end_flinch(previous_state: int):
 
 func start_parry_flinch():
     state = STUNNED
+    step_animator.reset_base()
     animator.play("step")
     animator.advance(1)
     step_animator.randomize_pose(flinch_bone_angle_range)

@@ -40,7 +40,7 @@ func stop_step():
 
 func _start_step(move_backwards := false):
     stop_step()
-    set_base_position()
+    flip_base()
     apply_default_step_pose()
     generate_step_pose()
     apply_overshot_step_pose()
@@ -63,7 +63,7 @@ func move_with_step(move_backwards := false):
     step_taken.emit(Vector2(x_distance, y_distance))
 
 
-func set_base_position():
+func flip_base():
     step_direction *= -1
     var base_position := get_bone_rest(0).origin
     var base_scale = Vector3(-step_direction, 1, 1)
@@ -72,6 +72,8 @@ func set_base_position():
         Basis.from_scale(base_scale), base_position
     )
     set_bone_pose(0, base_t)
+
+func reset_base(): reset_bone_pose(0)
 
 
 func apply_default_step_pose():
