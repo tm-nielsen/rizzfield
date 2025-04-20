@@ -17,3 +17,7 @@ func _process(delta: float) -> void:
     if frame_timer > frame_period:
         frame_timer -= frame_period
         frame_out.emit()
+
+
+func pause_for(seconds: float):
+    frame_timer -= seconds

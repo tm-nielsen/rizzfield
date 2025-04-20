@@ -1,11 +1,15 @@
-extends Node3D
+extends DamageableCharacterBody3D
 
-enum State {
-    TRACKING, ATTACKING
-}
-const TRACKING = State.TRACKING
-const ATTACKING = State.ATTACKING
+const TRACKING = 4
+const ATTACKING = 5
+const RETREATING = 6
 
+@export_subgroup("flinch")
+@export var flinch_bone_angle_range: float = 0.5
+@export var parry_flinch_duration: float = 1.0
+@export var parry_flinch_recoil_distance: float = 0.4
+
+@export_subgroup("references")
 @export var animator: AnimationPlayer
 @export var step_animator: ProceduralStepAnimator
 @export var ragdoll: PhysicalBoneSimulator3D
@@ -13,12 +17,13 @@ const ATTACKING = State.ATTACKING
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
-@export var attack_trigger_distance: float = 2.0
-@export var attack_step_distance: float = 0.8
+@export var attack_trigger_distance: float = 3.0
+@export var attack_distance: float = 1.5
 
-var state: State
 var target: Node3D
 var target_position: Vector3
+
+var is_target_in_range: bool: get = _get_is_target_in_range
 
 
 func _ready() -> void:
@@ -28,6 +33,7 @@ func _ready() -> void:
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
     ragdoll.active = false
+    state = TRACKING
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
@@ -35,20 +41,19 @@ func _process(_delta: float) -> void:
         target_position = target.global_position
         target_position -= target.global_basis.z * target_lead_distance
 
-    if Input.is_key_pressed(KEY_1) && !ragdoll.active:
-        ragdoll.active = true
-        ragdoll.physical_bones_start_simulation()
-        force_node.apply_central_impulse(Vector3.FORWARD * 100)
     if Input.is_key_pressed(KEY_2) && ragdoll.active:
         ragdoll.active = false
         ragdoll.physical_bones_stop_simulation()
+        collision_layer = 12
+        health = maximum_health
+        state = TRACKING
+        step_animator.take_step()
 
+    if state == TRACKING && is_target_in_range: attack()
 
-    match state:
-        TRACKING:
-            if target_position.distance_to(global_position) < attack_trigger_distance:
-                attack()
-        ATTACKING: pass
+func _physics_process(_delta: float) -> void:
+    velocity += get_gravity()
+    move_and_slide()
 
 
 func attack():
@@ -56,17 +61,87 @@ func attack():
     step_animator.stop_step()
     animator.play("attack")
     animator.advance(0)
-    move_with_step(attack_step_distance)
+    step_animator.set_base_position()
+
+    var target_offset = global_position - target_position
+    var attack_offset = target_offset.normalized() * attack_distance
+    var attack_position = target_position + attack_offset
+    move_units(attack_position - global_position)
 
 
-func move_with_step(distance: float):
+func move_with_step(distance: Vector2):
+    var displacement = Vector3.ZERO
+    displacement += basis.z * distance.y
+    displacement += basis.x * distance.x
+    move_units(displacement)
+
+func move_units(displacement: Vector3):
+    velocity = displacement * Engine.physics_ticks_per_second
+    move_and_slide()
+    look_at_target()
+    velocity *= Vector3.UP
+
+func look_at_target():
     var target_offset = target_position - global_position
     target_offset.y = 0
     var look_target = global_position + target_offset
     look_at(look_target, Vector3.UP, true)
-    global_position += basis.z * distance
+
+
+func receive_damage(amount: int, impact: Vector3):
+    super(amount, impact)
+    if health > 0:
+        var angle_range = flinch_bone_angle_range * amount
+        step_animator.randomize_pose(angle_range)
+
+
+func start_flinch():
+    if state == STUNNED: state = RETREATING
+    super()
+    step_animator.stop_step()
+    animator.pause()
+
+func end_flinch(previous_state: int):
+    super(previous_state)
+    if state == STUNNED: state = TRACKING
+    if state == TRACKING: step_animator.take_step()
+    if state == STUNNED || state == RETREATING:
+        step_animator.take_steps_back(5, _on_retreat_completed)
+    if state != DEAD: animator.play()
+
+
+func start_parry_flinch():
+    state = STUNNED
+    animator.play("step")
+    animator.advance(1)
+    step_animator.randomize_pose(flinch_bone_angle_range)
+    move_with_step(Vector2.UP * parry_flinch_recoil_distance)
+    _end_flinch_in(parry_flinch_duration, RETREATING)
+
+
+func die(force: Vector3):
+    state = DEAD
+    collision_layer = 0
+    ragdoll.active = true
+    ragdoll.physical_bones_start_simulation()
+    force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
+
 
 func _on_animation_finished(_animation_name: String):
     if state == ATTACKING:
+        state = RETREATING
+        step_animator.take_steps_back(2 + randi() % 2, _on_retreat_completed)
+
+func _on_retreat_completed():
+    state = IDLE
+    var tween = create_tween()
+    tween.tween_interval(randf())
+    tween.tween_callback(func():
         state = TRACKING
         step_animator.take_step()
+    )
+
+
+func _get_is_target_in_range() -> bool:
+    var target_distance = target_position.distance_to(global_position)
+    return target_distance < attack_trigger_distance
