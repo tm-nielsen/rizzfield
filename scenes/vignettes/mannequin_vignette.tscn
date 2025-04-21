@@ -1,12 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbdpk1g82cs7n"]
+[gd_scene load_steps=5 format=3 uid="uid://dbdpk1g82cs7n"]
 
 [ext_resource type="ArrayMesh" uid="uid://bck47k562vrd1" path="res://models/mannequin.res" id="1_w6n52"]
+
+[sub_resource type="Animation" id="Animation_b70mf"]
+resource_name = "zoom"
+length = 0.333342
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0567388, 0.106597, 0.180544), Vector3(0.0600145, 0.0661532, 0.279614), Vector3(0.0267763, 0.0600544, 0.23586)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.470215, 0.0985171, -0.432987), Vector3(-0.147785, 0.196448, -0.15474), Vector3(-0.235165, 0.187762, -0.119657)]
+}
+
+[sub_resource type="Animation" id="Animation_hilif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0790314, 0.0811251, 0.180544)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.464909, -0.122644, 0.0500958)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gnmd"]
+_data = {
+&"RESET": SubResource("Animation_hilif"),
+&"zoom": SubResource("Animation_b70mf")
+}
 
 [node name="MannequinConversationView" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.99399, 0.00508108, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999014, -0.450541, 0.887149, -0.0790314, 0.0811251, 0.180544)
+transform = Transform3D(0.99399, 0.00508113, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999014, -0.450541, 0.887148, -0.0790314, 0.0811251, 0.180544)
 cull_mask = 1048569
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5gnmd")
+}
+autoplay = "zoom"
 
 [node name="Mannequin" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
