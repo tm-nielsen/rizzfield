@@ -1,10 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
 
-[ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/mannequin.tscn" id="1_w105o"]
+[ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/combat_mannequin.tscn" id="1_w105o"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="2_ekcfv"]
 [ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="3_5jbmu"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="3_s5ga2"]
 [ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="4_0yobm"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rfoto"]
 render_priority = 0

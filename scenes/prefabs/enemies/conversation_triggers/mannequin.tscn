@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_tpnoj"]
 [ext_resource type="Script" uid="uid://ddfa6bjdyoi1" path="res://scripts/enemies/converation_trigger_sentry.gd" id="2_8mact"]
 [ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_iq0i8"]
-[ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/mannequin.tscn" id="4_12umt"]
+[ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/combat_mannequin.tscn" id="4_12umt"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="5_4klpi"]
 [ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="5_j18o8"]
 

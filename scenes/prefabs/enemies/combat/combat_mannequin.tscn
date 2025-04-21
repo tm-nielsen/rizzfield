@@ -1,11 +1,12 @@
 [gd_scene load_steps=25 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
-[ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin.gd" id="2_q8lao"]
+[ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin_combat_controller.gd" id="2_q8lao"]
 [ext_resource type="Script" uid="uid://ceqw1wpmritw8" path="res://scripts/enemies/procedural_step_animator.gd" id="3_wi8gg"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="4_1refm"]
 [ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://models/source_files/eye.gdshader" id="5_5q6qh"]
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="5_7nf3y"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eg11s"]
 resource_local_to_scene = true
