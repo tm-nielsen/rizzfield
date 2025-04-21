@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode specular_toon;
+render_mode specular_toon, cull_disabled;
 
 uniform vec3 albedo_colour: source_color = vec3(1);
 uniform sampler2D albedo_texture: hint_default_white, filter_nearest;
@@ -11,9 +11,11 @@ uniform float specular = 0.5;
 uniform vec3 emission: source_color = vec3(0);
 
 uniform vec2 uv_scale = vec2(1);
+uniform float normal_scale: hint_range(-1, 1, 2) = 1.0;
 
 void vertex() {
 	UV *= uv_scale;
+	NORMAL *= normal_scale;
 }
 
 void fragment() {

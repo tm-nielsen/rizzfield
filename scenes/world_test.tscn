@@ -14,6 +14,7 @@ shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/emission = Color(0.194349, 0.194349, 0.194349, 1)
 shader_parameter/uv_scale = Vector2(200, 200)
+shader_parameter/normal_scale = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_i6uhy"]
 material = SubResource("ShaderMaterial_4lv6h")

@@ -96,6 +96,7 @@ surface_material = ExtResource("4_1refm")
 animate_physical_bones = false
 script = ExtResource("3_wi8gg")
 animator = NodePath("../../AnimationPlayer")
+skin_material = ExtResource("4_1refm")
 
 [node name="body" parent="skeleton/Skeleton3D" index="0"]
 layers = 2

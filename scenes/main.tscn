@@ -16,6 +16,7 @@ shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
 
 [node name="Base" type="Control"]
 texture_filter = 1
@@ -55,7 +56,6 @@ surface_material = SubResource("ShaderMaterial_choun")
 
 [node name="ConversationScreen" type="Control" parent="." node_paths=PackedStringArray("vignette_viewport")]
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

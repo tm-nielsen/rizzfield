@@ -12,3 +12,4 @@ shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
