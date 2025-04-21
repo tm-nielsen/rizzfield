@@ -6,7 +6,7 @@ extends DamageableCharacterBody3D
 
 @export_subgroup("parameters")
 @export_range(0, 180) var view_range: float = 60
-@export var activation_time: float = 1 / 12.0
+@export var activation_time: float = 1 / 6.0
 @export_flags_3d_physics var raycast_mask = 3
 
 var camera: Camera3D
@@ -43,9 +43,9 @@ func check_raycast() -> bool:
 
 func activate():
     triggered = true
-    head_node.visible = true
+    head_node.show()
     head_node.override_pose = true
-    head_node.look_at(camera.global_position)
+    head_node.look_at(camera.global_position, Vector3.UP, true)
     camera.look_at(head_node.global_position)
 
     (func(): get_tree().paused = true).call_deferred()
