@@ -8,4 +8,6 @@ render_priority = 0
 shader = ExtResource("1_e1v5f")
 shader_parameter/iris_colour = Color(1, 1, 1, 1)
 shader_parameter/pupil_colour = Color(0, 0, 0, 1)
+shader_parameter/eye_width = 1.0
+shader_parameter/eye_height = 1.0
 shader_parameter/pupil_size = 0.2
