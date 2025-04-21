@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdra44ss3dhfn"]
+
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_1moov"]
+[ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="2_63fu1"]
+[ext_resource type="PackedScene" uid="uid://c0rmr1wpvutpg" path="res://scenes/prefabs/enemies/conversation_triggers/mannequin.tscn" id="3_ob026"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4lv6h"]
+render_priority = 0
+shader = ExtResource("1_1moov")
+shader_parameter/albedo_colour = Color(0.0793711, 0.147565, 0.105524, 1)
+shader_parameter/albedo_texture = ExtResource("2_63fu1")
+shader_parameter/roughness = 1.0
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0.194349, 0.194349, 0.194349, 1)
+shader_parameter/uv_scale = Vector2(200, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i6uhy"]
+material = SubResource("ShaderMaterial_4lv6h")
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_voen0"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4bo10"]
+size = Vector3(20, 2, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d357a"]
+points = PackedVector3Array(10, 1, 0.5, 10, 1, -0.5, -10, 1, 0.5, 10, -1, 0.5, 10, -1, -0.5, -10, 1, -0.5, -10, -1, 0.5, -10, -1, -0.5)
+
+[node name="WorldTest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.968204, -0.0638475, -0.241875, 0.25016, 0.247111, 0.936139, 0, -0.966881, 0.255226, 0, 0, 0)
+light_color = Color(0.481789, 0.481789, 0.481789, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+mesh = SubResource("BoxMesh_i6uhy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0)
+shape = SubResource("BoxShape3D_voen0")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -4)
+
+[node name="Wall" type="MeshInstance3D" parent="Wall"]
+mesh = SubResource("BoxMesh_4bo10")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+shape = SubResource("ConvexPolygonShape3D_d357a")
+
+[node name="MannequinConvoTrigger" parent="." instance=ExtResource("3_ob026")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -4, 0, -8)
