@@ -57,6 +57,7 @@ flinch_duration = 0.33
 surface_material = ExtResource("6_50rl7")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("movement_body", "update_timer")]
+cull_mask = 1048567
 current = true
 script = ExtResource("2_50rl7")
 movement_body = NodePath("..")
@@ -66,6 +67,7 @@ frequency = 1.5
 
 [node name="DamageIndicator" type="MeshInstance3D" parent="Camera3D" node_paths=PackedStringArray("frame_timer")]
 visible = false
+layers = 4
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_c1k3r")
 skeleton = NodePath("../..")
@@ -108,16 +110,19 @@ view_bob_frame_timer = NodePath("../../FrameTimer")
 transform = Transform3D(0.978142, 0.207911, -0.00277504, -0.207912, 0.978148, -1.26709e-09, 0.0027144, 0.000576967, 0.999994, 0.462, -0.17, -0.61)
 
 [node name="Pipe" type="MeshInstance3D" parent="ElasticJoint/Models"]
+layers = 2
 mesh = ExtResource("3_6v0jn")
 surface_material_override/0 = ExtResource("4_jybep")
 
 [node name="Arm" type="MeshInstance3D" parent="ElasticJoint/Models"]
+layers = 2
 mesh = ExtResource("4_r053x")
 surface_material_override/0 = ExtResource("6_50rl7")
 
 [node name="Smear" type="MeshInstance3D" parent="ElasticJoint/Models"]
 transform = Transform3D(-0.638385, 0.488446, -0.594881, -0.744853, -0.586864, 0.317463, -0.19405, 0.645763, 0.738467, 0.0224981, 0.00349995, -0.119393)
 visible = false
+layers = 2
 mesh = ExtResource("5_jybep")
 surface_material_override/0 = ExtResource("8_oqq3r")
 

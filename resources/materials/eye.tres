@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://di8gh4ie604eb"]
+
+[ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://models/source_files/eye.gdshader" id="1_e1v5f"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_e1v5f")
+shader_parameter/iris_colour = Color(1, 1, 1, 1)
+shader_parameter/pupil_colour = Color(0, 0, 0, 1)
+shader_parameter/eye_width = 1.0
+shader_parameter/eye_height = 1.0
+shader_parameter/pupil_size = 0.2

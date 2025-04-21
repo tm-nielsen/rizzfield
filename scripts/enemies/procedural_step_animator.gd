@@ -5,6 +5,7 @@ signal step_taken(distance: Vector2)
 const FRAME_TIME = 1.0 / 12.0
 
 @export var animator: AnimationPlayer
+@export var skin_material: ShaderMaterial
 
 @export_subgroup("step parameters")
 @export var random_angle_range: float = 0.4
@@ -72,8 +73,11 @@ func flip_base():
         Basis.from_scale(base_scale), base_position
     )
     set_bone_pose(0, base_t)
+    skin_material.set_shader_parameter("normal_scale", -step_direction)
 
-func reset_base(): reset_bone_pose(0)
+func reset_base():
+    reset_bone_pose(0)
+    skin_material.set_shader_parameter("normal_scale", 1)
 
 
 func apply_default_step_pose():
