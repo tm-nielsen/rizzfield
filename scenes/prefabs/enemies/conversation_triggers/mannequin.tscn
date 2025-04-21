@@ -16,10 +16,12 @@ material = ExtResource("5_j18o8")
 size = Vector2(0.05, 0.05)
 
 [node name="MannequinConvoTrigger" node_paths=PackedStringArray("head_node") instance=ExtResource("1_tpnoj")]
+collision_layer = 12
 script = ExtResource("2_8mact")
 vignette_prefab = ExtResource("3_iq0i8")
 combat_prefab = ExtResource("4_12umt")
 head_node = NodePath("skeleton/Skeleton3D/Head")
+surface_material = ExtResource("5_4klpi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075, 0)

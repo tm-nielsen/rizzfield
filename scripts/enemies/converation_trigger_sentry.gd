@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends DamageableCharacterBody3D
 
 @export var vignette_prefab: PackedScene
 @export var combat_prefab: PackedScene
@@ -57,8 +57,16 @@ func start_conversation():
     GameModeSignalBus.combat_triggered.connect(spawn_combat_instance)
     GameModeSignalBus.notify_conversation_triggered(vignette_instance)
 
-func spawn_combat_instance():
+func spawn_combat_instance() -> DamageableCharacterBody3D:
     var combat_instance: Node3D = combat_prefab.instantiate()
     add_sibling(combat_instance)
     combat_instance.transform = transform
     queue_free()
+    return combat_instance
+
+
+func receive_damage(amount: int, impulse: Vector3):
+    var combat_instance = spawn_combat_instance()
+    combat_instance.position += impulse
+    combat_instance.move_and_slide()
+    combat_instance.receive_damage(amount * 2, impulse)
