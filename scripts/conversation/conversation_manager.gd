@@ -15,6 +15,9 @@ func _process(_delta: float) -> void:
         get_tree().paused = false
         hide()
         GameModeSignalBus.combat_triggered.emit()
+    if Input.is_key_pressed(KEY_R):
+        get_tree().paused = false
+        get_tree().reload_current_scene()
 
 
 func _on_conversation_started(vignette_instance: Node3D):
