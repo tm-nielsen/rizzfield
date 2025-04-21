@@ -1,6 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbdpk1g82cs7n"]
+[gd_scene load_steps=8 format=3 uid="uid://dbdpk1g82cs7n"]
 
 [ext_resource type="ArrayMesh" uid="uid://bck47k562vrd1" path="res://models/mannequin.res" id="1_w6n52"]
+[ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="2_5gnmd"]
+[ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="2_hilif"]
+
+[sub_resource type="Animation" id="Animation_hilif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0790314, 0.0811251, 0.180544)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.464909, -0.122644, 0.0500958)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
 
 [sub_resource type="Animation" id="Animation_b70mf"]
 resource_name = "zoom"
@@ -30,32 +71,17 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(-0.470215, 0.0985171, -0.432987), Vector3(-0.147785, 0.196448, -0.15474), Vector3(-0.235165, 0.187762, -0.119657)]
 }
-
-[sub_resource type="Animation" id="Animation_hilif"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.0790314, 0.0811251, 0.180544)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.464909, -0.122644, 0.0500958)]
+"values": [0.2, 0.9, 0.75]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5gnmd"]
@@ -64,10 +90,14 @@ _data = {
 &"zoom": SubResource("Animation_b70mf")
 }
 
-[node name="MannequinConversationView" type="Node3D"]
+[sub_resource type="QuadMesh" id="QuadMesh_5gnmd"]
+material = ExtResource("2_hilif")
+size = Vector2(0.05, 0.05)
+
+[node name="MannequinVignette" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.99399, 0.00508113, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999014, -0.450541, 0.887148, -0.0790314, 0.0811251, 0.180544)
+transform = Transform3D(0.99399, 0.00508112, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999013, -0.450541, 0.887148, -0.0790314, 0.0811251, 0.180544)
 cull_mask = 1048569
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -80,6 +110,18 @@ autoplay = "zoom"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 layers = 8
 mesh = ExtResource("1_w6n52")
+surface_material_override/0 = ExtResource("2_5gnmd")
+
+[node name="Head" type="Node3D" parent="Mannequin"]
+transform = Transform3D(1, -1.75089e-07, 4.04194e-07, 8.56817e-08, 1, 2.98024e-08, -3.68804e-07, -2.98023e-08, 1, -6.24132e-08, 0.466707, 1.04827e-09)
+
+[node name="RightEye" type="MeshInstance3D" parent="Mannequin/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5gnmd")
+
+[node name="LeftEye" type="MeshInstance3D" parent="Mannequin/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5gnmd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0.40739, 0.817942, 0.406208, 0, 0, 0)
