@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled;
 
 uniform vec4 iris_colour: source_color = vec4(1);
 uniform vec4 pupil_colour: source_color = vec4(vec3(0), 1);

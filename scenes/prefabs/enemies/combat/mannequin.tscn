@@ -1,10 +1,25 @@
-[gd_scene load_steps=22 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=25 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
 [ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin.gd" id="2_q8lao"]
 [ext_resource type="Script" uid="uid://ceqw1wpmritw8" path="res://scripts/enemies/procedural_step_animator.gd" id="3_wi8gg"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="4_1refm"]
+[ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://models/source_files/eye.gdshader" id="5_5q6qh"]
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="5_7nf3y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eg11s"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_5q6qh")
+shader_parameter/iris_colour = Color(1, 1, 1, 1)
+shader_parameter/pupil_colour = Color(0, 0, 0, 1)
+shader_parameter/eye_width = 1.0
+shader_parameter/eye_height = 1.0
+shader_parameter/pupil_size = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_5q6qh"]
+material = SubResource("ShaderMaterial_eg11s")
+size = Vector2(0.05, 0.05)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1refm"]
 radius = 0.05
@@ -64,7 +79,7 @@ height = 1.4
 [sub_resource type="SphereShape3D" id="SphereShape3D_7t5wa"]
 radius = 0.4
 
-[node name="CombatMannequin" node_paths=PackedStringArray("animator", "step_animator", "ragdoll", "force_node") instance=ExtResource("1_wva5t")]
+[node name="CombatMannequin" node_paths=PackedStringArray("animator", "step_animator", "ragdoll", "force_node", "eyes_parent") instance=ExtResource("1_wva5t")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 collision_layer = 12
 collision_mask = 3
@@ -73,6 +88,7 @@ animator = NodePath("AnimationPlayer")
 step_animator = NodePath("skeleton/Skeleton3D")
 ragdoll = NodePath("skeleton/Skeleton3D/PhysicalBoneSimulator3D")
 force_node = NodePath("skeleton/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Upper Back")
+eyes_parent = NodePath("skeleton/Skeleton3D/Head")
 flinch_duration = 0.16
 surface_material = ExtResource("4_1refm")
 
@@ -85,7 +101,20 @@ animator = NodePath("../../AnimationPlayer")
 layers = 2
 surface_material_override/0 = ExtResource("4_1refm")
 
-[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="skeleton/Skeleton3D" index="1"]
+[node name="Head" type="BoneAttachment3D" parent="skeleton/Skeleton3D" index="1"]
+transform = Transform3D(1, -1.75089e-07, 4.04194e-07, 8.56817e-08, 1, 2.98024e-08, -3.68804e-07, -2.98023e-08, 1, -6.24132e-08, 0.466707, 1.04827e-09)
+bone_name = "Head"
+bone_idx = 20
+
+[node name="RightEye" type="MeshInstance3D" parent="skeleton/Skeleton3D/Head" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5q6qh")
+
+[node name="LeftEye" type="MeshInstance3D" parent="skeleton/Skeleton3D/Head" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5q6qh")
+
+[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="skeleton/Skeleton3D" index="2"]
 active = false
 
 [node name="Physical Bone Base" type="PhysicalBone3D" parent="skeleton/Skeleton3D/PhysicalBoneSimulator3D" index="0"]

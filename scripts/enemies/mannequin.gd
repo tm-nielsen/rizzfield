@@ -14,6 +14,7 @@ const RETREATING = 6
 @export var step_animator: ProceduralStepAnimator
 @export var ragdoll: PhysicalBoneSimulator3D
 @export var force_node: PhysicalBone3D
+@export var eyes_parent: Node3D
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
@@ -46,6 +47,7 @@ func _process(_delta: float) -> void:
         ragdoll.physical_bones_stop_simulation()
         collision_layer = 12
         health = maximum_health
+        eyes_parent.show()
         state = TRACKING
         step_animator.take_step()
 
@@ -123,6 +125,7 @@ func start_parry_flinch():
 func die(force: Vector3):
     state = DEAD
     collision_layer = 0
+    eyes_parent.hide()
     ragdoll.active = true
     ragdoll.physical_bones_start_simulation()
     force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
