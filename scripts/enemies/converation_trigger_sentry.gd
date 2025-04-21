@@ -35,10 +35,7 @@ func activate():
     camera.look_at(head_node.global_position)
 
     get_tree().paused = true;
-    var end_tween = create_tween()
-    end_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-    end_tween.tween_interval(activation_time)
-    end_tween.tween_callback(start_conversation)
+    TweenHelpers.call_delayed_realtime(start_conversation, activation_time)
 
 func start_conversation():
     var vignette_instance: Node3D = vignette_prefab.instantiate()

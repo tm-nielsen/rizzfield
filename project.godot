@@ -15,6 +15,10 @@ run/main_scene="uid://ch7e8r5h7a6kn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+TweenHelpers="*res://scripts/globals/tween_helpers.gd"
+
 [display]
 
 window/size/viewport_width=240
