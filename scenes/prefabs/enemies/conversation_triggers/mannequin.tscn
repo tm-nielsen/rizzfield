@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0rmr1wpvutpg"]
+[gd_scene load_steps=9 format=3 uid="uid://c0rmr1wpvutpg"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_tpnoj"]
 [ext_resource type="Script" uid="uid://ddfa6bjdyoi1" path="res://scripts/enemies/converation_trigger_sentry.gd" id="2_8mact"]
 [ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_iq0i8"]
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/mannequin.tscn" id="4_12umt"]
+[ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="5_4klpi"]
 [ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="5_j18o8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g514v"]
@@ -14,20 +15,18 @@ height = 1.45
 material = ExtResource("5_j18o8")
 size = Vector2(0.05, 0.05)
 
-[node name="MannequinConvoTrigger" node_paths=PackedStringArray("head_node", "raycast") instance=ExtResource("1_tpnoj")]
+[node name="MannequinConvoTrigger" node_paths=PackedStringArray("head_node") instance=ExtResource("1_tpnoj")]
 script = ExtResource("2_8mact")
 vignette_prefab = ExtResource("3_iq0i8")
 combat_prefab = ExtResource("4_12umt")
 head_node = NodePath("skeleton/Skeleton3D/Head")
-raycast = NodePath("RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075, 0)
 shape = SubResource("CapsuleShape3D_g514v")
 
-[node name="RayCast3D" type="RayCast3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-collision_mask = 2
+[node name="body" parent="skeleton/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("5_4klpi")
 
 [node name="Head" type="BoneAttachment3D" parent="skeleton/Skeleton3D" index="1"]
 transform = Transform3D(1, -1.75089e-07, 4.04194e-07, 8.56817e-08, 1, 2.98024e-08, -3.68804e-07, -2.98023e-08, 1, -6.24132e-08, 0.466707, 1.04827e-09)
