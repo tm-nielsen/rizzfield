@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 
 func check_angle() -> bool:
     var diff = camera.global_position - head_node.global_position
-    return diff.angle_to(-head_node.basis.z) < deg_to_rad(view_range)
+    return diff.angle_to(basis.z) < deg_to_rad(view_range)
 
 func check_raycast() -> bool:
     var space_state := get_world_3d().direct_space_state
