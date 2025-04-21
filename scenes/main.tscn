@@ -1,0 +1,92 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch7e8r5h7a6kn"]
+
+[ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bd7jdvcxay8jg" path="res://scenes/combat_test.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_sugp2"]
+
+[node name="Base" type="Control"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MouseManager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("1_0wfyh")
+
+[node name="FreeRoamViewport" type="SubViewportContainer" parent="."]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="FreeRoamViewport"]
+transparent_bg = true
+handle_input_locally = false
+audio_listener_enable_3d = true
+size = Vector2i(240, 135)
+render_target_update_mode = 4
+
+[node name="Base" parent="FreeRoamViewport/SubViewport" instance=ExtResource("2_sugp2")]
+
+[node name="ConversationScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VignetteViewport" type="SubViewportContainer" parent="ConversationScreen"]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="ConversationScreen/VignetteViewport"]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
+size = Vector2i(240, 135)
+render_target_update_mode = 4
+
+[node name="MannequinConversationView2" parent="ConversationScreen/VignetteViewport/SubViewport" instance=ExtResource("3_sugp2")]
+
+[node name="Panel" type="Panel" parent="ConversationScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="ConversationScreen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lorem Ipsum Dolor Sit"

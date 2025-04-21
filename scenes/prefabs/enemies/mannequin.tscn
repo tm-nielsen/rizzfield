@@ -82,6 +82,7 @@ script = ExtResource("3_wi8gg")
 animator = NodePath("../../AnimationPlayer")
 
 [node name="body" parent="skeleton/Skeleton3D" index="0"]
+layers = 2
 surface_material_override/0 = ExtResource("4_1refm")
 
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="skeleton/Skeleton3D" index="1"]

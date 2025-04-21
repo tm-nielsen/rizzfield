@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbdpk1g82cs7n"]
+
+[ext_resource type="ArrayMesh" uid="uid://bck47k562vrd1" path="res://models/mannequin.res" id="1_w6n52"]
+
+[node name="MannequinConversationView" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.99399, 0.00508108, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999014, -0.450541, 0.887149, -0.0790314, 0.0811251, 0.180544)
+cull_mask = 1048569
+
+[node name="Mannequin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
+layers = 8
+mesh = ExtResource("1_w6n52")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0.40739, 0.817942, 0.406208, 0, 0, 0)
+shadow_enabled = true
