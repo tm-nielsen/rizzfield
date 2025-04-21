@@ -24,6 +24,10 @@ var is_moving: bool
 var was_moving_last_update: bool
 
 
+func _ready() -> void:
+    GameModeSignalBus.combat_triggered.connect(apply_head_rotation)
+    GameModeSignalBus.conversation_resolved.connect(apply_head_rotation)
+
 func _physics_process(delta: float) -> void:
     look(delta)
     move(delta)
@@ -92,3 +96,10 @@ func get_floor_velocity() -> Vector3:
 
 func apply_impulse(impulse: Vector3):
     velocity += basis * impulse
+
+func apply_head_rotation():
+    rotation.x = 0
+    rotation.y += head_node.rotation.y
+    rotation.z = 0
+    head_node.rotation.y = 0
+    head_node.rotation.z = 0
