@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GameModeSignalBus="*res://scripts/globals/game_mode_signal_bus.gd"
 TweenHelpers="*res://scripts/globals/tween_helpers.gd"
 
 [display]

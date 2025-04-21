@@ -40,7 +40,7 @@ func activate():
 func start_conversation():
     var vignette_instance: Node3D = vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
-    # GameModeSignalBus.notify_conversation_triggered(vignette_instance)
+    GameModeSignalBus.notify_conversation_triggered(vignette_instance)
 
     var combat_instance: Node3D = combat_prefab.instantiate()
     add_sibling(combat_instance)
