@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bdra44ss3dhfn" path="res://scenes/world_test.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="4_tipki"]
-[ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="5_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dm6nb6h5e06ie" path="res://scenes/conversation_screen.tscn" id="5_tbgi4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
 resource_local_to_scene = true
@@ -54,55 +54,5 @@ render_target_update_mode = 4
 [node name="Player" parent="WorldViewport/SubViewport" instance=ExtResource("3_o6xl0")]
 surface_material = SubResource("ShaderMaterial_choun")
 
-[node name="ConversationScreen" type="Control" parent="." node_paths=PackedStringArray("vignette_viewport")]
-process_mode = 3
+[node name="ConversationScreen" parent="." instance=ExtResource("5_tbgi4")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_85g3d")
-vignette_viewport = NodePath("VignetteViewport/SubViewport")
-
-[node name="VignetteViewport" type="SubViewportContainer" parent="ConversationScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="ConversationScreen/VignetteViewport"]
-transparent_bg = true
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-size = Vector2i(240, 135)
-
-[node name="Panel" type="Panel" parent="ConversationScreen"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.6
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_right = -12.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="ConversationScreen/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Lorem Ipsum Dolor Sit"
