@@ -1,22 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://kfxvu5oltfbb"]
+[gd_scene load_steps=7 format=3 uid="uid://kfxvu5oltfbb"]
 
 [ext_resource type="Shader" uid="uid://bffowjmg0i2bd" path="res://resources/shaders/unlit.gdshader" id="1_gr2tu"]
 [ext_resource type="Script" uid="uid://dqeuaowcae7tu" path="res://scripts/conversation/placement_grid.gd" id="1_liyel"]
+[ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="3_b75ef"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b75ef"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gr2tu"]
 render_priority = 0
 shader = ExtResource("1_gr2tu")
 shader_parameter/colour = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_bifgu"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_gr2tu"]
 size = Vector2(1, 1)
 
-[sub_resource type="MultiMesh" id="MultiMesh_sfxb7"]
+[sub_resource type="MultiMesh" id="MultiMesh_b75ef"]
 transform_format = 1
+use_colors = true
 instance_count = 20
-mesh = SubResource("PlaneMesh_bifgu")
-buffer = PackedFloat32Array(1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, -1.65, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, -0.55, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, 0.55, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, 1.65, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, -1.65, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, -0.55, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, 0.55, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, 1.65, 1, 0, 0, -2.3836e-08, 0, 1, 0, 0, 0, 0, 1, -1.65, 1, 0, 0, -2.3836e-08, 0, 1, 0, 0, 0, 0, 1, -0.55, 1, 0, 0, -2.3836e-08, 0, 1, 0, 0, 0, 0, 1, 0.55, 1, 0, 0, -2.3836e-08, 0, 1, 0, 0, 0, 0, 1, 1.65, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, -1.65, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, -0.55, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, 0.55, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, 1.65, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, -1.65, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, -0.55, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, 0.55, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, 1.65)
+mesh = SubResource("PlaneMesh_gr2tu")
+buffer = PackedFloat32Array(1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, -1.65, 0, 0, 0, 1, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, -0.55, 0.039978, 0.039978, 0.039978, 1, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, 0.55, 0.0799561, 0.0799561, 0.0799561, 1, 1, 0, 0, -2.2, 0, 1, 0, 0, 0, 0, 1, 1.65, 0.119995, 0.119995, 0.119995, 1, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, -1.65, 0.159912, 0.159912, 0.159912, 1, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, -0.55, 0.199951, 0.199951, 0.199951, 1, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, 0.55, 0.23999, 0.23999, 0.23999, 1, 1, 0, 0, -1.1, 0, 1, 0, 0, 0, 0, 1, 1.65, 0.279785, 0.279785, 0.279785, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1.65, 0.319824, 0.319824, 0.319824, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.55, 0.359863, 0.359863, 0.359863, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0.55, 0.399902, 0.399902, 0.399902, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1.65, 0.439941, 0.439941, 0.439941, 1, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, -1.65, 0.47998, 0.47998, 0.47998, 1, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, -0.55, 0.519531, 0.519531, 0.519531, 1, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, 0.55, 0.55957, 0.55957, 0.55957, 1, 1, 0, 0, 1.1, 0, 1, 0, 0, 0, 0, 1, 1.65, 0.599609, 0.599609, 0.599609, 1, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, -1.65, 0.639648, 0.639648, 0.639648, 1, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, -0.55, 0.679688, 0.679688, 0.679688, 1, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, 0.55, 0.719727, 0.719727, 0.719727, 1, 1, 0, 0, 2.2, 0, 1, 0, 0, 0, 0, 1, 1.65, 0.759766, 0.759766, 0.759766, 1)
 
 [node name="ResponseBuilder" type="Node3D"]
 
@@ -26,9 +28,10 @@ projection = 1
 size = 5.0
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_b75ef")
-multimesh = SubResource("MultiMesh_sfxb7")
+material_override = SubResource("ShaderMaterial_gr2tu")
+multimesh = SubResource("MultiMesh_b75ef")
 script = ExtResource("1_liyel")
 grid_size = Vector2i(5, 4)
 cell_size = 1.0
 grid_gap = 0.1
+test_fragment = ExtResource("3_b75ef")
