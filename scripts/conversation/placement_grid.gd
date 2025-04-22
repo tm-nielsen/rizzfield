@@ -17,6 +17,21 @@ func _ready() -> void:
 func get_cell_position(x: int, y: int) -> Vector3:
     return grid_origin + Vector3(x, 0, y) * grid_step
 
+func get_cell_coords(point: Vector3) -> Vector2i:
+    return clamp(
+        _get_unclamped_cell_coords(point),
+        Vector2i.ZERO, grid_size
+    )
+
+func _get_unclamped_cell_coords(point: Vector3) -> Vector2i:
+    var offset = (point - grid_origin) / grid_step
+    return Vector2i(roundi(offset.x), roundi(offset.z))
+
+func contains_point(point: Vector3) -> bool:
+    var unclamped_coords = _get_unclamped_cell_coords(point)
+    var coords_rect = Rect2i(Vector2i.ZERO, grid_size)
+    return coords_rect.has_point(unclamped_coords)
+
 
 func create_grid():
     _initialize_multimesh()
