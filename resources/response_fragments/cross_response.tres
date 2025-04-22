@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=3 format=3 uid="uid://xg7826m1ef07"]
+
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_a0dql"]
+[ext_resource type="Texture2D" uid="uid://caf7r0fotrms5" path="res://resources/response_fragments/shape_textures/cross.png" id="2_a0dql"]
+
+[resource]
+script = ExtResource("1_a0dql")
+name = "cross"
+value = 1
+shape_texture = ExtResource("2_a0dql")
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

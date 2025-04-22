@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=2 format=3 uid="uid://bgsfka3cqgf7n"]
+
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_i5veh"]
+
+[resource]
+script = ExtResource("1_i5veh")
+name = ""
+value = 1
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

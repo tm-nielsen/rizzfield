@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=3 format=3 uid="uid://ddxgbo0p8blsw"]
+
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_jnbiq"]
+[ext_resource type="Texture2D" uid="uid://cc2xsj351fabh" path="res://resources/response_fragments/shape_textures/arch.png" id="2_jnbiq"]
+
+[resource]
+script = ExtResource("1_jnbiq")
+name = "arch"
+value = 1
+shape_texture = ExtResource("2_jnbiq")
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

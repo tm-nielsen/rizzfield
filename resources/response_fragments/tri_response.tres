@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=3 format=3 uid="uid://cm05u2kaqoor"]
+
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_vg3by"]
+[ext_resource type="Texture2D" uid="uid://6c7lhve4e7t2" path="res://resources/response_fragments/shape_textures/tri.png" id="2_vg3by"]
+
+[resource]
+script = ExtResource("1_vg3by")
+name = "tri"
+value = 1
+shape_texture = ExtResource("2_vg3by")
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"
