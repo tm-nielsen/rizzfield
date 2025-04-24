@@ -6,6 +6,12 @@ extends MultiMeshInstance3D
 @export var grid_gap: float = 0.01
 @export_tool_button("generate cells") var generate_button = create_grid
 
+@export_subgroup("colours", "colour")
+@export var colour_available := Color.BLACK
+@export var colour_filled := Color.GRAY
+@export var colour_highlight := Color.WHITE
+@export var colour_error := Color.RED
+
 @export var held_fragment: ResponseFragment
 
 var cell_count: int
@@ -21,22 +27,26 @@ func _process(_delta: float) -> void:
     if Engine.is_editor_hint(): return
 
     for i in cell_count:
-        toggle_cell_colour(i, false)
+        set_cell_colour(i)
 
     var mouse_position = get_mouse_world_position()
     var placement_offset = get_fragment_placement_offset(held_fragment)
-    var shape_position = mouse_position + placement_offset
-    var shape_end = mouse_position - placement_offset
-    if contains_point(shape_position) && contains_point(shape_end):
-        var origin_coords = get_cell_coords(shape_position)
-        for cell_offset in held_fragment.cells:
-            toggle_cell_colourv(origin_coords + cell_offset)
+    var placement_origin = mouse_position + placement_offset
+    var shape_contained = contains_point(placement_origin) && \
+        contains_point(mouse_position - placement_offset)
+
+    var fill_colour = colour_highlight if shape_contained else colour_error
+    
+    var origin_coords = get_unclamped_cell_coords(placement_origin)
+    for cell_offset in held_fragment.cells:
+        set_cell_colourv(origin_coords + cell_offset, fill_colour)
 
 
 func get_cell_position(x: int, y: int) -> Vector3:
     return grid_origin + Vector3(x, 0, y) * grid_step
 
 func get_cell_index(cell_coords: Vector2i) -> int:
+    if !contains_coords(cell_coords): return -1
     return cell_coords.y + grid_size.y * cell_coords.x
 
 func get_cell_index_from_point(point: Vector3) -> int:
@@ -44,27 +54,27 @@ func get_cell_index_from_point(point: Vector3) -> int:
 
 func get_cell_coords(point: Vector3) -> Vector2i:
     return clamp(
-        _get_unclamped_cell_coords(point),
+        get_unclamped_cell_coords(point),
         Vector2i.ZERO, grid_size
     )
 
-func _get_unclamped_cell_coords(point: Vector3) -> Vector2i:
+func get_unclamped_cell_coords(point: Vector3) -> Vector2i:
     var offset = (point - grid_origin) / grid_step
     return Vector2i(round(offset.x), round(offset.z))
 
 func contains_point(point: Vector3) -> bool:
-    var unclamped_coords = _get_unclamped_cell_coords(point)
+    return contains_coords(get_unclamped_cell_coords(point))
+
+func contains_coords(cell_coords: Vector2i) -> bool:
     var coords_rect = Rect2i(Vector2i.ZERO, grid_size)
-    return coords_rect.has_point(unclamped_coords)
+    return coords_rect.has_point(cell_coords)
 
 
-func toggle_cell_colour(cell_index: int, on: bool = true) -> void:
-    if cell_index < 0 || cell_index >= cell_count: return
-    var cell_colour = Color.WHITE if on else Color.BLACK
-    multimesh.set_instance_color(cell_index, cell_colour)
+func set_cell_colour(cell_index: int, colour := colour_available) -> void:
+    multimesh.set_instance_color(cell_index, colour)
 
-func toggle_cell_colourv(cell_coords: Vector2i, on: bool = true) -> void:
-    toggle_cell_colour(get_cell_index(cell_coords), on)
+func set_cell_colourv(cell_coords: Vector2i, colour := colour_available) -> void:
+    set_cell_colour(get_cell_index(cell_coords), colour)
 
 
 func get_fragment_placement_offset(fragment: ResponseFragment) -> Vector3:
