@@ -45,6 +45,7 @@ func get_cell_index_from_point(point: Vector3) -> int:
     return get_cell_index(get_cell_coords(point))
 
 func get_cell_coords(point: Vector3) -> Vector2i:
+    point -= global_position
     var offset = (point - grid_origin) / grid_step
     return Vector2i(round(offset.x), round(offset.z))
 
