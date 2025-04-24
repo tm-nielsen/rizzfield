@@ -24,9 +24,9 @@ func _process(_delta: float) -> void:
         toggle_cell_colour(i, false)
 
     var mouse_position = get_mouse_world_position()
-    var shape_offset = get_shape_offset(held_fragment)
-    var shape_position = mouse_position + shape_offset
-    var shape_end = shape_position + Vector3(held_fragment.size.x - 1, 0, held_fragment.size.y - 1) * grid_step
+    var placement_offset = get_fragment_placement_offset(held_fragment)
+    var shape_position = mouse_position + placement_offset
+    var shape_end = mouse_position - placement_offset
     if contains_point(shape_position) && contains_point(shape_end):
         var origin_coords = get_cell_coords(shape_position)
         for cell_offset in held_fragment.cells:
@@ -67,10 +67,9 @@ func toggle_cell_colourv(cell_coords: Vector2i, on: bool = true) -> void:
     toggle_cell_colour(get_cell_index(cell_coords), on)
 
 
-func get_shape_offset(fragment: ResponseFragment) -> Vector3:
-    return Vector3(
-        fragment.origin.x, 0, fragment.origin.y
-    ) * grid_step
+func get_fragment_placement_offset(fragment: ResponseFragment) -> Vector3:
+    var origin_cell_position = fragment.get_origin_cell_centre()
+    return xy_to_xz(origin_cell_position) * grid_step
 
 func get_mouse_world_position() -> Vector3:
     var viewport = get_viewport()
@@ -108,4 +107,7 @@ func _initialize_mesh():
 func _calculate_grid_origin():
     grid_step = cell_size + grid_gap
     var origin_2d = -grid_step * (grid_size - Vector2i.ONE) / 2.0
-    grid_origin = Vector3(origin_2d.x, 0, origin_2d.y)
+    grid_origin = xy_to_xz(origin_2d)
+
+func xy_to_xz(cell_space_vector: Vector2) -> Vector3:
+    return Vector3(cell_space_vector.x, 0, cell_space_vector.y)
