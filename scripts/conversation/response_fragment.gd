@@ -13,7 +13,7 @@ var origin: Vector2
 func initialize():
     var shape_image = shape_texture.get_image()
     size = shape_image.get_size()
-    origin = -Vector2(size) / 2.0
+    origin = (Vector2.ONE - Vector2(size)) / 2.0
     cells = []
     for x in size.x: for y in size.y:
         if shape_image.get_pixel(x, y).v > 0.5:

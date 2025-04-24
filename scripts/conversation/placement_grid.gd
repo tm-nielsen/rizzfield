@@ -18,6 +18,8 @@ func _ready() -> void:
     test_fragment.initialize()
 
 func _process(_delta: float) -> void:
+    if Engine.is_editor_hint(): return
+
     for i in cell_count:
         toggle_cell_colour(i, false)
 
@@ -26,11 +28,11 @@ func _process(_delta: float) -> void:
     var camera = viewport.get_camera_3d()
     var mouse_world_position = camera.project_position(mouse_position, 1)
     
-    # var shape_origin = test_fragment.origin
-    # var shape_offset = Vector3(shape_origin.x, 0, shape_origin.y) * grid_step
-    # var shape_position = mouse_world_position + shape_offset
-    if contains_point(mouse_world_position):
-        var origin_coords = get_cell_coords(mouse_world_position)
+    var shape_origin = test_fragment.origin
+    var shape_offset = Vector3(shape_origin.x, 0, shape_origin.y) * grid_step
+    var shape_position = mouse_world_position + shape_offset
+    if contains_point(shape_position):
+        var origin_coords = get_cell_coords(shape_position)
         for cell_offset in test_fragment.cells:
             toggle_cell_colourv(origin_coords + cell_offset)
 
