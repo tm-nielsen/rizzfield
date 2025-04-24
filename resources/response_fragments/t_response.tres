@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="ResponseFragment" load_steps=2 format=3 uid="uid://bgsfka3cqgf7n"]
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=3 format=3 uid="uid://bgsfka3cqgf7n"]
 
 [ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_i5veh"]
+[ext_resource type="Texture2D" uid="uid://bd821c8mgy48d" path="res://resources/response_fragments/shape_textures/t.png" id="2_qq4jb"]
 
 [resource]
 script = ExtResource("1_i5veh")
 name = ""
 value = 1
+shape_texture = ExtResource("2_qq4jb")
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"
