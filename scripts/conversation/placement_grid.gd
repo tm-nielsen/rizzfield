@@ -6,7 +6,7 @@ extends MultiMeshInstance3D
 @export var grid_gap: float = 0.01
 @export_tool_button("generate cells") var generate_button = create_grid
 
-@export var test_fragment: ResponseFragment
+@export var held_fragment: ResponseFragment
 
 var cell_count: int
 var grid_origin: Vector3
@@ -15,7 +15,7 @@ var grid_step: float
 
 func _ready() -> void:
     create_grid()
-    test_fragment.initialize()
+    held_fragment.initialize()
 
 func _process(_delta: float) -> void:
     if Engine.is_editor_hint(): return
@@ -23,17 +23,13 @@ func _process(_delta: float) -> void:
     for i in cell_count:
         toggle_cell_colour(i, false)
 
-    var viewport = get_viewport()
-    var mouse_position = viewport.get_mouse_position()
-    var camera = viewport.get_camera_3d()
-    var mouse_world_position = camera.project_position(mouse_position, 1)
-    
-    var shape_origin = test_fragment.origin
-    var shape_offset = Vector3(shape_origin.x, 0, shape_origin.y) * grid_step
-    var shape_position = mouse_world_position + shape_offset
-    if contains_point(shape_position):
+    var mouse_position = get_mouse_world_position()
+    var shape_offset = get_shape_offset(held_fragment)
+    var shape_position = mouse_position + shape_offset
+    var shape_end = shape_position + Vector3(held_fragment.size.x - 1, 0, held_fragment.size.y - 1) * grid_step
+    if contains_point(shape_position) && contains_point(shape_end):
         var origin_coords = get_cell_coords(shape_position)
-        for cell_offset in test_fragment.cells:
+        for cell_offset in held_fragment.cells:
             toggle_cell_colourv(origin_coords + cell_offset)
 
 
@@ -69,6 +65,18 @@ func toggle_cell_colour(cell_index: int, on: bool = true) -> void:
 
 func toggle_cell_colourv(cell_coords: Vector2i, on: bool = true) -> void:
     toggle_cell_colour(get_cell_index(cell_coords), on)
+
+
+func get_shape_offset(fragment: ResponseFragment) -> Vector3:
+    return Vector3(
+        fragment.origin.x, 0, fragment.origin.y
+    ) * grid_step
+
+func get_mouse_world_position() -> Vector3:
+    var viewport = get_viewport()
+    var mouse_position = viewport.get_mouse_position()
+    var camera = viewport.get_camera_3d()
+    return camera.project_position(mouse_position, 1)
 
 
 func create_grid():

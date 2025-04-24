@@ -34,4 +34,4 @@ script = ExtResource("1_liyel")
 grid_size = Vector2i(10, 8)
 cell_size = 0.45
 grid_gap = 0.05
-test_fragment = ExtResource("3_b75ef")
+held_fragment = ExtResource("3_b75ef")
