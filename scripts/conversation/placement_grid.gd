@@ -29,17 +29,9 @@ func _process(_delta: float) -> void:
     for i in cell_count:
         set_cell_colour(i)
 
-    var mouse_position = get_mouse_world_position()
-    var placement_offset = get_fragment_placement_offset(held_fragment)
-    var placement_origin = mouse_position + placement_offset
-    var shape_contained = contains_point(placement_origin) && \
-        contains_point(mouse_position - placement_offset)
-
+    var shape_contained = contains_held_fragment_shape()
     var fill_colour = colour_highlight if shape_contained else colour_error
-    
-    var origin_coords = get_unclamped_cell_coords(placement_origin)
-    for cell_offset in held_fragment.cells:
-        set_cell_colourv(origin_coords + cell_offset, fill_colour)
+    paint_held_fragment(fill_colour)
 
 
 func get_cell_position(x: int, y: int) -> Vector3:
@@ -53,17 +45,18 @@ func get_cell_index_from_point(point: Vector3) -> int:
     return get_cell_index(get_cell_coords(point))
 
 func get_cell_coords(point: Vector3) -> Vector2i:
-    return clamp(
-        get_unclamped_cell_coords(point),
-        Vector2i.ZERO, grid_size
-    )
-
-func get_unclamped_cell_coords(point: Vector3) -> Vector2i:
     var offset = (point - grid_origin) / grid_step
     return Vector2i(round(offset.x), round(offset.z))
 
+func get__clamped_cell_coords(point: Vector3) -> Vector2i:
+    return clamp(
+        get_cell_coords(point),
+        Vector2i.ZERO, grid_size
+    )
+
+
 func contains_point(point: Vector3) -> bool:
-    return contains_coords(get_unclamped_cell_coords(point))
+    return contains_coords(get_cell_coords(point))
 
 func contains_coords(cell_coords: Vector2i) -> bool:
     var coords_rect = Rect2i(Vector2i.ZERO, grid_size)
@@ -71,11 +64,30 @@ func contains_coords(cell_coords: Vector2i) -> bool:
 
 
 func set_cell_colour(cell_index: int, colour := colour_available) -> void:
+    if cell_index < 0 || cell_index >= cell_count: return
     multimesh.set_instance_color(cell_index, colour)
 
 func set_cell_colourv(cell_coords: Vector2i, colour := colour_available) -> void:
     set_cell_colour(get_cell_index(cell_coords), colour)
 
+
+func paint_held_fragment(colour: Color) -> void:
+    var origin = get_held_fragment_origin_coords()
+    held_fragment.for_each_cell(set_cell_colourv.bind(colour), origin)
+
+
+func contains_held_fragment_shape() -> bool:
+    var mouse_position := get_mouse_world_position()
+    var placement_offset := get_fragment_placement_offset(held_fragment)
+    var contains_origin := contains_point(mouse_position + placement_offset)
+    var contains_end := contains_point(mouse_position - placement_offset)
+    return contains_origin && contains_end
+
+
+func get_held_fragment_origin_coords() -> Vector2i:
+    var mouse_position = get_mouse_world_position()
+    var placement_offset = get_fragment_placement_offset(held_fragment)
+    return get_cell_coords(mouse_position + placement_offset)
 
 func get_fragment_placement_offset(fragment: ResponseFragment) -> Vector3:
     var origin_cell_position = fragment.get_origin_cell_centre()

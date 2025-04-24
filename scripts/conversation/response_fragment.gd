@@ -21,5 +21,9 @@ func generate_cells(shape_image: Image):
             cells.append(Vector2i(x, y))
 
 
+func for_each_cell(method: Callable, origin: Vector2i):
+    for cell_offset in cells: method.call(origin + cell_offset)
+
+
 func get_origin_cell_centre() -> Vector2:
     return (Vector2.ONE - Vector2(size)) / 2.0
