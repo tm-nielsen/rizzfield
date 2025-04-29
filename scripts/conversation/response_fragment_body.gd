@@ -3,6 +3,8 @@ extends RigidBody3D
 
 signal grabbed
 signal dropped
+signal placed
+signal freed
 
 enum State {FREE, HELD, PLACED}
 const FREE = State.FREE
@@ -26,6 +28,7 @@ var collision_shape = CollisionShape3D
 
 
 func _ready() -> void:
+    fragment.initialize()
     mouse_entered.connect(_on_mouse_entered)
     mouse_exited.connect(_on_mouse_exited)
 
@@ -38,6 +41,9 @@ func _ready() -> void:
     collision_shape = fragment.create_collision_shape()
     add_child(collision_shape)
     scale_children(0.5)
+
+func _exit_tree() -> void:
+    freed.emit()
 
 
 func _process(_delta) -> void:
@@ -57,9 +63,11 @@ func _process(_delta) -> void:
 
 
 func place_and_freeze(point: Vector3):
-    position = point
+    state = PLACED
+    global_position = point
     freeze = true
     set_colour(colour_placed)
+    placed.emit()
 
 
 func scale_children(value: float) -> void:

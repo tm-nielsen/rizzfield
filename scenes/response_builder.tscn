@@ -53,7 +53,6 @@ script = ExtResource("1_liyel")
 grid_size = Vector2i(10, 8)
 cell_size = 0.45
 grid_gap = 0.05
-held_fragment = ExtResource("3_b75ef")
 
 [node name="ResponseFragmentSpawner" type="Node3D" parent="." node_paths=PackedStringArray("grid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)

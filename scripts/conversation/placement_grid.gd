@@ -13,7 +13,7 @@ extends MultiMeshInstance3D
 @export var colour_highlight := Color.WHITE
 @export var colour_error := Color.RED
 
-@export var held_fragment: ResponseFragment
+var held_fragment: ResponseFragment
 
 var cell_count: int
 var grid_origin: Vector3
@@ -22,7 +22,6 @@ var grid_step: float
 
 func _ready() -> void:
     create_grid()
-    held_fragment.initialize()
 
 func _process(_delta: float) -> void:
     if Engine.is_editor_hint(): return
@@ -30,13 +29,17 @@ func _process(_delta: float) -> void:
     for i in cell_count:
         set_cell_colour(i)
 
-    var shape_contained = contains_held_fragment_shape()
-    var fill_colour = colour_highlight if shape_contained else colour_error
-    paint_held_fragment(fill_colour)
+    if held_fragment:
+        var shape_contained = contains_held_fragment_shape()
+        var fill_colour = colour_highlight if shape_contained else colour_error
+        paint_held_fragment(fill_colour)
 
 
 func get_cell_position(x: int, y: int) -> Vector3:
     return grid_origin + Vector3(x, 0, y) * grid_step
+
+func get_cell_positionv(cell_coords: Vector2i) -> Vector3:
+    return get_cell_position(cell_coords.x, cell_coords.y)
 
 func get_cell_index(cell_coords: Vector2i) -> int:
     if !contains_coords(cell_coords): return -1
@@ -95,6 +98,14 @@ func get_fragment_placement_offset(fragment: ResponseFragment) -> Vector3:
     var origin_cell_position = fragment.get_origin_cell_centre()
     return xy_to_xz(origin_cell_position) * grid_step
 
+func get_held_fragment_placement_point() -> Vector3:
+    var origin_cell_coords = get_held_fragment_origin_coords()
+    var placement_point = get_cell_positionv(origin_cell_coords)
+    placement_point -= get_fragment_placement_offset(held_fragment)
+    placement_point += global_position
+    return placement_point
+
+
 func get_mouse_world_position() -> Vector3:
     var viewport = get_viewport()
     var mouse_position = viewport.get_mouse_position()
@@ -136,3 +147,17 @@ func _calculate_grid_origin():
 
 func xy_to_xz(cell_space_vector: Vector2) -> Vector3:
     return Vector3(cell_space_vector.x, 0, cell_space_vector.y)
+
+
+func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
+    fragment_body.grabbed.connect(_on_fragment_body_grabbed.bind(fragment_body))
+    fragment_body.dropped.connect(_on_fragment_body_dropped.bind(fragment_body))
+
+func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
+    held_fragment = fragment_body.fragment
+
+func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
+    if contains_held_fragment_shape():
+        var placement_point = get_held_fragment_placement_point()
+        fragment_body.place_and_freeze(placement_point)
+    held_fragment = null

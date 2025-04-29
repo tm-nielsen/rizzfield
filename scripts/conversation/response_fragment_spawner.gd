@@ -14,6 +14,7 @@ signal fragment_spawned(fragment: ResponseFragmentBody)
 
 
 func _ready() -> void:
+    fragment_spawned.connect(grid._on_fragment_body_spawned)
     for i in fragment_count:
         spawn_fragment(i)
 
