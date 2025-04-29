@@ -1,4 +1,5 @@
 @tool
+class_name PlacementGrid
 extends MultiMeshInstance3D
 
 @export var grid_size := Vector2i(5, 5)

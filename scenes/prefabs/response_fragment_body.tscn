@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bai4owdwcx2cj"]
+
+[ext_resource type="Script" uid="uid://c3nxld71qu22n" path="res://scripts/conversation/response_fragment_body.gd" id="1_nc877"]
+[ext_resource type="Resource" uid="uid://ddxgbo0p8blsw" path="res://resources/response_fragments/arch_response.tres" id="2_nowb8"]
+
+[node name="ResponseFragmentBody" type="RigidBody3D"]
+can_sleep = false
+script = ExtResource("1_nc877")
+fragment = ExtResource("2_nowb8")
+held_depth = 4.0
