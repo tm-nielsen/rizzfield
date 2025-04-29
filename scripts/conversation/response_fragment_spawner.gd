@@ -21,10 +21,11 @@ func _ready() -> void:
 
 func spawn_fragment(index: int) -> void:
     var spawn_position = get_spawn_position(index)
-    var new_fragment = fragment_body_prefab.instantiate()
+    var new_fragment: ResponseFragmentBody = fragment_body_prefab.instantiate()
     new_fragment.position = grid.xy_to_xz(spawn_position) * basis
     new_fragment.fragment = fragments.pick_random()
     add_child(new_fragment)
+    new_fragment.scale_children(grid.grid_step)
     connect_fragment_signals(new_fragment, index)
     fragment_spawned.emit(new_fragment)
 
