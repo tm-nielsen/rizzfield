@@ -5,7 +5,8 @@ extends Resource
 @export var value: int = 1
 @export var shape_texture: Texture2D
 @export var mesh: Mesh
-@export var material: Material
+@export var base_material: ShaderMaterial
+@export var colour := Color.SKY_BLUE
 
 var cells: Array[Vector2i]
 var size: Vector2i
@@ -30,7 +31,6 @@ func for_each_cell(method: Callable, origin: Vector2i):
 func create_mesh_instance() -> MeshInstance3D:
     var mesh_instance = MeshInstance3D.new()
     mesh_instance.mesh = mesh
-    mesh_instance.material_override = material
     return mesh_instance
 
 func create_collision_shape() -> CollisionShape3D:
