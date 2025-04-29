@@ -12,12 +12,14 @@ const HELD = State.HELD
 const PLACED = State.PLACED
 
 @export var fragment: ResponseFragment
-@export var held_depth: float = 2
+@export var held_depth_offset = 0.5
 
 @export_subgroup("colours", "colour")
 @export var colour_hovered := Color.WHITE
 @export var colour_grabbed := Color.DIM_GRAY
 @export var colour_placed := Color.WEB_GREEN
+
+var camera_depth: float = 2
 
 var state: State
 var contains_mouse: bool
@@ -40,7 +42,6 @@ func _ready() -> void:
 
     collision_shape = fragment.create_collision_shape()
     add_child(collision_shape)
-    scale_children(0.5)
 
 func _exit_tree() -> void:
     freed.emit()
@@ -54,7 +55,8 @@ func _process(_delta) -> void:
             set_colour(colour_hovered if contains_mouse else fragment.colour)
             dropped.emit()
         else:
-            global_position = get_mouse_world_position(held_depth)
+            global_position = get_mouse_world_position(camera_depth)
+            global_position.y += held_depth_offset
     elif contains_mouse && Input.is_action_just_pressed("grab"):
         state = HELD
         freeze = true

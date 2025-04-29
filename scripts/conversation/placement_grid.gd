@@ -155,6 +155,8 @@ func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     held_fragment = fragment_body.fragment
+    var camera = get_viewport().get_camera_3d()
+    fragment_body.camera_depth = camera.global_position.y - global_position.y
 
 func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
     if contains_held_fragment_shape():
