@@ -98,7 +98,8 @@ func get_mouse_world_position() -> Vector3:
     var viewport = get_viewport()
     var mouse_position = viewport.get_mouse_position()
     var camera = viewport.get_camera_3d()
-    return camera.project_position(mouse_position, 1)
+    var depth = camera.global_position.y - global_position.y
+    return camera.project_position(mouse_position, depth)
 
 
 func create_grid():
