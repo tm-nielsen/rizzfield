@@ -18,6 +18,7 @@ const PLACED = State.PLACED
 @export var colour_hovered := Color.WHITE
 @export var colour_grabbed := Color.DIM_GRAY
 @export var colour_placed := Color.WEB_GREEN
+@export var colour_placed_and_hovered := Color.LIME_GREEN
 
 var camera_depth: float = 2
 
@@ -52,7 +53,8 @@ func _process(_delta) -> void:
         if Input.is_action_just_released("grab"):
             state = FREE
             freeze = false
-            set_colour(colour_hovered if contains_mouse else fragment.colour)
+            if contains_mouse: set_colour(colour_hovered)
+            else: set_colour(fragment.colour)
             dropped.emit()
         else:
             global_position = get_mouse_world_position(camera_depth)
@@ -68,7 +70,8 @@ func place_and_freeze(point: Vector3):
     state = PLACED
     global_position = point
     freeze = true
-    set_colour(colour_placed)
+    if contains_mouse: set_colour(colour_placed_and_hovered)
+    else: set_colour(colour_placed)
     placed.emit()
 
 
@@ -91,8 +94,9 @@ func get_mouse_world_position(z_depth: float = 1) -> Vector3:
 
 func _on_mouse_entered():
     contains_mouse = true
-    if state == FREE || state == PLACED:
-        set_colour(colour_hovered)
+    match state:
+        FREE: set_colour(colour_hovered)
+        PLACED: set_colour(colour_placed_and_hovered)
 
 func _on_mouse_exited():
     contains_mouse = false
