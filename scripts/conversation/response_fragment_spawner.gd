@@ -30,8 +30,8 @@ func spawn_fragment(index: int) -> void:
 
 func connect_fragment_signals(fragment: ResponseFragmentBody, index: int):
     var spawn_replacement = spawn_fragment.bind(index)
-    fragment.placed.connect(spawn_replacement)
-    fragment.freed.connect(spawn_replacement)
+    fragment.placed.connect(spawn_replacement, ConnectFlags.CONNECT_ONE_SHOT)
+    fragment.freed.connect(spawn_replacement, ConnectFlags.CONNECT_ONE_SHOT)
 
 
 func get_spawn_position(index: int) -> Vector2:
