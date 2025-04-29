@@ -44,6 +44,11 @@ func _ready() -> void:
     collision_shape = fragment.create_collision_shape()
     add_child(collision_shape)
 
+    var visibility_notifier := VisibleOnScreenNotifier3D.new()
+    visibility_notifier.aabb = mesh_instance.get_aabb()
+    visibility_notifier.screen_exited.connect(queue_free)
+    add_child(visibility_notifier)
+
 func _exit_tree() -> void:
     freed.emit()
 
@@ -78,8 +83,8 @@ func place_and_freeze(point: Vector3):
 
 func scale_children(value: float) -> void:
     var child_scale = Vector3.ONE * value
-    mesh_instance.scale = child_scale
-    collision_shape.scale = child_scale
+    for child in get_children():
+        child.scale = child_scale
 
 
 func set_colour(colour: Color) -> void:

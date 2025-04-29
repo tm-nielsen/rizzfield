@@ -24,10 +24,13 @@ func spawn_fragment(index: int) -> void:
     var new_fragment: ResponseFragmentBody = fragment_body_prefab.instantiate()
     new_fragment.position = grid.xy_to_xz(spawn_position) * basis
     new_fragment.fragment = fragments.pick_random()
-    add_child(new_fragment)
-    new_fragment.scale_children(grid.cell_size)
-    connect_fragment_signals(new_fragment, index)
-    fragment_spawned.emit(new_fragment)
+    add_fragment.call_deferred(new_fragment, index)
+
+func add_fragment(fragment: ResponseFragmentBody, index) -> void:
+    add_child(fragment)
+    fragment.scale_children(grid.cell_size)
+    connect_fragment_signals(fragment, index)
+    fragment_spawned.emit(fragment)
 
 func connect_fragment_signals(fragment: ResponseFragmentBody, index: int):
     var spawn_replacement = spawn_fragment.bind(index)
