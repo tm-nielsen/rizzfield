@@ -25,7 +25,7 @@ func spawn_fragment(index: int) -> void:
     new_fragment.position = grid.xy_to_xz(spawn_position) * basis
     new_fragment.fragment = fragments.pick_random()
     add_child(new_fragment)
-    new_fragment.scale_children(grid.grid_step)
+    new_fragment.scale_children(grid.cell_size)
     connect_fragment_signals(new_fragment, index)
     fragment_spawned.emit(new_fragment)
 
