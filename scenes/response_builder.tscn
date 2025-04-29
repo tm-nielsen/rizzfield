@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://kfxvu5oltfbb"]
+[gd_scene load_steps=11 format=3 uid="uid://kfxvu5oltfbb"]
 
 [ext_resource type="Shader" uid="uid://bffowjmg0i2bd" path="res://resources/shaders/unlit.gdshader" id="1_gr2tu"]
 [ext_resource type="Script" uid="uid://dqeuaowcae7tu" path="res://scripts/conversation/placement_grid.gd" id="1_liyel"]
 [ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="3_b75ef"]
+[ext_resource type="Script" uid="uid://c3nxld71qu22n" path="res://scripts/conversation/response_fragment_body.gd" id="4_2wl4r"]
+[ext_resource type="Resource" uid="uid://ddxgbo0p8blsw" path="res://resources/response_fragments/arch_response.tres" id="5_k1fge"]
+[ext_resource type="Resource" uid="uid://cm05u2kaqoor" path="res://resources/response_fragments/tri_response.tres" id="6_8t6sj"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wl4r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr2tu"]
 render_priority = 0
@@ -10,28 +15,57 @@ shader = ExtResource("1_gr2tu")
 shader_parameter/colour = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_b75ef"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_mxwmv"]
 size = Vector2(0.45, 0.45)
 
-[sub_resource type="MultiMesh" id="MultiMesh_bifgu"]
+[sub_resource type="MultiMesh" id="MultiMesh_5dev5"]
 transform_format = 1
 use_colors = true
 instance_count = 80
-mesh = SubResource("PlaneMesh_b75ef")
+mesh = SubResource("PlaneMesh_mxwmv")
 buffer = PackedFloat32Array(1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, -2.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, -1.75, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, -1.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, -0.75, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, -0.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, 0.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, 0.75, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, 1.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, 1.75, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, -1.75, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, -1.25, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, -0.75, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, -0.25, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, 0.25, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, 0.75, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, 1.25, 1, 1, 1, 1, 1, 0, 0, 2.25, 0, 1, 0, 0, 0, 0, 1, 1.75, 1, 1, 1, 1)
 
 [node name="ResponseBuilder" type="Node3D"]
 
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="WorldBoundary" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_2wl4r")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
-projection = 1
 size = 5.0
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.952937, -0.0658242, -0.295936, -1.32519e-08, 0.976145, -0.217121, 0.303168, 0.206903, 0.930204, 0, 0, 0)
+
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40359, 0, 0.411701)
 material_override = SubResource("ShaderMaterial_gr2tu")
-multimesh = SubResource("MultiMesh_bifgu")
+multimesh = SubResource("MultiMesh_5dev5")
 script = ExtResource("1_liyel")
 grid_size = Vector2i(10, 8)
 cell_size = 0.45
 grid_gap = 0.05
 held_fragment = ExtResource("3_b75ef")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11442, 0, -1.32012)
+can_sleep = false
+script = ExtResource("4_2wl4r")
+fragment = ExtResource("3_b75ef")
+held_depth = 3.5
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11442, 0, 0)
+can_sleep = false
+script = ExtResource("4_2wl4r")
+fragment = ExtResource("5_k1fge")
+held_depth = 3.5
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11442, 0, 1.37989)
+can_sleep = false
+script = ExtResource("4_2wl4r")
+fragment = ExtResource("6_8t6sj")
+held_depth = 3.5
