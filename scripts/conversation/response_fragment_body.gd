@@ -62,6 +62,7 @@ func _process(_delta) -> void:
     elif contains_mouse && Input.is_action_just_pressed("grab"):
         state = HELD
         freeze = true
+        rotation = Vector3.ZERO
         set_colour(colour_grabbed)
         grabbed.emit()
 
