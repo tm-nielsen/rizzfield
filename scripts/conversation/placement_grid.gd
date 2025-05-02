@@ -13,7 +13,8 @@ extends MultiMeshInstance3D
 @export var colour_highlight := Color.WHITE
 @export var colour_error := Color.RED
 
-var held_fragment: ResponseFragment
+var held_fragment: PlacedResponseFragment
+var placed_fragments: Array[PlacedResponseFragment] = []
 
 var cell_count: int
 var grid_origin: Vector3
@@ -29,10 +30,15 @@ func _process(_delta: float) -> void:
     for i in cell_count:
         set_cell_colour(i)
 
+    for fragment in placed_fragments:
+        paint_fragment(fragment)
+
     if held_fragment:
-        var shape_contained = contains_held_fragment_shape()
-        var fill_colour = colour_highlight if shape_contained else colour_error
-        paint_held_fragment(fill_colour)
+        held_fragment.origin = get_held_fragment_origin_coords()
+        var fill_colour = colour_highlight
+        if !is_held_fragment_placeable():
+            fill_colour = colour_error
+        paint_fragment(held_fragment, fill_colour)
 
 
 func get_cell_position(x: int, y: int) -> Vector3:
@@ -68,6 +74,18 @@ func contains_coords(cell_coords: Vector2i) -> bool:
     return coords_rect.has_point(cell_coords)
 
 
+func is_held_fragment_placeable() -> bool:
+    if !contains_held_fragment_shape(): return false
+    return held_fragment.for_all_cells(is_cell_available)
+
+func is_cell_available(cell_coords: Vector2i) -> bool:
+    if !contains_coords(cell_coords): return false
+    for fragment in placed_fragments:
+        if fragment.occupies_cell(cell_coords):
+            return false
+    return true
+
+
 func set_cell_colour(cell_index: int, colour := colour_available) -> void:
     if cell_index < 0 || cell_index >= cell_count: return
     multimesh.set_instance_color(cell_index, colour)
@@ -75,10 +93,8 @@ func set_cell_colour(cell_index: int, colour := colour_available) -> void:
 func set_cell_colourv(cell_coords: Vector2i, colour := colour_available) -> void:
     set_cell_colour(get_cell_index(cell_coords), colour)
 
-
-func paint_held_fragment(colour: Color) -> void:
-    var origin = get_held_fragment_origin_coords()
-    held_fragment.for_each_cell(set_cell_colourv.bind(colour), origin)
+func paint_fragment(fragment: PlacedResponseFragment, colour := colour_filled) -> void:
+    fragment.for_each_cell(set_cell_colourv.bind(colour))
 
 
 func contains_held_fragment_shape() -> bool:
@@ -94,7 +110,7 @@ func get_held_fragment_origin_coords() -> Vector2i:
     var placement_offset = get_fragment_placement_offset(held_fragment)
     return get_cell_coords(mouse_position + placement_offset)
 
-func get_fragment_placement_offset(fragment: ResponseFragment) -> Vector3:
+func get_fragment_placement_offset(fragment: PlacedResponseFragment) -> Vector3:
     var origin_cell_position = fragment.get_origin_cell_centre()
     return xy_to_xz(origin_cell_position) * grid_step
 
@@ -130,6 +146,7 @@ func create_grid():
 
 func _initialize_multimesh():
     multimesh = MultiMesh.new()
+    multimesh.instance_count = 0
     multimesh.transform_format = MultiMesh.TRANSFORM_3D
     multimesh.use_colors = true
     cell_count = grid_size.x * grid_size.y
@@ -154,12 +171,15 @@ func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
     fragment_body.dropped.connect(_on_fragment_body_dropped.bind(fragment_body))
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
-    held_fragment = fragment_body.fragment
+    held_fragment = PlacedResponseFragment.new(fragment_body)
+    placed_fragments = placed_fragments.filter(held_fragment.has_different_origin_body)
     var camera = get_viewport().get_camera_3d()
     fragment_body.camera_depth = camera.global_position.y - global_position.y
 
 func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
-    if contains_held_fragment_shape():
+    held_fragment.origin = get_held_fragment_origin_coords()
+    if is_held_fragment_placeable():
+        placed_fragments.append(held_fragment)
         var placement_point = get_held_fragment_placement_point()
         fragment_body.place_and_freeze(placement_point)
     held_fragment = null
