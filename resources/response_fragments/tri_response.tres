@@ -11,5 +11,6 @@ name = "tri"
 value = 1
 shape_texture = ExtResource("2_vg3by")
 mesh = ExtResource("2_0yjnc")
-base_material= ExtResource("1_76erl")
+base_material = ExtResource("1_76erl")
+colour = Color(0.529412, 0.807843, 0.921569, 1)
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"
