@@ -21,6 +21,7 @@ const PLACED = State.PLACED
 @export var colour_placed_and_hovered := Color.LIME_GREEN
 
 var camera_depth: float = 2
+var placement_rotation: float = 0
 
 var state: State
 var contains_mouse: bool
@@ -31,7 +32,6 @@ var collision_shape = CollisionShape3D
 
 
 func _ready() -> void:
-    fragment.initialize()
     mouse_entered.connect(_on_mouse_entered)
     mouse_exited.connect(_on_mouse_exited)
 
@@ -68,6 +68,7 @@ func _process(_delta) -> void:
         state = HELD
         freeze = true
         rotation = Vector3.ZERO
+        placement_rotation = 0
         set_colour(colour_grabbed)
         grabbed.emit()
 
@@ -79,6 +80,11 @@ func place_and_freeze(point: Vector3):
     if contains_mouse: set_colour(colour_placed_and_hovered)
     else: set_colour(colour_placed)
     placed.emit()
+
+
+func rotate_placement(angle: float):
+    placement_rotation += angle
+    rotate(Vector3.UP, angle)
 
 
 func scale_children(value: float) -> void:

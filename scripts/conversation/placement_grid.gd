@@ -34,11 +34,18 @@ func _process(_delta: float) -> void:
         paint_fragment(fragment)
 
     if held_fragment:
-        held_fragment.origin = get_held_fragment_origin_coords()
-        var fill_colour = colour_highlight
-        if !is_held_fragment_placeable():
-            fill_colour = colour_error
-        paint_fragment(held_fragment, fill_colour)
+        if Input.is_action_just_pressed("right"):
+            held_fragment.rotate(CLOCKWISE)
+        if Input.is_action_just_pressed("left"):
+            held_fragment.rotate(COUNTERCLOCKWISE)
+        paint_held_fragment()
+
+func paint_held_fragment():
+    held_fragment.origin = get_held_fragment_origin_coords()
+    var fill_colour = colour_highlight
+    if !is_held_fragment_placeable():
+        fill_colour = colour_error
+    paint_fragment(held_fragment, fill_colour)
 
 
 func get_cell_position(x: int, y: int) -> Vector3:
@@ -172,7 +179,7 @@ func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     held_fragment = PlacedResponseFragment.new(fragment_body)
-    placed_fragments = placed_fragments.filter(held_fragment.has_different_origin_body)
+    placed_fragments = placed_fragments.filter(held_fragment.has_different_body)
     var camera = get_viewport().get_camera_3d()
     fragment_body.camera_depth = camera.global_position.y - global_position.y
 
