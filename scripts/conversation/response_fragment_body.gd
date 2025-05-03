@@ -11,6 +11,9 @@ const FREE = State.FREE
 const HELD = State.HELD
 const PLACED = State.PLACED
 
+const GRAB_ACTION = "attack"
+const FLIP_GRAB_ACTION = "block"
+
 @export var fragment: ResponseFragment
 @export var held_depth_offset = 0.5
 
@@ -21,7 +24,9 @@ const PLACED = State.PLACED
 @export var colour_placed_and_hovered := Color.LIME_GREEN
 
 var camera_depth: float = 2
+var grab_action: String = GRAB_ACTION
 var placement_rotation: float = 0
+var placement_flipped: bool = false
 
 var state: State
 var contains_mouse: bool
@@ -55,7 +60,7 @@ func _exit_tree() -> void:
 
 func _process(_delta) -> void:
     if state == HELD:
-        if Input.is_action_just_released("grab"):
+        if Input.is_action_just_released(grab_action):
             state = FREE
             freeze = false
             if contains_mouse: set_colour(colour_hovered)
@@ -64,12 +69,20 @@ func _process(_delta) -> void:
         else:
             global_position = get_mouse_world_position(camera_depth)
             global_position.y += held_depth_offset
-    elif contains_mouse && Input.is_action_just_pressed("grab"):
-        state = HELD
-        freeze = true
-        rotation = Vector3(0, placement_rotation, 0)
-        set_colour(colour_grabbed)
-        grabbed.emit()
+    elif contains_mouse:
+        var grab = Input.is_action_just_pressed(GRAB_ACTION)
+        var grab_and_flip = Input.is_action_just_pressed(FLIP_GRAB_ACTION)
+        if grab || grab_and_flip:
+            placement_flipped = grab_and_flip
+            grab_action = FLIP_GRAB_ACTION if grab_and_flip else GRAB_ACTION
+            state = HELD
+            freeze = true
+            rotation = Vector3(
+                PI if placement_flipped else 0.0,
+                placement_rotation, 0
+            )
+            set_colour(colour_grabbed)
+            grabbed.emit()
 
 
 func place_and_freeze(point: Vector3):
@@ -85,7 +98,11 @@ func rotate_placement(angle: float):
     placement_rotation = clamp_angle(
         placement_rotation + angle
     )
-    rotation.y = placement_rotation
+    rotate_y(angle)
+
+func flip_placement():
+    placement_flipped = !placement_flipped
+    rotation.x = PI if placement_flipped else 0.0
 
 func clamp_angle(angle: float) -> float:
     while angle > PI: angle -= TAU
