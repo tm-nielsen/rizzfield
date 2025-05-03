@@ -67,8 +67,7 @@ func _process(_delta) -> void:
     elif contains_mouse && Input.is_action_just_pressed("grab"):
         state = HELD
         freeze = true
-        rotation = Vector3.ZERO
-        placement_rotation = 0
+        rotation = Vector3(0, placement_rotation, 0)
         set_colour(colour_grabbed)
         grabbed.emit()
 
@@ -83,8 +82,15 @@ func place_and_freeze(point: Vector3):
 
 
 func rotate_placement(angle: float):
-    placement_rotation += angle
-    rotate(Vector3.UP, angle)
+    placement_rotation = clamp_angle(
+        placement_rotation + angle
+    )
+    rotation.y = placement_rotation
+
+func clamp_angle(angle: float) -> float:
+    while angle > PI: angle -= TAU
+    while angle <= -PI: angle += TAU
+    return angle
 
 
 func scale_children(value: float) -> void:

@@ -15,8 +15,20 @@ func _init(
     body = fragment_body
     fragment = fragment_body.fragment
     shape_image = fragment.shape_texture.get_image()
+    _match_body_rotation()
     _generate_shape()
     origin = Vector2i.ZERO
+
+func _match_body_rotation():
+    var body_rotation := body.placement_rotation
+    if body_rotation == 0: return
+    if abs(body_rotation) == PI:
+        shape_image.rotate_180()
+    elif body_rotation < 0:
+        shape_image.rotate_90(CLOCKWISE)
+    else:
+        shape_image.rotate_90(COUNTERCLOCKWISE)
+
 
 func _generate_shape():
     size = shape_image.get_size()
