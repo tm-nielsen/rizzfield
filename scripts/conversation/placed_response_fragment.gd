@@ -26,6 +26,12 @@ func _generate_shape():
             cells.append(Vector2i(x, y))
 
 
+func process_input():
+    if Input.is_action_just_pressed("right"):
+        rotate(CLOCKWISE)
+    if Input.is_action_just_pressed("left"):
+        rotate(COUNTERCLOCKWISE)
+
 func rotate(direction: ClockDirection):
     shape_image.rotate_90(direction)
     _generate_shape()

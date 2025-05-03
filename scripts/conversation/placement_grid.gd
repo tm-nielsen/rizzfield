@@ -34,10 +34,7 @@ func _process(_delta: float) -> void:
         paint_fragment(fragment)
 
     if held_fragment:
-        if Input.is_action_just_pressed("right"):
-            held_fragment.rotate(CLOCKWISE)
-        if Input.is_action_just_pressed("left"):
-            held_fragment.rotate(COUNTERCLOCKWISE)
+        held_fragment.process_input()
         paint_held_fragment()
 
 func paint_held_fragment():
