@@ -16,10 +16,14 @@ func _init(
     fragment = fragment_body.fragment
     shape_image = fragment.shape_texture.get_image()
     if body.placement_flipped: shape_image.flip_y()
-    _match_body_rotation()
+    _match_body_orientation()
     _generate_shape()
     origin = Vector2i.ZERO
 
+func _match_body_orientation():
+    _match_body_flip()
+    _match_body_rotation()
+    
 func _match_body_rotation():
     var body_rotation := body.placement_rotation
     if body_rotation == 0: return
@@ -29,6 +33,10 @@ func _match_body_rotation():
         shape_image.rotate_90(CLOCKWISE)
     else:
         shape_image.rotate_90(COUNTERCLOCKWISE)
+
+func _match_body_flip():
+    if body.placement_flipped:
+        shape_image.flip_x()
 
 
 func _generate_shape():
