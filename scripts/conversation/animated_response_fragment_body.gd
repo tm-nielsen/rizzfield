@@ -13,6 +13,7 @@ extends ResponseFragmentBody
 @export var momentum_maximum: float = 10
 
 var displacement: Vector3
+var placement_tween: Tween
 
 
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _ready() -> void:
     elastic_rotation_planar = elastic_rotation_planar.duplicate()
     elastic_rotation_normal = elastic_rotation_normal.duplicate()
     dropped.connect(apply_momentum)
+    grabbed.connect(end_placement_tween)
 
 func _physics_process(delta: float) -> void:
     if state == PLACED: return
@@ -62,19 +64,26 @@ func apply_elastic_values():
 
 
 func place(point: Vector3):
-    var tween := create_tween()
-    tween.set_ease(Tween.EASE_OUT)
-    tween.set_trans(Tween.TRANS_ELASTIC)
-    tween.set_parallel()
-    tween.tween_property(
+    placement_tween = create_tween()
+    placement_tween.set_ease(Tween.EASE_OUT)
+    placement_tween.set_trans(Tween.TRANS_ELASTIC)
+    placement_tween.set_parallel()
+    placement_tween.tween_property(
         self, 'global_position', point,
         placement_tween_duration
     )
-    tween.tween_property(
-        self, 'rotation',
-        get_placement_rotation(),
+    placement_tween.tween_property(
+        self, 'quaternion',
+        Quaternion.from_euler(
+            get_placement_rotation()
+        ),
         placement_tween_duration
     )
+
+func end_placement_tween():
+    if placement_tween:
+        placement_tween.kill()
+        placement_tween = null
 
 
 func apply_momentum():
