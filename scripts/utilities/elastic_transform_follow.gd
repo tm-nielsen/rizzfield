@@ -1,7 +1,5 @@
 extends Node3D
 
-const SCALING_FRAMERATE = 60
-
 @export var target: Node3D
 @export var update_timer: FrameTimer
 
@@ -17,7 +15,7 @@ func _process(delta: float) -> void:
 
 
 func update_values(delta: float):
-    var delta_scale = delta * SCALING_FRAMERATE
+    var delta_scale = delta * ElasticValue.SCALING_FRAMERATE
 
     var target_position = Vector2(target.position.x, target.position.y)
     elastic_position.update_value(target_position, delta_scale)

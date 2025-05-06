@@ -78,10 +78,6 @@ func _process(_delta) -> void:
 func grab():
     state = HELD
     freeze = true
-    rotation = Vector3(
-        0, placement_rotation,
-        PI if placement_flipped else 0.0
-    )
     set_colour(colour_grabbed)
     grabbed.emit()
 
@@ -96,6 +92,7 @@ func drop():
 func place_and_freeze(point: Vector3):
     state = PLACED
     global_position = point
+    rotation = get_placement_rotation()
     freeze = true
     if contains_mouse: set_colour(colour_placed_and_hovered)
     else: set_colour(colour_placed)
@@ -103,15 +100,9 @@ func place_and_freeze(point: Vector3):
 
 
 func rotate_placement(angle: float):
-    placement_rotation = clamp_angle(
-        placement_rotation + angle
+    placement_rotation = ElasticValue.wrap_value(
+        placement_rotation + angle, PI
     )
-    rotate_y(angle)
-
-func clamp_angle(angle: float) -> float:
-    while angle > PI: angle -= TAU
-    while angle <= -PI: angle += TAU
-    return angle
 
 
 func scale_children(value: float) -> void:
@@ -129,6 +120,13 @@ func get_mouse_world_position(z_depth: float = 1) -> Vector3:
     var mouse_position = viewport.get_mouse_position()
     var camera = viewport.get_camera_3d()
     return camera.project_position(mouse_position, z_depth)
+
+
+func get_placement_rotation() -> Vector3:
+    return Vector3(
+        0, placement_rotation,
+        PI if placement_flipped else 0.0
+    )
 
 
 func _on_mouse_entered():
