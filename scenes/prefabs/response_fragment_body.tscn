@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bai4owdwcx2cj"]
+[gd_scene load_steps=7 format=3 uid="uid://bai4owdwcx2cj"]
 
 [ext_resource type="Script" uid="uid://de7uyt1aeob3o" path="res://scripts/conversation/animated_response_fragment_body.gd" id="1_p2g3s"]
 [ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="2_nowb8"]
 [ext_resource type="Script" uid="uid://df31el24njntk" path="res://scripts/utilities/elastic_value.gd" id="3_wyasc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nowb8"]
+friction = 0.8
+bounce = 0.2
 
 [sub_resource type="Resource" id="Resource_nlqx2"]
 script = ExtResource("2_nowb8")
@@ -17,8 +21,10 @@ friction = 0.3
 metadata/_custom_type_script = "uid://df31el24njntk"
 
 [node name="ResponseFragmentBody" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_nowb8")
+gravity_scale = 4.0
 can_sleep = false
-linear_damp = 5.0
+linear_damp = 0.5
 script = ExtResource("1_p2g3s")
 elastic_rotation_planar = SubResource("Resource_nlqx2")
 elastic_rotation_normal = SubResource("Resource_cgkw4")
