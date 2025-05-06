@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://kfxvu5oltfbb"]
+[gd_scene load_steps=17 format=3 uid="uid://kfxvu5oltfbb"]
 
+[ext_resource type="Script" uid="uid://cx8u5es5jq84n" path="res://scripts/conversation/response_builder_camera.gd" id="1_gjipf"]
 [ext_resource type="Shader" uid="uid://bffowjmg0i2bd" path="res://resources/shaders/unlit.gdshader" id="1_gr2tu"]
 [ext_resource type="Script" uid="uid://dqeuaowcae7tu" path="res://scripts/conversation/placement_grid.gd" id="1_liyel"]
 [ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="3_b75ef"]
@@ -38,9 +39,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 [node name="WorldBoundary" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape3D_2wl4r")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("fragment_spawner")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
 size = 5.0
+script = ExtResource("1_gjipf")
+fragment_spawner = NodePath("../ResponseFragmentSpawner")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
 transform = Transform3D(0.952937, -0.0658242, -0.295936, -1.32519e-08, 0.976145, -0.217121, 0.303168, 0.206903, 0.930204, 0, 0, 0)
