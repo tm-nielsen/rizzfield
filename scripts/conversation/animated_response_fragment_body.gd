@@ -24,7 +24,7 @@ func _ready() -> void:
     grabbed.connect(end_placement_tween)
 
 func _physics_process(delta: float) -> void:
-    if state == PLACED: return
+    if state != HELD: return
     var last_position := position
     super(delta)
     displacement = position - last_position
