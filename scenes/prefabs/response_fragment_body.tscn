@@ -22,3 +22,4 @@ linear_damp = 5.0
 script = ExtResource("1_p2g3s")
 elastic_rotation_planar = SubResource("Resource_nlqx2")
 elastic_rotation_normal = SubResource("Resource_cgkw4")
+held_depth_offset = 0.8

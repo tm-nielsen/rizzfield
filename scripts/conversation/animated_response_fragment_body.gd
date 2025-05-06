@@ -1,5 +1,7 @@
 extends ResponseFragmentBody
 
+@export var placement_tween_duration: float = 0.5
+
 @export_subgroup("rotation", "rotation")
 @export var rotation_planar_sensitivity: float = 2
 @export_subgroup("rotation/elastic", "elastic_rotation")
@@ -56,6 +58,22 @@ func apply_elastic_values():
         elastic_rotation_planar.x,
         elastic_rotation_normal.value,
         elastic_rotation_planar.y
+    )
+
+
+func place(point: Vector3):
+    var tween := create_tween()
+    tween.set_ease(Tween.EASE_OUT)
+    tween.set_trans(Tween.TRANS_ELASTIC)
+    tween.set_parallel()
+    tween.tween_property(
+        self, 'global_position', point,
+        placement_tween_duration
+    )
+    tween.tween_property(
+        self, 'rotation',
+        get_placement_rotation(),
+        placement_tween_duration
     )
 
 

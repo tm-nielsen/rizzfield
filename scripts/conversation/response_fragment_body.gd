@@ -91,12 +91,15 @@ func drop():
 
 func place_and_freeze(point: Vector3):
     state = PLACED
-    global_position = point
-    rotation = get_placement_rotation()
+    place(point)
     freeze = true
     if contains_mouse: set_colour(colour_placed_and_hovered)
     else: set_colour(colour_placed)
     placed.emit()
+
+func place(point: Vector3):
+    global_position = point
+    rotation = get_placement_rotation()
 
 
 func rotate_placement(angle: float):
