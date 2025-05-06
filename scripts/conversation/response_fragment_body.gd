@@ -58,31 +58,39 @@ func _exit_tree() -> void:
     freed.emit()
 
 
+func _physics_process(_delta) -> void:
+    if state == HELD:
+        global_position = get_mouse_world_position(camera_depth)
+        global_position.y += held_depth_offset
+
 func _process(_delta) -> void:
     if state == HELD:
         if Input.is_action_just_released(grab_action):
-            state = FREE
-            freeze = false
-            if contains_mouse: set_colour(colour_hovered)
-            else: set_colour(fragment.colour)
-            dropped.emit()
-        else:
-            global_position = get_mouse_world_position(camera_depth)
-            global_position.y += held_depth_offset
+            drop()
     elif contains_mouse:
-        var grab = Input.is_action_just_pressed(GRAB_ACTION)
-        var grab_and_flip = Input.is_action_just_pressed(FLIP_GRAB_ACTION)
-        if grab || grab_and_flip:
-            placement_flipped = grab_and_flip
-            grab_action = FLIP_GRAB_ACTION if grab_and_flip else GRAB_ACTION
-            state = HELD
-            freeze = true
-            rotation = Vector3(
-                PI if placement_flipped else 0.0,
-                placement_rotation, 0
-            )
-            set_colour(colour_grabbed)
-            grabbed.emit()
+        var grab_pressed = Input.is_action_just_pressed(GRAB_ACTION)
+        var flip_grab_pressed = Input.is_action_just_pressed(FLIP_GRAB_ACTION)
+        if grab_pressed || flip_grab_pressed:
+            placement_flipped = flip_grab_pressed
+            grab_action = FLIP_GRAB_ACTION if flip_grab_pressed else GRAB_ACTION
+            grab()
+
+func grab():
+    state = HELD
+    freeze = true
+    rotation = Vector3(
+        0, placement_rotation,
+        PI if placement_flipped else 0.0
+    )
+    set_colour(colour_grabbed)
+    grabbed.emit()
+
+func drop():
+    state = FREE
+    freeze = false
+    if contains_mouse: set_colour(colour_hovered)
+    else: set_colour(fragment.colour)
+    dropped.emit()
 
 
 func place_and_freeze(point: Vector3):
