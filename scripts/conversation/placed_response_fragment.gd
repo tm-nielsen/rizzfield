@@ -15,7 +15,6 @@ func _init(
     body = fragment_body
     fragment = fragment_body.fragment
     shape_image = fragment.shape_texture.get_image()
-    if body.placement_flipped: shape_image.flip_y()
     _match_body_orientation()
     _generate_shape()
     origin = Vector2i.ZERO

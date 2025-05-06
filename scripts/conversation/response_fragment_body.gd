@@ -108,10 +108,6 @@ func rotate_placement(angle: float):
     )
     rotate_y(angle)
 
-func flip_placement():
-    placement_flipped = !placement_flipped
-    rotation.x = PI if placement_flipped else 0.0
-
 func clamp_angle(angle: float) -> float:
     while angle > PI: angle -= TAU
     while angle <= -PI: angle += TAU
