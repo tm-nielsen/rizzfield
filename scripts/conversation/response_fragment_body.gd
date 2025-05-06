@@ -111,7 +111,8 @@ func rotate_placement(angle: float):
 func scale_children(value: float) -> void:
     var child_scale = Vector3.ONE * value
     for child in get_children():
-        child.scale = child_scale
+        if child is Node3D:
+            child.scale = child_scale
 
 
 func set_colour(colour: Color) -> void:
