@@ -28,6 +28,11 @@ window/size/mode=3
 window/stretch/mode="viewport"
 window/size/mode.editor=0
 
+[gui]
+
+theme/custom="uid://chlubqsqhmav4"
+theme/default_font_antialiasing=0
+
 [input]
 
 forward={
@@ -88,5 +93,6 @@ pause={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
