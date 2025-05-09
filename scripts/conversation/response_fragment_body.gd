@@ -25,8 +25,8 @@ const FLIP_GRAB_ACTION = "block"
 
 var camera_depth: float = 2
 var grab_action: String = GRAB_ACTION
-var placement_rotation: float = 0
-var placement_flipped: bool = false
+var placement_rotation: Vector3
+var is_horizontal: bool: get = _get_is_horizontal
 
 var state: State
 var contains_mouse: bool
@@ -71,7 +71,7 @@ func _process(_delta) -> void:
         var grab_pressed = Input.is_action_just_pressed(GRAB_ACTION)
         var flip_grab_pressed = Input.is_action_just_pressed(FLIP_GRAB_ACTION)
         if grab_pressed || flip_grab_pressed:
-            placement_flipped = flip_grab_pressed
+            placement_rotation = get_placement_rotation(flip_grab_pressed)
             grab_action = FLIP_GRAB_ACTION if flip_grab_pressed else GRAB_ACTION
             grab()
 
@@ -99,12 +99,12 @@ func place_and_freeze(point: Vector3):
 
 func place(point: Vector3):
     global_position = point
-    rotation = get_placement_rotation()
+    rotation = placement_rotation
 
 
 func rotate_placement(angle: float):
-    placement_rotation = ElasticValue.wrap_value(
-        placement_rotation + angle, PI
+    placement_rotation.y = ElasticValue.wrap_value(
+        placement_rotation.y + angle, PI
     )
 
 
@@ -126,10 +126,22 @@ func get_mouse_world_position(z_depth: float = 1) -> Vector3:
     return camera.project_position(mouse_position, z_depth)
 
 
-func get_placement_rotation() -> Vector3:
-    return Vector3(
-        0, placement_rotation,
-        PI if placement_flipped else 0.0
+func get_placement_rotation(flipped: bool) -> Vector3:
+    if !flipped: return placement_rotation
+    if is_horizontal:
+        placement_rotation.z = ElasticValue.wrap_value(
+            placement_rotation.z + PI, PI
+        )
+    else:
+        placement_rotation.x = ElasticValue.wrap_value(
+            placement_rotation.x + PI, PI
+        )
+    return placement_rotation
+
+func _get_is_horizontal() -> bool:
+    return (
+        is_zero_approx(placement_rotation.y) ||
+        is_equal_approx(placement_rotation.y, PI)
     )
 
 

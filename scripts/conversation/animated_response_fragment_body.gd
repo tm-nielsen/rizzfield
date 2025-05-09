@@ -38,22 +38,21 @@ func _physics_process(delta: float) -> void:
 
 func update_elastic_values(delta: float):
     var delta_scale = delta * ElasticValue.SCALING_FRAMERATE
-    var base_rotation = get_placement_rotation()
 
     var target_planar_rotation = Vector2(
         -displacement.z, displacement.x
     ).rotated(
-        base_rotation.y
+        placement_rotation.y
     ) * rotation_planar_sensitivity
     target_planar_rotation += Vector2(
-        base_rotation.x, base_rotation.z
+        placement_rotation.x, placement_rotation.z
     )
     elastic_rotation_planar.update_value(
         target_planar_rotation, delta_scale
     )
 
     elastic_rotation_normal.update_value(
-        base_rotation.y, delta_scale, PI
+        placement_rotation.y, delta_scale, PI
     )
 
 
@@ -78,14 +77,14 @@ func place(point: Vector3):
     placement_tween.tween_property(
         self, 'quaternion',
         Quaternion.from_euler(
-            get_placement_rotation()
+            placement_rotation
         ),
         placement_tween_duration
     )
     placement_tween.tween_callback(
         func():
             global_position = point
-            rotation = get_placement_rotation()
+            rotation = placement_rotation
     )
     placement_tween.pause()
 
