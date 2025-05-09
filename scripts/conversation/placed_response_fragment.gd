@@ -63,6 +63,17 @@ func rotate(direction: ClockDirection):
     )
 
 
+func update_body_colour(in_grid: bool, placeable: bool):
+    var body_colour = body.colour_grabbed
+    if in_grid:
+        body_colour = (
+            body.colour_grabbed_valid
+            if placeable else 
+            body.colour_grabbed_invalid
+        )
+    body.set_colour(body_colour)
+
+
 func for_each_cell(method: Callable):
     for cell_offset in cells:
         method.call(origin + cell_offset)

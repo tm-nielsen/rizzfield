@@ -35,10 +35,14 @@ func _process(_delta: float) -> void:
 
     if held_fragment:
         held_fragment.process_input()
+        update_held_fragment_origin()
+        held_fragment.update_body_colour(
+            overlaps_held_fragment_shape(),
+            is_held_fragment_placeable()
+        )
         paint_held_fragment()
 
 func paint_held_fragment():
-    held_fragment.origin = get_held_fragment_origin_coords()
     var fill_colour = colour_highlight
     if !is_held_fragment_placeable():
         fill_colour = colour_error
@@ -108,6 +112,16 @@ func contains_held_fragment_shape() -> bool:
     var contains_end := contains_point(mouse_position - placement_offset)
     return contains_origin && contains_end
 
+func overlaps_held_fragment_shape() -> bool:
+    var mouse_position := get_mouse_world_position()
+    var placement_offset := get_fragment_placement_offset(held_fragment)
+    var contains_origin := contains_point(mouse_position + placement_offset)
+    var contains_end := contains_point(mouse_position - placement_offset)
+    return contains_origin || contains_end
+
+
+func update_held_fragment_origin() -> void:
+    held_fragment.origin = get_held_fragment_origin_coords()
 
 func get_held_fragment_origin_coords() -> Vector2i:
     var mouse_position = get_mouse_world_position()
@@ -181,7 +195,7 @@ func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     fragment_body.camera_depth = camera.global_position.y - global_position.y
 
 func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
-    held_fragment.origin = get_held_fragment_origin_coords()
+    update_held_fragment_origin()
     if is_held_fragment_placeable():
         placed_fragments.append(held_fragment)
         var placement_point = get_held_fragment_placement_point()

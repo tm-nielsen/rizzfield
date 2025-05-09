@@ -20,6 +20,8 @@ const FLIP_GRAB_ACTION = "block"
 @export_subgroup("colours", "colour")
 @export var colour_hovered := Color.WHITE
 @export var colour_grabbed := Color.DIM_GRAY
+@export var colour_grabbed_valid := Color.LIGHT_GREEN
+@export var colour_grabbed_invalid := Color.LIGHT_PINK
 @export var colour_placed := Color.WEB_GREEN
 @export var colour_placed_and_hovered := Color.LIME_GREEN
 
