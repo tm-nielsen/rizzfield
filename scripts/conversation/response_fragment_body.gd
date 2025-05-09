@@ -15,7 +15,11 @@ const GRAB_ACTION = "attack"
 const FLIP_GRAB_ACTION = "block"
 
 @export var fragment: ResponseFragment
-@export var held_depth_offset = 0.5
+@export var held_depth_offset: float = 0.5
+
+@export_subgroup("invalid placement force", "invalid_placement")
+@export var invalid_placement_offset: float = 1
+@export var invalid_placement_impulse: float = 6
 
 @export_subgroup("colours", "colour")
 @export var colour_hovered := Color.WHITE
@@ -102,6 +106,11 @@ func place_and_freeze(point: Vector3):
 func place(point: Vector3):
     global_position = point
     rotation = placement_rotation
+
+func repel(origin: Vector3):
+    var direction = (global_position - origin).normalized()
+    position += direction * invalid_placement_offset
+    apply_impulse(direction * invalid_placement_impulse)
 
 
 func rotate_placement(angle: float):

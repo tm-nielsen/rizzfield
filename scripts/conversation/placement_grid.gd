@@ -205,4 +205,6 @@ func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
         placed_fragments.append(held_fragment)
         var placement_point = get_held_fragment_placement_point()
         fragment_body.place_and_freeze(placement_point)
+    else:
+        fragment_body.repel(global_position)
     held_fragment = null
