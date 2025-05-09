@@ -150,4 +150,6 @@ mesh = SubResource("QuadMesh_5gnmd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0.40739, 0.817942, 0.406208, 0, 0, 0)
+layers = 8
 shadow_enabled = true
+shadow_caster_mask = 4294967289

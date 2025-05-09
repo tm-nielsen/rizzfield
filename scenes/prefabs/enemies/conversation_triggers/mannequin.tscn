@@ -28,6 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.075, 0)
 shape = SubResource("CapsuleShape3D_g514v")
 
 [node name="body" parent="skeleton/Skeleton3D" index="0"]
+layers = 2
 surface_material_override/0 = ExtResource("5_4klpi")
 
 [node name="Head" type="BoneAttachment3D" parent="skeleton/Skeleton3D" index="1"]
@@ -37,8 +38,10 @@ bone_idx = 20
 
 [node name="RightEye" type="MeshInstance3D" parent="skeleton/Skeleton3D/Head" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.0479237, 0.1)
+layers = 2
 mesh = SubResource("QuadMesh_s60i3")
 
 [node name="LeftEye" type="MeshInstance3D" parent="skeleton/Skeleton3D/Head" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.0479237, 0.1)
+layers = 2
 mesh = SubResource("QuadMesh_s60i3")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=4 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
-[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="2_3lo3o"]
 [ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
@@ -60,8 +59,6 @@ audio_listener_enable_2d = true
 audio_listener_enable_3d = true
 size = Vector2i(76, 50)
 render_target_update_mode = 4
-
-[node name="MannequinVignette" parent="VBoxContainer/Top Bar/VignetteViewport/SubViewport" instance=ExtResource("2_3lo3o")]
 
 [node name="Dialogue Box" type="Panel" parent="VBoxContainer/Top Bar"]
 layout_mode = 2
