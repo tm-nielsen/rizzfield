@@ -187,6 +187,11 @@ func xy_to_xz(cell_space_vector: Vector2) -> Vector3:
 func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
     fragment_body.grabbed.connect(_on_fragment_body_grabbed.bind(fragment_body))
     fragment_body.dropped.connect(_on_fragment_body_dropped.bind(fragment_body))
+    fragment_body.freed.connect(_on_fragment_body_freed.bind(fragment_body))
+
+func _on_fragment_body_freed(fragment_body: ResponseFragmentBody):
+    if held_fragment != null && held_fragment.body == fragment_body:
+        held_fragment = null
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     held_fragment = PlacedResponseFragment.new(fragment_body)
