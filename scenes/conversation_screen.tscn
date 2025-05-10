@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=8 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
@@ -10,6 +10,9 @@ _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_px1lt"]
+font_size = 24
 
 [node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer")]
 process_mode = 3
@@ -38,10 +41,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -6.0
 grow_horizontal = 2
 script = ExtResource("2_3lo3o")
 display_area = NodePath("Display Area")
@@ -63,6 +66,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 stretch = true
+stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/Display Area/VignetteViewport"]
 transparent_bg = true
@@ -70,7 +74,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(76, 46)
+size = Vector2i(76, 47)
 render_target_update_mode = 4
 
 [node name="Dialogue Box" type="Panel" parent="VBoxContainer/Display Area"]
@@ -90,10 +94,11 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="TimerBar" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(236, 8)
+custom_minimum_size = Vector2(468, 12)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("3_px1lt")
+margin = 12.0
 drain_curve = SubResource("Curve_4vf5j")
 
 [node name="Construction Area" type="Panel" parent="VBoxContainer"]
@@ -112,6 +117,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
+stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/Construction Area/ResponseBuilder"]
 own_world_3d = true
@@ -120,7 +126,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
-size = Vector2i(236, 69)
+size = Vector2i(234, 71)
 render_target_update_mode = 4
 
 [node name="ResponseBuilder" parent="VBoxContainer/Construction Area/ResponseBuilder/SubViewport" instance=ExtResource("2_bw1gy")]
@@ -132,9 +138,9 @@ anchor_left = 1.0
 anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 0.65
-offset_left = -54.0
+offset_left = -112.0
 offset_top = 0.0119991
-offset_right = -12.0
+offset_right = -24.0
 offset_bottom = -0.012001
 grow_horizontal = 0
 grow_vertical = 2
@@ -152,5 +158,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+label_settings = SubResource("LabelSettings_px1lt")
 horizontal_alignment = 1
 vertical_alignment = 1
