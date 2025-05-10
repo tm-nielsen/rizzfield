@@ -25,7 +25,6 @@ func reset() -> void:
 
 
 func spawn_initial_fragments() -> void:
-    print("spawning initial fragments")
     for i in fragment_count: spawn_fragment(i)
 
 func spawn_fragment(index: int) -> void:
