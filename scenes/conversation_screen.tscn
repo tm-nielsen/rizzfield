@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
-_data = [Vector2(0, 0.01), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
@@ -87,7 +87,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="TimerBar" type="ColorRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(236, 6)
+custom_minimum_size = Vector2(236, 8)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("3_px1lt")
@@ -117,7 +117,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
-size = Vector2i(236, 71)
+size = Vector2i(236, 69)
 render_target_update_mode = 4
 
 [node name="ResponseBuilder" parent="VBoxContainer/Active Area/ResponseBuilder/SubViewport" instance=ExtResource("2_bw1gy")]
