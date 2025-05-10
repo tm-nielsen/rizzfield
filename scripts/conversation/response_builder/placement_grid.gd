@@ -24,6 +24,10 @@ var grid_step: float
 func _ready() -> void:
     create_grid()
 
+func reset() -> void:
+    held_fragment = null
+    placed_fragments = []
+
 func _process(_delta: float) -> void:
     if Engine.is_editor_hint(): return
 

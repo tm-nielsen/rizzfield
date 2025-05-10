@@ -15,9 +15,18 @@ signal fragment_spawned(fragment: ResponseFragmentBody)
 
 func _ready() -> void:
     fragment_spawned.connect(grid._on_fragment_body_spawned)
-    for i in fragment_count:
-        spawn_fragment(i)
 
+func reset() -> void:
+    for child: ResponseFragmentBody in get_children():
+        for connection in child.freed.get_connections():
+            child.freed.disconnect(connection.callable)
+        child.queue_free()
+    spawn_initial_fragments()
+
+
+func spawn_initial_fragments() -> void:
+    print("spawning initial fragments")
+    for i in fragment_count: spawn_fragment(i)
 
 func spawn_fragment(index: int) -> void:
     var spawn_position = get_spawn_position(index)

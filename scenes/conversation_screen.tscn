@@ -14,7 +14,7 @@ point_count = 2
 [sub_resource type="LabelSettings" id="LabelSettings_px1lt"]
 font_size = 24
 
-[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer")]
+[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +25,7 @@ script = ExtResource("1_ew0bg")
 view = NodePath("VBoxContainer")
 vignette_viewport = NodePath("VBoxContainer/Display Area/VignetteViewport/SubViewport")
 response_construction_timer = NodePath("VBoxContainer/TimerBar")
+response_builder = NodePath("VBoxContainer/Construction Area/ResponseBuilder/SubViewport/ResponseBuilder")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

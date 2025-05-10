@@ -13,6 +13,7 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 @export var view: ConversationView
 @export var vignette_viewport: SubViewport
 @export var response_construction_timer: ResponseTimer
+@export var response_builder: ResponseBuilder
 
 @export_subgroup("timing", "duration")
 @export var duration_prompt_display: float = 3
@@ -50,6 +51,7 @@ func set_state(new_state: ConversationState):
             show()
         RESPONSE_CONSTRUCTION:
             view.start_response_construction()
+            response_builder.reset()
             response_construction_timer.start(duration_response_construction)
 
 func set_state_in(target_state: ConversationState, delay: float):
