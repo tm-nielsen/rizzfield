@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ew0bg")
 view = NodePath("VBoxContainer")
-vignette_viewport = NodePath("VBoxContainer/Top Bar/VignetteViewport/SubViewport")
+vignette_viewport = NodePath("VBoxContainer/Display Area/VignetteViewport/SubViewport")
 response_construction_timer = NodePath("VBoxContainer/TimerBar")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1, 0.1, 0.1, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("display_area", "active_area", "vignette_container")]
+[node name="VBoxContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("display_area", "construction_area", "dialogue_area", "vignette_container", "primary_dialogue_box", "secondary_dialogue_box")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -44,24 +44,27 @@ offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 2
 script = ExtResource("2_3lo3o")
-display_area = NodePath("Top Bar")
-active_area = NodePath("Active Area")
-vignette_container = NodePath("Top Bar/VignetteViewport")
+display_area = NodePath("Display Area")
+construction_area = NodePath("Construction Area")
+dialogue_area = NodePath("Dialogue Area")
+vignette_container = NodePath("Display Area/VignetteViewport")
+primary_dialogue_box = NodePath("Dialogue Area/Label")
+secondary_dialogue_box = NodePath("Display Area/Dialogue Box/Label")
 
-[node name="Top Bar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Display Area" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Meters" type="Panel" parent="VBoxContainer/Top Bar"]
+[node name="Meters" type="Panel" parent="VBoxContainer/Display Area"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VignetteViewport" type="SubViewportContainer" parent="VBoxContainer/Top Bar"]
+[node name="VignetteViewport" type="SubViewportContainer" parent="VBoxContainer/Display Area"]
 layout_mode = 2
 size_flags_horizontal = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/Top Bar/VignetteViewport"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/Display Area/VignetteViewport"]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
@@ -70,11 +73,11 @@ audio_listener_enable_3d = true
 size = Vector2i(76, 46)
 render_target_update_mode = 4
 
-[node name="Dialogue Box" type="Panel" parent="VBoxContainer/Top Bar"]
+[node name="Dialogue Box" type="Panel" parent="VBoxContainer/Display Area"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Top Bar/Dialogue Box"]
+[node name="Label" type="Label" parent="VBoxContainer/Display Area/Dialogue Box"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,13 +96,13 @@ size_flags_horizontal = 4
 script = ExtResource("3_px1lt")
 drain_curve = SubResource("Curve_4vf5j")
 
-[node name="Active Area" type="Panel" parent="VBoxContainer"]
+[node name="Construction Area" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 1.5
 
-[node name="ResponseBuilder" type="SubViewportContainer" parent="VBoxContainer/Active Area"]
+[node name="ResponseBuilder" type="SubViewportContainer" parent="VBoxContainer/Construction Area"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +113,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/Active Area/ResponseBuilder"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/Construction Area/ResponseBuilder"]
 own_world_3d = true
 world_3d = SubResource("World3D_3lo3o")
 transparent_bg = true
@@ -120,9 +123,9 @@ physics_object_picking = true
 size = Vector2i(236, 69)
 render_target_update_mode = 4
 
-[node name="ResponseBuilder" parent="VBoxContainer/Active Area/ResponseBuilder/SubViewport" instance=ExtResource("2_bw1gy")]
+[node name="ResponseBuilder" parent="VBoxContainer/Construction Area/ResponseBuilder/SubViewport" instance=ExtResource("2_bw1gy")]
 
-[node name="SubmitButton" type="Button" parent="VBoxContainer/Active Area"]
+[node name="SubmitButton" type="Button" parent="VBoxContainer/Construction Area"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -136,3 +139,18 @@ offset_bottom = -0.012001
 grow_horizontal = 0
 grow_vertical = 2
 text = "Reply"
+
+[node name="Dialogue Area" type="Panel" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Dialogue Area"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1

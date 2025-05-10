@@ -41,8 +41,7 @@ func tween_height(
     start_value: float, end_value: float,
     easing := Tween.EASE_OUT
 ) -> Tween:
-    var height_tween = TweenHelpers.build_tween(0, easing)
-    height_tween.bind_node(self)
+    var height_tween = TweenHelpers.build_tween(self, 0, easing)
     height_tween.tween_method(
         _set_height, start_value, end_value,
         height_tween_duration

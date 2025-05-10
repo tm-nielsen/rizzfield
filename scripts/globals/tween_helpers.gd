@@ -2,11 +2,13 @@ extends Node
 
 
 func build_tween(
+    bound_node: Node,
     delay: float = 0,
     easing := Tween.EASE_OUT,
     transition := Tween.TRANS_BACK
 ) -> Tween: 
     var tween := create_tween()
+    tween.bind_node(bound_node)
     tween.set_ease(easing)
     tween.set_trans(transition)
     tween.tween_interval(delay)
