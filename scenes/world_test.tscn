@@ -58,4 +58,4 @@ skeleton = NodePath("../..")
 shape = SubResource("ConvexPolygonShape3D_d357a")
 
 [node name="MannequinConvoTrigger" parent="." instance=ExtResource("3_ob026")]
-transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -4, 0, -8)
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -1.88107, 0, -1.55162)
