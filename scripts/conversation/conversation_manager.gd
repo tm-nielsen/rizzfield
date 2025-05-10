@@ -1,7 +1,11 @@
 extends Control
 
 @export var view: ConversationView
+@export var timer: ResponseTimer
 @export var vignette_viewport: SubViewport
+
+@export_subgroup("time")
+@export var prompt_display_time: float = 3
 
 var active_vignette: Node3D
 
@@ -26,3 +30,5 @@ func _on_conversation_started(vignette_instance: Node3D):
     active_vignette = vignette_instance
     view.start_display()
     show()
+
+    TweenHelpers.call_delayed_realtime(timer.start, prompt_display_time)

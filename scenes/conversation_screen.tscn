@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=7 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
 [ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
+[ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
+
+[sub_resource type="Curve" id="Curve_4vf5j"]
+_data = [Vector2(0, 0.01), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
 
-[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport")]
+[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "timer", "vignette_viewport")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ew0bg")
 view = NodePath("VBoxContainer")
+timer = NodePath("VBoxContainer/TimerBar")
 vignette_viewport = NodePath("VBoxContainer/Top Bar/VignetteViewport/SubViewport")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -61,7 +67,7 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
 audio_listener_enable_3d = true
-size = Vector2i(76, 50)
+size = Vector2i(76, 46)
 render_target_update_mode = 4
 
 [node name="Dialogue Box" type="Panel" parent="VBoxContainer/Top Bar"]
@@ -79,6 +85,13 @@ text = "\"Press Space to Close\""
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="TimerBar" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(236, 6)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_px1lt")
+drain_curve = SubResource("Curve_4vf5j")
 
 [node name="Active Area" type="Panel" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
@@ -104,7 +117,7 @@ transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 physics_object_picking = true
-size = Vector2i(236, 77)
+size = Vector2i(236, 71)
 render_target_update_mode = 4
 
 [node name="ResponseBuilder" parent="VBoxContainer/Active Area/ResponseBuilder/SubViewport" instance=ExtResource("2_bw1gy")]
