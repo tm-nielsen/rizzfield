@@ -28,9 +28,8 @@ func _ready() -> void:
     for node in [display_area, construction_area, dialogue_area, vignette_container]:
         _set_stretch_ratio(1, node)
 
-func start_prompt_display():
-    dialogue_area.show()
-    construction_area.hide()
+func start_prompt_display(prompt: String):
+    _display_dialogue(prompt)
     vignette_container.custom_minimum_size = get_viewport_rect().size;
     var tween = TweenHelpers.build_tween(self, appear_shrink_delay)
     tween.tween_property(
@@ -41,12 +40,11 @@ func start_prompt_display():
     _tween_stretch_ratio(
         vignette_container, 1,
         appear_shrink_duration,
-        tween, 2
-    )
-    _tween_stretch_ratio(
-        display_area, 1,
-        appear_shrink_duration,
-        tween, 2
+        _tween_stretch_ratio(
+            display_area, 1,
+            appear_shrink_duration,
+            tween, 2
+        ), 2
     )
 
 
@@ -69,13 +67,11 @@ func start_response_construction():
 
 
 func display_constructed_response(response: String):
-    construction_area.hide()
-    dialogue_area.show()
+    _display_dialogue(response)
     _set_stretch_ratio(
         construction_area.size_flags_stretch_ratio,
         dialogue_area
     )
-    primary_dialogue_box.text = response
     var stretch_tween = _tween_stretch_ratio(
         dialogue_area,
         response_display_grow_size,
@@ -90,8 +86,7 @@ func display_constructed_response(response: String):
 
 
 func display_npc_quote(quote: String):
-    primary_dialogue_box.text = quote
-    secondary_dialogue_box.text = quote
+    _display_dialogue(quote)
     _tween_stretch_ratio(
         vignette_container, 2,
         speak_grow_duration,
@@ -100,6 +95,12 @@ func display_npc_quote(quote: String):
             speak_grow_duration
         ).set_parallel()
     )
+
+func _display_dialogue(text: String):
+    construction_area.hide()
+    dialogue_area.show()
+    primary_dialogue_box.text = text
+    secondary_dialogue_box.text = text
 
 
 func _tween_stretch_ratio(

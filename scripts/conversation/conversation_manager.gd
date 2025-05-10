@@ -47,7 +47,7 @@ func set_state(new_state: ConversationState):
     match state:
         INACTIVE: hide()
         PROMPT_DISPLAY:
-            view.start_prompt_display()
+            view.start_prompt_display(dialogue.initial_prompt)
             set_state_in(RESPONSE_CONSTRUCTION, duration_prompt_display)
             show()
         RESPONSE_CONSTRUCTION:
