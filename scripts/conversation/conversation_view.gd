@@ -9,16 +9,16 @@ extends Control
 @export var secondary_dialogue_box: Label
 
 @export_subgroup("tweens")
-@export var active_area_focused_size: float = 1.5
+@export var active_area_focused_size: float = 1.8
 @export_subgroup("tweens/appear", "appear_shrink")
 @export var appear_shrink_delay: float = 0.5
 @export var appear_shrink_duration: float = 0.4
 @export_subgroup("tweens/response construction", "response_construction")
 @export var response_construction_grow_duration: float = 0.2
 @export_subgroup("tweens/response display", "response_display")
-@export var response_display_grow_size: float = 2
-@export var response_display_grow_duration: float = 0.2
-@export var response_display_shrink_duration: float = 0.4
+@export var response_display_grow_size: float = 2.4
+@export var response_display_grow_duration: float = 0.6
+@export var response_display_shrink_duration: float = 0.3
 @export_subgroup("tweens/speak", "speak")
 @export var speak_grow_duration: float = 0.2
 @export var speak_shrink_duration: float = 0.4
