@@ -15,7 +15,6 @@ point_count = 2
 font_size = 24
 
 [node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer")]
-process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

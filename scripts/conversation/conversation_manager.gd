@@ -34,11 +34,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
     if visible && Input.is_key_pressed(KEY_SPACE):
         vignette.queue_free()
-        get_tree().paused = false
         hide()
-        GameModeSignalBus.combat_triggered.emit()
+        GameModeSignalBus.notify_combat_triggered()
     if Input.is_key_pressed(KEY_R):
-        get_tree().paused = false
         get_tree().reload_current_scene()
 
 

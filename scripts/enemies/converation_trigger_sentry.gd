@@ -48,7 +48,11 @@ func activate():
     head_node.look_at(camera.global_position, Vector3.UP, true)
     camera.look_at(head_node.global_position)
 
-    (func(): get_tree().paused = true).call_deferred()
+    get_viewport().process_mode = Node.PROCESS_MODE_DISABLED
+    GameModeSignalBus.conversation_ended.connect(
+        func(): get_viewport().process_mode = Node.PROCESS_MODE_INHERIT,
+        CONNECT_ONE_SHOT
+    )
     TweenHelpers.call_delayed_realtime(start_conversation, activation_time)
 
 func start_conversation():
