@@ -12,18 +12,18 @@
 [sub_resource type="Resource" id="Resource_hl5gy"]
 script = ExtResource("4_o68g5")
 name = "stat 1"
-maximum_value = 20
 initial_value = 10
-decrement_default = 4
+maximum_value = 20
+decrement = 4
 decrement_variation = 2
 metadata/_custom_type_script = "uid://c2sxfektaow43"
 
 [sub_resource type="Resource" id="Resource_jubsn"]
 script = ExtResource("4_o68g5")
 name = "stat 2"
-maximum_value = 20
 initial_value = 10
-decrement_default = 4
+maximum_value = 20
+decrement = 4
 decrement_variation = 2
 metadata/_custom_type_script = "uid://c2sxfektaow43"
 

@@ -15,7 +15,7 @@ extends Control
 @export var vignette_speak_shrink_duration: float = 0.4
 
 
-func start_display():
+func start_prompt_display():
     vignette_container.custom_minimum_size = get_viewport_rect().size;
     vignette_container.size_flags_stretch_ratio = 2
     display_area.size_flags_stretch_ratio = 2;
@@ -35,3 +35,15 @@ func start_display():
         display_area, "size_flags_stretch_ratio",
         1, vignette_appear_shrink_duration
     )
+
+
+func start_response_construction():
+    pass
+
+
+func display_constructed_response(response: String):
+    pass
+
+
+func display_npc_quote(quote: String):
+    pass

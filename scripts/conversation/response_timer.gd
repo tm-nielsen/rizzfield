@@ -3,7 +3,6 @@ extends Control
 
 signal timeout
 
-@export var duration: float = 8
 @export var margin: float = 4
 @export var drain_curve: Curve
 @export var height_tween_duration: float = 0.2
@@ -19,7 +18,7 @@ func _ready() -> void:
     hide()
 
 
-func start():
+func start(duration: float):
     tween_height(0, display_height)
     custom_minimum_size.x = max_width
     drain_tween = create_tween()
@@ -27,9 +26,15 @@ func start():
     drain_tween.tween_callback(_end)
     show()
 
-func _set_width(normalized_width: float):
-    var curved_width = drain_curve.sample(normalized_width)
-    custom_minimum_size.x = max_width * curved_width
+func cancel():
+    if drain_tween: drain_tween.kill()
+    start_hide_tween()
+
+
+func start_hide_tween():
+    tween_height(
+        display_height, 0, Tween.EASE_IN
+    ).tween_callback(hide)
 
 
 func tween_height(
@@ -47,8 +52,11 @@ func tween_height(
 func _set_height(height: float):
     custom_minimum_size.y = height
 
+func _set_width(normalized_width: float):
+    var curved_width = drain_curve.sample(normalized_width)
+    custom_minimum_size.x = max_width * curved_width
+
+
 func _end():
-    tween_height(
-        display_height, 0, Tween.EASE_IN
-    ).tween_callback(hide)
+    start_hide_tween()
     timeout.emit()

@@ -11,7 +11,7 @@ point_count = 2
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
 
-[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "timer", "vignette_viewport")]
+[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -21,8 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ew0bg")
 view = NodePath("VBoxContainer")
-timer = NodePath("VBoxContainer/TimerBar")
 vignette_viewport = NodePath("VBoxContainer/Top Bar/VignetteViewport/SubViewport")
+response_construction_timer = NodePath("VBoxContainer/TimerBar")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
