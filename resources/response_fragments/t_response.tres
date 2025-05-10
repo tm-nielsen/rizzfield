@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ResponseFragment" load_steps=5 format=3 uid="uid://bgsfka3cqgf7n"]
 
 [ext_resource type="Material" uid="uid://dgcg2kfxfxab7" path="res://resources/materials/response_fragment_material.tres" id="1_7evci"]
-[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_fragment.gd" id="1_i5veh"]
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="1_i5veh"]
 [ext_resource type="ArrayMesh" uid="uid://c4qiska65d0ql" path="res://models/fragments/t.res" id="2_44brm"]
 [ext_resource type="Texture2D" uid="uid://bd821c8mgy48d" path="res://resources/response_fragments/shape_textures/t.png" id="2_qq4jb"]
 
