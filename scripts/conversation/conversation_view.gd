@@ -67,7 +67,7 @@ func start_response_construction():
 
 
 func display_constructed_response(response: String):
-    _display_dialogue(response)
+    _display_dialogue(response, false)
     _set_stretch_ratio(
         construction_area.size_flags_stretch_ratio,
         dialogue_area
@@ -96,11 +96,12 @@ func display_npc_quote(quote: String):
         ).set_parallel()
     )
 
-func _display_dialogue(text: String):
+func _display_dialogue(text: String, set_secondary := true):
     construction_area.hide()
     dialogue_area.show()
     primary_dialogue_box.text = text
-    secondary_dialogue_box.text = text
+    if set_secondary:
+        secondary_dialogue_box.text = text
 
 
 func _tween_stretch_ratio(
