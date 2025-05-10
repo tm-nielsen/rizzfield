@@ -1,6 +1,6 @@
 extends DamageableCharacterBody3D
 
-@export var vignette_prefab: PackedScene
+@export var conversation: ConversationDefinition
 @export var combat_prefab: PackedScene
 @export var head_node: BoneAttachment3D
 
@@ -52,10 +52,10 @@ func activate():
     TweenHelpers.call_delayed_realtime(start_conversation, activation_time)
 
 func start_conversation():
-    var vignette_instance: Node3D = vignette_prefab.instantiate()
+    var vignette_instance: Node3D = conversation.vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
     GameModeSignalBus.combat_triggered.connect(spawn_combat_instance)
-    GameModeSignalBus.notify_conversation_triggered(vignette_instance)
+    GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
 func spawn_combat_instance() -> DamageableCharacterBody3D:
     var combat_instance: Node3D = combat_prefab.instantiate()

@@ -1,0 +1,22 @@
+Hello, I am horny.
+
+NORMAL
+normal a
+normal b
+normal c
+
+PLEASED
+pleased a
+pleased b
+pleased c
+
+UPSET
+upset a
+upset b
+upset c
+
+SUCCESS
+conversation successful
+
+FAILURE
+failed!

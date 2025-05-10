@@ -25,7 +25,11 @@ func _process(_delta: float) -> void:
         get_tree().reload_current_scene()
 
 
-func _on_conversation_started(vignette_instance: Node3D):
+func _on_conversation_started(
+    definition: ConversationDefinition,
+    vignette_instance: Node3D
+):
+    print(definition.dialogue.success_quote)
     vignette_viewport.add_child(vignette_instance)
     active_vignette = vignette_instance
     view.start_display()

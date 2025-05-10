@@ -1,12 +1,18 @@
 extends Node
 
-signal conversation_triggered(vignette_scene: Node3D)
+signal conversation_triggered(
+    definition: ConversationDefinition,
+    vignette_scene: Node3D
+)
 signal conversation_resolved()
 signal combat_triggered()
 
 
-func notify_conversation_triggered(vignette_scene: Node3D):
-    conversation_triggered.emit(vignette_scene)
+func notify_conversation_triggered(
+    definition: ConversationDefinition,
+    vignette_scene: Node3D
+):
+    conversation_triggered.emit(definition, vignette_scene)
 
 func notify_conversation_resolved():
     conversation_resolved.emit()
