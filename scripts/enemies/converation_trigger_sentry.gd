@@ -21,6 +21,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
     if check_angle() && check_raycast():
         activate()
+        return
 
     velocity += get_gravity()
     move_and_slide()
