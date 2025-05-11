@@ -7,27 +7,27 @@ extends Resource
 
 @export_subgroup("stats")
 @export_subgroup("stats/chastity", "chastity")
-@export var chastity_initial_value: int = 10
-@export var chastity_maximum_value: int = 20
-@export var chastity_drain: int = 4
-@export var chastity_drain_variation: int = 2
+@export var chastity_initial_value: int = 4
+@export var chastity_maximum_value: int = 8
+@export var chastity_drain: int = 2
+@export var chastity_drain_variation: int = 1
 
 @export_subgroup("stats/temperance", "temperance")
-@export var temperance_initial_value: int = 10
-@export var temperance_maximum_value: int = 20
-@export var temperance_drain: int = 4
-@export var temperance_drain_variation: int = 2
+@export var temperance_initial_value: int = 4
+@export var temperance_maximum_value: int = 8
+@export var temperance_drain: int = 2
+@export var temperance_drain_variation: int = 1
 
 @export_subgroup("stats/humility", "humility")
 @export var humility_initial_value: int = 0
-@export var humility_maximum_value: int = 20
-@export var humility_drain: int = 4
+@export var humility_maximum_value: int = 8
+@export var humility_drain: int = 2
 @export var humility_drain_variation: int = 2
 
 @export_subgroup("stats/patience", "patience")
 @export var patience_initial_value: int = 0
-@export var patience_maximum_value: int = 20
-@export var patience_drain: int = 4
+@export var patience_maximum_value: int = 8
+@export var patience_drain: int = 2
 @export var patience_drain_variation: int = 2
 
 

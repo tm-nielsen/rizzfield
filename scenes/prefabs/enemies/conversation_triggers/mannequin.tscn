@@ -12,22 +12,6 @@
 script = ExtResource("3_x1alu")
 vignette_prefab = ExtResource("3_iq0i8")
 dialogue_file = "res://resources/dialogue/test_convo.txt"
-chastity_initial_value = 10
-chastity_maximum_value = 20
-chastity_drain = 4
-chastity_drain_variation = 2
-temperance_initial_value = 10
-temperance_maximum_value = 20
-temperance_drain = 4
-temperance_drain_variation = 2
-humility_initial_value = 0
-humility_maximum_value = 20
-humility_drain = 4
-humility_drain_variation = 2
-patience_initial_value = 0
-patience_maximum_value = 20
-patience_drain = 4
-patience_drain_variation = 2
 metadata/_custom_type_script = "uid://btbkufoee38v3"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g514v"]
