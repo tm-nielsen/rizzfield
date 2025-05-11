@@ -3,53 +3,53 @@ class_name ConversationDefinition
 extends Resource
 
 @export var vignette_prefab: PackedScene
-@export_file("*.txt") var dialogue_file: set=_set_dialogue_file_path
-@export var stats: Array[ConversationStatDefinition]
+@export_file("*.txt") var dialogue_file: String
 
-var dialogue: Dialogue
+@export_subgroup("stats")
+@export_subgroup("stats/chastity", "chastity")
+@export var chastity_initial_value: int = 10
+@export var chastity_maximum_value: int = 20
+@export var chastity_drain: int = 4
+@export var chastity_drain_variation: int = 2
 
+@export_subgroup("stats/temperance", "temperance")
+@export var temperance_initial_value: int = 10
+@export var temperance_maximum_value: int = 20
+@export var temperance_drain: int = 4
+@export var temperance_drain_variation: int = 2
 
-func _set_dialogue_file_path(path: String):
-    dialogue = Dialogue.new(path)
+@export_subgroup("stats/humility", "humility")
+@export var humility_initial_value: int = 0
+@export var humility_maximum_value: int = 20
+@export var humility_drain: int = 4
+@export var humility_drain_variation: int = 2
 
-
-class Dialogue:
-    var initial_prompt: String
-    var neutral_quotes: Array[String]
-    var positive_quotes: Array[String]
-    var negative_quotes: Array[String]
-    var success_quote: String
-    var failure_quote: String
-
-
-    func _init(file_path: String):
-        parse(file_path)
-    
-    func parse(file_path: String):
-        var file := FileAccess.open(file_path, FileAccess.READ)
-        initial_prompt = file.get_line()
-        neutral_quotes = parse_section(file, "NORMAL")
-        positive_quotes = parse_section(file, "PLEASED")
-        negative_quotes = parse_section(file, "UPSET")
-        success_quote = get_first_line_under_header(file, "SUCCESS")
-        failure_quote = get_first_line_under_header(file, "FAILURE")
+@export_subgroup("stats/patience", "patience")
+@export var patience_initial_value: int = 0
+@export var patience_maximum_value: int = 20
+@export var patience_drain: int = 4
+@export var patience_drain_variation: int = 2
 
 
-    func parse_section(
-        file: FileAccess, header: String
-    ) -> Array[String]:
-        var line := get_first_line_under_header(file, header)
-        if file.eof_reached(): return []
-        var result: Array[String] = []
-        while !line.is_empty():
-            result.append(line)
-            line = file.get_line()
-        return result
+func get_stat_set() -> ConversationStatSet:
+    return ConversationStatSet.new(
+        ConversationStat.new("Chastity",
+            chastity_initial_value, chastity_maximum_value,
+            chastity_drain, chastity_drain_variation
+        ),
+        ConversationStat.new("Temperance",
+            temperance_initial_value, temperance_maximum_value,
+            temperance_drain, temperance_drain_variation
+        ),
+        ConversationStat.new("Humility",
+            humility_initial_value, humility_maximum_value,
+            humility_drain, humility_drain_variation
+        ),
+        ConversationStat.new("Patience",
+            patience_initial_value, patience_maximum_value,
+            patience_drain, patience_drain_variation
+        )
+    )
 
-
-    func get_first_line_under_header(
-        file: FileAccess, header: String
-    ) -> String:
-        while file.get_line() != header:
-            if file.eof_reached(): return ""
-        return file.get_line()
+func get_dialogue_set() -> DialogueSet:
+    return DialogueSet.new(dialogue_file)
