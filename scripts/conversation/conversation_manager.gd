@@ -78,6 +78,8 @@ func _on_conversation_started(
     set_state(PROMPT_DISPLAY)
 
 func end_conversation(notification_method: Callable):
+    if state == INACTIVE: return
+    state = INACTIVE
     vignette.queue_free()
     hide()
     notification_method.call()

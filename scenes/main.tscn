@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch7e8r5h7a6kn"]
+[gd_scene load_steps=8 format=3 uid="uid://ch7e8r5h7a6kn"]
 
 [ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://cttswtvd8np6o" path="res://scripts/world_pauser.gd" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bdra44ss3dhfn" path="res://scenes/world_test.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="4_tipki"]
@@ -32,8 +33,7 @@ grow_vertical = 2
 process_mode = 3
 script = ExtResource("1_0wfyh")
 
-[node name="WorldViewport" type="SubViewportContainer" parent="."]
-process_mode = 1
+[node name="WorldViewport" type="SubViewportContainer" parent="." node_paths=PackedStringArray("target")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +42,8 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 stretch_shrink = 2
+script = ExtResource("2_o6xl0")
+target = NodePath("SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="WorldViewport"]
 transparent_bg = true

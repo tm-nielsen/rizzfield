@@ -43,17 +43,13 @@ func check_raycast() -> bool:
 
 
 func activate():
+    if triggered: return
     triggered = true
     head_node.show()
     head_node.override_pose = true
     head_node.look_at(camera.global_position, Vector3.UP, true)
     camera.look_at(head_node.global_position)
-
     get_viewport().process_mode = Node.PROCESS_MODE_DISABLED
-    GameModeSignalBus.conversation_ended.connect(
-        func(): get_viewport().process_mode = Node.PROCESS_MODE_INHERIT,
-        CONNECT_ONE_SHOT
-    )
     TweenHelpers.call_delayed_realtime(start_conversation, activation_time)
 
 func start_conversation():
