@@ -30,6 +30,7 @@ var is_target_in_range: bool: get = _get_is_target_in_range
 func _ready() -> void:
     target = get_viewport().get_camera_3d()
     if target: target = target.get_parent()
+    update_target_position()
     animator.animation_finished.connect(_on_animation_finished)
     step_animator.step_taken.connect(move_with_step)
     step_animator.animator = animator
@@ -39,13 +40,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
     if target:
-        target_position = target.global_position
-        target_position -= target.global_basis.z * target_lead_distance
+        update_target_position()
         if state == TRACKING && is_target_in_range: attack()
 
 func _physics_process(_delta: float) -> void:
     velocity += get_gravity()
     move_and_slide()
+
+
+func update_target_position():
+    if !target: return
+    target_position = target.global_position
+    target_position -= target.global_basis.z * target_lead_distance
 
 
 func attack():
