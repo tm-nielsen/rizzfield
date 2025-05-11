@@ -7,10 +7,12 @@
 
 [resource]
 script = ExtResource("1_i5veh")
-name = ""
-value = 1
 shape_texture = ExtResource("2_qq4jb")
 mesh = ExtResource("2_44brm")
 base_material = ExtResource("1_7evci")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
+chastity = 1
+temperance = 2
+humility = 2
+patience = 0
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"

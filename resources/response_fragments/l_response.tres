@@ -7,10 +7,12 @@
 
 [resource]
 script = ExtResource("1_qeas4")
-name = "L"
-value = 1
 shape_texture = ExtResource("2_qeas4")
 mesh = ExtResource("2_wknu2")
 base_material = ExtResource("1_rtpva")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
+chastity = 1
+temperance = 0
+humility = 0
+patience = 0
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"
