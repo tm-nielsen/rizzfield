@@ -60,13 +60,16 @@ func start_conversation():
     var vignette_instance: Node3D = conversation.vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
     GameModeSignalBus.combat_triggered.connect(spawn_combat_instance)
+    GameModeSignalBus.conversation_resolved.connect(
+        func(): GameModeSignalBus.combat_triggered.disconnect(spawn_combat_instance)
+    )
+    GameModeSignalBus.conversation_ended.connect(queue_free)
     GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
 func spawn_combat_instance() -> DamageableCharacterBody3D:
     var combat_instance: Node3D = combat_prefab.instantiate()
     add_sibling(combat_instance)
     combat_instance.transform = transform
-    queue_free()
     return combat_instance
 
 
