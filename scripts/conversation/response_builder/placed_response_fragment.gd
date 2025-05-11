@@ -97,10 +97,8 @@ func for_no_cells(predicate: Callable) -> bool:
     return true
 
 
-func has_different_body(
-    placed_fragment: PlacedResponseFragment
-) -> bool:
-    return body != placed_fragment.body
+func shares_body(placed_fragment: PlacedResponseFragment) -> bool:
+    return body == placed_fragment.body
 
 func get_origin_cell_centre() -> Vector2:
     return (Vector2.ONE - Vector2(size)) / 2.0

@@ -1,11 +1,18 @@
 class_name ResponseBuilder
 extends Node3D
 
+signal response_modified(updated_values: ResponseValues)
+
 @export var placement_grid: PlacementGrid
 @export var fragment_spawner: ResponseFragmentSpawner
 
 var is_blank: bool: get=_get_is_blank
 
+
+func _ready() -> void:
+    placement_grid.placements_modified.connect(
+        func(): response_modified.emit(get_response_values())
+    )
 
 func reset() -> void:
     placement_grid.reset()

@@ -22,6 +22,12 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 @export var duration_response_display: float = 2
 @export var duration_quote_display: float = 2
 
+@export_subgroup("stat meters")
+@export var chastity_meter: ConversationStatMeter
+@export var temperance_meter: ConversationStatMeter
+@export var humility_meter: ConversationStatMeter
+@export var patience_meter: ConversationStatMeter
+
 var state: ConversationState
 var vignette: Node3D
 var dialogue: DialogueSet
@@ -31,13 +37,10 @@ var stats: ConversationStatSet
 func _ready() -> void:
     GameModeSignalBus.conversation_triggered.connect(_on_conversation_started)
     response_construction_timer.timeout.connect(_submit_response)
+    response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
     submit_response_button.disabled = true
     hide()
-
-func _process(_delta: float) -> void:
-    if state == RESPONSE_CONSTRUCTION:
-        submit_response_button.disabled = response_builder.is_blank
 
 
 func set_state(new_state: ConversationState):
@@ -66,16 +69,34 @@ func _on_conversation_started(
     vignette_instance: Node3D
 ):
     dialogue = definition.get_dialogue_set()
-    stats = definition.get_stat_set()
+    _initialize_stat_set(definition)
+    vignette = vignette_instance
+    vignette_viewport.add_child(vignette)
+    set_state(PROMPT_DISPLAY)
+
+func _initialize_stat_set(conversation_definition: ConversationDefinition):
+    stats = conversation_definition.get_stat_set()
     stats.all_stats_filled.connect(
         end_conversation.bind(GameModeSignalBus.notify_conversation_resolved)
     )
     stats.stat_emptied.connect(
         end_conversation.bind(GameModeSignalBus.notify_combat_triggered)
     )
-    vignette = vignette_instance
-    vignette_viewport.add_child(vignette)
-    set_state(PROMPT_DISPLAY)
+    chastity_meter.setup(stats.chastity)
+    temperance_meter.setup(stats.temperance)
+    humility_meter.setup(stats.humility)
+    patience_meter.setup(stats.patience)
+
+func _on_response_modified(response: ResponseBuilder.ResponseValues):
+    submit_response_button.disabled = response_builder.is_blank
+    _update_stat_values(response)
+
+func _update_stat_values(response: ResponseBuilder.ResponseValues):
+    chastity_meter.update(response.chastity)
+    temperance_meter.update(response.temperance)
+    humility_meter.update(response.humility)
+    patience_meter.update(response.patience)
+
 
 func end_conversation(notification_method: Callable):
     if state == INACTIVE: return

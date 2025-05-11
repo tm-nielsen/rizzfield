@@ -43,3 +43,10 @@ func _process_state() -> void:
         filled.emit()
     elif value <= 0:
         emptied.emit()
+
+
+func get_normalized_value() -> float:
+    return clampf(float(value) / maximum_value, 0, 1)
+
+func get_normalized_next_value(amount_added: int) -> float:
+    return clampf(float(value + amount_added - next_drain) / maximum_value, 0, 1)

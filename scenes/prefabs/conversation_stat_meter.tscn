@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgohd0dwm2xxg"]
+
+[ext_resource type="Script" uid="uid://ctsgoyohq4221" path="res://scripts/conversation/stat_displays/conversation_stat_meter.gd" id="1_vrqev"]
+
+[sub_resource type="Gradient" id="Gradient_1qm8m"]
+offsets = PackedFloat32Array(0.2, 0.5)
+colors = PackedColorArray(0.6, 0.24, 0.24, 1, 1, 1, 1, 1)
+
+[node name="ConversationStatMeter" type="Control" node_paths=PackedStringArray("fill", "preview")]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+script = ExtResource("1_vrqev")
+fill = NodePath("Fill")
+preview = NodePath("Preview")
+colour_fill_gradient = SubResource("Gradient_1qm8m")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Fill" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Preview" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.6
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 0, 0, 1)

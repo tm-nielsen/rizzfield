@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=9 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
 [ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
+[ext_resource type="PackedScene" uid="uid://cgohd0dwm2xxg" path="res://scenes/prefabs/conversation_stat_meter.tscn" id="3_4vf5j"]
 [ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
@@ -14,7 +15,7 @@ point_count = 2
 [sub_resource type="LabelSettings" id="LabelSettings_px1lt"]
 font_size = 24
 
-[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder", "submit_response_button")]
+[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder", "submit_response_button", "chastity_meter", "temperance_meter", "humility_meter", "patience_meter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,10 @@ vignette_viewport = NodePath("VBoxContainer/Display Area/VignetteViewport/SubVie
 response_construction_timer = NodePath("VBoxContainer/TimerBar")
 response_builder = NodePath("VBoxContainer/Construction Area/ResponseBuilder/SubViewport/ResponseBuilder")
 submit_response_button = NodePath("VBoxContainer/Construction Area/SubmitButton")
+chastity_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Chastity Meter")
+temperance_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Temperance Meter")
+humility_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Humility Meter")
+patience_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Patience Meter")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -63,6 +68,32 @@ size_flags_vertical = 3
 [node name="Meters" type="Panel" parent="VBoxContainer/Display Area"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Display Area/Meters"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Chastity Meter" parent="VBoxContainer/Display Area/Meters/HBoxContainer" instance=ExtResource("3_4vf5j")]
+layout_mode = 2
+
+[node name="Temperance Meter" parent="VBoxContainer/Display Area/Meters/HBoxContainer" instance=ExtResource("3_4vf5j")]
+layout_mode = 2
+
+[node name="Humility Meter" parent="VBoxContainer/Display Area/Meters/HBoxContainer" instance=ExtResource("3_4vf5j")]
+layout_mode = 2
+
+[node name="Patience Meter" parent="VBoxContainer/Display Area/Meters/HBoxContainer" instance=ExtResource("3_4vf5j")]
+layout_mode = 2
 
 [node name="VignetteViewport" type="SubViewportContainer" parent="VBoxContainer/Display Area"]
 layout_mode = 2

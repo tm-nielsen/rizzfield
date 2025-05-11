@@ -2,6 +2,8 @@
 class_name PlacementGrid
 extends MultiMeshInstance3D
 
+signal placements_modified
+
 @export var grid_size := Vector2i(5, 5)
 @export var cell_size: float = 0.1
 @export var grid_gap: float = 0.01
@@ -199,7 +201,10 @@ func _on_fragment_body_freed(fragment_body: ResponseFragmentBody):
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     held_fragment = PlacedResponseFragment.new(fragment_body)
-    placed_fragments = placed_fragments.filter(held_fragment.has_different_body)
+    var placed_index = placed_fragments.find_custom(held_fragment.shares_body)
+    if placed_index != -1:
+        placed_fragments.remove_at(placed_index)
+        placements_modified.emit()
     var camera = get_viewport().get_camera_3d()
     fragment_body.camera_depth = camera.global_position.y - global_position.y
 
@@ -207,6 +212,7 @@ func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
     update_held_fragment_origin()
     if is_held_fragment_placeable():
         placed_fragments.append(held_fragment)
+        placements_modified.emit()
         var placement_point = get_held_fragment_placement_point()
         fragment_body.place_and_freeze(placement_point)
     elif overlaps_held_fragment_shape():
