@@ -28,7 +28,7 @@ func start(duration: float):
 
 func cancel():
     if drain_tween: drain_tween.kill()
-    start_hide_tween()
+    hide()
 
 
 func start_hide_tween():
@@ -57,5 +57,5 @@ func _set_width(normalized_width: float):
 
 
 func _end():
-    start_hide_tween()
+    hide()
     timeout.emit()

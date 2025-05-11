@@ -16,9 +16,8 @@ extends Control
 @export_subgroup("tweens/response construction", "response_construction")
 @export var response_construction_grow_duration: float = 0.2
 @export_subgroup("tweens/response display", "response_display")
-@export var response_display_grow_size: float = 2.4
-@export var response_display_grow_duration: float = 0.6
-@export var response_display_shrink_duration: float = 0.3
+@export var response_display_grow_size: float = 2.2
+@export var response_display_shrink_duration: float = 0.5
 @export_subgroup("tweens/speak", "speak")
 @export var speak_grow_duration: float = 0.2
 @export var speak_shrink_duration: float = 0.4
@@ -68,20 +67,12 @@ func start_response_construction():
 
 func display_constructed_response(response: String):
     _display_dialogue(response, false)
-    _set_stretch_ratio(
-        construction_area.size_flags_stretch_ratio,
-        dialogue_area
-    )
-    var stretch_tween = _tween_stretch_ratio(
-        dialogue_area,
-        response_display_grow_size,
-        response_display_grow_duration
-    )
     _tween_stretch_ratio(
         dialogue_area,
         active_area_focused_size,
         response_display_shrink_duration,
-        stretch_tween
+        TweenHelpers.build_tween(self),
+        response_display_grow_size
     )
 
 

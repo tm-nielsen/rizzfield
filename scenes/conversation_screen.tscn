@@ -55,7 +55,6 @@ vignette_container = NodePath("Display Area/VignetteViewport")
 primary_dialogue_box = NodePath("Dialogue Area/Label")
 secondary_dialogue_box = NodePath("Display Area/Dialogue Box/Label")
 response_construction_grow_duration = 0.6
-response_display_grow_size = 1.4
 
 [node name="Display Area" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
