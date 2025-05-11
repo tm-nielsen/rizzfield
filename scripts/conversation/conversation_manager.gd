@@ -23,8 +23,8 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 
 var state: ConversationState
 var vignette: Node3D
-var dialogue: ConversationDefinition.Dialogue
-var stats: Array[ConversationStatDefinition.ConversationStat]
+var dialogue: DialogueSet
+var stats: ConversationStatSet
 
 
 func _ready() -> void:
@@ -53,6 +53,8 @@ func set_state(new_state: ConversationState):
             view.start_response_construction()
             response_builder.reset()
             response_construction_timer.start(duration_response_construction)
+        QUOTE_DISPLAY:
+            set_state_in(RESPONSE_CONSTRUCTION, duration_quote_display)
 
 func set_state_in(target_state: ConversationState, delay: float):
     TweenHelpers.call_delayed_realtime(
@@ -64,23 +66,34 @@ func _on_conversation_started(
     definition: ConversationDefinition,
     vignette_instance: Node3D
 ):
-    dialogue = definition.dialogue
-    stats.assign(definition.stats.map(
-        ConversationStatDefinition.ConversationStat.new
-    ))
+    dialogue = definition.get_dialogue_set()
+    stats = definition.get_stat_set()
+    stats.all_stats_filled.connect(
+        end_conversation.bind(GameModeSignalBus.notify_conversation_resolved)
+    )
+    stats.stat_emptied.connect(
+        end_conversation.bind(GameModeSignalBus.notify_combat_triggered)
+    )
     vignette = vignette_instance
     vignette_viewport.add_child(vignette)
     set_state(PROMPT_DISPLAY)
 
+func end_conversation(notification_method: Callable):
+    vignette.queue_free()
+    hide()
+    notification_method.call()
+
+
 func _submit_response():
     response_construction_timer.cancel()
+    var response_values := response_builder.get_response_values()
+    stats.update_values(response_values)
+
     view.display_constructed_response("response narration")
     state = RESPONSE_DISPLAY
-    var delay_tween = TweenHelpers.call_delayed_realtime(
+    TweenHelpers.call_delayed_realtime(
         func():
-        state = QUOTE_DISPLAY
+        set_state(QUOTE_DISPLAY)
         view.display_npc_quote(dialogue.neutral_quotes.pick_random())
         , duration_response_display
     )
-    delay_tween.tween_interval(duration_quote_display)
-    delay_tween.tween_callback(set_state.bind(RESPONSE_CONSTRUCTION))
