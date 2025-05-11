@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdra44ss3dhfn"]
+[gd_scene load_steps=10 format=3 uid="uid://bdra44ss3dhfn"]
 
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_1moov"]
 [ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="2_63fu1"]
@@ -28,6 +28,18 @@ size = Vector3(20, 2, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d357a"]
 points = PackedVector3Array(10, 1, 0.5, 10, 1, -0.5, -10, 1, 0.5, 10, -1, 0.5, 10, -1, -0.5, -10, 1, -0.5, -10, -1, 0.5, -10, -1, -0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1moov"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_1moov")
+shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
 
 [node name="WorldTest" type="Node3D"]
 
@@ -59,3 +71,4 @@ shape = SubResource("ConvexPolygonShape3D_d357a")
 
 [node name="MannequinConvoTrigger" parent="." instance=ExtResource("3_ob026")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -4, 0, -8)
+surface_material = SubResource("ShaderMaterial_1moov")
