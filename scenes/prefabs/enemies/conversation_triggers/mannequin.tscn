@@ -1,37 +1,33 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0rmr1wpvutpg"]
+[gd_scene load_steps=11 format=3 uid="uid://c0rmr1wpvutpg"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_tpnoj"]
 [ext_resource type="Script" uid="uid://ddfa6bjdyoi1" path="res://scripts/enemies/converation_trigger_sentry.gd" id="2_8mact"]
 [ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_iq0i8"]
 [ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="3_x1alu"]
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/combat_mannequin.tscn" id="4_12umt"]
-[ext_resource type="Script" uid="uid://c2sxfektaow43" path="res://scripts/conversation/conversation_stat_definition.gd" id="4_o68g5"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="5_4klpi"]
 [ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="5_j18o8"]
-
-[sub_resource type="Resource" id="Resource_hl5gy"]
-script = ExtResource("4_o68g5")
-name = "stat 1"
-initial_value = 10
-maximum_value = 20
-decrement = 4
-decrement_variation = 2
-metadata/_custom_type_script = "uid://c2sxfektaow43"
-
-[sub_resource type="Resource" id="Resource_jubsn"]
-script = ExtResource("4_o68g5")
-name = "stat 2"
-initial_value = 10
-maximum_value = 20
-decrement = 4
-decrement_variation = 2
-metadata/_custom_type_script = "uid://c2sxfektaow43"
 
 [sub_resource type="Resource" id="Resource_cfd60"]
 script = ExtResource("3_x1alu")
 vignette_prefab = ExtResource("3_iq0i8")
 dialogue_file = "res://resources/dialogue/test_convo.txt"
-stats = Array[ExtResource("4_o68g5")]([SubResource("Resource_hl5gy"), SubResource("Resource_jubsn")])
+chastity_initial_value = 10
+chastity_maximum_value = 20
+chastity_drain = 4
+chastity_drain_variation = 2
+temperance_initial_value = 10
+temperance_maximum_value = 20
+temperance_drain = 4
+temperance_drain_variation = 2
+humility_initial_value = 0
+humility_maximum_value = 20
+humility_drain = 4
+humility_drain_variation = 2
+patience_initial_value = 0
+patience_maximum_value = 20
+patience_drain = 4
+patience_drain_variation = 2
 metadata/_custom_type_script = "uid://btbkufoee38v3"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g514v"]
