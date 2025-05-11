@@ -32,7 +32,7 @@ func update_values(response: ResponseBuilder.ResponseValues):
         all_stats_filled.emit()
     
 
-func _get_stat_array() -> Array[ConversationStat]:
+func _get_stat_array() -> Array:
     return [
         chastity, temperance, humility, patience
-    ].filter(func(stat): return stat.initial_value > 0)
+    ].filter(func(stat): return stat.value > 0)
