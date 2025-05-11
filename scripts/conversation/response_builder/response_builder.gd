@@ -4,6 +4,8 @@ extends Node3D
 @export var placement_grid: PlacementGrid
 @export var fragment_spawner: ResponseFragmentSpawner
 
+var is_blank: bool: get=_get_is_blank
+
 
 func reset() -> void:
     placement_grid.reset()
@@ -15,6 +17,10 @@ func get_response_values() -> ResponseValues:
     for placed_fragment in placement_grid.placed_fragments:
         values.add(placed_fragment.fragment)
     return values
+
+
+func _get_is_blank() -> bool:
+    return placement_grid.placed_fragments.is_empty()
 
 
 class ResponseValues:

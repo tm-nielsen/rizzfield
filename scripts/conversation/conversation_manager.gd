@@ -14,6 +14,7 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 @export var vignette_viewport: SubViewport
 @export var response_construction_timer: ResponseTimer
 @export var response_builder: ResponseBuilder
+@export var submit_response_button: Button
 
 @export_subgroup("timing", "duration")
 @export var duration_prompt_display: float = 3
@@ -30,15 +31,13 @@ var stats: ConversationStatSet
 func _ready() -> void:
     GameModeSignalBus.conversation_triggered.connect(_on_conversation_started)
     response_construction_timer.timeout.connect(_submit_response)
+    submit_response_button.pressed.connect(_submit_response)
+    submit_response_button.disabled = true
     hide()
 
 func _process(_delta: float) -> void:
-    if visible && Input.is_key_pressed(KEY_SPACE):
-        vignette.queue_free()
-        hide()
-        GameModeSignalBus.notify_combat_triggered()
-    if Input.is_key_pressed(KEY_R):
-        get_tree().reload_current_scene()
+    if state == RESPONSE_CONSTRUCTION:
+        submit_response_button.disabled = response_builder.is_blank
 
 
 func set_state(new_state: ConversationState):
@@ -88,6 +87,7 @@ func _submit_response():
     response_construction_timer.cancel()
     var response_values := response_builder.get_response_values()
     stats.update_values(response_values)
+    if stats.is_full || stats.failed: return
 
     view.display_constructed_response("response narration")
     state = RESPONSE_DISPLAY
