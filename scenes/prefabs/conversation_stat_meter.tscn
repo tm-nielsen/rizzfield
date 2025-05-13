@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://ctsgoyohq4221" path="res://scripts/conversation/stat_displays/conversation_stat_meter.gd" id="1_vrqev"]
 
 [sub_resource type="Gradient" id="Gradient_1qm8m"]
-offsets = PackedFloat32Array(0.2, 0.5)
-colors = PackedColorArray(0.6, 0.24, 0.24, 1, 1, 1, 1, 1)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25, 0.5)
+colors = PackedColorArray(0.6, 0.6, 0.6, 1, 0.8, 0.8, 0.8, 1, 1, 1, 1, 1)
 
 [node name="ConversationStatMeter" type="Control" node_paths=PackedStringArray("fill", "preview")]
 layout_mode = 3
