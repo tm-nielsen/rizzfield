@@ -23,6 +23,7 @@ func _init(
     maximum_value = p_maximum_value
     drain = p_drain
     drain_variation = p_drain_variation
+    _set_next_drain()
 
 
 func update_value(amount_added: int) -> void:
@@ -48,5 +49,5 @@ func _process_state() -> void:
 func get_normalized_value() -> float:
     return clampf(float(value) / maximum_value, 0, 1)
 
-func get_normalized_next_value(amount_added: int) -> float:
-    return clampf(float(value + amount_added - next_drain) / maximum_value, 0, 1)
+func get_normalized_next_value(offset: int = 0) -> float:
+    return clampf(float(value + offset - next_drain) / maximum_value, 0, 1)

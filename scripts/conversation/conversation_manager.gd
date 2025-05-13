@@ -55,6 +55,7 @@ func set_state(new_state: ConversationState):
             view.start_response_construction()
             response_builder.reset()
             response_construction_timer.start(duration_response_construction)
+            _update_stat_meters()
         QUOTE_DISPLAY:
             set_state_in(RESPONSE_CONSTRUCTION, duration_quote_display)
 
@@ -89,13 +90,16 @@ func _initialize_stat_set(conversation_definition: ConversationDefinition):
 
 func _on_response_modified(response: ResponseBuilder.ResponseValues):
     submit_response_button.disabled = response_builder.is_blank
-    _update_stat_values(response)
+    _update_stat_meters(response)
 
-func _update_stat_values(response: ResponseBuilder.ResponseValues):
-    chastity_meter.update(response.chastity)
-    temperance_meter.update(response.temperance)
-    humility_meter.update(response.humility)
-    patience_meter.update(response.patience)
+func _update_stat_meters(
+    response := ResponseBuilder.ResponseValues.new(),
+    apply_response := false
+):
+    chastity_meter.update(response.chastity, apply_response)
+    temperance_meter.update(response.temperance, apply_response)
+    humility_meter.update(response.humility, apply_response)
+    patience_meter.update(response.patience, apply_response)
 
 
 func end_conversation(notification_method: Callable):
@@ -108,8 +112,9 @@ func end_conversation(notification_method: Callable):
 
 func _submit_response():
     response_construction_timer.cancel()
-    var response_values := response_builder.get_response_values()
-    stats.update_values(response_values)
+    var response := response_builder.get_response_values()
+    stats.update_values(response)
+    _update_stat_meters(response, true)
     if stats.is_full || stats.failed: return
 
     view.display_constructed_response("response narration")
