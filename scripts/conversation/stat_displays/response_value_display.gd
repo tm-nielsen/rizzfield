@@ -48,27 +48,36 @@ func _ready() -> void:
 
 
 func initialize_displays(stats: ConversationStatSet):
-    chastity_enabled = stats.chastity.value != 0
-    temperance_enabled = stats.temperance.value != 0
-    humility_enabled = stats.humility.value != 0
-    patience_enabled = stats.patience.value != 0
-    if !chastity_enabled: disable_displays(
-        [response_label_chastity, fragment_label_chastity]
+    chastity_enabled = initialize_displays_for_stat(
+        [response_label_chastity, fragment_label_chastity],
+        stats.chastity, func(): chastity_enabled = false
     )
-    if !temperance_enabled: disable_displays(
-        [response_label_temperance, fragment_label_temperance]
+    temperance_enabled = initialize_displays_for_stat(
+        [response_label_temperance, fragment_label_temperance],
+        stats.temperance, func(): temperance_enabled = false
     )
-    if !humility_enabled: disable_displays(
-        [response_label_humility, fragment_label_humility]
+    humility_enabled = initialize_displays_for_stat(
+        [response_label_humility, fragment_label_humility],
+        stats.humility, func(): humility_enabled = false
     )
-    if !patience_enabled: disable_displays(
-        [response_label_patience, fragment_label_patience]
+    patience_enabled = initialize_displays_for_stat(
+        [response_label_patience, fragment_label_patience],
+        stats.patience, func(): patience_enabled = false
     )
 
-func disable_displays(displays: Array[Label]):
-    for label in displays:
-        label.text = "--"
-        label.modulate = colour_disabled
+func initialize_displays_for_stat(
+    displays: Array[Label], stat: ConversationStat, set_flag: Callable
+) -> bool:
+    var stat_enabled = stat.value != 0
+    var disable_displays = func():
+        set_flag.call()
+        for label in displays:
+            label.modulate = colour_disabled
+            label.text = "--"
+
+    if !stat_enabled: disable_displays.call()
+    else: stat.filled.connect(disable_displays)
+    return stat_enabled
 
 
 func display_fragment_values(fragment: ResponseFragment):
