@@ -38,12 +38,12 @@ func update_values(response: ResponseValues):
         all_stats_filled.emit()
 
 
-func get_next_values(values: ResponseValues) -> ResponseValues:
+func get_next_values(values := ResponseValues.new()) -> ResponseValues:
     return ResponseValues.new(
-        chastity.next_drain + values.chastity,
-        temperance.next_drain + values.temperance,
-        humility.next_drain + values.humility,
-        patience.next_drain + values.patience
+        values.chastity - chastity.next_drain,
+        values.temperance - temperance.next_drain,
+        values.humility - humility.next_drain,
+        values.patience - patience.next_drain
     )
 
 
