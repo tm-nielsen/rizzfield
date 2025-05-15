@@ -13,7 +13,18 @@ extends Control
 @export var fragment_label_humility: Label
 @export var fragment_label_patience: Label
 
+@export_subgroup("colours", "colour")
+@export var colour_neutral = Color.WHITE
+@export var colour_positive = Color.LIGHT_GREEN
+@export var colour_negative = Color.LIGHT_PINK
+@export var colour_disabled = Color.DARK_GRAY
+
 var held_fragment: ResponseFragment = null
+
+var chastity_enabled: bool
+var temperance_enabled: bool
+var humility_enabled: bool
+var patience_enabled: bool
 
 
 func _ready() -> void:
@@ -34,6 +45,30 @@ func _ready() -> void:
         func(_fragment: ResponseFragment):
         if !held_fragment: hide_fragment_value_display()
     )
+
+
+func initialize_displays(stats: ConversationStatSet):
+    chastity_enabled = stats.chastity.value != 0
+    temperance_enabled = stats.temperance.value != 0
+    humility_enabled = stats.humility.value != 0
+    patience_enabled = stats.patience.value != 0
+    if !chastity_enabled: disable_displays(
+        [response_label_chastity, fragment_label_chastity]
+    )
+    if !temperance_enabled: disable_displays(
+        [response_label_temperance, fragment_label_temperance]
+    )
+    if !humility_enabled: disable_displays(
+        [response_label_humility, fragment_label_humility]
+    )
+    if !patience_enabled: disable_displays(
+        [response_label_patience, fragment_label_patience]
+    )
+
+func disable_displays(displays: Array[Label]):
+    for label in displays:
+        label.text = "--"
+        label.modulate = colour_disabled
 
 
 func display_fragment_values(fragment: ResponseFragment):
@@ -71,10 +106,19 @@ func display_stat_values(
     chastity_label: Label, temperance_label: Label,
     humility_label: Label, patience_label: Label
 ):
-    chastity_label.text = get_value_string(chastity)
-    temperance_label.text = get_value_string(temperance)
-    humility_label.text = get_value_string(humility)
-    patience_label.text = get_value_string(patience)
+    if chastity_enabled: display_value(chastity_label, chastity)
+    if temperance_enabled: display_value(temperance_label, temperance)
+    if humility_enabled: display_value(humility_label, humility)
+    if patience_enabled: display_value(patience_label, patience)
+
+func display_value(label: Label, value: int):
+    label.text = get_value_string(value)
+    label.modulate = get_value_colour(value)
+
+func get_value_colour(value: int) -> Color:
+    if value > 0: return colour_positive
+    if value < 0: return colour_negative
+    return colour_neutral
 
 static func get_value_string(value: int) -> String:
     var prefix := "+" if value > 0 else ""

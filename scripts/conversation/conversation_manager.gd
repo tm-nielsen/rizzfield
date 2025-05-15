@@ -90,6 +90,7 @@ func _initialize_stat_set(conversation_definition: ConversationDefinition):
     temperance_meter.setup(stats.temperance)
     humility_meter.setup(stats.humility)
     patience_meter.setup(stats.patience)
+    response_value_display.initialize_displays(stats)
 
 func _on_response_modified(response: ResponseValues):
     submit_response_button.disabled = response_builder.is_blank
