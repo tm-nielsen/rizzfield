@@ -198,6 +198,7 @@ offset_top = 12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("6_gpeqp")
 response_label_chastity = NodePath("Background/Total Value/Chastity")
 response_label_temperance = NodePath("Background/Total Value/Temperance")
@@ -211,6 +212,7 @@ fragment_label_patience = NodePath("Held Fragment Value/Patience")
 [node name="Background" type="ColorRect" parent="VBoxContainer/Construction Area/Value Display"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 color = Color(0.5, 0.5, 0.5, 0.156863)
 
 [node name="Total Value" type="VBoxContainer" parent="VBoxContainer/Construction Area/Value Display/Background"]
@@ -221,6 +223,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="Chastity" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
 layout_mode = 2
@@ -253,6 +256,7 @@ vertical_alignment = 1
 [node name="Held Fragment Value" type="VBoxContainer" parent="VBoxContainer/Construction Area/Value Display"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="Chastity" type="Label" parent="VBoxContainer/Construction Area/Value Display/Held Fragment Value"]
