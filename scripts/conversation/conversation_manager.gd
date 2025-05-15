@@ -56,6 +56,7 @@ func set_state(new_state: ConversationState):
         RESPONSE_CONSTRUCTION:
             view.start_response_construction()
             response_builder.reset()
+            response_value_display.display_response_values(stats.get_next_values())
             response_construction_timer.start(duration_response_construction)
             _update_stat_meters()
         QUOTE_DISPLAY:
