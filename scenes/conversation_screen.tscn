@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=12 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
 [ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
 [ext_resource type="PackedScene" uid="uid://cgohd0dwm2xxg" path="res://scenes/prefabs/conversation_stat_meter.tscn" id="3_4vf5j"]
 [ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
+[ext_resource type="Script" uid="uid://dhn1wh4lnxhsv" path="res://scripts/conversation/stat_displays/response_value_display.gd" id="6_gpeqp"]
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
 _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
@@ -12,10 +13,16 @@ point_count = 2
 
 [sub_resource type="World3D" id="World3D_3lo3o"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_4vf5j"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_gpeqp"]
+font_size = 12
+
 [sub_resource type="LabelSettings" id="LabelSettings_px1lt"]
 font_size = 24
 
-[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder", "submit_response_button", "chastity_meter", "temperance_meter", "humility_meter", "patience_meter")]
+[node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder", "response_value_display", "submit_response_button", "chastity_meter", "temperance_meter", "humility_meter", "patience_meter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +34,9 @@ view = NodePath("VBoxContainer")
 vignette_viewport = NodePath("VBoxContainer/Display Area/VignetteViewport/SubViewport")
 response_construction_timer = NodePath("VBoxContainer/TimerBar")
 response_builder = NodePath("VBoxContainer/Construction Area/ResponseBuilder/SubViewport/ResponseBuilder")
+response_value_display = NodePath("VBoxContainer/Construction Area/Value Display")
 submit_response_button = NodePath("VBoxContainer/Construction Area/SubmitButton")
+duration_response_construction = 20.0
 chastity_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Chastity Meter")
 temperance_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Temperance Meter")
 humility_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Humility Meter")
@@ -178,6 +187,105 @@ offset_bottom = -0.012001
 grow_horizontal = 0
 grow_vertical = 2
 text = "Reply"
+
+[node name="Value Display" type="HBoxContainer" parent="VBoxContainer/Construction Area" node_paths=PackedStringArray("response_label_chastity", "response_label_temperance", "response_label_humility", "response_label_patience", "fragment_label_chastity", "fragment_label_temperance", "fragment_label_humility", "fragment_label_patience")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.075
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_top = 12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_gpeqp")
+response_label_chastity = NodePath("Background/Total Value/Chastity")
+response_label_temperance = NodePath("Background/Total Value/Temperance")
+response_label_humility = NodePath("Background/Total Value/Humility")
+response_label_patience = NodePath("Background/Total Value/Patience")
+fragment_label_chastity = NodePath("Held Fragment Value/Chastity")
+fragment_label_temperance = NodePath("Held Fragment Value/Temperance")
+fragment_label_humility = NodePath("Held Fragment Value/Humility")
+fragment_label_patience = NodePath("Held Fragment Value/Patience")
+
+[node name="Background" type="ColorRect" parent="VBoxContainer/Construction Area/Value Display"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.5, 0.5, 0.5, 0.156863)
+
+[node name="Total Value" type="VBoxContainer" parent="VBoxContainer/Construction Area/Value Display/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Chastity" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
+layout_mode = 2
+text = "+1"
+label_settings = SubResource("LabelSettings_4vf5j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Temperance" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
+layout_mode = 2
+text = "+1"
+label_settings = SubResource("LabelSettings_4vf5j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Humility" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
+layout_mode = 2
+text = "+1"
+label_settings = SubResource("LabelSettings_4vf5j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Patience" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
+layout_mode = 2
+text = "+1"
+label_settings = SubResource("LabelSettings_4vf5j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Held Fragment Value" type="VBoxContainer" parent="VBoxContainer/Construction Area/Value Display"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Chastity" type="Label" parent="VBoxContainer/Construction Area/Value Display/Held Fragment Value"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "+1"
+label_settings = SubResource("LabelSettings_gpeqp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Temperance" type="Label" parent="VBoxContainer/Construction Area/Value Display/Held Fragment Value"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "+1"
+label_settings = SubResource("LabelSettings_gpeqp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Humility" type="Label" parent="VBoxContainer/Construction Area/Value Display/Held Fragment Value"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "+1"
+label_settings = SubResource("LabelSettings_gpeqp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Patience" type="Label" parent="VBoxContainer/Construction Area/Value Display/Held Fragment Value"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "+1"
+label_settings = SubResource("LabelSettings_gpeqp")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Dialogue Area" type="Panel" parent="VBoxContainer"]
 visible = false

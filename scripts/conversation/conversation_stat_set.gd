@@ -28,7 +28,7 @@ func _init(
         )
 
 
-func update_values(response: ResponseBuilder.ResponseValues):
+func update_values(response: ResponseValues):
     chastity.update_value(response.chastity)
     temperance.update_value(response.temperance)
     humility.update_value(response.humility)
@@ -36,6 +36,15 @@ func update_values(response: ResponseBuilder.ResponseValues):
     if stat_array.all(func(stat): return stat.is_full):
         is_full = true
         all_stats_filled.emit()
+
+
+func get_next_values(values: ResponseValues) -> ResponseValues:
+    return ResponseValues.new(
+        chastity.next_drain + values.chastity,
+        temperance.next_drain + values.temperance,
+        humility.next_drain + values.humility,
+        patience.next_drain + values.patience
+    )
 
 
 func _get_stat_array() -> Array:

@@ -14,6 +14,7 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 @export var vignette_viewport: SubViewport
 @export var response_construction_timer: ResponseTimer
 @export var response_builder: ResponseBuilder
+@export var response_value_display: ResponseValueDisplay
 @export var submit_response_button: Button
 
 @export_subgroup("timing", "duration")
@@ -40,7 +41,7 @@ func _ready() -> void:
     response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
     submit_response_button.disabled = true
-    hide()
+    set_state(INACTIVE)
 
 
 func set_state(new_state: ConversationState):
@@ -49,6 +50,7 @@ func set_state(new_state: ConversationState):
         INACTIVE: hide()
         PROMPT_DISPLAY:
             view.start_prompt_display(dialogue.initial_prompt)
+            response_value_display.hide_fragment_value_display()
             set_state_in(RESPONSE_CONSTRUCTION, duration_prompt_display)
             show()
         RESPONSE_CONSTRUCTION:
@@ -88,12 +90,15 @@ func _initialize_stat_set(conversation_definition: ConversationDefinition):
     humility_meter.setup(stats.humility)
     patience_meter.setup(stats.patience)
 
-func _on_response_modified(response: ResponseBuilder.ResponseValues):
+func _on_response_modified(response: ResponseValues):
     submit_response_button.disabled = response_builder.is_blank
     _update_stat_meters(response)
+    response_value_display.display_response_values(
+        stats.get_next_values(response)
+    )
 
 func _update_stat_meters(
-    response := ResponseBuilder.ResponseValues.new(),
+    response := ResponseValues.new(),
     apply_response := false
 ):
     chastity_meter.update(response.chastity, apply_response)
@@ -104,9 +109,8 @@ func _update_stat_meters(
 
 func end_conversation(notification_method: Callable):
     if state == INACTIVE: return
-    state = INACTIVE
+    set_state(INACTIVE)
     vignette.queue_free()
-    hide()
     notification_method.call()
 
 

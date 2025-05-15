@@ -28,16 +28,3 @@ func get_response_values() -> ResponseValues:
 
 func _get_is_blank() -> bool:
     return placement_grid.placed_fragments.is_empty()
-
-
-class ResponseValues:
-    var chastity: int = 0
-    var temperance: int = 0
-    var humility: int = 0
-    var patience: int = 0
-
-    func add(fragment: ResponseFragment):
-        chastity += fragment.chastity
-        temperance += fragment.temperance
-        humility += fragment.humility
-        patience += fragment.patience

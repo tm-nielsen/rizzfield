@@ -86,6 +86,7 @@ func grab():
     freeze = true
     set_colour(colour_grabbed)
     grabbed.emit()
+    ResponseBuilderSignalBus.notify_fragment_grabbed(fragment)
 
 func drop():
     state = FREE
@@ -93,6 +94,7 @@ func drop():
     if contains_mouse: set_colour(colour_hovered)
     else: set_colour(fragment.colour)
     dropped.emit()
+    ResponseBuilderSignalBus.notify_fragment_dropped(fragment)
 
 
 func place_and_freeze(point: Vector3):
@@ -158,12 +160,14 @@ func _get_is_horizontal() -> bool:
 
 func _on_mouse_entered():
     contains_mouse = true
+    ResponseBuilderSignalBus.notify_fragment_hovered(fragment)
     match state:
         FREE: set_colour(colour_hovered)
         PLACED: set_colour(colour_placed_and_hovered)
 
 func _on_mouse_exited():
     contains_mouse = false
+    ResponseBuilderSignalBus.notify_fragment_hover_ended(fragment)
     match state:
         FREE: set_colour(fragment.colour)
         PLACED: set_colour(colour_placed)
