@@ -1,11 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgohd0dwm2xxg"]
+[gd_scene load_steps=6 format=3 uid="uid://cgohd0dwm2xxg"]
 
 [ext_resource type="Script" uid="uid://ctsgoyohq4221" path="res://scripts/conversation/stat_displays/conversation_stat_meter.gd" id="1_vrqev"]
+[ext_resource type="Script" uid="uid://df31el24njntk" path="res://scripts/utilities/elastic_value.gd" id="2_1qm8m"]
 
 [sub_resource type="Gradient" id="Gradient_1qm8m"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.25, 0.5)
 colors = PackedColorArray(0.6, 0.6, 0.6, 1, 0.8, 0.8, 0.8, 1, 1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_65h0r"]
+script = ExtResource("2_1qm8m")
+elasticity = 0.1
+friction = 0.1
+metadata/_custom_type_script = "uid://df31el24njntk"
+
+[sub_resource type="Resource" id="Resource_5lbjl"]
+script = ExtResource("2_1qm8m")
+elasticity = 0.1
+friction = 0.1
+metadata/_custom_type_script = "uid://df31el24njntk"
 
 [node name="ConversationStatMeter" type="Control" node_paths=PackedStringArray("fill", "preview")]
 layout_mode = 3
@@ -15,6 +28,8 @@ script = ExtResource("1_vrqev")
 fill = NodePath("Fill")
 preview = NodePath("Preview")
 colour_fill_gradient = SubResource("Gradient_1qm8m")
+elastic_fill_level = SubResource("Resource_65h0r")
+elastic_preview_level = SubResource("Resource_5lbjl")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
