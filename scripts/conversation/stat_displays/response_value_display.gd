@@ -68,7 +68,7 @@ func initialize_displays(stats: ConversationStatSet):
 func initialize_displays_for_stat(
     displays: Array[Label], stat: ConversationStat, set_flag: Callable
 ) -> bool:
-    var stat_enabled = !stat.disabled
+    var stat_enabled = !stat.is_disabled
     var disable_displays = func():
         set_flag.call()
         for label in displays:

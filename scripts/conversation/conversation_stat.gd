@@ -6,7 +6,8 @@ signal emptied
 var name: String
 var value: int
 var is_full: bool
-var disabled: bool
+var is_disabled: bool
+var is_active: bool: get = _get_is_active
 
 var maximum_value: int
 var drain: int
@@ -21,7 +22,7 @@ func _init(
 ):
     name = p_name
     value = initial_value
-    disabled = value == 0
+    is_disabled = value == 0
     maximum_value = p_maximum_value
     drain = p_drain
     drain_variation = p_drain_variation
@@ -53,3 +54,6 @@ func get_normalized_value() -> float:
 
 func get_normalized_next_value(offset: int = 0) -> float:
     return clampf(float(value + offset - next_drain) / maximum_value, 0, 1)
+
+
+func _get_is_active() -> bool: return !is_disabled && !is_full

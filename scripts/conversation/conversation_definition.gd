@@ -51,5 +51,5 @@ func get_stat_set() -> ConversationStatSet:
         )
     )
 
-func get_dialogue_set() -> DialogueSet:
-    return DialogueSet.new(dialogue_file)
+func get_dialogue_set() -> NPCQuoteSet:
+    return NPCQuoteSet.new(dialogue_file)

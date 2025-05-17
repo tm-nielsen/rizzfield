@@ -36,9 +36,17 @@ const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 @export var humility_meter: ConversationStatMeter
 @export var patience_meter: ConversationStatMeter
 
+@export_subgroup("response narration", "default_action")
+@export var default_action_chastity: String
+@export var default_action_temperance: String
+@export var default_action_humility: String
+@export var default_action_patience: String
+
+
 var state: ConversationState
 var vignette: Node3D
-var dialogue: DialogueSet
+var npc_quote_set: NPCQuoteSet
+var response_narration_set: ResponseNarrationSet
 var stats: ConversationStatSet
 
 
@@ -48,6 +56,10 @@ func _ready() -> void:
     response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
     submit_response_button.disabled = true
+    response_narration_set = ResponseNarrationSet.new(
+        [default_action_chastity], [default_action_temperance],
+        [default_action_humility], [default_action_patience]
+    )
     set_state(INACTIVE)
 
 
@@ -56,7 +68,7 @@ func set_state(new_state: ConversationState):
     match state:
         INACTIVE: hide()
         PROMPT_DISPLAY:
-            view.start_prompt_display(dialogue.initial_prompt)
+            view.start_prompt_display(npc_quote_set.initial_prompt)
             response_value_display.hide_fragment_value_display()
             set_state_in(RESPONSE_CONSTRUCTION, duration_prompt_display)
             show()
@@ -79,7 +91,7 @@ func _on_conversation_started(
     definition: ConversationDefinition,
     vignette_instance: Node3D
 ):
-    dialogue = definition.get_dialogue_set()
+    npc_quote_set = definition.get_dialogue_set()
     _initialize_stat_set(definition)
     vignette = vignette_instance
     vignette_viewport.add_child(vignette)
@@ -89,13 +101,13 @@ func _initialize_stat_set(conversation_definition: ConversationDefinition):
     stats = conversation_definition.get_stat_set()
     stats.all_stats_filled.connect(
         end_conversation.bind(
-            dialogue.success_quote,
+            npc_quote_set.success_quote,
             GameModeSignalBus.notify_conversation_resolved
         )
     )
     stats.stat_emptied.connect(
         end_conversation.bind(
-            dialogue.failure_quote,
+            npc_quote_set.failure_quote,
             GameModeSignalBus.notify_combat_triggered
         )
     )
@@ -141,27 +153,23 @@ func end_conversation(
 func _submit_response():
     response_construction_timer.cancel()
     var response := response_builder.get_response_values()
-    var response_delta = stats.get_total_response_delta(response)
+    response.evaluate(
+        stats, negative_response_threshold,
+        positive_response_threshold
+    )
+    var response_text := (
+        response_narration_set
+        .build_response_text(response, stats)
+    )
     stats.update_values(response)
     _update_stat_meters(response, true)
     if stats.is_full || stats.failed: return
 
-    view.display_constructed_response("response narration")
+    view.display_constructed_response(response_text)
     state = RESPONSE_DISPLAY
     TweenHelpers.call_delayed_realtime(
         func():
         set_state(QUOTE_DISPLAY)
-        view.display_npc_quote(
-            _get_npc_quote_from_response_delta(response_delta)
-        )
+        view.display_npc_quote(npc_quote_set.get_quote(response))
         , duration_response_display
     )
-
-func _get_npc_quote_from_response_delta(
-    response_delta: int
-) -> String:
-    if response_delta < negative_response_threshold:
-        return dialogue.negative_quotes.pick_new()
-    if response_delta > positive_response_threshold:
-        return dialogue.positive_quotes.pick_new()
-    return dialogue.neutral_quotes.pick_new()

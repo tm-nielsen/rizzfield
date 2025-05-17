@@ -1,4 +1,4 @@
-class_name DialogueSet
+class_name NPCQuoteSet
 
 var initial_prompt: String
 var neutral_quotes: RandomNonRepeatingArray
@@ -6,8 +6,6 @@ var positive_quotes: RandomNonRepeatingArray
 var negative_quotes: RandomNonRepeatingArray
 var success_quote: String
 var failure_quote: String
-
-var used_neutral_qoutes
 
 
 func _init(file_path: String):
@@ -21,6 +19,13 @@ func parse(file_path: String):
     negative_quotes = parse_section(file, "UPSET")
     success_quote = get_first_line_under_header(file, "SUCCESS")
     failure_quote = get_first_line_under_header(file, "FAILURE")
+
+
+func get_quote(response: ResponseValues) -> String:
+    match response.success_level:
+        ResponseValues.NEGATIVE: return negative_quotes.pick_new()
+        ResponseValues.POSITIVE: return positive_quotes.pick_new()
+    return neutral_quotes.pick_new()
 
 
 func parse_section(

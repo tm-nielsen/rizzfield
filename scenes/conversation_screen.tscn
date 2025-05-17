@@ -41,6 +41,10 @@ chastity_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Chast
 temperance_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Temperance Meter")
 humility_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Humility Meter")
 patience_meter = NodePath("VBoxContainer/Display Area/Meters/HBoxContainer/Patience Meter")
+default_action_chastity = "show off your Yugio collection"
+default_action_temperance = "just stand there completely still for like a full minute"
+default_action_humility = "get really quiet and take up as little space as possible"
+default_action_patience = "listen to them talk for a very long time without responding"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

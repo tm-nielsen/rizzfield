@@ -46,14 +46,14 @@ func get_next_values(values := ResponseValues.new()) -> ResponseValues:
         values.patience - patience.next_drain
     )
 
-func get_total_response_delta(values : ResponseValues) -> int:
+func get_total_response_value(values : ResponseValues) -> int:
     return [
         [chastity, values.chastity], [temperance, values.temperance],
         [humility, values.humility], [patience, values.patience]
     ].reduce(
         func(total: int, stat_and_value):
         var stat: ConversationStat = stat_and_value[0]
-        if stat.disabled || stat.is_full: return total
+        if !stat.is_active: return total
         return total + stat_and_value[1] - stat.next_drain,
         0
     )
