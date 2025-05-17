@@ -37,6 +37,11 @@ func _ready() -> void:
         func(_fragment: ResponseFragment):
         held_fragment = null
     )
+    ResponseBuilderSignalBus.held_fragment_freed.connect(
+        func():
+        held_fragment = null
+        hide_fragment_value_display()
+    )
     ResponseBuilderSignalBus.mouse_entered_fragment_body.connect(
         func(fragment: ResponseFragment):
         if !held_fragment: display_fragment_values(fragment)

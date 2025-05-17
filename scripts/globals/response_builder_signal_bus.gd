@@ -4,6 +4,7 @@ signal mouse_entered_fragment_body(fragment: ResponseFragment)
 signal mouse_exited_fragment_body(fragment: ResponseFragment)
 signal fragment_body_grabbed(fragment: ResponseFragment)
 signal fragment_body_dropped(fragment: ResponseFragment)
+signal held_fragment_freed()
 
 
 func notify_fragment_hovered(fragment: ResponseFragment):
@@ -17,3 +18,6 @@ func notify_fragment_grabbed(fragment: ResponseFragment):
 
 func notify_fragment_dropped(fragment: ResponseFragment):
     fragment_body_dropped.emit(fragment)
+
+func notify_held_fragment_freed():
+    held_fragment_freed.emit()

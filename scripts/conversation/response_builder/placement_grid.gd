@@ -198,6 +198,7 @@ func _on_fragment_body_spawned(fragment_body: ResponseFragmentBody):
 func _on_fragment_body_freed(fragment_body: ResponseFragmentBody):
     if held_fragment != null && held_fragment.body == fragment_body:
         held_fragment = null
+        ResponseBuilderSignalBus.held_fragment_freed.emit()
 
 func _on_fragment_body_grabbed(fragment_body: ResponseFragmentBody):
     held_fragment = PlacedResponseFragment.new(fragment_body)
