@@ -26,6 +26,10 @@ const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 @export var duration_quote_display: float = 2
 @export var duration_final_quote_display: float = 2
 
+@export_subgroup("success levels")
+@export var negative_response_threshold: int = 0
+@export var positive_response_threshold: int = 3
+
 @export_subgroup("stat meters")
 @export var chastity_meter: ConversationStatMeter
 @export var temperance_meter: ConversationStatMeter
@@ -137,6 +141,7 @@ func end_conversation(
 func _submit_response():
     response_construction_timer.cancel()
     var response := response_builder.get_response_values()
+    var response_delta = stats.get_total_response_delta(response)
     stats.update_values(response)
     _update_stat_meters(response, true)
     if stats.is_full || stats.failed: return
@@ -146,6 +151,17 @@ func _submit_response():
     TweenHelpers.call_delayed_realtime(
         func():
         set_state(QUOTE_DISPLAY)
-        view.display_npc_quote(dialogue.neutral_quotes.pick_random())
+        view.display_npc_quote(
+            _get_npc_quote_from_response_delta(response_delta)
+        )
         , duration_response_display
     )
+
+func _get_npc_quote_from_response_delta(
+    response_delta: int
+) -> String:
+    if response_delta < negative_response_threshold:
+        return dialogue.negative_quotes.pick_random()
+    if response_delta > positive_response_threshold:
+        return dialogue.positive_quotes.pick_random()
+    return dialogue.neutral_quotes.pick_random()

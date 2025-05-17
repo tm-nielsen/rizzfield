@@ -6,6 +6,7 @@ signal emptied
 var name: String
 var value: int
 var is_full: bool
+var disabled: bool
 
 var maximum_value: int
 var drain: int
@@ -20,6 +21,7 @@ func _init(
 ):
     name = p_name
     value = initial_value
+    disabled = value == 0
     maximum_value = p_maximum_value
     drain = p_drain
     drain_variation = p_drain_variation

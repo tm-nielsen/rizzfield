@@ -20,7 +20,6 @@ var preview_level: float
 var offset_state: OffsetState
 
 var stat: ConversationStat
-var disabled: bool
 
 
 func _process(_delta: float) -> void:
@@ -30,16 +29,15 @@ func _process(_delta: float) -> void:
 
 func setup(p_stat: ConversationStat):
     stat = p_stat
-    disabled = stat.value == 0
     fill_level = stat.get_normalized_value()
     preview_level = fill_level
-    fill.anchor_top = 0.0 if disabled else 2 * (1 - fill_level)
-    fill.color = colour_disabled if disabled else Color.WHITE
+    fill.anchor_top = 0.0 if stat.disabled else 2 * (1 - fill_level)
+    fill.color = colour_disabled if stat.disabled else Color.WHITE
     preview.color = Color.TRANSPARENT
 
 
 func update(response_value: int, apply_value := false) -> void:
-    if disabled: return
+    if stat.disabled: return
     _update_targets(response_value, apply_value)
     _update_offset_state()
     fill.color = colour_fill_gradient.sample(fill_level)
