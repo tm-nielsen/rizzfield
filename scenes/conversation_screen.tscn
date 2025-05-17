@@ -129,9 +129,13 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/Display Area/Dialogue Box"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "\"Press Space to Close\""
@@ -245,14 +249,14 @@ vertical_alignment = 1
 
 [node name="Humility" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
 layout_mode = 2
-text = "+1"
+text = "--"
 label_settings = SubResource("LabelSettings_4vf5j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Patience" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
 layout_mode = 2
-text = "+1"
+text = "--"
 label_settings = SubResource("LabelSettings_4vf5j")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -302,11 +306,16 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/Dialogue Area"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_px1lt")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
