@@ -71,6 +71,7 @@ func spawn_combat_instance() -> DamageableCharacterBody3D:
 
 func receive_damage(amount: int, impulse: Vector3):
     var combat_instance = spawn_combat_instance()
+    queue_free()
     combat_instance.position += impulse
     combat_instance.move_and_slide()
     combat_instance.receive_damage(amount * 2, impulse)
