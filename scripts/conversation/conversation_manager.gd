@@ -2,13 +2,15 @@ extends Control
 
 enum ConversationState {
     INACTIVE, PROMPT_DISPLAY, QUOTE_DISPLAY,
-    RESPONSE_CONSTRUCTION, RESPONSE_DISPLAY
+    RESPONSE_CONSTRUCTION, RESPONSE_DISPLAY,
+    FINAL_QUOTE_DISPLAY
 }
 const INACTIVE = ConversationState.INACTIVE
 const PROMPT_DISPLAY = ConversationState.PROMPT_DISPLAY
 const QUOTE_DISPLAY = ConversationState.QUOTE_DISPLAY
 const RESPONSE_CONSTRUCTION = ConversationState.RESPONSE_CONSTRUCTION
 const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
+const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 
 @export var view: ConversationView
 @export var vignette_viewport: SubViewport
@@ -22,6 +24,7 @@ const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 @export var duration_response_construction: float = 8
 @export var duration_response_display: float = 2
 @export var duration_quote_display: float = 2
+@export var duration_final_quote_display: float = 2
 
 @export_subgroup("stat meters")
 @export var chastity_meter: ConversationStatMeter
@@ -81,10 +84,16 @@ func _on_conversation_started(
 func _initialize_stat_set(conversation_definition: ConversationDefinition):
     stats = conversation_definition.get_stat_set()
     stats.all_stats_filled.connect(
-        end_conversation.bind(GameModeSignalBus.notify_conversation_resolved)
+        end_conversation.bind(
+            dialogue.success_quote,
+            GameModeSignalBus.notify_conversation_resolved
+        )
     )
     stats.stat_emptied.connect(
-        end_conversation.bind(GameModeSignalBus.notify_combat_triggered)
+        end_conversation.bind(
+            dialogue.failure_quote,
+            GameModeSignalBus.notify_combat_triggered
+        )
     )
     chastity_meter.setup(stats.chastity)
     temperance_meter.setup(stats.temperance)
@@ -109,11 +118,20 @@ func _update_stat_meters(
     patience_meter.update(response.patience, apply_response)
 
 
-func end_conversation(notification_method: Callable):
-    if state == INACTIVE: return
-    set_state(INACTIVE)
-    vignette.queue_free()
-    notification_method.call()
+func end_conversation(
+    final_quote: String,
+    notification_method: Callable
+):
+    if state == FINAL_QUOTE_DISPLAY: return
+    set_state(FINAL_QUOTE_DISPLAY)
+    view.display_npc_quote(final_quote)
+    TweenHelpers.call_delayed_realtime(
+        func():
+        set_state(INACTIVE)
+        vignette.queue_free()
+        notification_method.call()
+        , duration_final_quote_display
+    )
 
 
 func _submit_response():
