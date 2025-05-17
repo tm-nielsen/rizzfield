@@ -55,7 +55,6 @@ func _ready() -> void:
     response_construction_timer.timeout.connect(_submit_response)
     response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
-    submit_response_button.disabled = true
     response_narration_set = ResponseNarrationSet.new(
         [default_action_chastity], [default_action_temperance],
         [default_action_humility], [default_action_patience]
@@ -74,6 +73,7 @@ func set_state(new_state: ConversationState):
             show()
         RESPONSE_CONSTRUCTION:
             view.start_response_construction()
+            submit_response_button.disabled = true
             response_builder.reset()
             response_value_display.display_response_values(stats.get_next_values())
             response_construction_timer.start(duration_response_construction)
