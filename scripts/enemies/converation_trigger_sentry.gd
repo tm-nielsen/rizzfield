@@ -55,23 +55,27 @@ func activate():
 func start_conversation():
     var vignette_instance: Node3D = conversation.vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
-    GameModeSignalBus.combat_triggered.connect(spawn_combat_instance)
-    GameModeSignalBus.conversation_resolved.connect(
-        func(): GameModeSignalBus.combat_triggered.disconnect(spawn_combat_instance)
-    )
-    GameModeSignalBus.conversation_ended.connect(queue_free)
+    GameModeSignalBus.combat_triggered.connect(replace_with_combat_instance)
+    GameModeSignalBus.conversation_resolved.connect(spawn_happy_corpse)
     GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
-func spawn_combat_instance() -> DamageableCharacterBody3D:
+func replace_with_combat_instance() -> DamageableCharacterBody3D:
     var combat_instance: Node3D = combat_prefab.instantiate()
     add_sibling(combat_instance)
     combat_instance.transform = transform
+    queue_free()
+    return combat_instance
+
+func spawn_happy_corpse() -> DamageableCharacterBody3D:
+    var combat_instance = replace_with_combat_instance()
+    combat_instance.die(Vector3.ZERO)
+    combat_instance.smile.show()
+    GameModeSignalBus.combat_triggered.disconnect(replace_with_combat_instance)
     return combat_instance
 
 
 func receive_damage(amount: int, impulse: Vector3):
-    var combat_instance = spawn_combat_instance()
-    queue_free()
+    var combat_instance = replace_with_combat_instance()
     combat_instance.position += impulse
     combat_instance.move_and_slide()
     combat_instance.receive_damage(amount * 2, impulse)

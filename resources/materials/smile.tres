@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://du5t0l2fx4dja"]
+
+[ext_resource type="Shader" uid="uid://ccrr01pgqfdgs" path="res://resources/shaders/smile.gdshader" id="1_mjuot"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mjuot")
+shader_parameter/colour = Color(1, 1, 1, 1)
+shader_parameter/curve_depth = 0.02

@@ -15,6 +15,7 @@ const RETREATING = 6
 @export var ragdoll: PhysicalBoneSimulator3D
 @export var force_node: PhysicalBone3D
 @export var eyes_parent: Node3D
+@export var smile: Node3D
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
@@ -28,14 +29,16 @@ var is_target_in_range: bool: get = _get_is_target_in_range
 
 
 func _ready() -> void:
+    if state == DEAD: return
     target = get_viewport().get_camera_3d()
     if target: target = target.get_parent()
     update_target_position()
     animator.animation_finished.connect(_on_animation_finished)
     step_animator.step_taken.connect(move_with_step)
-    step_animator.animator = animator
     ragdoll.active = false
+    smile.hide()
     state = TRACKING
+    step_animator.animator = animator
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
@@ -120,6 +123,7 @@ func start_parry_flinch():
 
 func die(force: Vector3):
     state = DEAD
+    step_animator.stop_step()
     collision_layer = 0
     eyes_parent.hide()
     ragdoll.active = true
