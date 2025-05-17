@@ -10,14 +10,14 @@ colors = PackedColorArray(0.6, 0.6, 0.6, 1, 0.8, 0.8, 0.8, 1, 1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_65h0r"]
 script = ExtResource("2_1qm8m")
-elasticity = 0.1
-friction = 0.1
+elasticity = 0.15
+friction = 0.2
 metadata/_custom_type_script = "uid://df31el24njntk"
 
 [sub_resource type="Resource" id="Resource_5lbjl"]
 script = ExtResource("2_1qm8m")
 elasticity = 0.1
-friction = 0.1
+friction = 0.15
 metadata/_custom_type_script = "uid://df31el24njntk"
 
 [node name="ConversationStatMeter" type="Control" node_paths=PackedStringArray("fill", "preview")]

@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
     var delta_scale = delta * ElasticValue.SCALING_FRAMERATE
     elastic_fill_level.update_value(fill_target, delta_scale)
     elastic_preview_level.update_value(preview_target, delta_scale)
-    fill.anchor_top = 1 - elastic_fill_level.value
+    fill.anchor_top = clampf(1 - elastic_fill_level.value, 0, 1)
     _update_preview()
 
 
@@ -75,16 +75,18 @@ func _update_offset_state() -> void:
 
 func _update_preview() -> void:
     var is_positive = offset_state == POSITIVE
-    preview.anchor_top = 1 - (
+    var top_anchor := clampf(1 - (
         elastic_preview_level.value
         if is_positive
         else elastic_fill_level.value
-    )
-    preview.anchor_bottom = 1 - (
+    ), 0, 1)
+    var bottom_anchor := clampf(1 - (
         elastic_fill_level.value
         if is_positive
         else elastic_preview_level.value
-    )
+    ), 0, 1)
+    preview.anchor_top = clampf(top_anchor, 0, bottom_anchor)
+    preview.anchor_bottom = clampf(bottom_anchor, top_anchor, 1)
 
 func _get_preview_colour() -> Color:
     match offset_state:
