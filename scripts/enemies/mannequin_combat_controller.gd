@@ -11,6 +11,8 @@ const RETREATING = 6
 
 @export_subgroup("references")
 @export var animator: AnimationPlayer
+@export var collider: CollisionShape3D
+@export var hurtbox: Area3D
 @export var step_animator: ProceduralStepAnimator
 @export var ragdoll: PhysicalBoneSimulator3D
 @export var force_node: PhysicalBone3D
@@ -42,11 +44,12 @@ func _ready() -> void:
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
-    if target:
+    if target && state != DEAD:
         update_target_position()
         if state == TRACKING && is_target_in_range: attack()
 
 func _physics_process(_delta: float) -> void:
+    if state == DEAD: return
     velocity += get_gravity()
     move_and_slide()
 
@@ -104,7 +107,7 @@ func start_flinch():
 
 func end_flinch(previous_state: int):
     super(previous_state)
-    if state == STUNNED: state = TRACKING
+    if state == STUNNED || state == DAMAGED: state = TRACKING
     if state == TRACKING: step_animator.take_step()
     if state == STUNNED || state == RETREATING:
         step_animator.take_steps_back(5, _on_retreat_completed)
@@ -124,7 +127,8 @@ func start_parry_flinch():
 func die(force: Vector3):
     state = DEAD
     step_animator.stop_step()
-    collision_layer = 0
+    collider.disabled = true
+    hurtbox.monitoring = false
     eyes_parent.hide()
     ragdoll.active = true
     ragdoll.physical_bones_start_simulation()
