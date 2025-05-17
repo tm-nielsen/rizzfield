@@ -1,11 +1,13 @@
 class_name DialogueSet
 
 var initial_prompt: String
-var neutral_quotes: Array[String]
-var positive_quotes: Array[String]
-var negative_quotes: Array[String]
+var neutral_quotes: RandomNonRepeatingArray
+var positive_quotes: RandomNonRepeatingArray
+var negative_quotes: RandomNonRepeatingArray
 var success_quote: String
 var failure_quote: String
+
+var used_neutral_qoutes
 
 
 func _init(file_path: String):
@@ -22,6 +24,13 @@ func parse(file_path: String):
 
 
 func parse_section(
+    file: FileAccess, header: String
+) -> RandomNonRepeatingArray:
+    return RandomNonRepeatingArray.new(
+        _parse_section(file, header)
+    )
+
+func _parse_section(
     file: FileAccess, header: String
 ) -> Array[String]:
     var line := get_first_line_under_header(file, header)

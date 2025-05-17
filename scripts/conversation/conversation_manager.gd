@@ -161,7 +161,7 @@ func _get_npc_quote_from_response_delta(
     response_delta: int
 ) -> String:
     if response_delta < negative_response_threshold:
-        return dialogue.negative_quotes.pick_random()
+        return dialogue.negative_quotes.pick_new()
     if response_delta > positive_response_threshold:
-        return dialogue.positive_quotes.pick_random()
-    return dialogue.neutral_quotes.pick_random()
+        return dialogue.positive_quotes.pick_new()
+    return dialogue.neutral_quotes.pick_new()
