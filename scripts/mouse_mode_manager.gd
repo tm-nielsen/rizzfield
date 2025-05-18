@@ -1,6 +1,7 @@
+class_name MouseModeManager
 extends Node
 
-var capturing_disabled: bool
+static var capturing_disabled: bool
 
 
 func _notification(what: int) -> void:
@@ -10,10 +11,10 @@ func _notification(what: int) -> void:
 
 func _ready() -> void:
     GameModeSignalBus.conversation_started.connect(
-        func(): capturing_disabled = true; release_mouse()
+        release_and_disable_capturing
     )
     GameModeSignalBus.conversation_ended.connect(
-        func(): capturing_disabled = false; capture_mouse()
+        capture_and_enable_capturing
     )
 
 func _input(event: InputEvent) -> void:
@@ -23,9 +24,18 @@ func _process(_delta: float) -> void:
     if Input.is_action_just_pressed("pause"): release_mouse()
 
 
-func capture_mouse():
+static func capture_and_enable_capturing():
+    capturing_disabled = false
+    capture_mouse()
+
+static func release_and_disable_capturing():
+    capturing_disabled = true
+    release_mouse()
+
+
+static func capture_mouse():
     if capturing_disabled: return
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func release_mouse():
+static func release_mouse():
     Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

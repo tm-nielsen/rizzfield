@@ -23,6 +23,7 @@ func _ready() -> void:
 
 func popup():
     get_tree().paused = true
+    MouseModeManager.release_and_disable_capturing()
     close_button.grab_focus()
     scale = Vector2.ZERO
     if size_tween: size_tween.kill()
@@ -34,6 +35,7 @@ func popup():
 
 func close():
     get_tree().paused = false
+    MouseModeManager.capture_and_enable_capturing()
     if size_tween: size_tween.kill()
     size_tween = TweenHelpers.build_tween(
         self, 0, Tween.EASE_OUT, Tween.TRANS_SINE
