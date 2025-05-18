@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdvqoqpcker0v"]
+[gd_scene load_steps=8 format=3 uid="uid://bdvqoqpcker0v"]
 
 [ext_resource type="Script" uid="uid://5e8xvg65eu15" path="res://scripts/exploration/fragment_collection_popup.gd" id="1_5qnml"]
 [ext_resource type="ArrayMesh" uid="uid://c4qiska65d0ql" path="res://models/fragments/t.res" id="2_03dq7"]
@@ -10,7 +10,10 @@ font_size = 24
 [sub_resource type="LabelSettings" id="LabelSettings_7ls2j"]
 font_size = 18
 
+[sub_resource type="Environment" id="Environment_03dq7"]
+
 [sub_resource type="World3D" id="World3D_vrnth"]
+environment = SubResource("Environment_03dq7")
 
 [node name="FragmentCollectionPopup" type="Control" node_paths=PackedStringArray("fragment_mesh", "title_label", "description_label", "close_button", "frame_timer")]
 process_mode = 3

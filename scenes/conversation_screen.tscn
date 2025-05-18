@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=13 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
@@ -11,7 +11,10 @@
 _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Environment" id="Environment_gpeqp"]
+
 [sub_resource type="World3D" id="World3D_3lo3o"]
+environment = SubResource("Environment_gpeqp")
 
 [sub_resource type="LabelSettings" id="LabelSettings_4vf5j"]
 font_size = 18
