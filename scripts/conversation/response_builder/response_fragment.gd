@@ -12,6 +12,12 @@ extends Resource
 @export var humility: int = 0
 @export var patience: int = 0
 
+@export_subgroup("response snippets", "response_action")
+@export_multiline var response_action_chastity: String
+@export_multiline var response_action_temperance: String
+@export_multiline var response_action_humility: String
+@export_multiline var response_action_patience: String
+
 
 func create_mesh_instance() -> MeshInstance3D:
     var mesh_instance = MeshInstance3D.new()
