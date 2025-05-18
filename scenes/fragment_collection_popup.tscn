@@ -23,7 +23,7 @@ pivot_offset = Vector2(240, 135)
 script = ExtResource("1_5qnml")
 fragment_mesh = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Panel2/SubViewportContainer/SubViewport/MeshInstance3D")
 title_label = NodePath("VBoxContainer/Panel/Header")
-description_label = NodePath("VBoxContainer/HBoxContainer/Panel/Flavour")
+description_label = NodePath("VBoxContainer/HBoxContainer/Panel/ScrollContainer/Flavour")
 close_button = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -67,18 +67,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="Flavour" type="Label" parent="VBoxContainer/HBoxContainer/Panel"]
-custom_minimum_size = Vector2(200, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 12.0
+offset_top = 2.0
+offset_right = -12.0
+offset_bottom = -6.0
+horizontal_scroll_mode = 0
+
+[node name="Flavour" type="Label" parent="VBoxContainer/HBoxContainer/Panel/ScrollContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 2.0
