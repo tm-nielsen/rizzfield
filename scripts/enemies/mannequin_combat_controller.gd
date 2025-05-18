@@ -80,6 +80,7 @@ func move_with_step(distance: Vector2):
     move_units(displacement)
 
 func move_units(displacement: Vector3):
+    if !can_process(): return
     velocity = displacement * Engine.physics_ticks_per_second
     move_and_slide()
     look_at_target()
@@ -132,6 +133,7 @@ func die(force: Vector3):
     eyes_parent.hide()
     ragdoll.active = true
     ragdoll.physical_bones_start_simulation()
+    if !can_process(): return
     force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
 
 
