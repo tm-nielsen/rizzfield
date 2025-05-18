@@ -9,6 +9,15 @@ extends Control
 @export var popup_duration: float = 0.4
 @export var close_duration: float = 0.2
 
+@export_subgroup("mesh animation")
+@export var frame_timer: FrameTimer
+@export var yaw_frequency: float = 1.5
+@export var yaw_amplitude: float = PI / 4
+@export var pitch_frequency: float = 0.9
+@export var pitch_amplitude: float = PI / 8
+@export var roll_frequency: float = 0.4
+@export var roll_amplitude: float = PI / 20
+
 var size_tween: Tween
 
 
@@ -24,6 +33,7 @@ func _ready() -> void:
         description_label.text = description
         popup()
     )
+    frame_timer.frame_out.connect(update_mesh_rotation)
     close_button.pressed.connect(close)
     hide()
 
@@ -51,3 +61,12 @@ func close():
         self, "scale", Vector2.ZERO, close_duration
     )
     size_tween.tween_callback(hide)
+
+
+func update_mesh_rotation():
+    var time: float = Time.get_ticks_msec() / 1000.0
+    fragment_mesh.rotation = Vector3(
+        pitch_amplitude * sin(pitch_frequency * time),
+        yaw_amplitude * sin(yaw_frequency * time),
+        roll_amplitude * sin(roll_frequency * time)
+    )
