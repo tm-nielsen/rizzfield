@@ -62,4 +62,4 @@ func get_total_response_value(values : ResponseValues) -> int:
 func _get_stat_array() -> Array:
     return [
         chastity, temperance, humility, patience
-    ].filter(func(stat): return stat.value > 0)
+    ].filter(func(stat): return !stat.is_disabled)
