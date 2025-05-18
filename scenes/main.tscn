@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch7e8r5h7a6kn"]
+[gd_scene load_steps=7 format=3 uid="uid://ch7e8r5h7a6kn"]
 
 [ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://cttswtvd8np6o" path="res://scripts/world_pauser.gd" id="2_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://bdra44ss3dhfn" path="res://scenes/world_test.tscn" id="2_tefeu"]
+[ext_resource type="PackedScene" uid="uid://drfqwnyxq1u7d" path="res://scenes/lvl_0.tscn" id="2_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://dm6nb6h5e06ie" path="res://scenes/conversation_screen.tscn" id="5_tbgi4"]
@@ -33,7 +32,7 @@ grow_vertical = 2
 process_mode = 3
 script = ExtResource("1_0wfyh")
 
-[node name="WorldViewport" type="SubViewportContainer" parent="." node_paths=PackedStringArray("target")]
+[node name="WorldViewport" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,20 +41,18 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 stretch_shrink = 2
-script = ExtResource("2_o6xl0")
-target = NodePath("SubViewport")
 
 [node name="SubViewport" type="SubViewport" parent="WorldViewport"]
-transparent_bg = true
 handle_input_locally = false
 audio_listener_enable_3d = true
 size = Vector2i(240, 135)
 render_target_update_mode = 4
 
-[node name="WorldTest" parent="WorldViewport/SubViewport" instance=ExtResource("2_tefeu")]
-
 [node name="Player" parent="WorldViewport/SubViewport" instance=ExtResource("3_o6xl0")]
+transform = Transform3D(0.261499, 0, -0.965204, 0, 1, 0, 0.965204, 0, 0.261499, 0, 0, 0)
 surface_material = SubResource("ShaderMaterial_choun")
+
+[node name="Lvl0" parent="WorldViewport/SubViewport" instance=ExtResource("2_o6xl0")]
 
 [node name="ConversationScreen" parent="." instance=ExtResource("5_tbgi4")]
 layout_mode = 1
