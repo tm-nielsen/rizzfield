@@ -5,16 +5,20 @@ signal fragment_spawned(fragment: ResponseFragmentBody)
 
 @export var grid: PlacementGrid
 @export var fragment_body_prefab: PackedScene
-@export var fragments: Array[ResponseFragment]
+@export var default_fragments: Array[ResponseFragment]
 
 @export_subgroup("placement")
 @export var spawn_area_height: float = 4
 @export var position_randomization: float = 1
 @export var fragment_count: int = 3
 
+var fragments: Array[ResponseFragment]
+
 
 func _ready() -> void:
     fragment_spawned.connect(grid._on_fragment_body_spawned)
+    fragments = default_fragments.duplicate()
+    ExplorationSignalBus.fragment_collected.connect(fragments.append)
 
 func reset() -> void:
     for child: ResponseFragmentBody in get_children():

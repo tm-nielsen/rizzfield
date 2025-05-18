@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbbtkwd2mv5o5"]
+
+[ext_resource type="Script" uid="uid://dqjk4jb0jb00i" path="res://scripts/exploration/fragment_pickup_area.gd" id="1_k2f26"]
+[ext_resource type="Resource" uid="uid://bgsfka3cqgf7n" path="res://resources/response_fragments/t_response.tres" id="2_uqgd7"]
+[ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="3_mtplr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_85g3d"]
+radius = 1.0
+
+[node name="FragmentPickupArea" type="Area3D" node_paths=PackedStringArray("frame_timer")]
+collision_mask = 2
+script = ExtResource("1_k2f26")
+fragment = ExtResource("2_uqgd7")
+title = "Fragment Name"
+description = "More information about the fragment goes here.
+As much flavour as is desired."
+frame_timer = NodePath("FrameTimer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_85g3d")
+
+[node name="FrameTimer" type="Node" parent="."]
+script = ExtResource("3_mtplr")
+frame_rate = 18.0
+metadata/_custom_type_script = "uid://dhpprbs6cek1p"

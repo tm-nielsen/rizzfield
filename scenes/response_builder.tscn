@@ -1,20 +1,35 @@
-[gd_scene load_steps=18 format=3 uid="uid://kfxvu5oltfbb"]
+[gd_scene load_steps=19 format=3 uid="uid://kfxvu5oltfbb"]
 
 [ext_resource type="Script" uid="uid://bf1kmmw0ed4wy" path="res://scripts/conversation/response_builder/response_builder.gd" id="1_fe1ti"]
 [ext_resource type="Script" uid="uid://cx8u5es5jq84n" path="res://scripts/conversation/response_builder/response_builder_camera.gd" id="1_gjipf"]
 [ext_resource type="Shader" uid="uid://bffowjmg0i2bd" path="res://resources/shaders/unlit.gdshader" id="1_gr2tu"]
 [ext_resource type="Script" uid="uid://dqeuaowcae7tu" path="res://scripts/conversation/response_builder/placement_grid.gd" id="1_liyel"]
-[ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="3_b75ef"]
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="2_va2ta"]
+[ext_resource type="Texture2D" uid="uid://drq2igm6wjkbu" path="res://textures/rock_0.png" id="3_gjipf"]
 [ext_resource type="Script" uid="uid://cx6q64kuim5dh" path="res://scripts/conversation/response_builder/response_fragment_spawner.gd" id="4_va2ta"]
 [ext_resource type="PackedScene" uid="uid://bai4owdwcx2cj" path="res://scenes/prefabs/response_fragment_body.tscn" id="5_gjipf"]
-[ext_resource type="Resource" uid="uid://ddxgbo0p8blsw" path="res://resources/response_fragments/arch_response.tres" id="5_k1fge"]
 [ext_resource type="Resource" uid="uid://cm05u2kaqoor" path="res://resources/response_fragments/tri_response.tres" id="6_8t6sj"]
 [ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="6_fe1ti"]
 [ext_resource type="Resource" uid="uid://cbhfl0xtcabui" path="res://resources/response_fragments/l_response.tres" id="8_gsw4f"]
 [ext_resource type="Resource" uid="uid://bacgci8bgld0" path="res://resources/response_fragments/square_response.tres" id="9_6fcue"]
-[ext_resource type="Resource" uid="uid://bgsfka3cqgf7n" path="res://resources/response_fragments/t_response.tres" id="11_8xilf"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wl4r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjipf"]
+render_priority = 0
+shader = ExtResource("2_va2ta")
+shader_parameter/albedo_colour = Color(0.6, 0.54, 0.54, 1)
+shader_parameter/albedo_texture = ExtResource("3_gjipf")
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(8, 4)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fe1ti"]
+material = SubResource("ShaderMaterial_gjipf")
+size = Vector2(40, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gr2tu"]
 render_priority = 0
@@ -22,14 +37,14 @@ shader = ExtResource("1_gr2tu")
 shader_parameter/colour = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_gjipf"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_gsw4f"]
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="MultiMesh" id="MultiMesh_fe1ti"]
+[sub_resource type="MultiMesh" id="MultiMesh_6fcue"]
 transform_format = 1
 use_colors = true
 instance_count = 35
-mesh = SubResource("PlaneMesh_gjipf")
+mesh = SubResource("PlaneMesh_gsw4f")
 buffer = PackedFloat32Array(1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1)
 
 [node name="ResponseBuilder" type="Node3D" node_paths=PackedStringArray("placement_grid", "fragment_spawner")]
@@ -43,19 +58,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 [node name="WorldBoundary" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape3D_2wl4r")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("PlaneMesh_fe1ti")
+
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("fragment_spawner")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
 size = 5.0
 script = ExtResource("1_gjipf")
 fragment_spawner = NodePath("../ResponseFragmentSpawner")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
-transform = Transform3D(0.952937, -0.0658242, -0.295936, -1.32519e-08, 0.976145, -0.217121, 0.303168, 0.206903, 0.930204, 0, 0, 0)
+[node name="Main Light" type="OmniLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0607, -0.154193, 0.185948)
+light_color = Color(1, 1, 0.9, 1)
+light_energy = 4.0
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="Secondary Light" type="OmniLight3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.68364, 1.06071, -2.92176)
+light_color = Color(0.8, 0.933333, 1, 1)
+shadow_enabled = true
+omni_range = 6.0
 
 [node name="PlacementGrid" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
 material_override = SubResource("ShaderMaterial_gr2tu")
-multimesh = SubResource("MultiMesh_fe1ti")
+multimesh = SubResource("MultiMesh_6fcue")
 script = ExtResource("1_liyel")
 grid_size = Vector2i(7, 5)
 cell_size = 0.8
@@ -67,7 +96,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 script = ExtResource("4_va2ta")
 grid = NodePath("../PlacementGrid")
 fragment_body_prefab = ExtResource("5_gjipf")
-fragments = Array[ExtResource("6_fe1ti")]([ExtResource("5_k1fge"), ExtResource("3_b75ef"), ExtResource("8_gsw4f"), ExtResource("9_6fcue"), ExtResource("6_8t6sj"), ExtResource("11_8xilf")])
+default_fragments = Array[ExtResource("6_fe1ti")]([ExtResource("8_gsw4f"), ExtResource("9_6fcue"), ExtResource("6_8t6sj")])
 spawn_area_height = 2.0
 position_randomization = 0.5
 metadata/_custom_type_script = "uid://cx6q64kuim5dh"
