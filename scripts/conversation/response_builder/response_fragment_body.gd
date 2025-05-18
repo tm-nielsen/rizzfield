@@ -37,8 +37,7 @@ var is_horizontal: bool: get = _get_is_horizontal
 var state: State
 var contains_mouse: bool
 
-var mesh_instance: MeshInstance3D
-var material: ShaderMaterial
+var material_proxy: ResponseFragment.FragmentMaterialProxy
 var collision_shape = CollisionShape3D
 
 
@@ -46,10 +45,9 @@ func _ready() -> void:
     mouse_entered.connect(_on_mouse_entered)
     mouse_exited.connect(_on_mouse_exited)
 
-    mesh_instance = fragment.create_mesh_instance()
-    material = fragment.base_material.duplicate()
-    mesh_instance.material_override = material
-    set_colour(fragment.colour)
+    var mesh_instance := fragment.create_mesh_instance()
+    material_proxy = fragment.create_material_proxy()
+    mesh_instance.material_override = material_proxy.material
     add_child(mesh_instance)
 
     collision_shape = fragment.create_collision_shape()
@@ -129,7 +127,7 @@ func scale_children(value: float) -> void:
 
 
 func set_colour(colour: Color) -> void:
-    material.set_shader_parameter("albedo_colour", colour)
+    material_proxy.set_colour(colour)
 
 
 func get_mouse_world_position(z_depth: float = 1) -> Vector3:

@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var fragment: ResponseFragment
+@export var mesh_scale: float = 0.2
 
 @export_subgroup("animation")
 @export var spin_speed: float = 2
@@ -16,10 +17,10 @@ func _ready() -> void:
         ExplorationSignalBus.notify_fragment_collected(fragment)
         queue_free()
     )
-    for child in get_children():
-        if child is MeshInstance3D:
-            mesh = child
-            mesh.mesh = fragment.mesh
+    mesh = fragment.create_mesh_instance()
+    mesh.material_override = fragment.create_material_proxy().material
+    add_child(mesh)
+    mesh.scale = Vector3.ONE * mesh_scale
 
 
 func _process(delta: float) -> void:

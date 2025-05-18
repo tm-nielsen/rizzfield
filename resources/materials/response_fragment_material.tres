@@ -1,12 +1,16 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dgcg2kfxfxab7"]
 
-[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_fs3wo"]
+[ext_resource type="Shader" uid="uid://huklnp2t8acn" path="res://resources/shaders/block_fragment.gdshader" id="1_fs3wo"]
 
 [resource]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_fs3wo")
 shader_parameter/albedo_colour = Color(0.339134, 0.804423, 0.942972, 1)
+shader_parameter/edge_width = 0.15
+shader_parameter/edge_colour = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/edge_offset_x = 0.5
+shader_parameter/edge_offset_y = 0.5
 shader_parameter/roughness = 0.6
 shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
