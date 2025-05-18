@@ -18,7 +18,7 @@ func _ready() -> void:
         queue_free()
     )
     mesh = fragment.create_mesh_instance()
-    mesh.material_override = fragment.create_material_proxy().material
+    mesh.material_override = fragment.create_material()
     add_child(mesh)
     mesh.scale = Vector3.ONE * mesh_scale
 

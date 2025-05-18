@@ -33,6 +33,9 @@ func create_material_proxy() -> FragmentMaterialProxy:
     material.set_edge_offsets(shape_texture.get_size())
     return material
 
+func create_material() -> ShaderMaterial:
+    return create_material_proxy().material
+
 func create_collision_shape() -> CollisionShape3D:
     var collision_shape = CollisionShape3D.new()
     collision_shape.shape = mesh.create_convex_shape(true, true)
