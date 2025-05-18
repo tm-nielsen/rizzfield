@@ -1,6 +1,8 @@
 extends Area3D
 
 @export var fragment: ResponseFragment
+@export var title: String
+@export_multiline var description: String
 @export var mesh_scale: float = 0.2
 
 @export_subgroup("animation")
@@ -15,7 +17,9 @@ var mesh: MeshInstance3D
 func _ready() -> void:
     body_entered.connect(func(body: PhysicsBody3D):
         if !body is PlayerController: return
-        ExplorationSignalBus.notify_fragment_collected(fragment)
+        ExplorationSignalBus.notify_fragment_collected(
+            fragment, title, description
+        )
         queue_free()
     )
     frame_timer.frame_out.connect(update_mesh_rotation)

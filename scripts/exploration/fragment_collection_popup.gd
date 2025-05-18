@@ -1,6 +1,8 @@
 extends Control
 
 @export var fragment_mesh: MeshInstance3D
+@export var title_label: Label
+@export var description_label: Label
 @export var close_button: Button
 
 @export_subgroup("tweens")
@@ -15,6 +17,11 @@ func _ready() -> void:
         func(fragment: ResponseFragment):
         fragment_mesh.mesh = fragment.mesh
         fragment_mesh.material_override = fragment.create_material()
+    )
+    ExplorationSignalBus.fragment_discovered.connect(
+        func(title: String, description: String):
+        title_label.text = title
+        description_label.text = description
         popup()
     )
     close_button.pressed.connect(close)

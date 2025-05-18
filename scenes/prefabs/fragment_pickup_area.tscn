@@ -11,6 +11,9 @@ radius = 1.0
 collision_mask = 2
 script = ExtResource("1_k2f26")
 fragment = ExtResource("2_uqgd7")
+title = "Fragment Name"
+description = "More information about the fragment goes here.
+As much flavour as is desired."
 frame_timer = NodePath("FrameTimer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
