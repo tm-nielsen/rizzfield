@@ -1,10 +1,16 @@
 extends Node
 
+signal fragment_collected(fragment: ResponseFragment)
+
 signal mouse_entered_fragment_body(fragment: ResponseFragment)
 signal mouse_exited_fragment_body(fragment: ResponseFragment)
 signal fragment_body_grabbed(fragment: ResponseFragment)
 signal fragment_body_dropped(fragment: ResponseFragment)
 signal held_fragment_freed()
+
+
+func notify_fragment_collected(fragment: ResponseFragment):
+    fragment_collected.emit(fragment)
 
 
 func notify_fragment_hovered(fragment: ResponseFragment):
