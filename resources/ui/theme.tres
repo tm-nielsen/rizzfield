@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://chlubqsqhmav4"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://chlubqsqhmav4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfwp4"]
 bg_color = Color(0.3, 0.3, 0.3, 0.588235)
@@ -50,6 +50,34 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_626q5"]
+bg_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p5woc"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3vpb"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_77ydo"]
+content_margin_left = 3.0
+content_margin_top = 8.0
+content_margin_right = 3.0
+content_margin_bottom = 8.0
+
 [resource]
 default_font_size = 12
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -63,3 +91,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_id20u")
 Button/styles/normal = SubResource("StyleBoxFlat_7kyrn")
 Button/styles/pressed = SubResource("StyleBoxFlat_gofuw")
 Panel/styles/panel = SubResource("StyleBoxFlat_77ydo")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_626q5")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_p5woc")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_b3vpb")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_77ydo")
