@@ -19,11 +19,11 @@ void vertex() {
 void fragment() {
 	vec2 p = 2.0 * (UV - vec2(0.5));
 	float pupil_r = p.x * p.x + p.y * p.y;
-	
+
 	p.y = abs(abs(p.y) + 1.0 - eye_height);
 	p.x = abs(abs(p.x) + 1.0 - eye_width);
 	float border_r = p.x * p.x + p.y * p.y;
-	
+
 	vec4 col = mix(iris_colour, pupil_colour, step(pupil_r, pupil_size * pupil_size));
 	ALPHA = col.a * step(border_r, 1.0);
 	ALBEDO = col.rgb;

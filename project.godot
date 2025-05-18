@@ -17,15 +17,17 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameModeSignalBus="*res://scripts/globals/game_mode_signal_bus.gd"
 TweenHelpers="*res://scripts/globals/tween_helpers.gd"
+GameModeSignalBus="*res://scripts/globals/game_mode_signal_bus.gd"
+ResponseBuilderSignalBus="*res://scripts/globals/response_builder_signal_bus.gd"
 
 [display]
 
-window/size/viewport_width=240
-window/size/viewport_height=135
+window/size/viewport_width=480
+window/size/viewport_height=270
 window/size/mode=3
 window/stretch/mode="viewport"
+window/size/mode.editor=0
 
 [dotnet]
 
@@ -34,6 +36,11 @@ project/assembly_name="Rizzfield"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://chlubqsqhmav4"
+theme/default_font_antialiasing=0
 
 [input]
 
@@ -92,3 +99,9 @@ pause={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

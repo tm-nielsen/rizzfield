@@ -123,6 +123,7 @@ size = Vector2(0.05, 0.05)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.99399, 0.00508112, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999013, -0.450541, 0.887148, -0.0790314, 0.0811251, 0.180544)
 cull_mask = 1048569
+current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -149,4 +150,6 @@ mesh = SubResource("QuadMesh_5gnmd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0.40739, 0.817942, 0.406208, 0, 0, 0)
+layers = 8
 shadow_enabled = true
+shadow_caster_mask = 4294967289

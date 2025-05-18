@@ -1,6 +1,6 @@
 extends DamageableCharacterBody3D
 
-@export var vignette_prefab: PackedScene
+@export var conversation: ConversationDefinition
 @export var combat_prefab: PackedScene
 @export var head_node: BoneAttachment3D
 
@@ -21,6 +21,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
     if check_angle() && check_raycast():
         activate()
+        return
 
     velocity += get_gravity()
     move_and_slide()
@@ -42,31 +43,37 @@ func check_raycast() -> bool:
 
 
 func activate():
+    if triggered: return
     triggered = true
     head_node.show()
     head_node.override_pose = true
     head_node.look_at(camera.global_position, Vector3.UP, true)
     camera.look_at(head_node.global_position)
-
-    (func(): get_tree().paused = true).call_deferred()
+    get_viewport().process_mode = Node.PROCESS_MODE_DISABLED
     TweenHelpers.call_delayed_realtime(start_conversation, activation_time)
 
 func start_conversation():
-    var vignette_instance: Node3D = vignette_prefab.instantiate()
+    var vignette_instance: Node3D = conversation.vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
-    GameModeSignalBus.combat_triggered.connect(spawn_combat_instance)
-    GameModeSignalBus.notify_conversation_triggered(vignette_instance)
+    GameModeSignalBus.combat_triggered.connect(replace_with_combat_instance)
+    GameModeSignalBus.conversation_resolved.connect(spawn_happy_corpse)
+    GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
-func spawn_combat_instance() -> DamageableCharacterBody3D:
+func replace_with_combat_instance() -> DamageableCharacterBody3D:
     var combat_instance: Node3D = combat_prefab.instantiate()
     add_sibling(combat_instance)
     combat_instance.transform = transform
     queue_free()
     return combat_instance
 
+func spawn_happy_corpse() -> DamageableCharacterBody3D:
+    var combat_instance = replace_with_combat_instance()
+    combat_instance.die(Vector3.ZERO)
+    combat_instance.smile.show()
+    GameModeSignalBus.combat_triggered.disconnect(replace_with_combat_instance)
+    return combat_instance
+
 
 func receive_damage(amount: int, impulse: Vector3):
-    var combat_instance = spawn_combat_instance()
-    combat_instance.position += impulse
-    combat_instance.move_and_slide()
+    var combat_instance = replace_with_combat_instance()
     combat_instance.receive_damage(amount * 2, impulse)

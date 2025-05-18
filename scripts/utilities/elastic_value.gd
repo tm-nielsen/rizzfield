@@ -1,16 +1,18 @@
 class_name ElasticValue
 extends Resource
 
+const SCALING_FRAMERATE = 60
+
 @export var elasticity: float = 0.05
 @export_range(0, 1) var friction: float = 0.2
 
 var value_velocity: float
 var value: float
 
-func update_value(target: float, delta_scale: float, wrap_limit = 0) -> float:
+func update_value(target: float, delta_scale: float, wrap_limit: float = 0) -> float:
     var offset = get_wrapped_target_offset(target, value, wrap_limit)
     value_velocity += offset * elasticity * delta_scale
-    value += wrap_value(value + value_velocity, wrap_limit)
+    value = wrap_value(value + value_velocity, wrap_limit)
     value_velocity = apply_friction(value_velocity, friction, delta_scale)
     return value
 

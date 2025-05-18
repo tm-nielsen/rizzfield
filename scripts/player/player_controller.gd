@@ -63,7 +63,7 @@ func move(delta):
     input_force *= move_force * delta
     velocity += basis * input_force
     
-    velocity += get_gravity()
+    velocity += get_gravity() * delta
 
 
 func apply_friction(delta):

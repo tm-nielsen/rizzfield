@@ -11,10 +11,13 @@ const RETREATING = 6
 
 @export_subgroup("references")
 @export var animator: AnimationPlayer
+@export var collider: CollisionShape3D
+@export var hurtbox: Area3D
 @export var step_animator: ProceduralStepAnimator
 @export var ragdoll: PhysicalBoneSimulator3D
 @export var force_node: PhysicalBone3D
 @export var eyes_parent: Node3D
+@export var smile: Node3D
 
 @export_subgroup("behaviour parameters")
 @export var target_lead_distance: float = 0
@@ -28,24 +31,33 @@ var is_target_in_range: bool: get = _get_is_target_in_range
 
 
 func _ready() -> void:
+    if state == DEAD: return
     target = get_viewport().get_camera_3d()
     if target: target = target.get_parent()
+    update_target_position()
     animator.animation_finished.connect(_on_animation_finished)
     step_animator.step_taken.connect(move_with_step)
-    step_animator.animator = animator
     ragdoll.active = false
+    smile.hide()
     state = TRACKING
+    step_animator.animator = animator
     step_animator.take_step()
 
 func _process(_delta: float) -> void:
-    if target:
-        target_position = target.global_position
-        target_position -= target.global_basis.z * target_lead_distance
+    if target && state != DEAD:
+        update_target_position()
         if state == TRACKING && is_target_in_range: attack()
 
 func _physics_process(_delta: float) -> void:
+    if state == DEAD: return
     velocity += get_gravity()
     move_and_slide()
+
+
+func update_target_position():
+    if !target: return
+    target_position = target.global_position
+    target_position -= target.global_basis.z * target_lead_distance
 
 
 func attack():
@@ -68,6 +80,7 @@ func move_with_step(distance: Vector2):
     move_units(displacement)
 
 func move_units(displacement: Vector3):
+    if !can_process(): return
     velocity = displacement * Engine.physics_ticks_per_second
     move_and_slide()
     look_at_target()
@@ -95,7 +108,7 @@ func start_flinch():
 
 func end_flinch(previous_state: int):
     super(previous_state)
-    if state == STUNNED: state = TRACKING
+    if state == STUNNED || state == DAMAGED: state = TRACKING
     if state == TRACKING: step_animator.take_step()
     if state == STUNNED || state == RETREATING:
         step_animator.take_steps_back(5, _on_retreat_completed)
@@ -114,10 +127,13 @@ func start_parry_flinch():
 
 func die(force: Vector3):
     state = DEAD
-    collision_layer = 0
+    step_animator.stop_step()
+    collider.disabled = true
+    hurtbox.monitoring = false
     eyes_parent.hide()
     ragdoll.active = true
     ragdoll.physical_bones_start_simulation()
+    if !can_process(): return
     force_node.apply_central_impulse(force * Engine.physics_ticks_per_second)
 
 

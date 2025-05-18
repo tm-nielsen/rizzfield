@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd7jdvcxay8jg"]
+[gd_scene load_steps=9 format=3 uid="uid://bd7jdvcxay8jg"]
 
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/combat_mannequin.tscn" id="1_w105o"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="2_ekcfv"]
@@ -6,29 +6,6 @@
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="3_s5ga2"]
 [ext_resource type="Texture2D" uid="uid://c6u2yulwdgmfx" path="res://icon.svg" id="4_0yobm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5ga2"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_s5ga2")
-shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
-shader_parameter/roughness = 0.87
-shader_parameter/metallic = 0.0
-shader_parameter/specular = 0.5
-shader_parameter/emission = Color(0, 0, 0, 1)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/normal_scale = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yobm"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_s5ga2")
-shader_parameter/albedo_colour = Color(0.490196, 0.501961, 0.541176, 1)
-shader_parameter/roughness = 0.87
-shader_parameter/metallic = 0.0
-shader_parameter/specular = 0.5
-shader_parameter/emission = Color(0, 0, 0, 1)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/normal_scale = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rfoto"]
 render_priority = 0
@@ -40,7 +17,6 @@ shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
 shader_parameter/emission = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = Vector2(200, 200)
-shader_parameter/normal_scale = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_w105o"]
 material = SubResource("ShaderMaterial_rfoto")
@@ -59,10 +35,8 @@ shadow_enabled = true
 
 [node name="mannequin" parent="." instance=ExtResource("1_w105o")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.2, -3)
-surface_material = SubResource("ShaderMaterial_s5ga2")
 
 [node name="Player" parent="." instance=ExtResource("2_ekcfv")]
-surface_material = SubResource("ShaderMaterial_0yobm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

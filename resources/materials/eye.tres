@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://di8gh4ie604eb"]
 
-[ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://models/source_files/eye.gdshader" id="1_e1v5f"]
+[ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://resources/shaders/eye.gdshader" id="1_e1v5f"]
 
 [resource]
 resource_local_to_scene = true
