@@ -1,12 +1,30 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dgcg2kfxfxab7"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dgcg2kfxfxab7"]
 
 [ext_resource type="Shader" uid="uid://huklnp2t8acn" path="res://resources/shaders/block_fragment.gdshader" id="1_fs3wo"]
+
+[sub_resource type="Gradient" id="Gradient_fs3wo"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1, 0.9)
+colors = PackedColorArray(0.9, 0.9, 0.9, 1, 1, 1, 1, 1, 0.7, 0.7, 0.7, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h1rdn"]
+noise_type = 0
+frequency = 0.1
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fs3wo"]
+width = 64
+height = 64
+color_ramp = SubResource("Gradient_fs3wo")
+noise = SubResource("FastNoiseLite_h1rdn")
 
 [resource]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_fs3wo")
 shader_parameter/albedo_colour = Color(0.339134, 0.804423, 0.942972, 1)
+shader_parameter/albedo_texture = SubResource("NoiseTexture2D_fs3wo")
 shader_parameter/edge_width = 0.15
 shader_parameter/edge_colour = Color(0.1, 0.1, 0.1, 1)
 shader_parameter/edge_offset_x = 0.5
