@@ -74,6 +74,5 @@ func spawn_happy_corpse() -> DamageableCharacterBody3D:
     return combat_instance
 
 
-func receive_damage(amount: int, impulse: Vector3):
-    var combat_instance = replace_with_combat_instance()
-    combat_instance.receive_damage(amount * 2, impulse)
+func receive_damage(_amount: int, _impulse: Vector3):
+    replace_with_combat_instance()
