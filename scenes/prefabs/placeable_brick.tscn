@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://7sjdmj67cf3x"]
+
+[ext_resource type="Script" uid="uid://dqxw4obt4uyqq" path="res://scripts/conversation/response_builder/placeable_brick.gd" id="1_m4d4d"]
+[ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="2_rgul6"]
+[ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="3_p8oon"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8xilf"]
+friction = 0.8
+bounce = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r186r"]
+size = Vector3(3.5, 0.8, 1.6)
+
+[node name="PlaceableBrick" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
+physics_material_override = SubResource("PhysicsMaterial_8xilf")
+gravity_scale = 4.0
+can_sleep = false
+linear_damp = 0.5
+script = ExtResource("1_m4d4d")
+mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
+material_override = ExtResource("2_rgul6")
+mesh = ExtResource("3_p8oon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_r186r")
