@@ -22,6 +22,16 @@ func _init(
     temperance_actions = RandomNonRepeatingArray.new(default_temperance_actions)
     humility_actions = RandomNonRepeatingArray.new(default_humility_actions)
     patience_actions = RandomNonRepeatingArray.new(default_patience_actions)
+    ExplorationSignalBus.fragment_collected.connect(
+        func(fragment: ResponseFragment):
+        for pair in [
+            [fragment.response_action_chastity, chastity_actions],
+            [fragment.response_action_temperance, temperance_actions],
+            [fragment.response_action_humility, patience_actions],
+            [fragment.response_action_patience, patience_actions]
+        ]:
+            if !pair[0].is_empty(): pair[1].append(pair[0])
+    )
 
 
 func build_response_text(
