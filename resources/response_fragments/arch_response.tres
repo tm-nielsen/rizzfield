@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="ResponseFragment" load_steps=5 format=3 uid="uid://ddxgbo0p8blsw"]
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=4 format=3 uid="uid://ddxgbo0p8blsw"]
 
-[ext_resource type="Material" uid="uid://dgcg2kfxfxab7" path="res://resources/materials/response_fragment_material.tres" id="1_1cl1j"]
 [ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="1_jnbiq"]
 [ext_resource type="ArrayMesh" uid="uid://bch87ic0mn4tr" path="res://models/fragments/arch.res" id="2_3sggg"]
 [ext_resource type="Texture2D" uid="uid://cc2xsj351fabh" path="res://resources/response_fragments/shape_textures/arch.png" id="2_jnbiq"]
@@ -9,10 +8,13 @@
 script = ExtResource("1_jnbiq")
 shape_texture = ExtResource("2_jnbiq")
 mesh = ExtResource("2_3sggg")
-base_material = ExtResource("1_1cl1j")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
 chastity = 2
 temperance = 0
 humility = 0
 patience = 0
+response_action_chastity = ""
+response_action_temperance = ""
+response_action_humility = ""
+response_action_patience = ""
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"
