@@ -23,9 +23,9 @@ void vertex() {
 	NORMAL *= normal_scale;
 }
 
-float get_edge(float axis, float offset)
+float get_edge(float axis, float offset, float width)
 {
-	return step(mod(axis + edge_width / 2.0 + offset, 1.0), edge_width);
+	return step(mod(axis + width / 2.0 + offset, 1.0), width);
 }
 
 void fragment() {
@@ -33,9 +33,9 @@ void fragment() {
 
 	vec3 v = (inverse(MODEL_MATRIX) * INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec3 e = vec3(
-		get_edge(v.x, edge_offset_x),
-		get_edge(v.y, 0.5),
-		get_edge(v.z, edge_offset_y)
+		get_edge(v.x, edge_offset_x, edge_width),
+		get_edge(v.y, 0.5, edge_width * 2.0),
+		get_edge(v.z, edge_offset_y, edge_width)
 	);
 	float edge_factor = step(1.0, e.x * e.y + e.x * e.z + e.y * e.z);
 	ALBEDO = tex_col * mix(albedo_colour, edge_colour, edge_factor);
