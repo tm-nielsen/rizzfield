@@ -9,7 +9,6 @@ extends RigidBody3D
 @export var colour_normal := Color.GRAY
 @export var colour_hovered := Color.WHITE
 @export var colour_grabbed := Color.DIM_GRAY
-@export var colour_grabbed_valid := Color.LIGHT_GREEN
 
 var camera_depth: float = 2
 var target_rotation: Vector3;
@@ -32,11 +31,6 @@ func _physics_process(_delta) -> void:
     if held:
         global_position = get_mouse_world_position(camera_depth)
         global_position.y += held_depth_offset
-        set_colour(
-            colour_grabbed_valid
-            if can_place
-            else colour_grabbed
-        )
 
 func _process(_delta) -> void:
     if held:
