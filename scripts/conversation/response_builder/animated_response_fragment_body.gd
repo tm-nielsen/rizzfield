@@ -87,6 +87,7 @@ func place(point: Vector3):
             rotation = placement_rotation
     )
     placement_tween.pause()
+    update_placement_tween()
 
 func update_placement_tween():
     if placement_tween:
