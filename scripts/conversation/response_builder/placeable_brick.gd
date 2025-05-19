@@ -12,6 +12,8 @@ extends RigidBody3D
 @export var colour_grabbed_valid := Color.LIGHT_GREEN
 
 var camera_depth: float = 2
+var target_rotation: Vector3;
+
 var held: bool
 var contains_mouse: bool
 var can_place: bool: get = _get_can_place
@@ -24,6 +26,7 @@ func _ready() -> void:
         get_viewport().get_camera_3d().global_position.y
         - placement_grid.global_position.y
     )
+    target_rotation = rotation
 
 func _physics_process(_delta) -> void:
     if held:
@@ -36,10 +39,15 @@ func _physics_process(_delta) -> void:
         )
 
 func _process(_delta) -> void:
-    if held && Input.is_action_just_released(
-        ResponseFragmentBody.GRAB_ACTION
-    ):
-        drop()
+    if held:
+        if Input.is_action_just_pressed("right"):
+            rotate_placement(-PI / 2)
+        if Input.is_action_just_pressed("left"):
+            rotate_placement(PI / 2)
+        if Input.is_action_just_released(
+            ResponseFragmentBody.GRAB_ACTION
+        ):
+            drop()
     elif contains_mouse && Input.is_action_just_pressed(
         ResponseFragmentBody.GRAB_ACTION
     ):
@@ -58,6 +66,12 @@ func drop():
     else: set_colour(colour_normal)
     if can_place:
         ResponseBuilderSignalBus.notify_brick_placed()
+
+
+func rotate_placement(angle: float):
+    target_rotation.y = ElasticValue.wrap_value(
+        target_rotation.y + angle, PI
+    )
 
 
 func set_colour(colour: Color):

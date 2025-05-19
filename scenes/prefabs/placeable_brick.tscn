@@ -1,22 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://7sjdmj67cf3x"]
+[gd_scene load_steps=11 format=3 uid="uid://7sjdmj67cf3x"]
 
-[ext_resource type="Script" uid="uid://dqxw4obt4uyqq" path="res://scripts/conversation/response_builder/placeable_brick.gd" id="1_m4d4d"]
+[ext_resource type="Script" uid="uid://chua64evpmyo6" path="res://scripts/conversation/response_builder/animated_placeable_brick.gd" id="1_lj4od"]
 [ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="2_rgul6"]
+[ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="2_tn2pu"]
 [ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="3_p8oon"]
+[ext_resource type="Script" uid="uid://df31el24njntk" path="res://scripts/utilities/elastic_value.gd" id="3_qmxy1"]
+[ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="6_60qyp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8xilf"]
 friction = 0.8
 bounce = 0.2
 
+[sub_resource type="Resource" id="Resource_kj008"]
+script = ExtResource("2_tn2pu")
+elasticity = Vector2(0.05, 0.05)
+friction = Vector2(0.15, 0.15)
+metadata/_custom_type_script = "uid://ctu3lj87dt74c"
+
+[sub_resource type="Resource" id="Resource_3sng6"]
+script = ExtResource("3_qmxy1")
+elasticity = 0.05
+friction = 0.1
+metadata/_custom_type_script = "uid://df31el24njntk"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_r186r"]
 size = Vector3(3.5, 0.8, 1.6)
 
-[node name="PlaceableBrick" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
+[node name="PlaceableBrick" type="RigidBody3D" node_paths=PackedStringArray("update_timer", "mesh")]
 physics_material_override = SubResource("PhysicsMaterial_8xilf")
 gravity_scale = 4.0
 can_sleep = false
 linear_damp = 0.5
-script = ExtResource("1_m4d4d")
+script = ExtResource("1_lj4od")
+update_timer = NodePath("FrameTimer")
+elastic_rotation_planar = SubResource("Resource_kj008")
+elastic_rotation_normal = SubResource("Resource_3sng6")
 mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -26,3 +44,8 @@ mesh = ExtResource("3_p8oon")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_r186r")
+
+[node name="FrameTimer" type="Node" parent="."]
+script = ExtResource("6_60qyp")
+frame_rate = 18.0
+metadata/_custom_type_script = "uid://dhpprbs6cek1p"
