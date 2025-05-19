@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/brick.blend-30711c6c03d152751977ebd34f81e0ae.
 
 [params]
 
-nodes/root_type="MeshInstance3D"
+nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -39,7 +39,7 @@ _subresources={
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
-"save_to_file/enabled": false,
+"save_to_file/enabled": true,
 "save_to_file/path": "res://models/brick.res"
 }
 }
