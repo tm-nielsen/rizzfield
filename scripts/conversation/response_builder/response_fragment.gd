@@ -39,7 +39,6 @@ func create_material() -> ShaderMaterial:
     return create_material_proxy().material
 
 func create_collision_shape() -> CollisionShape3D:
-    print("creating collision_shape")
     var collision_shape = CollisionShape3D.new()
     collision_shape.shape = get_or_create_collider_shape()
     return collision_shape
