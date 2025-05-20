@@ -29,7 +29,6 @@ func _ready() -> void:
     super()
     elastic_rotation_planar = elastic_rotation_planar.duplicate()
     elastic_rotation_normal = elastic_rotation_normal.duplicate()
-    elastic_rotation_normal.value = target_rotation.y
     update_timer.frame_out.connect(apply_elastic_values)
     update_timer.frame_out.connect(update_threaten_animation)
 
@@ -67,6 +66,10 @@ func apply_threaten_animation():
 func drop():
     super()
     apply_momentum()
+
+func reset():
+    super()
+    elastic_rotation_normal.value = target_rotation.y
 
 
 func update_elastic_values(delta: float):

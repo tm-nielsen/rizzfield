@@ -3,6 +3,7 @@ extends RigidBody3D
 
 @export var held_depth_offset: float = 0.5
 @export var mesh: MeshInstance3D
+@export var collider: CollisionShape3D
 @export var placement_grid: PlacementGrid
 
 @export_subgroup("colours", "colour")
@@ -10,8 +11,10 @@ extends RigidBody3D
 @export var colour_hovered := Color.WHITE
 @export var colour_grabbed := Color.DIM_GRAY
 
+@onready var reset_position := position
+@onready var reset_rotation := rotation
+@onready var target_rotation := rotation
 var camera_depth: float = 2
-var target_rotation: Vector3;
 
 var held: bool
 var contains_mouse: bool
@@ -19,13 +22,16 @@ var can_place: bool: get = _get_can_place
 
 
 func _ready() -> void:
+    GameModeSignalBus.conversation_started.connect(reset)
+    GameModeSignalBus.brick_thrown.connect(disable)
+    ExplorationSignalBus.brick_collected.connect(enable)
     mouse_entered.connect(_on_mouse_entered)
     mouse_exited.connect(_on_mouse_exited)
     camera_depth = (
         get_viewport().get_camera_3d().global_position.y
         - placement_grid.global_position.y
     )
-    target_rotation = rotation
+    disable()
 
 func _physics_process(_delta) -> void:
     if held:
@@ -71,6 +77,22 @@ func set_colour(colour: Color):
     mesh.material_override.set_shader_parameter(
         "albedo_colour", colour
     )
+
+
+func reset():
+    position = reset_position
+    rotation = reset_rotation
+    target_rotation = rotation
+
+func disable():
+    hide()
+    collider.disabled = true
+    freeze = true
+
+func enable():
+    freeze = false
+    collider.disabled = false
+    show()
 
 
 func get_mouse_world_position(z_depth: float = 1) -> Vector3:
