@@ -20,7 +20,7 @@ noise = SubResource("FastNoiseLite_doe8v")
 [resource]
 render_priority = 0
 shader = ExtResource("1_bmb8g")
-shader_parameter/albedo_colour = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/albedo_colour = Color(0.48, 0.538, 0.6, 1)
 shader_parameter/albedo_texture = SubResource("NoiseTexture2D_336iu")
 shader_parameter/roughness = 0.5
 shader_parameter/metallic = 0.0
