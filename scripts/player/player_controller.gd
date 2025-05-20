@@ -25,8 +25,10 @@ var was_moving_last_update: bool
 
 
 func _ready() -> void:
-    GameModeSignalBus.combat_triggered.connect(_on_combat_triggered)
-    GameModeSignalBus.conversation_resolved.connect(apply_head_rotation)
+    GameModeSignalBus.conversation_ended.connect(apply_head_rotation)
+    GameModeSignalBus.combat_triggered.connect(
+        func(): receive_damage(1, -basis.z * 10)
+    )
 
 func _physics_process(delta: float) -> void:
     look(delta)
@@ -93,10 +95,6 @@ func get_floor_velocity() -> Vector3:
     var floor_plane = Plane(get_floor_normal())
     return floor_plane.project(velocity)
 
-
-func _on_combat_triggered():
-    apply_head_rotation()
-    receive_damage(1, -basis.z * 10)
 
 func receive_damage(amount: int, impulse: Vector3):
     super(amount, impulse)
