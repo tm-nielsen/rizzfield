@@ -16,6 +16,7 @@ points = PackedVector3Array(-0.380031, -0.0800117, -0.2, -0.380031, -0.1, -0.180
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ya4ey")
 gravity_scale = 2.0
+can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ya4ey")

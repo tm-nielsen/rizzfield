@@ -4,7 +4,7 @@ extends Node3D
 
 @export var spawn_height_offset: float = 0.5
 @export var spawn_speed: float = 5
-@export var spawn_torque: float = 50
+@export var spawn_torque: float = 1.5
 @export var spawn_offset: float = 0.5
 
 var spawn_position: Vector3
@@ -40,7 +40,11 @@ func get_spawn_direction() -> Vector3:
 
 func get_spawn_spin_direction() -> Vector3:
     return Vector3(
-        randf_range(-1, 1),
-        randf_range(-1, 1),
-        randf_range(-1, 1)
+        get_spin_axis(0.6),
+        get_spin_axis(0.2),
+        get_spin_axis(1)
     )
+
+func get_spin_axis(maximum: float) -> float:
+    var v = randf_range(-maximum, maximum)
+    return sign(v) * (1 - sqrt(1 - abs(v)))
