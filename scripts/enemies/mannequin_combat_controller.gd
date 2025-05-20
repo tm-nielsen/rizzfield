@@ -39,9 +39,9 @@ func _ready() -> void:
     step_animator.step_taken.connect(move_with_step)
     ragdoll.active = false
     smile.hide()
-    state = TRACKING
+    state = IDLE
     step_animator.animator = animator
-    step_animator.take_step()
+    animator.play("step")
 
 func _process(_delta: float) -> void:
     if target && state != DEAD:
@@ -52,6 +52,20 @@ func _physics_process(_delta: float) -> void:
     if state == DEAD: return
     velocity += get_gravity()
     move_and_slide()
+
+
+func start_tracking():
+    state = TRACKING
+    look_at_target()
+    step_animator.take_step()
+
+func start_retreat(base_steps: int = 2, variance: int = 2):
+    state = RETREATING
+    look_at_target()
+    var step_count = base_steps + (
+        0 if variance < 1 else randi() % variance
+    )
+    step_animator.take_steps_back(step_count, _on_retreat_completed)
 
 
 func update_target_position():
@@ -111,6 +125,7 @@ func end_flinch(previous_state: int):
     if state == STUNNED || state == DAMAGED: state = TRACKING
     if state == TRACKING: step_animator.take_step()
     if state == STUNNED || state == RETREATING:
+        look_at_target()
         step_animator.take_steps_back(5, _on_retreat_completed)
     if state != DEAD: animator.play()
 
@@ -138,18 +153,11 @@ func die(force: Vector3):
 
 
 func _on_animation_finished(_animation_name: String):
-    if state == ATTACKING:
-        state = RETREATING
-        step_animator.take_steps_back(2 + randi() % 2, _on_retreat_completed)
+    if state == ATTACKING: start_retreat()
 
 func _on_retreat_completed():
     state = IDLE
-    var tween = create_tween()
-    tween.tween_interval(randf())
-    tween.tween_callback(func():
-        state = TRACKING
-        step_animator.take_step()
-    )
+    TweenHelpers.call_delayed(start_tracking, randf())
 
 
 func _get_is_target_in_range() -> bool:

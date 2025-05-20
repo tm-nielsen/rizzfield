@@ -42,16 +42,18 @@ const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 @export var default_action_humility: String
 @export var default_action_patience: String
 
-
 var state: ConversationState
 var vignette: Node3D
 var npc_quote_set: NPCQuoteSet
 var response_narration_set: ResponseNarrationSet
 var stats: ConversationStatSet
 
+var state_tween: Tween
+
 
 func _ready() -> void:
     GameModeSignalBus.conversation_triggered.connect(_on_conversation_started)
+    GameModeSignalBus.conversation_ended.connect(disable)
     response_construction_timer.timeout.connect(_submit_response)
     response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
@@ -82,7 +84,8 @@ func set_state(new_state: ConversationState):
             set_state_in(RESPONSE_CONSTRUCTION, duration_quote_display)
 
 func set_state_in(target_state: ConversationState, delay: float):
-    TweenHelpers.call_delayed_realtime(
+    if state_tween: state_tween.kill()
+    state_tween = TweenHelpers.call_delayed_realtime(
         set_state.bind(target_state), delay
     )
 
@@ -142,12 +145,14 @@ func end_conversation(
     set_state(FINAL_QUOTE_DISPLAY)
     view.display_npc_quote(final_quote)
     TweenHelpers.call_delayed_realtime(
-        func():
-        set_state(INACTIVE)
-        vignette.queue_free()
-        notification_method.call()
+        notification_method.call
         , duration_final_quote_display
     )
+
+func disable():
+    if state_tween: state_tween.kill()
+    set_state(INACTIVE)
+    vignette.queue_free()
 
 
 func _submit_response():

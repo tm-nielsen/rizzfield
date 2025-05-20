@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kfxvu5oltfbb"]
+[gd_scene load_steps=20 format=3 uid="uid://kfxvu5oltfbb"]
 
 [ext_resource type="Script" uid="uid://bf1kmmw0ed4wy" path="res://scripts/conversation/response_builder/response_builder.gd" id="1_fe1ti"]
 [ext_resource type="Script" uid="uid://cx8u5es5jq84n" path="res://scripts/conversation/response_builder/response_builder_camera.gd" id="1_gjipf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="6_fe1ti"]
 [ext_resource type="Resource" uid="uid://cbhfl0xtcabui" path="res://resources/response_fragments/l_response.tres" id="8_gsw4f"]
 [ext_resource type="Resource" uid="uid://bacgci8bgld0" path="res://resources/response_fragments/square_response.tres" id="9_6fcue"]
+[ext_resource type="PackedScene" uid="uid://7sjdmj67cf3x" path="res://scenes/prefabs/placeable_brick.tscn" id="13_fe1ti"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wl4r"]
 
@@ -100,3 +101,7 @@ default_fragments = Array[ExtResource("6_fe1ti")]([ExtResource("8_gsw4f"), ExtRe
 spawn_area_height = 2.0
 position_randomization = 0.5
 metadata/_custom_type_script = "uid://cx6q64kuim5dh"
+
+[node name="PlaceableBrick" parent="." node_paths=PackedStringArray("placement_grid") instance=ExtResource("13_fe1ti")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+placement_grid = NodePath("../PlacementGrid")

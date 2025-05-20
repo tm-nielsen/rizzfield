@@ -21,6 +21,8 @@ const base_material: ShaderMaterial = preload(
 @export_multiline var response_action_humility: String
 @export_multiline var response_action_patience: String
 
+var collider_shape: Shape3D = null
+
 
 func create_mesh_instance() -> MeshInstance3D:
     var mesh_instance = MeshInstance3D.new()
@@ -38,8 +40,18 @@ func create_material() -> ShaderMaterial:
 
 func create_collision_shape() -> CollisionShape3D:
     var collision_shape = CollisionShape3D.new()
-    collision_shape.shape = mesh.create_convex_shape(true, true)
+    collision_shape.shape = get_or_create_collider_shape()
     return collision_shape
+
+func get_or_create_collider_shape() -> Shape3D:
+    if collider_shape == null: 
+        collider_shape = mesh.create_convex_shape(true, true)
+    return collider_shape
+
+func create_and_cache_collider_shape() -> Shape3D:
+    collider_shape = mesh.create_convex_shape(true, true)
+    return collider_shape
+
 
 
 class FragmentMaterialProxy:

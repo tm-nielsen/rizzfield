@@ -18,7 +18,12 @@ var fragments: Array[ResponseFragment]
 func _ready() -> void:
     fragment_spawned.connect(grid._on_fragment_body_spawned)
     fragments = default_fragments.duplicate()
-    ExplorationSignalBus.fragment_collected.connect(fragments.append)
+    for fragment in fragments: fragment.create_and_cache_collider_shape()
+    ExplorationSignalBus.fragment_collected.connect(
+        func(fragment: ResponseFragment):
+        fragments.append(fragment)
+        fragment.create_and_cache_collider_shape()
+    )
 
 func reset() -> void:
     for child: ResponseFragmentBody in get_children():
