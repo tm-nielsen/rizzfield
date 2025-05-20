@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq8gwd8d7rcd2"]
+[gd_scene load_steps=7 format=3 uid="uid://cq8gwd8d7rcd2"]
 
 [ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="1_pq1ji"]
+[ext_resource type="Script" uid="uid://vqh48c1k0jla" path="res://scripts/exploration/collectable_brick.gd" id="1_vryqu"]
 [ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="2_vryqu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ya4ey"]
@@ -12,11 +13,13 @@ points = PackedVector3Array(-0.380031, -0.0800117, -0.2, -0.380031, -0.1, -0.180
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ya4ey"]
 
-[node name="WorldBrick" type="RigidBody3D"]
+[node name="WorldBrick" type="RigidBody3D" node_paths=PackedStringArray("pickup_area")]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ya4ey")
 gravity_scale = 2.0
 can_sleep = false
+script = ExtResource("1_vryqu")
+pickup_area = NodePath("PickupArea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ya4ey")

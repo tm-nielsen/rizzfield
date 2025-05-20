@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var brick_prefab: PackedScene
+@export var held_brick_mesh: MeshInstance3D
 
 @export var spawn_height_offset: float = 0.5
 @export var spawn_speed: float = 5
@@ -17,6 +18,8 @@ func _ready() -> void:
         spawn_position.y += spawn_height_offset).call_deferred
     )
     GameModeSignalBus.brick_thrown.connect(spawn_brick.call_deferred)
+    ExplorationSignalBus.brick_collected.connect(held_brick_mesh.show)
+    held_brick_mesh.hide()
 
 
 func spawn_brick():
@@ -29,6 +32,7 @@ func spawn_brick():
         get_spawn_spin_direction() * spawn_torque
     )
     brick.position += spawn_direction * spawn_offset
+    held_brick_mesh.hide()
 
 
 func get_spawn_direction() -> Vector3:
