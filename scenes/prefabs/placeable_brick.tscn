@@ -36,6 +36,9 @@ update_timer = NodePath("FrameTimer")
 elastic_rotation_planar = SubResource("Resource_kj008")
 elastic_rotation_normal = SubResource("Resource_3sng6")
 mesh = NodePath("MeshInstance3D")
+colour_normal = Color(0.478431, 0.537255, 0.6, 1)
+colour_hovered = Color(0.8, 0.896667, 1, 1)
+colour_grabbed = Color(0.32, 0.358667, 0.4, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
