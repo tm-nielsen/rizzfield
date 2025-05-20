@@ -58,8 +58,7 @@ func drop():
     freeze = false
     if contains_mouse: set_colour(colour_hovered)
     else: set_colour(colour_normal)
-    if can_place:
-        ResponseBuilderSignalBus.notify_brick_placed()
+    if can_place: GameModeSignalBus.notify_brick_thrown()
 
 
 func rotate_placement(angle: float):

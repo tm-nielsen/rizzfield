@@ -52,6 +52,7 @@ var stats: ConversationStatSet
 
 func _ready() -> void:
     GameModeSignalBus.conversation_triggered.connect(_on_conversation_started)
+    GameModeSignalBus.conversation_ended.connect(disable)
     response_construction_timer.timeout.connect(_submit_response)
     response_builder.response_modified.connect(_on_response_modified)
     submit_response_button.pressed.connect(_submit_response)
@@ -142,12 +143,13 @@ func end_conversation(
     set_state(FINAL_QUOTE_DISPLAY)
     view.display_npc_quote(final_quote)
     TweenHelpers.call_delayed_realtime(
-        func():
-        set_state(INACTIVE)
-        vignette.queue_free()
-        notification_method.call()
+        notification_method.call
         , duration_final_quote_display
     )
+
+func disable():
+    set_state(INACTIVE)
+    vignette.queue_free()
 
 
 func _submit_response():

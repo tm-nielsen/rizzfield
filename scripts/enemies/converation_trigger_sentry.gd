@@ -57,6 +57,7 @@ func start_conversation():
     vignette_instance.global_transform = global_transform
     GameModeSignalBus.combat_triggered.connect(replace_with_combat_instance)
     GameModeSignalBus.conversation_resolved.connect(spawn_happy_corpse)
+    GameModeSignalBus.brick_thrown.connect(spawn_and_damage_corpse)
     GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
 func replace_with_combat_instance() -> DamageableCharacterBody3D:
@@ -73,6 +74,9 @@ func spawn_happy_corpse() -> DamageableCharacterBody3D:
     GameModeSignalBus.combat_triggered.disconnect(replace_with_combat_instance)
     return combat_instance
 
+func spawn_and_damage_corpse():
+    var combat_instance = replace_with_combat_instance()
+    combat_instance.receive_damage(1, Vector3.ZERO)
 
 func receive_damage(_amount: int, _impulse: Vector3):
     replace_with_combat_instance()

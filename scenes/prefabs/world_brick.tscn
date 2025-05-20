@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cq8gwd8d7rcd2"]
+
+[ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="1_pq1ji"]
+[ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="2_vryqu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ya4ey"]
+friction = 0.6
+bounce = 0.4
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ya4ey"]
+points = PackedVector3Array(-0.380031, -0.0800117, -0.2, -0.380031, -0.1, -0.180031, -0.4, -0.0800117, -0.180031, -0.380031, 0.0799921, -0.2, 0.379953, -0.0800117, -0.2, -0.380031, -0.1, 0.179992, 0.379953, -0.1, -0.180031, -0.4, 0.0799921, -0.180031, -0.4, -0.0800117, 0.179992, -0.380031, 0.1, -0.180031, 0.379953, 0.0799921, -0.2, 0.399922, -0.0800117, -0.180031, -0.380031, -0.0800117, 0.2, 0.379953, -0.1, 0.179992, -0.4, 0.0799921, 0.179992, -0.380031, 0.1, 0.179992, 0.379953, 0.1, -0.180031, 0.399922, 0.0799921, -0.180031, 0.399922, -0.0800117, 0.179992, -0.380031, 0.0799921, 0.2, 0.379953, -0.0800117, 0.2, 0.379953, 0.1, 0.179992, 0.399922, 0.0799921, 0.179992, 0.379953, 0.0799921, 0.2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ya4ey"]
+
+[node name="WorldBrick" type="RigidBody3D"]
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_ya4ey")
+gravity_scale = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ya4ey")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_pq1ji")
+mesh = ExtResource("2_vryqu")
+
+[node name="PickupArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+shape = SubResource("SphereShape3D_ya4ey")

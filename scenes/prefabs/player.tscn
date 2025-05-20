@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=27 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/player_attack_animator.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
@@ -16,6 +16,10 @@
 [ext_resource type="Script" uid="uid://ctu3lj87dt74c" path="res://scripts/utilities/elastic_vector2.gd" id="6_gkb8g"]
 [ext_resource type="Material" uid="uid://bjcmfgiew676s" path="res://resources/materials/smear_material.tres" id="8_oqq3r"]
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="14_c1k3r"]
+[ext_resource type="Script" uid="uid://bkan41pc3vigm" path="res://scripts/player/brick_thrower.gd" id="17_20t1h"]
+[ext_resource type="PackedScene" uid="uid://cq8gwd8d7rcd2" path="res://scenes/prefabs/world_brick.tscn" id="18_gsvhg"]
+[ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="19_gx6q2"]
+[ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="20_mgyw5"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_c1k3r"]
 flip_faces = true
@@ -137,6 +141,16 @@ impact_scale = 10.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ElasticJoint/HurtBox"]
 shape = SubResource("SphereShape3D_xtlg4")
+
+[node name="BrickThrower" type="Node3D" parent="ElasticJoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, -0.5)
+script = ExtResource("17_20t1h")
+brick_prefab = ExtResource("18_gsvhg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ElasticJoint/BrickThrower"]
+transform = Transform3D(0.015949, -0.18222, 0.46534, 0.494171, -0.0635953, -0.0418401, 0.0744351, 0.46125, 0.178067, -0.16264, -0.295412, 0.0738195)
+material_override = ExtResource("19_gx6q2")
+mesh = ExtResource("20_mgyw5")
 
 [connection signal="damage_blocked" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_blocked"]
 [connection signal="damage_parried" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_parried"]

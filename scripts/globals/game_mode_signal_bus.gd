@@ -6,6 +6,7 @@ signal conversation_triggered(
 )
 signal conversation_resolved()
 signal combat_triggered()
+signal brick_thrown()
 
 signal conversation_started
 signal conversation_ended
@@ -24,4 +25,8 @@ func notify_conversation_resolved():
 
 func notify_combat_triggered():
     combat_triggered.emit()
+    conversation_ended.emit()
+
+func notify_brick_thrown():
+    brick_thrown.emit()
     conversation_ended.emit()
