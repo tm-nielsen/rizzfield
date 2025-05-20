@@ -55,9 +55,9 @@ func activate():
 func start_conversation():
     var vignette_instance: Node3D = conversation.vignette_prefab.instantiate()
     vignette_instance.global_transform = global_transform
-    GameModeSignalBus.combat_triggered.connect(replace_with_combat_instance)
+    GameModeSignalBus.combat_triggered.connect(spawn_active_combat_instance)
     GameModeSignalBus.conversation_resolved.connect(spawn_happy_corpse)
-    GameModeSignalBus.brick_thrown.connect(spawn_and_damage_corpse)
+    GameModeSignalBus.brick_thrown.connect(spawn_and_damage_combat_instance)
     GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
 func replace_with_combat_instance() -> DamageableCharacterBody3D:
@@ -67,6 +67,10 @@ func replace_with_combat_instance() -> DamageableCharacterBody3D:
     queue_free()
     return combat_instance
 
+func spawn_active_combat_instance():
+    var combat_instance = replace_with_combat_instance()
+    combat_instance.start_tracking()
+
 func spawn_happy_corpse() -> DamageableCharacterBody3D:
     var combat_instance = replace_with_combat_instance()
     combat_instance.die(Vector3.ZERO)
@@ -74,9 +78,11 @@ func spawn_happy_corpse() -> DamageableCharacterBody3D:
     GameModeSignalBus.combat_triggered.disconnect(replace_with_combat_instance)
     return combat_instance
 
-func spawn_and_damage_corpse():
+func spawn_and_damage_combat_instance():
     var combat_instance = replace_with_combat_instance()
+    combat_instance.state = STUNNED
     combat_instance.receive_damage(1, Vector3.ZERO)
 
 func receive_damage(_amount: int, _impulse: Vector3):
-    replace_with_combat_instance()
+    var combat_instance = replace_with_combat_instance()
+    combat_instance.state = STUNNED
