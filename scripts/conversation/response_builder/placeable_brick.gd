@@ -31,6 +31,7 @@ func _ready() -> void:
         get_viewport().get_camera_3d().global_position.y
         - placement_grid.global_position.y
     )
+    mesh.material_override = mesh.material_override.duplicate()
     disable()
 
 func _physics_process(_delta) -> void:
