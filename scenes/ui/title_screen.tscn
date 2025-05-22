@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://kabqnswlkaj6"]
+[gd_scene load_steps=6 format=3 uid="uid://kabqnswlkaj6"]
 
 [ext_resource type="PackedScene" uid="uid://do171msbojews" path="res://scenes/ui/title_screen_background.tscn" id="1_eb34j"]
+[ext_resource type="FontFile" uid="uid://boy2w1cg078kv" path="res://resources/ui/fonts/Splash-Regular.ttf" id="2_aqpy5"]
+[ext_resource type="FontFile" uid="uid://d3qmxep71cpo6" path="res://resources/ui/fonts/PermanentMarker-Regular.ttf" id="3_w8uqo"]
 
 [sub_resource type="World3D" id="World3D_k1th2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eb6dy"]
-font_size = 64
+font = ExtResource("2_aqpy5")
+font_size = 42
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -34,8 +37,7 @@ render_target_update_mode = 4
 
 [node name="TitleScreenBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_eb34j")]
 
-[node name="Title" type="Label" parent="."]
-layout_mode = 1
+[node name="Title" type="Label" parent="SubViewportContainer/SubViewport"]
 anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 1.0
@@ -47,17 +49,14 @@ label_settings = SubResource("LabelSettings_eb6dy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 1
+[node name="StartButton" type="Button" parent="SubViewportContainer/SubViewport"]
 anchors_preset = -1
-anchor_left = 0.45
+anchor_left = 0.35
 anchor_top = 0.8
-anchor_right = 0.55
+anchor_right = 0.65
 anchor_bottom = 0.8
-offset_left = -32.5
-offset_top = -20.0
-offset_right = 32.5
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_w8uqo")
+theme_override_font_sizes/font_size = 16
 text = "Begin"
