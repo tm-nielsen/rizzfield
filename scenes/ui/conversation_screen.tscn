@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
-[ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
+[ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/ui/response_builder.tscn" id="2_bw1gy"]
 [ext_resource type="PackedScene" uid="uid://cgohd0dwm2xxg" path="res://scenes/prefabs/conversation_stat_meter.tscn" id="3_4vf5j"]
 [ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
 [ext_resource type="Script" uid="uid://dhn1wh4lnxhsv" path="res://scripts/conversation/stat_displays/response_value_display.gd" id="6_gpeqp"]
+
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
 _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
