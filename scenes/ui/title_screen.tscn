@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://kabqnswlkaj6"]
+
+[ext_resource type="PackedScene" uid="uid://do171msbojews" path="res://scenes/ui/title_screen_background.tscn" id="1_eb34j"]
+
+[sub_resource type="World3D" id="World3D_k1th2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eb6dy"]
+font_size = 64
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_k1th2")
+handle_input_locally = false
+size = Vector2i(240, 135)
+render_target_update_mode = 4
+
+[node name="TitleScreenBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_eb34j")]
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Homonculus"
+label_settings = SubResource("LabelSettings_eb6dy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.8
+anchor_right = 0.55
+anchor_bottom = 0.8
+offset_left = -32.5
+offset_top = -20.0
+offset_right = 32.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Begin"
