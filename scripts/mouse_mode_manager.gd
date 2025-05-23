@@ -21,6 +21,18 @@ func _ready() -> void:
         capture_and_enable_capturing
     )
 
+func _exit_tree() -> void:
+    GameModeSignalBus.game_started.disconnect(
+        capture_and_enable_capturing
+    )
+    GameModeSignalBus.conversation_started.disconnect(
+        release_and_disable_capturing
+    )
+    GameModeSignalBus.conversation_ended.disconnect(
+        capture_and_enable_capturing
+    )
+
+
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseButton: capture_mouse()
 
