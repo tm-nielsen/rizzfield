@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdvqoqpcker0v"]
+[gd_scene load_steps=9 format=3 uid="uid://bdvqoqpcker0v"]
 
 [ext_resource type="Script" uid="uid://5e8xvg65eu15" path="res://scripts/exploration/fragment_collection_popup.gd" id="1_5qnml"]
 [ext_resource type="ArrayMesh" uid="uid://c4qiska65d0ql" path="res://models/fragments/t.res" id="2_03dq7"]
 [ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="2_myaig"]
+[ext_resource type="FontFile" uid="uid://boy2w1cg078kv" path="res://resources/ui/fonts/Splash-Regular.ttf" id="3_tqhq3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_myaig"]
-font_size = 24
+font = ExtResource("3_tqhq3")
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ls2j"]
 font_size = 18
@@ -48,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 54)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -61,7 +63,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 6
-text = "Fragment Name"
+text = "Blessing of the Countenance"
 label_settings = SubResource("LabelSettings_myaig")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -123,7 +125,7 @@ stretch_shrink = 2
 world_3d = SubResource("World3D_vrnth")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(71, 60)
+size = Vector2i(71, 55)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="VBoxContainer/HBoxContainer/VBoxContainer/Panel2/SubViewportContainer/SubViewport"]

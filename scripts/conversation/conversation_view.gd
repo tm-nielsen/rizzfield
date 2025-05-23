@@ -8,6 +8,10 @@ extends Control
 @export var primary_dialogue_box: Label
 @export var secondary_dialogue_box: Label
 
+@export_subgroup("fonts", "font")
+@export var font_npc_quote: Font
+@export var font_narration: Font
+
 @export_subgroup("tweens")
 @export var active_area_focused_size: float = 1.8
 @export_subgroup("tweens/appear", "appear_shrink")
@@ -28,7 +32,7 @@ func _ready() -> void:
         _set_stretch_ratio(1, node)
 
 func start_prompt_display(prompt: String):
-    _display_dialogue(prompt)
+    _display_dialogue(prompt, font_npc_quote)
     vignette_container.custom_minimum_size = get_viewport_rect().size;
     var tween = TweenHelpers.build_tween(self, appear_shrink_delay)
     tween.tween_property(
@@ -66,7 +70,7 @@ func start_response_construction():
 
 
 func display_constructed_response(response: String):
-    _display_dialogue(response, false)
+    _display_dialogue(response, font_narration, false)
     _tween_stretch_ratio(
         dialogue_area,
         active_area_focused_size,
@@ -77,7 +81,7 @@ func display_constructed_response(response: String):
 
 
 func display_npc_quote(quote: String):
-    _display_dialogue(quote)
+    _display_dialogue(quote, font_npc_quote)
     _tween_stretch_ratio(
         vignette_container, 2,
         speak_grow_duration,
@@ -87,10 +91,11 @@ func display_npc_quote(quote: String):
         ).set_parallel()
     )
 
-func _display_dialogue(text: String, set_secondary := true):
+func _display_dialogue(text: String, font: Font, set_secondary := true):
     construction_area.hide()
     dialogue_area.show()
     primary_dialogue_box.text = text
+    primary_dialogue_box.label_settings.font = font
     if set_secondary:
         secondary_dialogue_box.text = text
 

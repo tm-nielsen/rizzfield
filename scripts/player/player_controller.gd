@@ -100,6 +100,10 @@ func receive_damage(amount: int, impulse: Vector3):
     super(amount, impulse)
     velocity -= impulse
 
+func die(_force: Vector3):
+    GameModeSignalBus.notify_player_died()
+
+
 func apply_impulse(impulse: Vector3):
     velocity += basis * impulse
 
