@@ -19,7 +19,7 @@ func notify_game_started():
     game_started.emit()
 
 func notify_player_died():
-    player_died.emit()
+    player_died.emit.call_deferred()
 
 
 func notify_conversation_triggered(
