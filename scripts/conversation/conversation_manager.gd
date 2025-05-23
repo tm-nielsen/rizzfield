@@ -44,7 +44,7 @@ const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 
 var state: ConversationState
 var vignette: Node3D
-var npc_quote_set: NPCQuoteSet
+var npc_dialogue_set: NPCDialogueSet
 var response_narration_set: ResponseNarrationSet
 var stats: ConversationStatSet
 
@@ -69,7 +69,7 @@ func set_state(new_state: ConversationState):
     match state:
         INACTIVE: hide()
         PROMPT_DISPLAY:
-            view.start_prompt_display(npc_quote_set.initial_prompt)
+            view.start_prompt_display(npc_dialogue_set.initial_prompt)
             response_value_display.hide_fragment_value_display()
             set_state_in(RESPONSE_CONSTRUCTION, duration_prompt_display)
             show()
@@ -94,7 +94,7 @@ func _on_conversation_started(
     definition: ConversationDefinition,
     vignette_instance: Node3D
 ):
-    npc_quote_set = definition.get_dialogue_set()
+    npc_dialogue_set = definition.get_dialogue_set()
     _initialize_stat_set(definition)
     vignette = vignette_instance
     vignette_viewport.add_child(vignette)
@@ -104,13 +104,13 @@ func _initialize_stat_set(conversation_definition: ConversationDefinition):
     stats = conversation_definition.get_stat_set()
     stats.all_stats_filled.connect(
         end_conversation.bind(
-            npc_quote_set.success_quote,
+            npc_dialogue_set.success_quote,
             GameModeSignalBus.notify_conversation_resolved
         )
     )
     stats.stat_emptied.connect(
         end_conversation.bind(
-            npc_quote_set.failure_quote,
+            npc_dialogue_set.failure_quote,
             GameModeSignalBus.notify_combat_triggered
         )
     )
@@ -175,6 +175,8 @@ func _submit_response():
     TweenHelpers.call_delayed_realtime(
         func():
         set_state(QUOTE_DISPLAY)
-        view.display_npc_quote(npc_quote_set.get_quote(response))
+        view.display_npc_quote(
+            npc_dialogue_set.get_quote_for_response(response)
+        )
         , duration_response_display
     )

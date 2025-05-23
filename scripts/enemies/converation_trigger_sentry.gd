@@ -75,7 +75,7 @@ func spawn_happy_corpse() -> DamageableCharacterBody3D:
     var combat_instance = replace_with_combat_instance()
     combat_instance.die(Vector3.ZERO)
     combat_instance.smile.show()
-    GameModeSignalBus.combat_triggered.disconnect(replace_with_combat_instance)
+    GameModeSignalBus.combat_triggered.disconnect(spawn_active_combat_instance)
     return combat_instance
 
 func spawn_and_damage_combat_instance():
