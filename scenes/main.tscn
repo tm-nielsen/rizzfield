@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://cttswtvd8np6o" path="res://scripts/world_pauser.gd" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="3_o6xl0"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="4_tipki"]
-[ext_resource type="PackedScene" uid="uid://dm6nb6h5e06ie" path="res://scenes/conversation_screen.tscn" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://bdvqoqpcker0v" path="res://scenes/fragment_collection_popup.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://kabqnswlkaj6" path="res://scenes/ui/title_screen.tscn" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://dm6nb6h5e06ie" path="res://scenes/ui/conversation_screen.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bdvqoqpcker0v" path="res://scenes/ui/fragment_collection_popup.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://cvvc0gq1ejxgq" path="res://scenes/ui/menu_screens.tscn" id="11_ya4ey"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
 resource_local_to_scene = true
@@ -63,4 +63,4 @@ surface_material = SubResource("ShaderMaterial_choun")
 
 [node name="FragmentCollectionPopup" parent="." instance=ExtResource("10_choun")]
 
-[node name="TitleScreen" parent="." instance=ExtResource("11_ya4ey")]
+[node name="MenuScreens" parent="." instance=ExtResource("11_ya4ey")]
