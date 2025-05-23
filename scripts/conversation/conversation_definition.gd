@@ -3,7 +3,7 @@ class_name ConversationDefinition
 extends Resource
 
 @export var vignette_prefab: PackedScene
-@export var dialogue: NPCDialogue
+@export var dialogue: NPCDialogueSet
 
 @export_subgroup("stats")
 @export_subgroup("stats/chastity", "chastity")
@@ -51,5 +51,5 @@ func get_stat_set() -> ConversationStatSet:
         )
     )
 
-func get_dialogue_set() -> NPCQuoteSet:
-    return NPCQuoteSet.new(dialogue)
+func get_dialogue_set() -> NPCDialogueSet:
+    return dialogue.create_instance()
