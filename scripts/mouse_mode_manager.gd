@@ -10,6 +10,10 @@ func _notification(what: int) -> void:
         NOTIFICATION_APPLICATION_FOCUS_OUT: release_mouse()
 
 func _ready() -> void:
+    release_and_disable_capturing()
+    GameModeSignalBus.game_started.connect(
+        capture_and_enable_capturing
+    )
     GameModeSignalBus.conversation_started.connect(
         release_and_disable_capturing
     )
