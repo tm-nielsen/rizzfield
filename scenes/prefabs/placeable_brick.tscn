@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7sjdmj67cf3x"]
+[gd_scene load_steps=15 format=3 uid="uid://7sjdmj67cf3x"]
 
 [ext_resource type="Script" uid="uid://chua64evpmyo6" path="res://scripts/conversation/response_builder/animated_placeable_brick.gd" id="1_lj4od"]
 [ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="2_rgul6"]
@@ -6,6 +6,10 @@
 [ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="3_p8oon"]
 [ext_resource type="Script" uid="uid://df31el24njntk" path="res://scripts/utilities/elastic_value.gd" id="3_qmxy1"]
 [ext_resource type="Script" uid="uid://dhpprbs6cek1p" path="res://scripts/utilities/frame_timer.gd" id="6_60qyp"]
+[ext_resource type="Script" uid="uid://47tp254ro64l" path="res://scripts/audio/placeable_brick_sounds.gd" id="7_kj008"]
+[ext_resource type="AudioStream" uid="uid://1dm6ehju2pbp" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorRollOver.ogg" id="8_3sng6"]
+[ext_resource type="AudioStream" uid="uid://dc3slo8b8as6i" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorClick.ogg" id="9_ibrhw"]
+[ext_resource type="AudioStream" uid="uid://dx7v36p2ghy1s" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorPlacement.ogg" id="10_d62jn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8xilf"]
 friction = 0.8
@@ -53,3 +57,11 @@ shape = SubResource("BoxShape3D_r186r")
 script = ExtResource("6_60qyp")
 frame_rate = 18.0
 metadata/_custom_type_script = "uid://dhpprbs6cek1p"
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+max_polyphony = 2
+bus = &"Sounds"
+script = ExtResource("7_kj008")
+mouseover = ExtResource("8_3sng6")
+grab = ExtResource("9_ibrhw")
+drop = ExtResource("10_d62jn")

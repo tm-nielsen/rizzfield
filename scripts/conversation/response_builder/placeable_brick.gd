@@ -1,6 +1,9 @@
 class_name PlaceableBrick
 extends RigidBody3D
 
+signal grabbed
+signal dropped
+
 @export var held_depth_offset: float = 0.5
 @export var mesh: MeshInstance3D
 @export var collider: CollisionShape3D
@@ -59,6 +62,7 @@ func grab():
     held = true
     freeze = true
     set_colour(colour_grabbed)
+    grabbed.emit()
 
 func drop():
     held = false
@@ -66,6 +70,7 @@ func drop():
     if contains_mouse: set_colour(colour_hovered)
     else: set_colour(colour_normal)
     if can_place: GameModeSignalBus.notify_brick_thrown()
+    dropped.emit()
 
 
 func rotate_placement(angle: float):
