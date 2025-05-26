@@ -1,0 +1,134 @@
+[gd_scene load_steps=15 format=3 uid="uid://do171msbojews"]
+
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_peowh"]
+[ext_resource type="Texture2D" uid="uid://drq2igm6wjkbu" path="res://textures/rock_0.png" id="2_mjgbm"]
+
+[sub_resource type="Environment" id="Environment_peowh"]
+background_mode = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rcnrt"]
+size = Vector3(5, 1, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pu1c0"]
+render_priority = 0
+shader = ExtResource("1_peowh")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("2_mjgbm")
+shader_parameter/roughness = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(10, 10)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mjgbm"]
+size = Vector3(10, 1, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_eb62g"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l71q4"]
+render_priority = 0
+shader = ExtResource("1_peowh")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="Gradient" id="Gradient_ovsny"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.39375, 0.7125)
+colors = PackedColorArray(0, 0, 0, 0, 0.52, 0.52, 0.52, 0.541176, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_00rdk"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7hyco"]
+width = 32
+height = 32
+color_ramp = SubResource("Gradient_ovsny")
+noise = SubResource("FastNoiseLite_00rdk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e7ma"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = SubResource("NoiseTexture2D_7hyco")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wu12c"]
+material = SubResource("StandardMaterial3D_8e7ma")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Curve" id="Curve_7gkfe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.162162, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="TitleScreenBackground" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.980426, 0.0464134, 0.191339, 0.00296888, 0.968222, -0.250076, -0.196865, 0.245749, 0.949132, 0.456714, 0.448851, 2)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_peowh")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.901259, -0.336251, 0.273254, 0, 0.630662, 0.776057, -0.433282, -0.699428, 0.56839, 0, 0, 0)
+visible = false
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="Main" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.30297, 1.33496, 0)
+light_color = Color(1, 1, 0.8, 1)
+light_energy = 0.5
+
+[node name="Accent" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03149, 0.841391, 0.964614)
+light_color = Color(0.8, 0.833333, 1, 1)
+light_energy = 0.2
+omni_range = 4.0
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -8)
+mesh = SubResource("BoxMesh_rcnrt")
+skeleton = NodePath("../../root/@EditorNode@21301/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/TitleScreen/SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_pu1c0")
+
+[node name="LeftWall" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3, -1, -8)
+mesh = SubResource("BoxMesh_mjgbm")
+skeleton = NodePath("../../root/@EditorNode@21301/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/TitleScreen/SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_pu1c0")
+
+[node name="RightWall" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3, -1, -8)
+mesh = SubResource("BoxMesh_mjgbm")
+skeleton = NodePath("../../root/@EditorNode@21301/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/TitleScreen/SubViewportContainer/SubViewport")
+surface_material_override/0 = SubResource("ShaderMaterial_pu1c0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+visible = false
+mesh = SubResource("QuadMesh_eb62g")
+surface_material_override/0 = SubResource("ShaderMaterial_l71q4")
+
+[node name="Dust" type="CPUParticles3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 3, -4)
+amount = 200
+lifetime = 6.0
+mesh = SubResource("QuadMesh_wu12c")
+emission_shape = 3
+emission_box_extents = Vector3(5, 2, 4)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+gravity = Vector3(0, -0.1, 0)
+initial_velocity_max = 1.0
+scale_amount_min = 0.2
+scale_amount_curve = SubResource("Curve_7gkfe")

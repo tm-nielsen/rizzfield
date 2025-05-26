@@ -1,17 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0rmr1wpvutpg"]
+[gd_scene load_steps=13 format=3 uid="uid://c0rmr1wpvutpg"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_tpnoj"]
 [ext_resource type="Script" uid="uid://ddfa6bjdyoi1" path="res://scripts/enemies/converation_trigger_sentry.gd" id="2_8mact"]
 [ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_iq0i8"]
+[ext_resource type="Script" uid="uid://bd83bpnet8tbq" path="res://scripts/conversation/npc_dialogue_set.gd" id="3_o68g5"]
 [ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="3_x1alu"]
 [ext_resource type="PackedScene" uid="uid://dpo4s1kibccid" path="res://scenes/prefabs/enemies/combat/combat_mannequin.tscn" id="4_12umt"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="5_4klpi"]
 [ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="5_j18o8"]
 
+[sub_resource type="Resource" id="Resource_hl5gy"]
+script = ExtResource("3_o68g5")
+initial_prompt = "Hello, I am horny."
+success_quote = "conversation successful"
+failure_quote = "failed!"
+positive_quote_block = "pleased a
+pleased b
+pleased c"
+neutral_quote_block = "normal a
+normal b
+normal c"
+negative_quote_block = "upset a
+upset b
+upset c"
+metadata/_custom_type_script = "uid://bd83bpnet8tbq"
+
 [sub_resource type="Resource" id="Resource_cfd60"]
 script = ExtResource("3_x1alu")
 vignette_prefab = ExtResource("3_iq0i8")
-dialogue_file = "res://resources/dialogue/test_convo.txt"
+dialogue = SubResource("Resource_hl5gy")
 chastity_initial_value = 4
 chastity_maximum_value = 8
 chastity_drain = 2

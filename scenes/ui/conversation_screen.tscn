@@ -1,11 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=16 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
-[ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/response_builder.tscn" id="2_bw1gy"]
+[ext_resource type="PackedScene" uid="uid://kfxvu5oltfbb" path="res://scenes/ui/response_builder.tscn" id="2_bw1gy"]
 [ext_resource type="PackedScene" uid="uid://cgohd0dwm2xxg" path="res://scenes/prefabs/conversation_stat_meter.tscn" id="3_4vf5j"]
 [ext_resource type="Script" uid="uid://bbq0usot4cale" path="res://scripts/conversation/response_timer.gd" id="3_px1lt"]
+[ext_resource type="FontFile" uid="uid://c8311ruc5w17n" path="res://resources/ui/fonts/Lacquer-Regular.ttf" id="4_paju4"]
+[ext_resource type="FontFile" uid="uid://d3qmxep71cpo6" path="res://resources/ui/fonts/PermanentMarker-Regular.ttf" id="4_t3wce"]
 [ext_resource type="Script" uid="uid://dhn1wh4lnxhsv" path="res://scripts/conversation/stat_displays/response_value_display.gd" id="6_gpeqp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_t3wce"]
+font = ExtResource("4_paju4")
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
 _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
@@ -23,6 +28,7 @@ font_size = 18
 font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_px1lt"]
+font = ExtResource("4_paju4")
 font_size = 24
 
 [node name="ConversationScreen" type="Control" node_paths=PackedStringArray("view", "vignette_viewport", "response_construction_timer", "response_builder", "response_value_display", "submit_response_button", "chastity_meter", "temperance_meter", "humility_meter", "patience_meter")]
@@ -75,6 +81,8 @@ dialogue_area = NodePath("Dialogue Area")
 vignette_container = NodePath("Display Area/VignetteViewport")
 primary_dialogue_box = NodePath("Dialogue Area/Label")
 secondary_dialogue_box = NodePath("Display Area/Dialogue Box/Label")
+font_npc_quote = ExtResource("4_paju4")
+font_narration = ExtResource("4_t3wce")
 
 [node name="Display Area" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -141,6 +149,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "\"Press Space to Close\""
+label_settings = SubResource("LabelSettings_t3wce")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -234,6 +243,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+alignment = 1
 
 [node name="Chastity" type="Label" parent="VBoxContainer/Construction Area/Value Display/Background/Total Value"]
 layout_mode = 2
@@ -317,6 +327,7 @@ offset_right = -6.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "There is a violence in you."
 label_settings = SubResource("LabelSettings_px1lt")
 horizontal_alignment = 1
 vertical_alignment = 1

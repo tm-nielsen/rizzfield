@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://chlubqsqhmav4"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://chlubqsqhmav4"]
+
+[ext_resource type="FontFile" uid="uid://d3qmxep71cpo6" path="res://resources/ui/fonts/PermanentMarker-Regular.ttf" id="1_qfwp4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfwp4"]
 bg_color = Color(0.3, 0.3, 0.3, 0.588235)
@@ -79,6 +81,7 @@ content_margin_right = 3.0
 content_margin_bottom = 8.0
 
 [resource]
+default_font = ExtResource("1_qfwp4")
 default_font_size = 12
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
