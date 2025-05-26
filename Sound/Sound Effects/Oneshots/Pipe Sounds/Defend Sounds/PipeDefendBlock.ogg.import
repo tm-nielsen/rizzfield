@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ds3ev1op6oo60"
+path="res://.godot/imported/PipeDefendBlock.ogg-f6348a93fbe72e34ef5315041b96cba3.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Defend Sounds/PipeDefendBlock.ogg"
+dest_files=["res://.godot/imported/PipeDefendBlock.ogg-f6348a93fbe72e34ef5315041b96cba3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

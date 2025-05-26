@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b1gdo6cwova6a"
+path="res://.godot/imported/PCHurtBass-002.ogg-a1006e8e3ea42a560de6035f206839df.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Sub Tone Layer/PCHurtBass-002.ogg"
+dest_files=["res://.godot/imported/PCHurtBass-002.ogg-a1006e8e3ea42a560de6035f206839df.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

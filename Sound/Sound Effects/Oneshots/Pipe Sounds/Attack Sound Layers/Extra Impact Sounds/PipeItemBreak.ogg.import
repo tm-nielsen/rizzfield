@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpie7ienn6p7v"
+path="res://.godot/imported/PipeItemBreak.ogg-64d452dc1e426a776fcef050049e0c98.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeItemBreak.ogg"
+dest_files=["res://.godot/imported/PipeItemBreak.ogg-64d452dc1e426a776fcef050049e0c98.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

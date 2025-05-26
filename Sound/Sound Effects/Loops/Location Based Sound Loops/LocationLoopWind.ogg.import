@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://hyotbvkcufkt"
+path="res://.godot/imported/LocationLoopWind.ogg-c14f7f8bad90c6688f7f5287c4b176ec.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopWind.ogg"
+dest_files=["res://.godot/imported/LocationLoopWind.ogg-c14f7f8bad90c6688f7f5287c4b176ec.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

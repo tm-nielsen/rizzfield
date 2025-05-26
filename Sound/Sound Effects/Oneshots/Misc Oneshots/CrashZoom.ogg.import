@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vdbi87nhckxa"
+path="res://.godot/imported/CrashZoom.ogg-18c50f4c52154d66ec5b37af7e905f0e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Misc Oneshots/CrashZoom.ogg"
+dest_files=["res://.godot/imported/CrashZoom.ogg-18c50f4c52154d66ec5b37af7e905f0e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

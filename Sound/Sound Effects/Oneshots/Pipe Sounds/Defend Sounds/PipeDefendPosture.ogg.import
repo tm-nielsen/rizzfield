@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dsh5ygclsym8n"
+path="res://.godot/imported/PipeDefendPosture.ogg-780fa3cbd4aec26de6656db2fed61743.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Defend Sounds/PipeDefendPosture.ogg"
+dest_files=["res://.godot/imported/PipeDefendPosture.ogg-780fa3cbd4aec26de6656db2fed61743.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

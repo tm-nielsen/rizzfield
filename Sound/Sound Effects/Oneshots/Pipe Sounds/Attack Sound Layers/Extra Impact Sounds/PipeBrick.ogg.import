@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dtat63nmp6a5q"
+path="res://.godot/imported/PipeBrick.ogg-9dbfaa9e13d9a4dddf8fe227ea1fcaaa.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeBrick.ogg"
+dest_files=["res://.godot/imported/PipeBrick.ogg-9dbfaa9e13d9a4dddf8fe227ea1fcaaa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

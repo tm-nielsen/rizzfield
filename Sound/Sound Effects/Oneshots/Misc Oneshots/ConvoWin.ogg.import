@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bj22nc4jw0c6k"
+path="res://.godot/imported/ConvoWin.ogg-c8e5cd977d66ce5de0978e6f3f4258ed.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Misc Oneshots/ConvoWin.ogg"
+dest_files=["res://.godot/imported/ConvoWin.ogg-c8e5cd977d66ce5de0978e6f3f4258ed.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

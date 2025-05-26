@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d2mnm3ifiprms"
+path="res://.godot/imported/PCHurtHammer-003.ogg-16561b559d4ca985cdd9dee60e5a2b67.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Hammer Blow Layer/PCHurtHammer-003.ogg"
+dest_files=["res://.godot/imported/PCHurtHammer-003.ogg-16561b559d4ca985cdd9dee60e5a2b67.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

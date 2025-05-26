@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dh80rtr6hpwxl"
+path="res://.godot/imported/NPCVoxGlitchStereo-005.ogg-ee6bef8cf17d2c25b3df4e13eb8808bc.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Glitch Layer/NPCVoxGlitchStereo-005.ogg"
+dest_files=["res://.godot/imported/NPCVoxGlitchStereo-005.ogg-ee6bef8cf17d2c25b3df4e13eb8808bc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
