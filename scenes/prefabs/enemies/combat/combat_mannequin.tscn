@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=28 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
 [ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin_combat_controller.gd" id="2_q8lao"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://58jr084rsmp" path="res://resources/shaders/eye.gdshader" id="5_5q6qh"]
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="5_7nf3y"]
 [ext_resource type="Material" uid="uid://du5t0l2fx4dja" path="res://resources/materials/smile.tres" id="6_d0ypw"]
+[ext_resource type="AudioStream" uid="uid://dstw1au7di1em" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPCAgroScreamStereo.ogg" id="8_1i44e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eg11s"]
 resource_local_to_scene = true
@@ -466,5 +467,10 @@ impact_direction = Vector3(0, -0.2, -1)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.150856)
 shape = SubResource("SphereShape3D_7t5wa")
+
+[node name="Scream" type="AudioStreamPlayer3D" parent="." index="4"]
+stream = ExtResource("8_1i44e")
+autoplay = true
+bus = &"Sounds"
 
 [connection signal="parried" from="HurtBox" to="." method="start_parry_flinch"]
