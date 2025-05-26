@@ -271,9 +271,9 @@ material_override = ExtResource("19_gx6q2")
 mesh = ExtResource("20_mgyw5")
 
 [node name="Audio" type="Node3D" parent="."]
-process_mode = 3
 
 [node name="Damaged" type="Node3D" parent="Audio"]
+process_mode = 3
 script = ExtResource("21_sutpr")
 layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_uioab"), SubResource("AudioStreamRandomizer_sn220"), SubResource("AudioStreamRandomizer_q5e7j")])
 metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
