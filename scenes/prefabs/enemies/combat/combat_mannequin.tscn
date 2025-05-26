@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=30 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
 [ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin_combat_controller.gd" id="2_q8lao"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://jinjdjj4bpee" path="res://scripts/combat/hurt_box.gd" id="5_7nf3y"]
 [ext_resource type="Material" uid="uid://du5t0l2fx4dja" path="res://resources/materials/smile.tres" id="6_d0ypw"]
 [ext_resource type="AudioStream" uid="uid://dstw1au7di1em" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPCAgroScreamStereo.ogg" id="8_1i44e"]
+[ext_resource type="AudioStream" uid="uid://c1rfuhegp3kna" path="res://Sound/Sound Effects/Loops/Misc Loops/NPCWalkLoop.ogg" id="9_qkgxy"]
 [ext_resource type="AudioStream" uid="uid://dpvs5suhm4405" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeNPCDeath.ogg" id="9_wdyof"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eg11s"]
@@ -472,14 +473,24 @@ shape = SubResource("SphereShape3D_7t5wa")
 [node name="Scream" type="AudioStreamPlayer3D" parent="." index="4"]
 stream = ExtResource("8_1i44e")
 attenuation_model = 2
+unit_size = 3.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="Death" type="AudioStreamPlayer3D" parent="." index="5"]
+[node name="Ambience" type="AudioStreamPlayer3D" parent="." index="5"]
+stream = ExtResource("9_qkgxy")
+attenuation_model = 2
+unit_size = 3.0
+autoplay = true
+bus = &"Sounds"
+
+[node name="Death" type="AudioStreamPlayer3D" parent="." index="6"]
 stream = ExtResource("9_wdyof")
 attenuation_model = 2
+unit_size = 3.0
 bus = &"Sounds"
 
 [connection signal="died" from="." to="Scream" method="queue_free"]
 [connection signal="died" from="." to="Death" method="play"]
+[connection signal="died" from="." to="Ambience" method="queue_free"]
 [connection signal="parried" from="HurtBox" to="." method="start_parry_flinch"]
