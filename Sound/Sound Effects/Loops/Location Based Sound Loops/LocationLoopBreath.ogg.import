@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://qjiy50kglwi4"
+path="res://.godot/imported/LocationLoopBreath.ogg-48774ec451b28e42f7865506e70b3b00.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopBreath.ogg"
+dest_files=["res://.godot/imported/LocationLoopBreath.ogg-48774ec451b28e42f7865506e70b3b00.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

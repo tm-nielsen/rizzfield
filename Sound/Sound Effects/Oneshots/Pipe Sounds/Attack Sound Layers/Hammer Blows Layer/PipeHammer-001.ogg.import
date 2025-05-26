@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bg8snmyqr671m"
+path="res://.godot/imported/PipeHammer-001.ogg-4e87d52a8ad4f52a3f183a33d609d8c7.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-001.ogg"
+dest_files=["res://.godot/imported/PipeHammer-001.ogg-4e87d52a8ad4f52a3f183a33d609d8c7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

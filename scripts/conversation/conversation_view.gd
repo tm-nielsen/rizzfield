@@ -1,6 +1,8 @@
 class_name ConversationView
 extends Control
 
+signal npc_spoke
+
 @export var display_area: Control
 @export var construction_area: Control
 @export var dialogue_area: Control
@@ -49,6 +51,7 @@ func start_prompt_display(prompt: String):
             tween, 2
         ), 2
     )
+    npc_spoke.emit()
 
 
 func start_response_construction():
@@ -90,6 +93,7 @@ func display_npc_quote(quote: String):
             speak_grow_duration
         ).set_parallel()
     )
+    npc_spoke.emit()
 
 func _display_dialogue(text: String, font: Font, set_secondary := true):
     construction_area.hide()

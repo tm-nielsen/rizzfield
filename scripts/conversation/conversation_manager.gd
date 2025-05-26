@@ -1,3 +1,4 @@
+class_name ConversationManager
 extends Control
 
 enum ConversationState {
@@ -11,6 +12,10 @@ const QUOTE_DISPLAY = ConversationState.QUOTE_DISPLAY
 const RESPONSE_CONSTRUCTION = ConversationState.RESPONSE_CONSTRUCTION
 const RESPONSE_DISPLAY = ConversationState.RESPONSE_DISPLAY
 const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
+
+signal resolved
+signal failed
+signal response_submitted(success_level: ResponseValues.SuccessLevel)
 
 @export var view: ConversationView
 @export var vignette_viewport: SubViewport
@@ -102,18 +107,8 @@ func _on_conversation_started(
 
 func _initialize_stat_set(conversation_definition: ConversationDefinition):
     stats = conversation_definition.get_stat_set()
-    stats.all_stats_filled.connect(
-        end_conversation.bind(
-            npc_dialogue_set.success_quote,
-            GameModeSignalBus.notify_conversation_resolved
-        )
-    )
-    stats.stat_emptied.connect(
-        end_conversation.bind(
-            npc_dialogue_set.failure_quote,
-            GameModeSignalBus.notify_combat_triggered
-        )
-    )
+    stats.all_stats_filled.connect(resolve)
+    stats.stat_emptied.connect(fail)
     chastity_meter.setup(stats.chastity)
     temperance_meter.setup(stats.temperance)
     humility_meter.setup(stats.humility)
@@ -135,6 +130,21 @@ func _update_stat_meters(
     temperance_meter.update(response.temperance, apply_response)
     humility_meter.update(response.humility, apply_response)
     patience_meter.update(response.patience, apply_response)
+
+
+func resolve():
+    end_conversation(
+        npc_dialogue_set.success_quote,
+        GameModeSignalBus.notify_conversation_resolved
+    )
+    resolved.emit()
+
+func fail():
+    end_conversation(
+        npc_dialogue_set.failure_quote,
+        GameModeSignalBus.notify_combat_triggered
+    )
+    failed.emit()
 
 
 func end_conversation(
@@ -169,6 +179,7 @@ func _submit_response():
     stats.update_values(response)
     _update_stat_meters(response, true)
     if stats.is_full || stats.failed: return
+    response_submitted.emit(response.success_level)
 
     view.display_constructed_response(response_text)
     state = RESPONSE_DISPLAY

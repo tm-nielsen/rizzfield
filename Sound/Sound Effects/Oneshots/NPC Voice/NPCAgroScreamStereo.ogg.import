@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dstw1au7di1em"
+path="res://.godot/imported/NPCAgroScreamStereo.ogg-fe73a1dbd95e9a5fd3b219218c3f06df.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/NPC Voice/NPCAgroScreamStereo.ogg"
+dest_files=["res://.godot/imported/NPCAgroScreamStereo.ogg-fe73a1dbd95e9a5fd3b219218c3f06df.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

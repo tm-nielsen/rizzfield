@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://iwybdnbu5nv6"
+path="res://.godot/imported/PipeSwing-003.ogg-8a4b5792c4cb9be0ef752f132460250f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-003.ogg"
+dest_files=["res://.godot/imported/PipeSwing-003.ogg-8a4b5792c4cb9be0ef752f132460250f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bbcxnwhaix5ey"
+path="res://.godot/imported/PCStepGravel-003.ogg-6bede8f34b110525e15d7221c7691390.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-003.ogg"
+dest_files=["res://.godot/imported/PCStepGravel-003.ogg-6bede8f34b110525e15d7221c7691390.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
