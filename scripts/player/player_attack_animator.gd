@@ -20,6 +20,12 @@ const COUNTER_SWINGING = AttackState.COUNTER_SWINGING
 
 var state: AttackState
 
+signal started_charging
+signal charged
+signal swung
+signal damaged_enemy
+signal block_started
+
 @export var movement_body: PlayerController
 @export var base_hit_stop_duration: float = 0.08
 @export var view_bob_frame_timer: FrameTimer
@@ -51,15 +57,15 @@ func set_state(new_state: AttackState):
             if movement_body.is_moving:
                 play("idle_static")
             else: play("idle")
-        CHARGING: play("charge")
-        CHARGED: play("hold_charge")
+        CHARGING: play("charge"); started_charging.emit()
+        CHARGED: play("hold_charge"); charged.emit()
         STARTING_UNCHARGED_SWING: play("swing_windup")
-        SWINGING: play("swing")
-        BLOCKING: play("block")
+        SWINGING: play("swing"); swung.emit()
+        BLOCKING: play("block"); block_started.emit()
         BLOCK_RECOVERY: play("block_recovery")
         PARRYING: play("parry")
         COUNTER_CHARGED: play("hold_parry_charge")
-        COUNTER_SWINGING: play("parry_swing")
+        COUNTER_SWINGING: play("parry_swing"); swung.emit()
     state = new_state
 
 
@@ -70,6 +76,7 @@ func _on_damaged_enemy(damage: int):
     var pause_tween = create_tween()
     pause_tween.tween_interval(pause_duration)
     pause_tween.tween_callback(play)
+    damaged_enemy.emit()
 
 func _on_damage_parried(): set_state(PARRYING)
 func _on_damage_blocked(): set_state(BLOCKING)

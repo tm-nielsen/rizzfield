@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=82 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/player_attack_animator.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
@@ -22,9 +22,14 @@
 [ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="20_mgyw5"]
 [ext_resource type="Script" uid="uid://d0cjk6nd2i1b1" path="res://scripts/audio/layered_random_sound_player.gd" id="21_sutpr"]
 [ext_resource type="AudioStream" uid="uid://c8i7dhd82ispl" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Gasp Layer/PCHurtGasp-001.ogg" id="22_0t1n1"]
+[ext_resource type="AudioStream" uid="uid://ldcc50als55m" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-001.ogg" id="22_tf2tk"]
 [ext_resource type="AudioStream" uid="uid://c5k6ur0wi3cci" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Gasp Layer/PCHurtGasp-002.ogg" id="23_xne2s"]
+[ext_resource type="AudioStream" uid="uid://cpd5k7ee5lkyy" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-002.ogg" id="23_xxx3e"]
 [ext_resource type="AudioStream" uid="uid://mk6vij4gtd2t" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Gasp Layer/PCHurtGasp-003.ogg" id="24_6mkeb"]
+[ext_resource type="AudioStream" uid="uid://bv3qu8gbnq6kn" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-003.ogg" id="24_tg447"]
+[ext_resource type="AudioStream" uid="uid://dk553kq2ogrle" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-004.ogg" id="25_0t1n1"]
 [ext_resource type="AudioStream" uid="uid://b2eqmn7ykeyqr" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Hammer Blow Layer/PCHurtHammer-001.ogg" id="25_g5m2n"]
+[ext_resource type="AudioStream" uid="uid://bi8wy3xaghywd" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-005.ogg" id="26_xne2s"]
 [ext_resource type="AudioStream" uid="uid://0pv8usfrmsvy" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Hammer Blow Layer/PCHurtHammer-002.ogg" id="26_ydol4"]
 [ext_resource type="AudioStream" uid="uid://d2mnm3ifiprms" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Hammer Blow Layer/PCHurtHammer-003.ogg" id="27_47hlf"]
 [ext_resource type="AudioStream" uid="uid://bax7pdsohxyrg" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Sub Tone Layer/PCHurtBass-001.ogg" id="28_8qhcd"]
@@ -47,6 +52,19 @@
 [ext_resource type="AudioStream" uid="uid://bdr6c1nl7fa4l" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-003.ogg" id="44_eabkt"]
 [ext_resource type="AudioStream" uid="uid://dw7fvrpy64go1" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-004.ogg" id="45_62da1"]
 [ext_resource type="AudioStream" uid="uid://bgxr5fehqtn5f" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-005.ogg" id="46_2sxhx"]
+[ext_resource type="AudioStream" uid="uid://bel2ttv04igjr" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-001.ogg" id="48_llgip"]
+[ext_resource type="AudioStream" uid="uid://cndp7ocjad5ii" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-002.ogg" id="49_w2qu4"]
+[ext_resource type="AudioStream" uid="uid://iwybdnbu5nv6" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-003.ogg" id="50_nt75k"]
+[ext_resource type="AudioStream" uid="uid://b11mwfw34s0u7" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-004.ogg" id="51_en1am"]
+[ext_resource type="AudioStream" uid="uid://dd8h3rtbihlp" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-005.ogg" id="52_yonpl"]
+[ext_resource type="AudioStream" uid="uid://bg8snmyqr671m" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-001.ogg" id="58_wi74m"]
+[ext_resource type="AudioStream" uid="uid://bi8g8dekamdix" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-002.ogg" id="59_pcsjt"]
+[ext_resource type="AudioStream" uid="uid://cv1m8papoaxs3" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-003.ogg" id="60_kbahu"]
+[ext_resource type="AudioStream" uid="uid://4v0run1pqmyb" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-004.ogg" id="61_0dd5q"]
+[ext_resource type="AudioStream" uid="uid://d3o52wh8701xc" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-005.ogg" id="62_3p620"]
+[ext_resource type="AudioStream" uid="uid://dsh5ygclsym8n" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Defend Sounds/PipeDefendPosture.ogg" id="63_7uh1v"]
+[ext_resource type="AudioStream" uid="uid://ds3ev1op6oo60" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Defend Sounds/PipeDefendBlock.ogg" id="64_nocmy"]
+[ext_resource type="AudioStream" uid="uid://b72lhelvwab75" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Defend Sounds/PipeDefendCharge.ogg" id="65_fefa1"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_c1k3r"]
 flip_faces = true
@@ -122,6 +140,30 @@ stream_1/stream = ExtResource("43_ktfnt")
 stream_2/stream = ExtResource("44_eabkt")
 stream_3/stream = ExtResource("45_62da1")
 stream_4/stream = ExtResource("46_2sxhx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qtecy"]
+streams_count = 5
+stream_0/stream = ExtResource("48_llgip")
+stream_1/stream = ExtResource("49_w2qu4")
+stream_2/stream = ExtResource("50_nt75k")
+stream_3/stream = ExtResource("51_en1am")
+stream_4/stream = ExtResource("52_yonpl")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6hr1c"]
+streams_count = 5
+stream_0/stream = ExtResource("22_tf2tk")
+stream_1/stream = ExtResource("23_xxx3e")
+stream_2/stream = ExtResource("24_tg447")
+stream_3/stream = ExtResource("25_0t1n1")
+stream_4/stream = ExtResource("26_xne2s")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ovffd"]
+streams_count = 5
+stream_0/stream = ExtResource("58_wi74m")
+stream_1/stream = ExtResource("59_pcsjt")
+stream_2/stream = ExtResource("60_kbahu")
+stream_3/stream = ExtResource("61_0dd5q")
+stream_4/stream = ExtResource("62_3p620")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
 collision_layer = 10
@@ -243,8 +285,36 @@ volume_curve = SubResource("Curve_mn10g")
 layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_pach2"), SubResource("AudioStreamRandomizer_vik5t"), SubResource("AudioStreamRandomizer_nebmk")])
 metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
 
+[node name="Pipe" type="Node3D" parent="Audio"]
+
+[node name="Swing" type="AudioStreamPlayer3D" parent="Audio/Pipe"]
+stream = SubResource("AudioStreamRandomizer_qtecy")
+bus = &"Sounds"
+
+[node name="Hit" type="Node3D" parent="Audio/Pipe"]
+script = ExtResource("21_sutpr")
+layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_6hr1c"), SubResource("AudioStreamRandomizer_ovffd")])
+metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
+
+[node name="Block Up" type="AudioStreamPlayer3D" parent="Audio/Pipe"]
+stream = ExtResource("63_7uh1v")
+bus = &"Sounds"
+
+[node name="Block" type="AudioStreamPlayer3D" parent="Audio/Pipe"]
+stream = ExtResource("64_nocmy")
+bus = &"Sounds"
+
+[node name="Parry" type="AudioStreamPlayer3D" parent="Audio/Pipe"]
+stream = ExtResource("65_fefa1")
+bus = &"Sounds"
+
 [connection signal="damage_blocked" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_blocked"]
+[connection signal="damage_blocked" from="." to="Audio/Pipe/Block" method="play"]
 [connection signal="damage_parried" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_parried"]
+[connection signal="damage_parried" from="." to="Audio/Pipe/Parry" method="play"]
 [connection signal="damage_received" from="." to="Camera3D/DamageIndicator" method="_on_player_damaged"]
 [connection signal="damaged" from="." to="Audio/Damaged" method="play"]
+[connection signal="block_started" from="ElasticJoint/PipeAnimator" to="Audio/Pipe/Block Up" method="play"]
+[connection signal="damaged_enemy" from="ElasticJoint/PipeAnimator" to="Audio/Pipe/Hit" method="play"]
+[connection signal="swung" from="ElasticJoint/PipeAnimator" to="Audio/Pipe/Swing" method="play"]
 [connection signal="damage_dealt" from="ElasticJoint/HurtBox" to="ElasticJoint/PipeAnimator" method="_on_damaged_enemy"]
