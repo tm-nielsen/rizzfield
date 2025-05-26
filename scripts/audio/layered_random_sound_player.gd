@@ -12,6 +12,7 @@ func _ready() -> void:
         new_source.volume_linear = volume
         new_source.bus = "Sounds"
         new_source.stream = layer
+        layer_sources.append(new_source)
         add_child(new_source)
 
 func play(): for source in layer_sources: source.play()
