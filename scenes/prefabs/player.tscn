@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cuwbviq8y2olc"]
+[gd_scene load_steps=61 format=3 uid="uid://cuwbviq8y2olc"]
 
 [ext_resource type="Script" uid="uid://bo476jmsfqisl" path="res://scripts/player/player_attack_animator.gd" id="1_56dyf"]
 [ext_resource type="Script" uid="uid://dcx8434halten" path="res://scripts/player/player_controller.gd" id="1_jybep"]
@@ -30,6 +30,23 @@
 [ext_resource type="AudioStream" uid="uid://bax7pdsohxyrg" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Sub Tone Layer/PCHurtBass-001.ogg" id="28_8qhcd"]
 [ext_resource type="AudioStream" uid="uid://b1gdo6cwova6a" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Sub Tone Layer/PCHurtBass-002.ogg" id="29_p0ax3"]
 [ext_resource type="AudioStream" uid="uid://b3b3d6hk78af" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Sub Tone Layer/PCHurtBass-003.ogg" id="30_lvj06"]
+[ext_resource type="AudioStream" uid="uid://bqfkpot3pgcyq" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-001.ogg" id="31_4oski"]
+[ext_resource type="Script" uid="uid://dod45kbt6slfx" path="res://scripts/audio/player_step_sounds.gd" id="31_kjdff"]
+[ext_resource type="AudioStream" uid="uid://yrkxqyp7kdrd" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-002.ogg" id="32_kjdff"]
+[ext_resource type="AudioStream" uid="uid://dedmwa1i4qrxu" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-003.ogg" id="33_mn10g"]
+[ext_resource type="AudioStream" uid="uid://ceu4kaf7wlgru" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-004.ogg" id="34_1yqq1"]
+[ext_resource type="AudioStream" uid="uid://doxpak52ydkg0" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-005.ogg" id="35_2j5mk"]
+[ext_resource type="AudioStream" uid="uid://8ww27t4twykv" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-001.ogg" id="36_86e23"]
+[ext_resource type="AudioStream" uid="uid://bw1vap0cgawfq" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-002.ogg" id="37_p3f2y"]
+[ext_resource type="AudioStream" uid="uid://bbcxnwhaix5ey" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-003.ogg" id="38_pqowp"]
+[ext_resource type="AudioStream" uid="uid://ctn5rmpk5ntm4" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-004.ogg" id="39_jcw1j"]
+[ext_resource type="AudioStream" uid="uid://c648vqp7i8o84" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepGravel-005.ogg" id="40_oepwj"]
+[ext_resource type="AudioStream" uid="uid://cm4mckvxbmdth" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Gravel Crunch Layer/PCStepAdditionalCrunchLayerRare.ogg" id="41_tl0ol"]
+[ext_resource type="AudioStream" uid="uid://d4ei57gm83brr" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-001.ogg" id="42_teqc2"]
+[ext_resource type="AudioStream" uid="uid://heplnb7idu0d" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-002.ogg" id="43_ktfnt"]
+[ext_resource type="AudioStream" uid="uid://bdr6c1nl7fa4l" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-003.ogg" id="44_eabkt"]
+[ext_resource type="AudioStream" uid="uid://dw7fvrpy64go1" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-004.ogg" id="45_62da1"]
+[ext_resource type="AudioStream" uid="uid://bgxr5fehqtn5f" path="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-005.ogg" id="46_2sxhx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_c1k3r"]
 flip_faces = true
@@ -75,6 +92,36 @@ streams_count = 3
 stream_0/stream = ExtResource("28_8qhcd")
 stream_1/stream = ExtResource("29_p0ax3")
 stream_2/stream = ExtResource("30_lvj06")
+
+[sub_resource type="Curve" id="Curve_mn10g"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 0.1), 0.404163, 0.404163, 0, 0, Vector2(1, 0.6), 5.50833, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pach2"]
+streams_count = 5
+stream_0/stream = ExtResource("31_4oski")
+stream_1/stream = ExtResource("32_kjdff")
+stream_2/stream = ExtResource("33_mn10g")
+stream_3/stream = ExtResource("34_1yqq1")
+stream_4/stream = ExtResource("35_2j5mk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vik5t"]
+streams_count = 6
+stream_0/stream = ExtResource("36_86e23")
+stream_1/stream = ExtResource("37_p3f2y")
+stream_2/stream = ExtResource("38_pqowp")
+stream_3/stream = ExtResource("39_jcw1j")
+stream_4/stream = ExtResource("40_oepwj")
+stream_5/stream = ExtResource("41_tl0ol")
+stream_5/weight = 0.02
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nebmk"]
+streams_count = 5
+stream_0/stream = ExtResource("42_teqc2")
+stream_1/stream = ExtResource("43_ktfnt")
+stream_2/stream = ExtResource("44_eabkt")
+stream_3/stream = ExtResource("45_62da1")
+stream_4/stream = ExtResource("46_2sxhx")
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head_node")]
 collision_layer = 10
@@ -187,6 +234,13 @@ process_mode = 3
 [node name="Damaged" type="Node3D" parent="Audio"]
 script = ExtResource("21_sutpr")
 layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_uioab"), SubResource("AudioStreamRandomizer_sn220"), SubResource("AudioStreamRandomizer_q5e7j")])
+metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
+
+[node name="Step" type="Node3D" parent="Audio" node_paths=PackedStringArray("movement_body")]
+script = ExtResource("31_kjdff")
+movement_body = NodePath("../..")
+volume_curve = SubResource("Curve_mn10g")
+layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_pach2"), SubResource("AudioStreamRandomizer_vik5t"), SubResource("AudioStreamRandomizer_nebmk")])
 metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
 
 [connection signal="damage_blocked" from="." to="ElasticJoint/PipeAnimator" method="_on_damage_blocked"]
