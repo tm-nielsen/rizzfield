@@ -20,7 +20,7 @@ const COUNTER_SWINGING = AttackState.COUNTER_SWINGING
 
 var state: AttackState
 
-signal started_charging
+signal charge_started
 signal charged
 signal swung
 signal damaged_enemy
@@ -57,7 +57,7 @@ func set_state(new_state: AttackState):
             if movement_body.is_moving:
                 play("idle_static")
             else: play("idle")
-        CHARGING: play("charge"); started_charging.emit()
+        CHARGING: play("charge"); charge_started.emit()
         CHARGED: play("hold_charge"); charged.emit()
         STARTING_UNCHARGED_SWING: play("swing_windup")
         SWINGING: play("swing"); swung.emit()
