@@ -23,7 +23,6 @@ var state: AttackState
 signal charge_started
 signal charged
 signal swung
-signal damaged_enemy
 signal block_started
 
 @export var movement_body: PlayerController
@@ -76,7 +75,6 @@ func _on_damaged_enemy(damage: int):
     var pause_tween = create_tween()
     pause_tween.tween_interval(pause_duration)
     pause_tween.tween_callback(play)
-    damaged_enemy.emit()
 
 func _on_damage_parried(): set_state(PARRYING)
 func _on_damage_blocked(): set_state(BLOCKING)

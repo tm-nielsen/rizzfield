@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dpo4s1kibccid"]
+[gd_scene load_steps=43 format=3 uid="uid://dpo4s1kibccid"]
 
 [ext_resource type="PackedScene" uid="uid://c2a7t3pilsbsx" path="res://models/source_files/mannequin.blend" id="1_wva5t"]
 [ext_resource type="Script" uid="uid://ckaywqn1oe2n2" path="res://scripts/enemies/mannequin_combat_controller.gd" id="2_q8lao"]
@@ -10,6 +10,17 @@
 [ext_resource type="AudioStream" uid="uid://dstw1au7di1em" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPCAgroScreamStereo.ogg" id="8_1i44e"]
 [ext_resource type="AudioStream" uid="uid://c1rfuhegp3kna" path="res://Sound/Sound Effects/Loops/Misc Loops/NPCWalkLoop.ogg" id="9_qkgxy"]
 [ext_resource type="AudioStream" uid="uid://dpvs5suhm4405" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeNPCDeath.ogg" id="9_wdyof"]
+[ext_resource type="Script" uid="uid://d0cjk6nd2i1b1" path="res://scripts/audio/layered_random_sound_player.gd" id="11_oaygj"]
+[ext_resource type="AudioStream" uid="uid://ldcc50als55m" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-001.ogg" id="12_646oj"]
+[ext_resource type="AudioStream" uid="uid://cpd5k7ee5lkyy" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-002.ogg" id="13_7a2ob"]
+[ext_resource type="AudioStream" uid="uid://bv3qu8gbnq6kn" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-003.ogg" id="14_vrwvf"]
+[ext_resource type="AudioStream" uid="uid://dk553kq2ogrle" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-004.ogg" id="15_mym0w"]
+[ext_resource type="AudioStream" uid="uid://bi8wy3xaghywd" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Bassy Impact Layer/PipeImpact-005.ogg" id="16_t7apr"]
+[ext_resource type="AudioStream" uid="uid://bg8snmyqr671m" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-001.ogg" id="17_8doga"]
+[ext_resource type="AudioStream" uid="uid://bi8g8dekamdix" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-002.ogg" id="18_qkgj0"]
+[ext_resource type="AudioStream" uid="uid://cv1m8papoaxs3" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-003.ogg" id="19_ps65u"]
+[ext_resource type="AudioStream" uid="uid://4v0run1pqmyb" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-004.ogg" id="20_qq4vf"]
+[ext_resource type="AudioStream" uid="uid://d3o52wh8701xc" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Hammer Blows Layer/PipeHammer-005.ogg" id="21_gqrx5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eg11s"]
 resource_local_to_scene = true
@@ -87,6 +98,22 @@ height = 1.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7t5wa"]
 radius = 0.4
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6hr1c"]
+streams_count = 5
+stream_0/stream = ExtResource("12_646oj")
+stream_1/stream = ExtResource("13_7a2ob")
+stream_2/stream = ExtResource("14_vrwvf")
+stream_3/stream = ExtResource("15_mym0w")
+stream_4/stream = ExtResource("16_t7apr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ovffd"]
+streams_count = 5
+stream_0/stream = ExtResource("17_8doga")
+stream_1/stream = ExtResource("18_qkgj0")
+stream_2/stream = ExtResource("19_ps65u")
+stream_3/stream = ExtResource("20_qq4vf")
+stream_4/stream = ExtResource("21_gqrx5")
 
 [node name="CombatMannequin" node_paths=PackedStringArray("animator", "collider", "hurtbox", "step_animator", "ragdoll", "force_node", "eyes_parent", "smile") instance=ExtResource("1_wva5t")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -470,27 +497,35 @@ impact_direction = Vector3(0, -0.2, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.150856)
 shape = SubResource("SphereShape3D_7t5wa")
 
-[node name="Scream" type="AudioStreamPlayer3D" parent="." index="4"]
+[node name="Audio" type="Node3D" parent="." index="4"]
+
+[node name="Scream" type="AudioStreamPlayer3D" parent="Audio" index="0"]
 stream = ExtResource("8_1i44e")
 attenuation_model = 2
 unit_size = 3.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="Ambience" type="AudioStreamPlayer3D" parent="." index="5"]
+[node name="Ambience" type="AudioStreamPlayer3D" parent="Audio" index="1"]
 stream = ExtResource("9_qkgxy")
 attenuation_model = 2
 unit_size = 3.0
 autoplay = true
 bus = &"Sounds"
 
-[node name="Death" type="AudioStreamPlayer3D" parent="." index="6"]
+[node name="Death" type="AudioStreamPlayer3D" parent="Audio" index="2"]
 stream = ExtResource("9_wdyof")
 attenuation_model = 2
 unit_size = 3.0
 bus = &"Sounds"
 
-[connection signal="died" from="." to="Scream" method="queue_free"]
-[connection signal="died" from="." to="Death" method="play"]
-[connection signal="died" from="." to="Ambience" method="queue_free"]
+[node name="Hit" type="Node3D" parent="Audio" index="3"]
+script = ExtResource("11_oaygj")
+layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_6hr1c"), SubResource("AudioStreamRandomizer_ovffd")])
+metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
+
+[connection signal="damaged" from="." to="Audio/Hit" method="play"]
+[connection signal="died" from="." to="Audio/Scream" method="queue_free"]
+[connection signal="died" from="." to="Audio/Ambience" method="queue_free"]
+[connection signal="died" from="." to="Audio/Death" method="play"]
 [connection signal="parried" from="HurtBox" to="." method="start_parry_flinch"]
