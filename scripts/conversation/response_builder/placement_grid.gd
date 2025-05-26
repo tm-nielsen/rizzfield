@@ -3,6 +3,7 @@ class_name PlacementGrid
 extends MultiMeshInstance3D
 
 signal placements_modified
+signal placement_rejected
 
 @export var grid_size := Vector2i(5, 5)
 @export var cell_size: float = 0.1
@@ -218,4 +219,5 @@ func _on_fragment_body_dropped(fragment_body: ResponseFragmentBody):
         fragment_body.place_and_freeze(placement_point)
     elif overlaps_held_fragment_shape():
         fragment_body.repel(global_position)
+        placement_rejected.emit()
     held_fragment = null
