@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq8gwd8d7rcd2"]
+[gd_scene load_steps=14 format=3 uid="uid://cq8gwd8d7rcd2"]
 
 [ext_resource type="Script" uid="uid://vqh48c1k0jla" path="res://scripts/exploration/collectable_brick.gd" id="1_aie28"]
 [ext_resource type="Material" uid="uid://24hy57fjtol0" path="res://resources/materials/brick_material.tres" id="2_aquqh"]
 [ext_resource type="ArrayMesh" uid="uid://dggu1w2x8uve" path="res://models/brick.res" id="3_5fspw"]
+[ext_resource type="AudioStream" uid="uid://bel2ttv04igjr" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-001.ogg" id="4_16g56"]
+[ext_resource type="AudioStream" uid="uid://cndp7ocjad5ii" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-002.ogg" id="5_rh6f5"]
+[ext_resource type="AudioStream" uid="uid://iwybdnbu5nv6" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-003.ogg" id="6_ljgfe"]
+[ext_resource type="AudioStream" uid="uid://b11mwfw34s0u7" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-004.ogg" id="7_nxlud"]
+[ext_resource type="AudioStream" uid="uid://dd8h3rtbihlp" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Swing Whoosh Layer/PipeSwing-005.ogg" id="8_jd5sf"]
+[ext_resource type="AudioStream" uid="uid://dtat63nmp6a5q" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeBrick.ogg" id="9_81g60"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ya4ey"]
 friction = 0.6
@@ -13,13 +19,22 @@ points = PackedVector3Array(-0.380031, -0.0800117, -0.2, -0.380031, -0.1, -0.180
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ya4ey"]
 
-[node name="WorldBrick" type="RigidBody3D" node_paths=PackedStringArray("pickup_area")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u652p"]
+streams_count = 5
+stream_0/stream = ExtResource("4_16g56")
+stream_1/stream = ExtResource("5_rh6f5")
+stream_2/stream = ExtResource("6_ljgfe")
+stream_3/stream = ExtResource("7_nxlud")
+stream_4/stream = ExtResource("8_jd5sf")
+
+[node name="WorldBrick" type="RigidBody3D" node_paths=PackedStringArray("pickup_area", "audio_source")]
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ya4ey")
 gravity_scale = 2.0
 can_sleep = false
 script = ExtResource("1_aie28")
 pickup_area = NodePath("PickupArea")
+audio_source = NodePath("Pickup")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ya4ey")
@@ -34,3 +49,13 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
 shape = SubResource("SphereShape3D_ya4ey")
+
+[node name="Throw" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_u652p")
+attenuation_model = 2
+unit_size = 3.0
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_81g60")
+attenuation_model = 2
+unit_size = 3.0
