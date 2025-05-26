@@ -15,7 +15,7 @@ const FINAL_QUOTE_DISPLAY = ConversationState.FINAL_QUOTE_DISPLAY
 
 signal resolved
 signal failed
-signal response_submitted
+signal response_submitted(success_level: ResponseValues.SuccessLevel)
 
 @export var view: ConversationView
 @export var vignette_viewport: SubViewport
@@ -179,7 +179,7 @@ func _submit_response():
     stats.update_values(response)
     _update_stat_meters(response, true)
     if stats.is_full || stats.failed: return
-    response_submitted.emit()
+    response_submitted.emit(response.success_level)
 
     view.display_constructed_response(response_text)
     state = RESPONSE_DISPLAY

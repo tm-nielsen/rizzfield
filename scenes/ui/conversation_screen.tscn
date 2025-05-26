@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dm6nb6h5e06ie"]
+[gd_scene load_steps=42 format=3 uid="uid://dm6nb6h5e06ie"]
 
 [ext_resource type="Script" uid="uid://dcpt6cetftqh7" path="res://scripts/conversation/conversation_manager.gd" id="1_ew0bg"]
 [ext_resource type="Script" uid="uid://cih1mxnic3cu3" path="res://scripts/conversation/conversation_view.gd" id="2_3lo3o"]
@@ -20,7 +20,6 @@
 [ext_resource type="AudioStream" uid="uid://bnjgo2oxdc7g0" path="res://Sound/Sound Effects/Oneshots/Misc/ConvoFail.ogg" id="12_1upeh"]
 [ext_resource type="AudioStream" uid="uid://dnay3jeqxvyeq" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-001.ogg" id="12_idclv"]
 [ext_resource type="AudioStream" uid="uid://c0dchx5pv2i6f" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-002.ogg" id="13_0ry5d"]
-[ext_resource type="AudioStream" uid="uid://dpie7ienn6p7v" path="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeItemBreak.ogg" id="13_g5e6a"]
 [ext_resource type="AudioStream" uid="uid://6vabixtvsx1v" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-003.ogg" id="14_xsqfp"]
 [ext_resource type="AudioStream" uid="uid://bwyg2vnolrlr" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-004.ogg" id="15_o8hjl"]
 [ext_resource type="AudioStream" uid="uid://b3d3xoecaf7h8" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-005.ogg" id="16_oiif1"]
@@ -29,6 +28,9 @@
 [ext_resource type="AudioStream" uid="uid://18lsc7kew08f" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Phone Layer/NPCVoxPhoneStereo-003.ogg" id="19_ycd0y"]
 [ext_resource type="AudioStream" uid="uid://drc2fhofnvoih" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Phone Layer/NPCVoxPhoneStereo-004.ogg" id="20_fq50c"]
 [ext_resource type="AudioStream" uid="uid://c146japjxvhsj" path="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Phone Layer/NPCVoxPhoneStereo-005.ogg" id="21_0sjib"]
+[ext_resource type="AudioStream" uid="uid://dbx41ow0swyhr" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/Submit Response/ConvoSubmitVeryGood.ogg" id="29_56ed6"]
+[ext_resource type="AudioStream" uid="uid://c73tf6iuoymps" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/Submit Response/ConvoSubmitGood.ogg" id="30_m23is"]
+[ext_resource type="AudioStream" uid="uid://btvxr0mq2u6w0" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/Submit Response/ConvoSubmitBad.ogg" id="31_jxyu7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v8s5h"]
 streams_count = 5
@@ -392,6 +394,8 @@ conversation_manager = NodePath("..")
 started = ExtResource("10_ntdgb")
 resolved = ExtResource("11_2vcyq")
 failed = ExtResource("12_1upeh")
-responded = ExtResource("13_g5e6a")
+responded_negative = ExtResource("29_56ed6")
+responded_neutral = ExtResource("30_m23is")
+responded_positive = ExtResource("31_jxyu7")
 
 [connection signal="npc_spoke" from="VBoxContainer" to="VBoxContainer/Display Area/VignetteViewport/SubViewport/Voice Sounds" method="play"]
