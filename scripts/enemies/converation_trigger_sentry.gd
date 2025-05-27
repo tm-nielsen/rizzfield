@@ -6,6 +6,7 @@ extends DamageableCharacterBody3D
 
 @export_subgroup("parameters")
 @export_range(0, 180) var view_range: float = 60
+@export var view_distance: float = 5
 @export var activation_time: float = 1 / 6.0
 @export_flags_3d_physics var raycast_mask = 3
 
@@ -29,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 
 func check_angle() -> bool:
     var diff = camera.global_position - head_node.global_position
+    if diff.length_squared() > view_distance * view_distance: return false
     return diff.angle_to(basis.z) < deg_to_rad(view_range)
 
 func check_raycast() -> bool:
