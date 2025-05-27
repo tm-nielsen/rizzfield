@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=128 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -28,6 +28,12 @@
 [ext_resource type="Resource" uid="uid://de2ry14082j0x" path="res://resources/conversations/temperance_conversation.tres" id="25_556r4"]
 [ext_resource type="Resource" uid="uid://boh5fijftsnvh" path="res://resources/conversations/humility_conversation.tres" id="26_7agi7"]
 [ext_resource type="Resource" uid="uid://cdx8tqa0l44s8" path="res://resources/conversations/patience_conversation.tres" id="27_kih21"]
+[ext_resource type="PackedScene" uid="uid://dbbtkwd2mv5o5" path="res://scenes/prefabs/fragment_pickup_area.tscn" id="28_v3why"]
+[ext_resource type="Resource" uid="uid://ddxgbo0p8blsw" path="res://resources/response_fragments/arch_response.tres" id="29_asl66"]
+[ext_resource type="Resource" uid="uid://bacgci8bgld0" path="res://resources/response_fragments/square_response.tres" id="30_2jdvr"]
+[ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="31_q4oe8"]
+[ext_resource type="Resource" uid="uid://jky8ohwkx4hs" path="res://resources/response_fragments/stairs_response.tres" id="32_svjb4"]
+[ext_resource type="Resource" uid="uid://c5bbk2uue8gnj" path="res://resources/response_fragments/splat_response.tres" id="33_c1pbi"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -704,6 +710,31 @@ conversation = ExtResource("27_kih21")
 view_range = 90.0
 view_distance = 4.0
 surface_material = SubResource("ShaderMaterial_gur6y")
+
+[node name="Fragments" type="Node3D" parent="."]
+
+[node name="Arch Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83759, -1.5, -5.66806)
+fragment = ExtResource("29_asl66")
+
+[node name="T Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5608, -9.5, 2.65005)
+
+[node name="Square Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9572, -9.5, -7.69272)
+fragment = ExtResource("30_2jdvr")
+
+[node name="Cross Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.4506, -9.5, 26.6257)
+fragment = ExtResource("31_q4oe8")
+
+[node name="Stairs Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.346, -10.5, 30.4634)
+fragment = ExtResource("32_svjb4")
+
+[node name="Splat Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7133, -3.5, 50.9311)
+fragment = ExtResource("33_c1pbi")
 
 [node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6708, -3.9, 39.5546)
