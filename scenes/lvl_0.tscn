@@ -313,20 +313,19 @@ points = PackedVector3Array(117, -69, -9, 117, -70, -9, 150, -70, -9, 150, -69, 
 [sub_resource type="Environment" id="Environment_d0lv2"]
 background_mode = 1
 background_color = Color(1, 0.8, 0.301961, 1)
+background_energy_multiplier = 0.25
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 2
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.25
 tonemap_mode = 3
-ssao_enabled = true
 ssao_intensity = 3.0
-ssil_enabled = true
 sdfgi_energy = 5.0
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0, 0, 0, 1)
-fog_density = 1.0
+fog_light_color = Color(0.46, 0.382413, 0.2484, 1)
+fog_density = 0.4
 fog_depth_end = 47.4
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.029
 volumetric_fog_albedo = Color(0.890629, 0.553476, 0.131475, 1)
 
@@ -596,9 +595,12 @@ shape = SubResource("ConvexPolygonShape3D_wd2gp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.432935, 0.845731, 0.31194, 0.676533, -0.533539, 0.507582, 0.59571, -0.00871235, -0.803152, 2.74181, 3.49423, 0)
-light_energy = 4.692
+light_color = Color(1, 0.8, 0.301961, 1)
+light_energy = 2.0
 light_indirect_energy = 10.0
+light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d0lv2")
