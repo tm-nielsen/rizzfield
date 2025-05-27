@@ -10,7 +10,8 @@ font = ExtResource("3_tqhq3")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ls2j"]
-font_size = 18
+line_spacing = -2.0
+font_size = 14
 
 [sub_resource type="Environment" id="Environment_03dq7"]
 
@@ -83,11 +84,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 2.0
-offset_right = -8.0
-offset_bottom = -6.0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = -24.0
+offset_bottom = -18.0
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
 
 [node name="Flavour" type="Label" parent="VBoxContainer/HBoxContainer/Panel/ScrollContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -95,9 +97,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 2.0
-text = "More information about the fragment goes here.
-As much flavour as is desired."
+text = "You seared this inscription into your mind. You cast off a part of yourself, and have been remade.
+
+Unlocks new options in conversation."
 label_settings = SubResource("LabelSettings_7ls2j")
+horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
