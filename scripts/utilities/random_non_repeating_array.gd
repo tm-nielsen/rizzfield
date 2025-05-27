@@ -1,27 +1,29 @@
 class_name RandomNonRepeatingArray
 
 var _entries: Array[Variant]
-var _unused_entries: Array[Variant]
+var _selection_queue: Array[Variant]
 
 
 func _init(p_entries: Array[Variant]):
     _entries = p_entries.duplicate()
-    _unused_entries = p_entries.duplicate()
+    _selection_queue = p_entries.duplicate()
+    _selection_queue.shuffle()
 
 
 func pick_new() -> Variant:
-    if _unused_entries.size() == 0:
+    if _selection_queue.size() == 0:
         push_warning("Random Non Repeating Array has no _entries to select from")
         return ""
 
-    var selected_entry = _unused_entries.pick_random()
-    _unused_entries.erase(selected_entry)
-    if _unused_entries.is_empty():
-        _unused_entries = _entries.duplicate()
+    var selected_entry = _selection_queue.pop_back()
+    if _selection_queue.is_empty():
+        _selection_queue = _entries.duplicate()
+        _selection_queue.shuffle()
 
     return selected_entry
 
 
 func append(new_entry: Variant) -> void:
     _entries.append(new_entry)
-    _unused_entries.append(new_entry)
+    _selection_queue.append(new_entry)
+    _selection_queue.shuffle()
