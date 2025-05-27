@@ -161,6 +161,7 @@ func end_conversation(
 
 func disable():
     if state_tween: state_tween.kill()
+    response_construction_timer.cancel()
     set_state(INACTIVE)
     vignette.queue_free()
 
