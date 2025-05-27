@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=130 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -34,6 +34,7 @@
 [ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="31_q4oe8"]
 [ext_resource type="Resource" uid="uid://jky8ohwkx4hs" path="res://resources/response_fragments/stairs_response.tres" id="32_svjb4"]
 [ext_resource type="Resource" uid="uid://c5bbk2uue8gnj" path="res://resources/response_fragments/splat_response.tres" id="33_c1pbi"]
+[ext_resource type="Script" uid="uid://br37m0k15x017" path="res://scripts/exploration/kill_box.gd" id="35_asl66"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -342,6 +343,8 @@ fog_density = 0.4
 fog_depth_end = 47.4
 volumetric_fog_density = 0.029
 volumetric_fog_albedo = Color(0.890629, 0.553476, 0.131475, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2jdvr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
 resource_local_to_scene = true
@@ -678,6 +681,14 @@ directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d0lv2")
+
+[node name="Kill Box" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130, -20, 8)
+collision_mask = 7
+script = ExtResource("35_asl66")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Kill Box"]
+shape = SubResource("WorldBoundaryShape3D_2jdvr")
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
