@@ -6,11 +6,10 @@ signal brick_collected()
 
 
 func notify_fragment_collected(
-    fragment: ResponseFragment,
-    title: String, description: String
+    fragment: ResponseFragment, description: String
 ):
     fragment_collected.emit(fragment)
-    fragment_discovered.emit(title, description)
+    fragment_discovered.emit(fragment.title, description)
 
 func notify_brick_collected():
     brick_collected.emit()

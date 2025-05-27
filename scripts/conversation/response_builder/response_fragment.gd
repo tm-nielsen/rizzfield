@@ -5,6 +5,7 @@ const base_material: ShaderMaterial = preload(
     "res://resources/materials/response_fragment_material.tres"
 )
 
+@export var title: String
 @export var shape_texture: Texture2D
 @export var mesh: Mesh
 @export var colour := Color.SKY_BLUE

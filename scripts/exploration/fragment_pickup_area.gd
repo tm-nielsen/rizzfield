@@ -1,7 +1,6 @@
 extends Area3D
 
 @export var fragment: ResponseFragment
-@export var title: String
 @export_multiline var description: String
 @export var mesh_scale: float = 0.2
 @export var audio_source: AudioStreamPlayer3D
@@ -29,7 +28,7 @@ func _ready() -> void:
 
 func collect():
     ExplorationSignalBus.notify_fragment_collected(
-        fragment, title, description
+        fragment, description
     )
     audio_source.reparent(get_parent())
     audio_source.finished.connect(audio_source.queue_free)
