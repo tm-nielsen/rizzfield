@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="ConversationDefinition" load_steps=5 format=3 uid="uid://q5jqbjmjamat"]
+
+[ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="1_ac0i7"]
+[ext_resource type="Script" uid="uid://bd83bpnet8tbq" path="res://scripts/conversation/npc_dialogue_set.gd" id="1_ued33"]
+[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_oj6j2"]
+
+[sub_resource type="Resource" id="Resource_a06p3"]
+script = ExtResource("1_ued33")
+initial_prompt = "What marvelous beauty!"
+success_quote = "The Alchemist smiles on your chastity."
+failure_quote = "You profane this place with your flesh."
+positive_quote_block = "Your flesh is a temple, as it was meant to be.
+...like that girl, picking flowers.
+She cleansed herself in the fire."
+neutral_quote_block = "You have an ordained duty.
+You have a purity to be shared.
+Now, stop your shaking.
+"
+negative_quote_block = "You are turning your back to the sun.
+You would betray your highest purpose?
+You pervert yourself by your withholding."
+metadata/_custom_type_script = "uid://bd83bpnet8tbq"
+
+[resource]
+script = ExtResource("1_ac0i7")
+vignette_prefab = ExtResource("3_oj6j2")
+dialogue = SubResource("Resource_a06p3")
+chastity_initial_value = 4
+chastity_maximum_value = 8
+chastity_drain = 2
+chastity_drain_variation = 1
+temperance_initial_value = 4
+temperance_maximum_value = 8
+temperance_drain = 2
+temperance_drain_variation = 1
+humility_initial_value = 0
+humility_maximum_value = 8
+humility_drain = 2
+humility_drain_variation = 2
+patience_initial_value = 0
+patience_maximum_value = 8
+patience_drain = 2
+patience_drain_variation = 2
+metadata/_custom_type_script = "uid://btbkufoee38v3"

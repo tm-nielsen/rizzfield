@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="ConversationDefinition" load_steps=5 format=3 uid="uid://cdx8tqa0l44s8"]
+
+[ext_resource type="Script" uid="uid://bd83bpnet8tbq" path="res://scripts/conversation/npc_dialogue_set.gd" id="1_h2duo"]
+[ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="2_12g7m"]
+[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_lad3r"]
+
+[sub_resource type="Resource" id="Resource_h2duo"]
+script = ExtResource("1_h2duo")
+initial_prompt = "There is a violence in you."
+success_quote = "Go, and continue the work of healing."
+failure_quote = "Reject healing and face a hail of fire."
+positive_quote_block = "She seeks to hurt us all, from Her high tower.
+Let me heal you.
+Don’t turn away."
+neutral_quote_block = "I see them, weighed down by Her curse.
+Their suffering makes me thankful I’ve been saved.
+We must defend what we’ve built."
+negative_quote_block = "You would attack your saviour?
+What incredible hate you hold.
+Then you will walk through smoke, choking and blind."
+metadata/_custom_type_script = "uid://bd83bpnet8tbq"
+
+[resource]
+script = ExtResource("2_12g7m")
+vignette_prefab = ExtResource("3_lad3r")
+dialogue = SubResource("Resource_h2duo")
+chastity_initial_value = 4
+chastity_maximum_value = 8
+chastity_drain = 2
+chastity_drain_variation = 1
+temperance_initial_value = 4
+temperance_maximum_value = 8
+temperance_drain = 2
+temperance_drain_variation = 1
+humility_initial_value = 0
+humility_maximum_value = 8
+humility_drain = 2
+humility_drain_variation = 2
+patience_initial_value = 0
+patience_maximum_value = 8
+patience_drain = 2
+patience_drain_variation = 2
+metadata/_custom_type_script = "uid://btbkufoee38v3"
