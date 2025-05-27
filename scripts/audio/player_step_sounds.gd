@@ -17,4 +17,4 @@ func _process(delta: float) -> void:
     step_timer += delta
     if step_timer > step_period:
         step_timer -= step_period
-        play()
+        if movement_body.is_on_floor(): play()
