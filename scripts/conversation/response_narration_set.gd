@@ -1,9 +1,21 @@
 class_name ResponseNarrationSet
 
-const RESULT_TEXT = {
-    ResponseValues.NEGATIVE: "That didn't work.",
-    ResponseValues.NEUTRAL: "It seems fine.",
-    ResponseValues.POSITIVE: "They liked that!"
+static var result_text = {
+    ResponseValues.NEGATIVE: RandomNonRepeatingArray.new([
+        "It doesn’t seem to have worked.",
+        "It appears to have made the human agitated.",
+        "The human frowns."
+    ]),
+    ResponseValues.NEUTRAL: RandomNonRepeatingArray.new([
+        "It seems to have worked.",
+        "You seem to have pleased the human.",
+        "The human nods."
+    ]),
+    ResponseValues.POSITIVE: RandomNonRepeatingArray.new([
+        "The human seems very pleased with you.",
+        "The human steps quite close to you.",
+        "The human flashes a wide grin."
+    ])
 }
 
 var chastity_actions: RandomNonRepeatingArray
@@ -51,5 +63,5 @@ func build_response_text(
 
     return (
         "You " + relevant_pools.pick_random().pick_new()
-        + "\n" + RESULT_TEXT[response.success_level]
+        + "\n" + result_text[response.success_level].pick_new()
     )
