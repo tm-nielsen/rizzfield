@@ -6,15 +6,16 @@
 
 [resource]
 script = ExtResource("1_hyhog")
+title = "Blessing of the Contemplative"
 shape_texture = ExtResource("2_hyhog")
 mesh = ExtResource("2_em6w7")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
-chastity = 0
-temperance = 1
-humility = 0
-patience = 0
-response_action_chastity = ""
-response_action_temperance = ""
-response_action_humility = ""
-response_action_patience = ""
+chastity = 2
+temperance = 2
+humility = 2
+patience = 2
+response_action_chastity = "recited a proverb about the importance of Chastity."
+response_action_temperance = "recited The Alchemist’s Benediction."
+response_action_humility = "quoted a fable about the value of Humility."
+response_action_patience = "quoted a hymn about the vice of Wrath."
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"

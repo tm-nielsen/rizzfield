@@ -6,15 +6,16 @@
 
 [resource]
 script = ExtResource("1_i5veh")
+title = "Blessing of the Countenance"
 shape_texture = ExtResource("2_qq4jb")
 mesh = ExtResource("2_44brm")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
 chastity = 1
 temperance = 2
-humility = 2
-patience = 0
-response_action_chastity = ""
-response_action_temperance = ""
-response_action_humility = ""
-response_action_patience = ""
+humility = 1
+patience = 2
+response_action_chastity = "gave a modest smile."
+response_action_temperance = "nodded in agreement."
+response_action_humility = "tried to keep eye contact while listening."
+response_action_patience = "tried to subtly step back from the human."
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"

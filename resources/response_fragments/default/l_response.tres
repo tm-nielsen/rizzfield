@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=4 format=3 uid="uid://cbhfl0xtcabui"]
+
+[ext_resource type="ArrayMesh" uid="uid://dqfju6lyhhvjw" path="res://models/fragments/l.res" id="1_kgwhj"]
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="2_67sf6"]
+[ext_resource type="Texture2D" uid="uid://p4wpvh1680m6" path="res://resources/response_fragments/shape_textures/l.png" id="3_6tmbo"]
+
+[resource]
+script = ExtResource("2_67sf6")
+title = ""
+shape_texture = ExtResource("3_6tmbo")
+mesh = ExtResource("1_kgwhj")
+colour = Color(0.529412, 0.807843, 0.921569, 1)
+chastity = 1
+temperance = 0
+humility = 1
+patience = 0
+response_action_chastity = ""
+response_action_temperance = ""
+response_action_humility = ""
+response_action_patience = ""
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

@@ -6,15 +6,16 @@
 
 [resource]
 script = ExtResource("1_a0dql")
+title = "Blessing of the Body"
 shape_texture = ExtResource("2_a0dql")
 mesh = ExtResource("2_hold3")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
 chastity = 1
-temperance = 1
+temperance = 3
 humility = 0
-patience = 0
-response_action_chastity = ""
-response_action_temperance = ""
-response_action_humility = ""
-response_action_patience = ""
+patience = 1
+response_action_chastity = "tried suppressing a shudder."
+response_action_temperance = "forced your hands to stay still."
+response_action_humility = "felt yourself disconnecting from your body."
+response_action_patience = "did your best to steady your breathing."
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"
