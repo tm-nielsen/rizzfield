@@ -3,6 +3,7 @@ extends DamageableCharacterBody3D
 @export var conversation: ConversationDefinition
 @export var combat_prefab: PackedScene
 @export var head_node: BoneAttachment3D
+@export var combat_instance_health: int = 6
 
 @export_subgroup("parameters")
 @export_range(0, 180) var view_range: float = 60
@@ -63,7 +64,8 @@ func start_conversation():
     GameModeSignalBus.notify_conversation_triggered(conversation, vignette_instance)
 
 func replace_with_combat_instance() -> DamageableCharacterBody3D:
-    var combat_instance: Node3D = combat_prefab.instantiate()
+    var combat_instance: DamageableCharacterBody3D = combat_prefab.instantiate()
+    combat_instance.maximum_health = combat_instance_health
     add_sibling(combat_instance)
     combat_instance.transform = transform
     queue_free()

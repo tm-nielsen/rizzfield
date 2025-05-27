@@ -720,6 +720,7 @@ shape = SubResource("WorldBoundaryShape3D_2jdvr")
 [node name="Chastity Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
 transform = Transform3D(0.66211, 0, -0.749407, 0, 1, 0, 0.749407, 0, 0.66211, 15.7442, -1.19965, -4.80036)
 conversation = ExtResource("25_3ies3")
+combat_instance_health = 4
 view_range = 180.0
 surface_material = SubResource("ShaderMaterial_wu01b")
 
@@ -733,12 +734,14 @@ surface_material = SubResource("ShaderMaterial_w3o6u")
 [node name="Humility Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 66.5446, -3.19965, 49.5626)
 conversation = ExtResource("26_7agi7")
+combat_instance_health = 8
 view_range = 180.0
 surface_material = SubResource("ShaderMaterial_2e2fo")
 
 [node name="Patience Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 137.198, -10.1996, -27.2338)
 conversation = ExtResource("27_kih21")
+combat_instance_health = 12
 view_range = 90.0
 view_distance = 4.0
 surface_material = SubResource("ShaderMaterial_gur6y")
