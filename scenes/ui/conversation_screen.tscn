@@ -58,6 +58,7 @@ stream_4/stream = ExtResource("21_0sjib")
 
 [sub_resource type="LabelSettings" id="LabelSettings_t3wce"]
 font = ExtResource("4_paju4")
+font_size = 12
 
 [sub_resource type="Curve" id="Curve_4vf5j"]
 _data = [Vector2(0, 0), 0.0, 0.2, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
