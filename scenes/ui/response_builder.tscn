@@ -8,14 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://drq2igm6wjkbu" path="res://textures/rock_0.png" id="3_gjipf"]
 [ext_resource type="Script" uid="uid://cx6q64kuim5dh" path="res://scripts/conversation/response_builder/response_fragment_spawner.gd" id="4_va2ta"]
 [ext_resource type="PackedScene" uid="uid://bai4owdwcx2cj" path="res://scenes/prefabs/response_fragment_body.tscn" id="5_gjipf"]
-[ext_resource type="Resource" uid="uid://cm05u2kaqoor" path="res://resources/response_fragments/tri_response.tres" id="6_8t6sj"]
+[ext_resource type="Resource" uid="uid://cm05u2kaqoor" path="res://resources/response_fragments/default/tri_response.tres" id="6_8t6sj"]
 [ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="6_fe1ti"]
 [ext_resource type="Script" uid="uid://b8yyom3skdj3m" path="res://scripts/audio/placement_grid_sounds.gd" id="7_huoyk"]
-[ext_resource type="Resource" uid="uid://cbhfl0xtcabui" path="res://resources/response_fragments/l_response.tres" id="8_gsw4f"]
+[ext_resource type="Resource" uid="uid://cbhfl0xtcabui" path="res://resources/response_fragments/default/l_response.tres" id="8_gsw4f"]
 [ext_resource type="AudioStream" uid="uid://dx7v36p2ghy1s" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorPlacement.ogg" id="8_jm356"]
-[ext_resource type="Resource" uid="uid://bacgci8bgld0" path="res://resources/response_fragments/square_response.tres" id="9_6fcue"]
 [ext_resource type="AudioStream" uid="uid://corp5trtbyhas" path="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorError.ogg" id="9_ipie8"]
 [ext_resource type="PackedScene" uid="uid://7sjdmj67cf3x" path="res://scenes/prefabs/placeable_brick.tscn" id="13_fe1ti"]
+[ext_resource type="Resource" uid="uid://dehqkyktkgbku" path="res://resources/response_fragments/default/s_response.tres" id="15_huoyk"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2wl4r"]
 
@@ -41,14 +41,14 @@ shader = ExtResource("1_gr2tu")
 shader_parameter/colour = Color(1, 1, 1, 1)
 shader_parameter/uv_scale = Vector2(1, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_mhjp6"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_huoyk"]
 size = Vector2(0.8, 0.8)
 
-[sub_resource type="MultiMesh" id="MultiMesh_0pn7t"]
+[sub_resource type="MultiMesh" id="MultiMesh_jm356"]
 transform_format = 1
 use_colors = true
 instance_count = 35
-mesh = SubResource("PlaneMesh_mhjp6")
+mesh = SubResource("PlaneMesh_huoyk")
 buffer = PackedFloat32Array(1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -3, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -2, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, -1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, -2, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, -1, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1)
 
 [node name="ResponseBuilder" type="Node3D" node_paths=PackedStringArray("placement_grid", "fragment_spawner")]
@@ -88,7 +88,7 @@ omni_range = 6.0
 [node name="PlacementGrid" type="MultiMeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
 material_override = SubResource("ShaderMaterial_gr2tu")
-multimesh = SubResource("MultiMesh_0pn7t")
+multimesh = SubResource("MultiMesh_jm356")
 script = ExtResource("1_liyel")
 grid_size = Vector2i(7, 5)
 cell_size = 0.8
@@ -105,7 +105,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 script = ExtResource("4_va2ta")
 grid = NodePath("../PlacementGrid")
 fragment_body_prefab = ExtResource("5_gjipf")
-default_fragments = Array[ExtResource("6_fe1ti")]([ExtResource("8_gsw4f"), ExtResource("9_6fcue"), ExtResource("6_8t6sj")])
+default_fragments = Array[ExtResource("6_fe1ti")]([ExtResource("8_gsw4f"), ExtResource("6_8t6sj"), ExtResource("15_huoyk")])
 spawn_area_height = 2.0
 position_randomization = 0.5
 metadata/_custom_type_script = "uid://cx6q64kuim5dh"
