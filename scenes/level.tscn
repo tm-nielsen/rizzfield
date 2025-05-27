@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=122 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -20,6 +20,14 @@
 [ext_resource type="Resource" uid="uid://b70dbh5v15xno" path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" id="17_36tdo"]
 [ext_resource type="Resource" uid="uid://bu2f3lupsjhfp" path="res://addons/qodot/game_definitions/fgd/solid_classes/wall_solid_class.tres" id="18_smt0q"]
 [ext_resource type="Script" uid="uid://k7m8ol644u53" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="19_g2utk"]
+[ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="21_wu01b"]
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="22_3ies3"]
+[ext_resource type="PackedScene" uid="uid://cq8gwd8d7rcd2" path="res://scenes/prefabs/collectable_physics_brick.tscn" id="23_xy2fk"]
+[ext_resource type="PackedScene" uid="uid://c0rmr1wpvutpg" path="res://scenes/prefabs/enemies/conversation_triggers/mannequin.tscn" id="24_cmcjb"]
+[ext_resource type="Resource" uid="uid://q5jqbjmjamat" path="res://resources/conversations/chastity_conversation.tres" id="25_3ies3"]
+[ext_resource type="Resource" uid="uid://de2ry14082j0x" path="res://resources/conversations/temperance_conversation.tres" id="25_556r4"]
+[ext_resource type="Resource" uid="uid://boh5fijftsnvh" path="res://resources/conversations/humility_conversation.tres" id="26_7agi7"]
+[ext_resource type="Resource" uid="uid://cdx8tqa0l44s8" path="res://resources/conversations/patience_conversation.tres" id="27_kih21"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -329,6 +337,66 @@ fog_depth_end = 47.4
 volumetric_fog_density = 0.029
 volumetric_fog_albedo = Color(0.890629, 0.553476, 0.131475, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.490196, 0.501961, 0.541176, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wu01b"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3o6u"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2e2fo"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gur6y"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
 [node name="Lvl0" type="Node3D"]
 
 [node name="QodotMap" type="Node3D" parent="."]
@@ -604,3 +672,38 @@ directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d0lv2")
+
+[node name="Player" parent="." instance=ExtResource("21_wu01b")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+surface_material = SubResource("ShaderMaterial_556r4")
+
+[node name="Conversation Triggers" type="Node3D" parent="."]
+
+[node name="Chastity Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
+transform = Transform3D(0.66211, 0, -0.749407, 0, 1, 0, 0.749407, 0, 0.66211, 15.7442, -1.19965, -4.80036)
+conversation = ExtResource("25_3ies3")
+view_range = 180.0
+surface_material = SubResource("ShaderMaterial_wu01b")
+
+[node name="Temperance Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 45.8557, -9.19965, 8.47473)
+conversation = ExtResource("25_556r4")
+view_range = 90.0
+view_distance = 10.0
+surface_material = SubResource("ShaderMaterial_w3o6u")
+
+[node name="Humility Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 66.5446, -3.19965, 49.5626)
+conversation = ExtResource("26_7agi7")
+view_range = 180.0
+surface_material = SubResource("ShaderMaterial_2e2fo")
+
+[node name="Patience Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 137.198, -10.1996, -27.2338)
+conversation = ExtResource("27_kih21")
+view_range = 90.0
+view_distance = 4.0
+surface_material = SubResource("ShaderMaterial_gur6y")
+
+[node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6708, -3.9, 39.5546)
