@@ -332,7 +332,7 @@ background_energy_multiplier = 0.25
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.0
-ambient_light_energy = 0.25
+ambient_light_energy = 0.1
 tonemap_mode = 3
 ssao_intensity = 3.0
 sdfgi_energy = 5.0
@@ -345,18 +345,6 @@ volumetric_fog_density = 0.029
 volumetric_fog_albedo = Color(0.890629, 0.553476, 0.131475, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2jdvr"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("22_3ies3")
-shader_parameter/albedo_colour = Color(0.490196, 0.501961, 0.541176, 1)
-shader_parameter/roughness = 0.87
-shader_parameter/metallic = 0.0
-shader_parameter/specular = 0.5
-shader_parameter/emission = Color(0, 0, 0, 1)
-shader_parameter/uv_scale = Vector2(1, 1)
-shader_parameter/normal_scale = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wu01b"]
 resource_local_to_scene = true
@@ -399,6 +387,18 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("22_3ies3")
 shader_parameter/albedo_colour = Color(0.700654, 0.601532, 0.514133, 1)
+shader_parameter/roughness = 0.87
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/normal_scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("22_3ies3")
+shader_parameter/albedo_colour = Color(0.490196, 0.501961, 0.541176, 1)
 shader_parameter/roughness = 0.87
 shader_parameter/metallic = 0.0
 shader_parameter/specular = 0.5
@@ -682,6 +682,31 @@ directional_shadow_mode = 0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d0lv2")
 
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21482, 7.89696, 7.35507)
+light_energy = 0.25
+omni_range = 50.0
+omni_attenuation = 0.25
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.1945, 7.89696, -7.24569)
+light_energy = 0.25
+omni_range = 50.0
+omni_attenuation = 0.25
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 131.835, 8.86059, 4.7008)
+light_energy = 0.5
+omni_range = 80.0
+omni_attenuation = 0.25
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6491, 3.42182, 43.2301)
+omni_range = 20.0
+omni_attenuation = 0.8
+
 [node name="Kill Box" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130, -20, 8)
 collision_mask = 7
@@ -689,10 +714,6 @@ script = ExtResource("35_asl66")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Kill Box"]
 shape = SubResource("WorldBoundaryShape3D_2jdvr")
-
-[node name="Player" parent="." instance=ExtResource("21_wu01b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-surface_material = SubResource("ShaderMaterial_556r4")
 
 [node name="Conversation Triggers" type="Node3D" parent="."]
 
@@ -746,6 +767,10 @@ fragment = ExtResource("32_svjb4")
 [node name="Splat Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7133, -3.5, 50.9311)
 fragment = ExtResource("33_c1pbi")
+
+[node name="Player" parent="." instance=ExtResource("21_wu01b")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+surface_material = SubResource("ShaderMaterial_556r4")
 
 [node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.6708, -3.9, 39.5546)
