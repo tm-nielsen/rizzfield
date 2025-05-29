@@ -12,7 +12,6 @@ func _ready() -> void:
     for child in get_children():
         var tone_player: AudioStreamPlayer = child.get_child(0)
         tone_player.volume_linear = 0
-        print(child.name, " | ", tone_player.name)
         child.body_entered.connect(
             func(body):
             if !body is PlayerController: return
