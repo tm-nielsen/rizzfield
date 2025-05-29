@@ -1,4 +1,9 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://c8f3qvmgjn7ty"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://c8f3qvmgjn7ty"]
+
+[sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_j3pel"]
+resource_name = "SpectrumAnalyzer"
+buffer_length = 1.0
+fft_size = 1
 
 [resource]
 bus/1/name = &"Music"
@@ -19,3 +24,17 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"Sounds"
+bus/4/name = &"Room Tones"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Ambient"
+bus/5/name = &"Flickering Lights"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Ambient"
+bus/5/effect/0/effect = SubResource("AudioEffectSpectrumAnalyzer_j3pel")
+bus/5/effect/0/enabled = true
