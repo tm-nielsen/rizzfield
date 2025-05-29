@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=138 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -34,7 +34,15 @@
 [ext_resource type="Resource" uid="uid://xg7826m1ef07" path="res://resources/response_fragments/cross_response.tres" id="31_q4oe8"]
 [ext_resource type="Resource" uid="uid://jky8ohwkx4hs" path="res://resources/response_fragments/stairs_response.tres" id="32_svjb4"]
 [ext_resource type="Resource" uid="uid://c5bbk2uue8gnj" path="res://resources/response_fragments/splat_response.tres" id="33_c1pbi"]
+[ext_resource type="AudioStream" uid="uid://ck36n8jlb8ymh" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopBell.ogg" id="34_iafhg"]
+[ext_resource type="AudioStream" uid="uid://hyotbvkcufkt" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopWind.ogg" id="34_q4oe8"]
 [ext_resource type="Script" uid="uid://br37m0k15x017" path="res://scripts/exploration/kill_box.gd" id="35_asl66"]
+[ext_resource type="AudioStream" uid="uid://ddoti5b766vls" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopSutter.ogg" id="35_svjb4"]
+[ext_resource type="AudioStream" uid="uid://ntxbmsq4a4ww" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopLight.ogg" id="36_cr74b"]
+[ext_resource type="AudioStream" uid="uid://lklgywtrpo7h" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopStone.ogg" id="38_uhfbm"]
+[ext_resource type="AudioStream" uid="uid://qjiy50kglwi4" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopBreath.ogg" id="39_lqb7q"]
+[ext_resource type="AudioStream" uid="uid://dwwqfvpd7s6hg" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopChug.ogg" id="40_ok3ci"]
+[ext_resource type="AudioStream" uid="uid://c4gy3ry6k6wt0" path="res://Sound/Sound Effects/Loops/Location Based Sound Loops/LocationLoopHeart.ogg" id="41_hv3ux"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -770,6 +778,70 @@ fragment = ExtResource("32_svjb4")
 [node name="Splat Fragment" parent="Fragments" instance=ExtResource("28_v3why")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7133, -3.5, 50.9311)
 fragment = ExtResource("33_c1pbi")
+
+[node name="Ambient Audio" type="Node3D" parent="."]
+
+[node name="Bell" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6413, -2, 34.7881)
+stream = ExtResource("34_iafhg")
+attenuation_model = 1
+unit_size = 20.0
+autoplay = true
+bus = &"Ambient"
+
+[node name="Wind" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6064, -3, 34.5693)
+stream = ExtResource("34_q4oe8")
+attenuation_model = 2
+unit_size = 4.0
+autoplay = true
+bus = &"Ambient"
+
+[node name="Light" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6064, 4.90668, 43.1234)
+stream = ExtResource("36_cr74b")
+attenuation_model = 2
+unit_size = 6.0
+autoplay = true
+bus = &"Ambient"
+
+[node name="Stutter" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -2, 7.2193)
+stream = ExtResource("35_svjb4")
+attenuation_model = 2
+unit_size = 4.0
+autoplay = true
+bus = &"Ambient"
+
+[node name="Stone" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8816, -9.34413, -0.574908)
+stream = ExtResource("38_uhfbm")
+attenuation_model = 2
+unit_size = 6.0
+autoplay = true
+bus = &"Ambient"
+
+[node name="Breath" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 132.442, -18.8564, 6)
+stream = ExtResource("39_lqb7q")
+attenuation_model = 2
+autoplay = true
+bus = &"Ambient"
+
+[node name="Chug" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 165.448, -2, 26.3967)
+stream = ExtResource("40_ok3ci")
+attenuation_model = 1
+autoplay = true
+bus = &"Ambient"
+
+[node name="Heart" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.9611, -14.1234, -31.6621)
+stream = ExtResource("41_hv3ux")
+attenuation_model = 2
+unit_size = 4.0
+autoplay = true
+bus = &"Ambient"
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
