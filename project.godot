@@ -17,7 +17,7 @@ warnings/check_invalid_track_paths=false
 config/name="Rizzfield"
 run/main_scene="uid://ch7e8r5h7a6kn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bdh5gylyl10vp"
 
 [autoload]
 
