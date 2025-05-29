@@ -944,7 +944,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82986, 0, 7.87388)
 shape = SubResource("BoxShape3D_j4eoh")
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 38.6575, 0, 14.5603)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 surface_material = SubResource("ShaderMaterial_556r4")
 
 [node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
