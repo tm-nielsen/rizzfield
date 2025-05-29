@@ -1,15 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvvc0gq1ejxgq"]
+[gd_scene load_steps=10 format=3 uid="uid://cvvc0gq1ejxgq"]
 
 [ext_resource type="Script" uid="uid://bdmqkf1bl5qbe" path="res://scripts/menu_manager.gd" id="1_q1yqd"]
 [ext_resource type="FontFile" uid="uid://boy2w1cg078kv" path="res://resources/ui/fonts/Splash-Regular.ttf" id="2_q1yqd"]
 [ext_resource type="PackedScene" uid="uid://do171msbojews" path="res://scenes/ui/title_screen_background.tscn" id="3_38q3s"]
 [ext_resource type="FontFile" uid="uid://d3qmxep71cpo6" path="res://resources/ui/fonts/PermanentMarker-Regular.ttf" id="4_qdcsh"]
+[ext_resource type="Script" uid="uid://di7rhyiglldyn" path="res://scripts/content_warning.gd" id="5_rlr80"]
+[ext_resource type="FontFile" uid="uid://c8311ruc5w17n" path="res://resources/ui/fonts/Lacquer-Regular.ttf" id="6_77d25"]
 
 [sub_resource type="World3D" id="World3D_k1th2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eb6dy"]
 font = ExtResource("2_q1yqd")
 font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqbrl"]
+font = ExtResource("6_77d25")
+font_size = 14
 
 [node name="MenuScreens" type="Control" node_paths=PackedStringArray("main_menu", "death_screen", "death_screen_label")]
 layout_mode = 3
@@ -97,11 +103,22 @@ render_target_update_mode = 4
 
 [node name="TitleScreenBackground" parent="TitleScreen/SubViewportContainer/SubViewport" instance=ExtResource("3_38q3s")]
 
-[node name="Title" type="Label" parent="TitleScreen/SubViewportContainer/SubViewport"]
+[node name="Start Screen" type="Control" parent="TitleScreen/SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen"]
+layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = -35.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Homonculus"
@@ -109,16 +126,54 @@ label_settings = SubResource("LabelSettings_eb6dy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="TitleScreen/SubViewportContainer/SubViewport"]
+[node name="StartButton" type="Button" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.35
 anchor_top = 0.8
 anchor_right = 0.65
 anchor_bottom = 0.8
+offset_top = -12.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_qdcsh")
 theme_override_font_sizes/font_size = 16
 text = "Begin"
 
-[connection signal="pressed" from="TitleScreen/SubViewportContainer/SubViewport/StartButton" to="." method="start_game"]
+[node name="Content Warning" type="Control" parent="TitleScreen" node_paths=PackedStringArray("next_screen")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_rlr80")
+duration = 8.0
+next_screen = NodePath("../SubViewportContainer/SubViewport/Start Screen")
+
+[node name="Title" type="Label" parent="TitleScreen/Content Warning"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -35.0
+offset_right = -24.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CONTENT WARNING
+
+Though presented through coding and metaphor, Homonculus references sexual themes, as well as themes of acephobia, homophobia, transphobia, and religious trauma.
+This game also contains direct depictions of violence.
+
+Player discretion is advised. Take care of yourselves.
+"
+label_settings = SubResource("LabelSettings_nqbrl")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="TitleScreen/SubViewportContainer/SubViewport/Start Screen/StartButton" to="." method="start_game"]
