@@ -767,6 +767,7 @@ transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 45.8557, -
 conversation = ExtResource("25_556r4")
 view_range = 90.0
 view_distance = 10.0
+activation_time = 0.6
 surface_material = SubResource("ShaderMaterial_w3o6u")
 
 [node name="Humility Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
