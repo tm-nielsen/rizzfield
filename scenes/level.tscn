@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=139 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://b70dbh5v15xno" path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" id="17_36tdo"]
 [ext_resource type="Resource" uid="uid://bu2f3lupsjhfp" path="res://addons/qodot/game_definitions/fgd/solid_classes/wall_solid_class.tres" id="18_smt0q"]
 [ext_resource type="Script" uid="uid://k7m8ol644u53" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="19_g2utk"]
+[ext_resource type="Script" uid="uid://ccdtxhbupgunu" path="res://scripts/exploration/flickering_light.gd" id="21_cr74b"]
 [ext_resource type="PackedScene" uid="uid://cuwbviq8y2olc" path="res://scenes/prefabs/player.tscn" id="21_wu01b"]
 [ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="22_3ies3"]
 [ext_resource type="PackedScene" uid="uid://cq8gwd8d7rcd2" path="res://scenes/prefabs/collectable_physics_brick.tscn" id="23_xy2fk"]
@@ -692,28 +693,31 @@ environment = SubResource("Environment_d0lv2")
 
 [node name="Lights" type="Node3D" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="Start Platform Light" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.21482, 7.89696, 7.35507)
 light_energy = 0.25
 omni_range = 50.0
 omni_attenuation = 0.25
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+[node name="Pillar Room Light" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56.1945, 7.89696, -7.24569)
 light_energy = 0.25
 omni_range = 50.0
 omni_attenuation = 0.25
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+[node name="Pit Room Light" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 131.835, 8.86059, 4.7008)
 light_energy = 0.5
 omni_range = 80.0
 omni_attenuation = 0.25
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+[node name="Tangent Room Light" type="OmniLight3D" parent="Lights"]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6491, 3.42182, 43.2301)
 omni_range = 20.0
 omni_attenuation = 0.8
+script = ExtResource("21_cr74b")
+base_energy = 0.8
 
 [node name="Kill Box" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130, -20, 8)
@@ -798,12 +802,13 @@ autoplay = true
 bus = &"Ambient"
 
 [node name="Light" type="AudioStreamPlayer3D" parent="Ambient Audio"]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6064, 4.90668, 43.1234)
 stream = ExtResource("36_cr74b")
 attenuation_model = 2
 unit_size = 6.0
 autoplay = true
-bus = &"Ambient"
+bus = &"Flickering Lights"
 
 [node name="Stutter" type="AudioStreamPlayer3D" parent="Ambient Audio"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -2, 7.2193)
@@ -844,7 +849,7 @@ autoplay = true
 bus = &"Ambient"
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 66.9735, 0, 32.4203)
 surface_material = SubResource("ShaderMaterial_556r4")
 
 [node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
