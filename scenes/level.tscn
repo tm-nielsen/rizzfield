@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=151 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -415,10 +415,19 @@ size = Vector3(25, 20, 30)
 size = Vector3(75, 40, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_30hdq"]
-size = Vector3(60, 40, 60)
+size = Vector3(60, 40, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bhb1k"]
+size = Vector3(25, 40, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tcyu4"]
+size = Vector3(20, 40, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3fqns"]
 size = Vector3(80, 20, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j4eoh"]
+size = Vector3(12, 20, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
 resource_local_to_scene = true
@@ -771,8 +780,9 @@ surface_material = SubResource("ShaderMaterial_2e2fo")
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 137.198, -10.1996, -27.2338)
 conversation = ExtResource("27_kih21")
 combat_instance_health = 12
-view_range = 90.0
-view_distance = 4.0
+view_range = 180.0
+view_distance = 1.5
+activation_time = 0.4
 surface_material = SubResource("ShaderMaterial_gur6y")
 
 [node name="Fragments" type="Node3D" parent="."]
@@ -907,6 +917,14 @@ bus = &"Room Tones"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room Tones/Area 3"]
 shape = SubResource("BoxShape3D_30hdq")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Room Tones/Area 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7627, 0, -23.332)
+shape = SubResource("BoxShape3D_bhb1k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Room Tones/Area 3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1508, 0, -23.332)
+shape = SubResource("BoxShape3D_tcyu4")
+
 [node name="Area 4" type="Area3D" parent="Room Tones"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.779, -7.80152, -28.5512)
 collision_mask = 2
@@ -920,8 +938,12 @@ bus = &"Room Tones"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room Tones/Area 4"]
 shape = SubResource("BoxShape3D_3fqns")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Room Tones/Area 4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82986, 0, 7.87388)
+shape = SubResource("BoxShape3D_j4eoh")
+
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 38.6575, 0, 14.5603)
 surface_material = SubResource("ShaderMaterial_556r4")
 
 [node name="WorldBrick" parent="." instance=ExtResource("23_xy2fk")]
