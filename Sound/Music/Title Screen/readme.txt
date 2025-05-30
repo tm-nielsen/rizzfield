@@ -1,0 +1,3 @@
+quick note on the title screen music:
+
+HomonculusTitleScreenMain should play once and then not repeat until the next time the title screen is seen. If possible, HomonculusTitleScreenLoop is supposed to start playing exactly 2 minutes 15 seconds and loop continuously until the title screen is exited. Fadeout time should be a little on the long side upon exiting the title screen (~1 second, although if you try that and it sounds like ass feel free to cut it off as slow or quick as needed) - if you can do a crossfade into the ambient room tones, that'd be super cool, but no worries if not (I'm aware I'm shaving this close - your patience is, sincerely, appreciated).
