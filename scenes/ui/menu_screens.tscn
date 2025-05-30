@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvvc0gq1ejxgq"]
+[gd_scene load_steps=13 format=3 uid="uid://cvvc0gq1ejxgq"]
 
 [ext_resource type="Script" uid="uid://bdmqkf1bl5qbe" path="res://scripts/menu_manager.gd" id="1_q1yqd"]
 [ext_resource type="FontFile" uid="uid://boy2w1cg078kv" path="res://resources/ui/fonts/Splash-Regular.ttf" id="2_q1yqd"]
 [ext_resource type="PackedScene" uid="uid://do171msbojews" path="res://scenes/ui/title_screen_background.tscn" id="3_38q3s"]
 [ext_resource type="FontFile" uid="uid://d3qmxep71cpo6" path="res://resources/ui/fonts/PermanentMarker-Regular.ttf" id="4_qdcsh"]
+[ext_resource type="Script" uid="uid://u5e61teokifo" path="res://scripts/audio/title_screen_music_manager.gd" id="5_iilto"]
 [ext_resource type="Script" uid="uid://di7rhyiglldyn" path="res://scripts/content_warning.gd" id="5_rlr80"]
+[ext_resource type="AudioStream" uid="uid://cck703nj1n1ux" path="res://Sound/Music/Title Screen/HomonculusTitleScreenMain.ogg" id="6_72jck"]
 [ext_resource type="FontFile" uid="uid://c8311ruc5w17n" path="res://resources/ui/fonts/Lacquer-Regular.ttf" id="6_77d25"]
+[ext_resource type="AudioStream" uid="uid://cq3jxf1wpq31t" path="res://Sound/Music/Title Screen/HomonculusTitleScreenLoop.ogg" id="7_0u6tk"]
 
 [sub_resource type="World3D" id="World3D_k1th2"]
 
@@ -140,6 +143,21 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_qdcsh")
 theme_override_font_sizes/font_size = 16
 text = "Begin"
+
+[node name="Music" type="Node" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen" node_paths=PackedStringArray("main_track", "delayed_loop")]
+script = ExtResource("5_iilto")
+main_track = NodePath("Main")
+delayed_loop = NodePath("Loop")
+fade_duration = 6.0
+
+[node name="Main" type="AudioStreamPlayer" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen/Music"]
+stream = ExtResource("6_72jck")
+autoplay = true
+bus = &"Music"
+
+[node name="Loop" type="AudioStreamPlayer" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen/Music"]
+stream = ExtResource("7_0u6tk")
+bus = &"Music"
 
 [node name="Content Warning" type="Control" parent="TitleScreen" node_paths=PackedStringArray("next_screen")]
 layout_mode = 1
