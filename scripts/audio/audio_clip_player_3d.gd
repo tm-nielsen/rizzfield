@@ -1,5 +1,5 @@
-class_name AudioClipPlayer
-extends AudioStreamPlayer
+class_name AudioClipPlayer3D
+extends AudioStreamPlayer3D
 
 func _notification(what: int) -> void:
     if what == NOTIFICATION_ENTER_TREE:
