@@ -181,7 +181,7 @@ audio_listener_enable_3d = true
 size = Vector2i(76, 47)
 render_target_update_mode = 4
 
-[node name="Voice Sounds" type="Node3D" parent="VBoxContainer/Display Area/VignetteViewport/SubViewport"]
+[node name="Voice Sounds" type="Node" parent="VBoxContainer/Display Area/VignetteViewport/SubViewport"]
 script = ExtResource("6_qj3xh")
 layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_v8s5h"), SubResource("AudioStreamRandomizer_hpawo"), SubResource("AudioStreamRandomizer_14ktd")])
 metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
