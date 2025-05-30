@@ -839,7 +839,7 @@ autoplay = true
 bus = &"Flickering Lights"
 
 [node name="Stutter" type="AudioStreamPlayer3D" parent="Ambient Audio"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -2, 7.2193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -9, 7.2193)
 stream = ExtResource("35_svjb4")
 attenuation_model = 2
 unit_size = 4.0
