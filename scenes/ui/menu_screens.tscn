@@ -166,11 +166,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "CONTENT WARNING
 
-Though presented through coding and metaphor, Homonculus references sexual themes, as well as themes of acephobia, homophobia, transphobia, and religious trauma.
-This game also contains direct depictions of violence.
+Though presented very abstractly, Homonculus references sexual themes, as well as themes of acephobia, homophobia, transphobia, and religious trauma.
 
-Player discretion is advised. Take care of yourselves.
-"
+Player discretion is advised."
 label_settings = SubResource("LabelSettings_nqbrl")
 horizontal_alignment = 1
 vertical_alignment = 1
