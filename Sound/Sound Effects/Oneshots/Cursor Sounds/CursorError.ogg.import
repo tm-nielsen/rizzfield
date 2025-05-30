@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://corp5trtbyhas"
+path="res://.godot/imported/CursorError.ogg-9cc2aaef6e5bcf730e9fb62eaca99f5f.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Cursor Sounds/CursorError.ogg"
+dest_files=["res://.godot/imported/CursorError.ogg-9cc2aaef6e5bcf730e9fb62eaca99f5f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

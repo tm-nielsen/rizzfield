@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://g0p1e6bo8t1r"
+path="res://.godot/imported/RoomToneLoop-003.ogg-4c57b130464312a63c6df49c087d1411.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-003.ogg"
+dest_files=["res://.godot/imported/RoomToneLoop-003.ogg-4c57b130464312a63c6df49c087d1411.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

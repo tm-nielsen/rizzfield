@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+
 [application]
 
-config/name="Rizzfield"
+config/name="Homonculus"
 run/main_scene="uid://ch7e8r5h7a6kn"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="uid://bdh5gylyl10vp"
 
 [autoload]
 

@@ -6,15 +6,16 @@
 
 [resource]
 script = ExtResource("1_jnbiq")
+title = "Blessing of the Meek"
 shape_texture = ExtResource("2_jnbiq")
 mesh = ExtResource("2_3sggg")
 colour = Color(0.529412, 0.807843, 0.921569, 1)
 chastity = 2
 temperance = 0
-humility = 0
-patience = 0
-response_action_chastity = ""
-response_action_temperance = ""
-response_action_humility = ""
-response_action_patience = ""
+humility = 3
+patience = 1
+response_action_chastity = "tried to play off your discomfort with laughter."
+response_action_temperance = "tried flattering the human."
+response_action_humility = "said something self-deprecating."
+response_action_patience = "made an apology."
 metadata/_custom_type_script = "uid://dctfnd7xh22aw"

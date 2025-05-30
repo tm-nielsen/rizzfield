@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnjgo2oxdc7g0"
+path="res://.godot/imported/ConvoFail.ogg-6c3208a25e87a0a53cd776a8467e7225.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Misc/ConvoFail.ogg"
+dest_files=["res://.godot/imported/ConvoFail.ogg-6c3208a25e87a0a53cd776a8467e7225.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

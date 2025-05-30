@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://btvxr0mq2u6w0"
+path="res://.godot/imported/ConvoSubmitBad.ogg-e38bf5206f8f1c612841988b2e6870e7.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Cursor Sounds/Submit Response/ConvoSubmitBad.ogg"
+dest_files=["res://.godot/imported/ConvoSubmitBad.ogg-e38bf5206f8f1c612841988b2e6870e7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

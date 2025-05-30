@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
     var delta_scale = delta * ElasticValue.SCALING_FRAMERATE
     elastic_fill_level.update_value(fill_target, delta_scale)
     elastic_preview_level.update_value(preview_target, delta_scale)
+    fill.anchor_bottom = 1
     fill.anchor_top = clampf(1 - elastic_fill_level.value, 0, 1)
     _update_preview()
 

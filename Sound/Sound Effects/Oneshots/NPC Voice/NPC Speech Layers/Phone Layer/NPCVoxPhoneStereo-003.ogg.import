@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://18lsc7kew08f"
+path="res://.godot/imported/NPCVoxPhoneStereo-003.ogg-c0c471727f013bf08856d5254802c4b6.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Phone Layer/NPCVoxPhoneStereo-003.ogg"
+dest_files=["res://.godot/imported/NPCVoxPhoneStereo-003.ogg-c0c471727f013bf08856d5254802c4b6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

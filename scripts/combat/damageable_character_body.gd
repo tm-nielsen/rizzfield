@@ -1,7 +1,9 @@
 class_name DamageableCharacterBody3D
 extends CharacterBody3D
 
-signal damaged(amount: int, impact: Vector3)
+signal damage_received(amount: int, impact: Vector3)
+signal damaged
+signal died
 signal damage_parried
 signal damage_blocked
 
@@ -40,7 +42,8 @@ func receive_damage(amount: int, impact: Vector3):
         health -= amount
         start_flinch()
         if health <= 0: die(impact)
-        damaged.emit(amount, impact)
+        damage_received.emit(amount, impact)
+        damaged.emit()
 
 
 func start_flinch():
@@ -58,7 +61,7 @@ func end_flinch(previous_state: int):
     if state != DEAD: state = previous_state
     set_material_emission(default_emission)
 
-func die(_force: Vector3): pass
+func die(_force: Vector3): died.emit()
 
 
 func set_material_emission(emission: Color):

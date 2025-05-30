@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b3d3xoecaf7h8"
+path="res://.godot/imported/NPCVoxMainStereo-005.ogg-70ae86d8edf9ac8e49b733b893c4926a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/NPC Voice/NPC Speech Layers/Main Layer/NPCVoxMainStereo-005.ogg"
+dest_files=["res://.godot/imported/NPCVoxMainStereo-005.ogg-70ae86d8edf9ac8e49b733b893c4926a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

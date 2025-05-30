@@ -141,6 +141,7 @@ func start_parry_flinch():
 
 
 func die(force: Vector3):
+    super(force)
     state = DEAD
     step_animator.stop_step()
     collider.disabled = true

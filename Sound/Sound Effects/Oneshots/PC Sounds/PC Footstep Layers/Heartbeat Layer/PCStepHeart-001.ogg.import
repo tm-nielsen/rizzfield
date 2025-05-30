@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d4ei57gm83brr"
+path="res://.godot/imported/PCStepHeart-001.ogg-99282869fed9ba4c47986108eb2e513c.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Heartbeat Layer/PCStepHeart-001.ogg"
+dest_files=["res://.godot/imported/PCStepHeart-001.ogg-99282869fed9ba4c47986108eb2e513c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

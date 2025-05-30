@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=4 format=3 uid="uid://jky8ohwkx4hs"]
+
+[ext_resource type="ArrayMesh" uid="uid://h6ng6oqll1n5" path="res://models/fragments/stairs.res" id="1_yhmjc"]
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="2_h8efe"]
+[ext_resource type="Texture2D" uid="uid://cc2cy2c2byifi" path="res://resources/response_fragments/shape_textures/stairs.png" id="3_h8efe"]
+
+[resource]
+script = ExtResource("2_h8efe")
+title = "Blessing of the Fearful"
+shape_texture = ExtResource("3_h8efe")
+mesh = ExtResource("1_yhmjc")
+colour = Color(0.529412, 0.807843, 0.921569, 1)
+chastity = 2
+temperance = 2
+humility = 4
+patience = -1
+response_action_chastity = "spoke fearfully about Her growing influence."
+response_action_temperance = "supplicated The Alchemist for protection."
+response_action_humility = "repeated a rumor you heard about Her."
+response_action_patience = "uttered a curse on The Ragged Queen’s followers"
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

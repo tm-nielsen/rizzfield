@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpvs5suhm4405"
+path="res://.godot/imported/PipeNPCDeath.ogg-f43e9cded0058485543368d78bc501d4.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/Pipe Sounds/Attack Sound Layers/Extra Impact Sounds/PipeNPCDeath.ogg"
+dest_files=["res://.godot/imported/PipeNPCDeath.ogg-f43e9cded0058485543368d78bc501d4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

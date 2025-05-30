@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ResponseFragment" load_steps=4 format=3 uid="uid://c5bbk2uue8gnj"]
+
+[ext_resource type="ArrayMesh" uid="uid://bs2ouhro701pa" path="res://models/fragments/splat.res" id="1_6ws5k"]
+[ext_resource type="Script" uid="uid://dctfnd7xh22aw" path="res://scripts/conversation/response_builder/response_fragment.gd" id="2_fes4p"]
+[ext_resource type="Texture2D" uid="uid://cn1c3b0bmmjq5" path="res://resources/response_fragments/shape_textures/splat.png" id="3_fes4p"]
+
+[resource]
+script = ExtResource("2_fes4p")
+title = "Blessing of the Deceiver"
+shape_texture = ExtResource("3_fes4p")
+mesh = ExtResource("1_6ws5k")
+colour = Color(0.529412, 0.807843, 0.921569, 1)
+chastity = 1
+temperance = 2
+humility = -2
+patience = 6
+response_action_chastity = "gave a gentle look."
+response_action_temperance = "kept your voice calm and even."
+response_action_humility = "complimented the human's modesty."
+response_action_patience = "took an aggressive tone."
+metadata/_custom_type_script = "uid://dctfnd7xh22aw"

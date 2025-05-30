@@ -1,9 +1,9 @@
 extends Area3D
 
 @export var fragment: ResponseFragment
-@export var title: String
 @export_multiline var description: String
 @export var mesh_scale: float = 0.2
+@export var audio_source: AudioStreamPlayer3D
 
 @export_subgroup("animation")
 @export var spin_speed: float = 2
@@ -15,18 +15,25 @@ var mesh: MeshInstance3D
 
 
 func _ready() -> void:
-    body_entered.connect(func(body: PhysicsBody3D):
-        if !body is PlayerController: return
-        ExplorationSignalBus.notify_fragment_collected(
-            fragment, title, description
-        )
-        queue_free()
+    body_entered.connect(
+        func(body: PhysicsBody3D):
+        if body is PlayerController: collect()
     )
     frame_timer.frame_out.connect(update_mesh_rotation)
     mesh = fragment.create_mesh_instance()
     mesh.material_override = fragment.create_material()
     add_child(mesh)
     mesh.scale = Vector3.ONE * mesh_scale
+
+
+func collect():
+    ExplorationSignalBus.notify_fragment_collected(
+        fragment, description
+    )
+    audio_source.reparent(get_parent())
+    audio_source.finished.connect(audio_source.queue_free)
+    audio_source.play()
+    queue_free()
 
 
 func update_mesh_rotation() -> void:

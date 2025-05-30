@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://yrkxqyp7kdrd"
+path="res://.godot/imported/PCStepFoot-002.ogg-5f272182a0df84eee5aaa06f1fa234de.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Footstep Layers/Footfall Layer/PCStepFoot-002.ogg"
+dest_files=["res://.godot/imported/PCStepFoot-002.ogg-5f272182a0df84eee5aaa06f1fa234de.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

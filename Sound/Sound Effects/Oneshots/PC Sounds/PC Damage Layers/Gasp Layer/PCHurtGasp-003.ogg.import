@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mk6vij4gtd2t"
+path="res://.godot/imported/PCHurtGasp-003.ogg-d9ae87f518a9b89812255feb2e88a690.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/Oneshots/PC Sounds/PC Damage Layers/Gasp Layer/PCHurtGasp-003.ogg"
+dest_files=["res://.godot/imported/PCHurtGasp-003.ogg-d9ae87f518a9b89812255feb2e88a690.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
