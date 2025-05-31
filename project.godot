@@ -25,6 +25,7 @@ TweenHelpers="*res://scripts/globals/tween_helpers.gd"
 GameModeSignalBus="*res://scripts/globals/game_mode_signal_bus.gd"
 ResponseBuilderSignalBus="*res://scripts/globals/response_builder_signal_bus.gd"
 ExplorationSignalBus="*res://scripts/globals/exploration_signal_bus.gd"
+ConversationSignalBus="*res://scripts/globals/conversation_signal_bus.gd"
 
 [display]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbdpk1g82cs7n"]
+[gd_scene load_steps=11 format=3 uid="uid://dbdpk1g82cs7n"]
 
 [ext_resource type="Script" uid="uid://c6diby04iws8k" path="res://scripts/enemies/vignette_animator.gd" id="1_mtw0t"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="2_5gnmd"]
@@ -109,9 +109,117 @@ tracks/3/keys = {
 "values": [0.4, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_mtw0t"]
+resource_name = "speak"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.013914, -0.0311063, 0.40301)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.11844, -0.0632279, -0.134863)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+
+[sub_resource type="Animation" id="Animation_mb8vu"]
+resource_name = "return"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0416923, -0.0289949, 0.329639), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.416667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0749347, 0.0765279, -0.149702), Vector3(-0.147785, 0.196448, -0.15474), Vector3(-0.235165, 0.187762, -0.119657)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.27826e-07),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5gnmd"]
 _data = {
 &"RESET": SubResource("Animation_hilif"),
+&"return": SubResource("Animation_mb8vu"),
+&"speak": SubResource("Animation_mtw0t"),
 &"zoom": SubResource("Animation_b70mf")
 }
 

@@ -79,6 +79,7 @@ func set_state(new_state: ConversationState):
             set_state_in(RESPONSE_CONSTRUCTION, duration_prompt_display)
             show()
         RESPONSE_CONSTRUCTION:
+            ConversationSignalBus.notify_response_construction_started()
             view.start_response_construction()
             submit_response_button.disabled = true
             response_builder.reset()
@@ -86,6 +87,7 @@ func set_state(new_state: ConversationState):
             response_construction_timer.start(duration_response_construction)
             _update_stat_meters()
         QUOTE_DISPLAY:
+            ConversationSignalBus.notify_npc_spoke()
             set_state_in(RESPONSE_CONSTRUCTION, duration_quote_display)
 
 func set_state_in(target_state: ConversationState, delay: float):
@@ -153,6 +155,7 @@ func end_conversation(
 ):
     if state == FINAL_QUOTE_DISPLAY: return
     set_state(FINAL_QUOTE_DISPLAY)
+    ConversationSignalBus.notify_npc_spoke()
     view.display_npc_quote(final_quote)
     TweenHelpers.call_delayed_realtime(
         notification_method.call
