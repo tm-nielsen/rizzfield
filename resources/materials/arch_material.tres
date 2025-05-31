@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dqipien8p0kd"]
+
+[ext_resource type="Shader" uid="uid://dx5nf4q1nlup3" path="res://resources/shaders/lit.gdshader" id="1_ehu1y"]
+[ext_resource type="Texture2D" uid="uid://drq2igm6wjkbu" path="res://textures/rock_0.png" id="2_q3qpw"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ehu1y")
+shader_parameter/albedo_colour = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("2_q3qpw")
+shader_parameter/roughness = 0.9
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = Vector2(10, 10)
+shader_parameter/normal_scale = 1.0
