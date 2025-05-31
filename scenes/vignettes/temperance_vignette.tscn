@@ -1,0 +1,312 @@
+[gd_scene load_steps=11 format=3 uid="uid://b74fxsa5h6dku"]
+
+[ext_resource type="Script" uid="uid://c6diby04iws8k" path="res://scripts/enemies/vignette_animator.gd" id="1_uwauc"]
+[ext_resource type="PackedScene" uid="uid://c1v21mtr3805d" path="res://models/source_files/sentry_poses.blend" id="2_ct20a"]
+[ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="3_wyrah"]
+[ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="4_gv87e"]
+
+[sub_resource type="Animation" id="Animation_hilif"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0790314, 0.0811251, 0.180544)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.464909, -0.122644, 0.0500958)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mb8vu"]
+resource_name = "return"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.054, 0.601, 0.322), Vector3(-0.095, 0.564, 0.001), Vector3(-0.095, 0.477, 0.071)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.49012e-08, 0.25, 0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0749347, 0.0765279, -0.149702), Vector3(-0.497331, -0.061123, 0.0331902), Vector3(-0.171819, -0.0545144, 0.0133311), Vector3(0.266033, -0.0556713, -0.0106489)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.27826e-07),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mtw0t"]
+resource_name = "speak"
+length = 0.666675
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.014, 0.519, 0.403)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.11844, -0.0632279, -0.134863)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+
+[sub_resource type="Animation" id="Animation_b70mf"]
+resource_name = "zoom"
+length = 0.333342
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.042, 0.657, 0.282), Vector3(-0.095, 0.468, 0.001), Vector3(-0.095, 0.477, 0.071)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.470215, 0.0985171, -0.432987), Vector3(0.459356, -0.0599297, -0.0225952), Vector3(0.266033, -0.0556713, -0.0106489)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 0.9, 0.75]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.4, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gnmd"]
+_data = {
+&"RESET": SubResource("Animation_hilif"),
+&"return": SubResource("Animation_mb8vu"),
+&"speak": SubResource("Animation_mtw0t"),
+&"zoom": SubResource("Animation_b70mf")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_5gnmd"]
+material = ExtResource("4_gv87e")
+size = Vector2(0.05, 0.05)
+
+[node name="Temperance Vignette" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.99399, 0.00508112, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999013, -0.450542, 0.887148, -0.0790314, 0.0811251, 0.180544)
+cull_mask = 1048569
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("body_animator")]
+libraries = {
+&"": SubResource("AnimationLibrary_5gnmd")
+}
+autoplay = "zoom"
+script = ExtResource("1_uwauc")
+body_animator = NodePath("../sentry_poses/AnimationPlayer")
+body_animation = "lean"
+
+[node name="sentry_poses" parent="." instance=ExtResource("2_ct20a")]
+
+[node name="Skeleton3D" parent="sentry_poses/skeleton" index="0"]
+bones/0/rotation = Quaternion(0, 0.131113, 0, 0.991367)
+bones/1/rotation = Quaternion(-0.0180083, -0.000309206, -0.0171641, 0.999691)
+bones/2/rotation = Quaternion(-0.0649918, 0.215542, 0.0328615, 0.973775)
+bones/3/rotation = Quaternion(0.14359, 0.374564, -0.645768, 0.649667)
+bones/4/rotation = Quaternion(-0.178764, -0.162942, 0.68266, 0.689542)
+bones/5/rotation = Quaternion(-0.146664, -0.0100777, -0.0948248, 0.984579)
+bones/6/position = Vector3(0.10687, 0.13295, -0.0444507)
+bones/6/rotation = Quaternion(-0.233165, 0.239602, -0.912006, 0.237635)
+bones/7/rotation = Quaternion(0.806841, -0.542515, 0.0208925, 0.232916)
+bones/8/rotation = Quaternion(-0.16006, 0.0961146, 0.347011, -0.91909)
+bones/9/rotation = Quaternion(-0.0356706, 0.872473, 0.00381311, 0.487343)
+bones/10/rotation = Quaternion(-0.0372922, 0.659072, -0.0157988, 0.750988)
+bones/11/rotation = Quaternion(-0.10983, 0.708841, 0.00379999, 0.696755)
+bones/12/rotation = Quaternion(-0.0196707, 0.665575, 0.0870905, 0.740971)
+bones/13/rotation = Quaternion(0.0796301, -0.712449, -0.00286437, 0.697186)
+bones/14/rotation = Quaternion(0.0114695, -0.476126, 0.0403213, 0.878377)
+bones/15/rotation = Quaternion(0.167399, -0.500305, -0.000189321, 0.849513)
+bones/16/rotation = Quaternion(-0.0527989, 0.0223982, 0.0250378, 0.99804)
+bones/17/rotation = Quaternion(-0.466442, 0.149245, 0.0229928, 0.871567)
+bones/18/rotation = Quaternion(-0.455859, -0.0595648, -0.161455, 0.873256)
+bones/19/rotation = Quaternion(0.0264926, -0.208315, -0.0408598, 0.976849)
+bones/20/rotation = Quaternion(0.0264926, -0.208315, -0.0408598, 0.976849)
+bones/21/position = Vector3(-0.118117, 0.0785696, -0.0173187)
+bones/21/rotation = Quaternion(0.25926, -0.269569, 0.921144, -0.10775)
+bones/22/rotation = Quaternion(0.270621, 0.101576, -0.171669, 0.941794)
+bones/23/rotation = Quaternion(0.00578013, 0.999974, 0.00434738, 7.02843e-05)
+bones/24/rotation = Quaternion(0.198416, 0.861037, 0.123448, -0.451672)
+bones/25/rotation = Quaternion(-0.120454, -0.661822, 0.199635, 0.712481)
+bones/26/rotation = Quaternion(-0.233156, -0.692077, -0.163758, 0.663213)
+bones/27/rotation = Quaternion(-0.185008, -0.665069, 0.0334595, 0.722728)
+bones/28/rotation = Quaternion(0.237572, 0.660999, -0.117911, 0.701952)
+bones/29/rotation = Quaternion(0.169628, 0.431004, 0.0827062, 0.882395)
+bones/30/rotation = Quaternion(0.284591, 0.431321, -0.153617, 0.842242)
+bones/31/rotation = Quaternion(0.126344, -0.094859, -0.0931131, 0.983041)
+bones/32/rotation = Quaternion(-0.466442, -0.149245, -0.0229928, 0.871567)
+bones/33/rotation = Quaternion(-0.455859, 0.0595648, 0.161455, 0.873256)
+bones/34/rotation = Quaternion(0.0621973, 0.709683, -0.0271242, 0.701246)
+bones/35/rotation = Quaternion(0.363161, -0.367797, 0.308828, 0.798413)
+bones/36/rotation = Quaternion(0.91691, -0.030744, 0.0908355, 0.387402)
+bones/37/rotation = Quaternion(-0.72095, -0.0649207, -0.0604875, 0.687283)
+
+[node name="body" parent="sentry_poses/skeleton/Skeleton3D" index="0"]
+material_override = ExtResource("3_wyrah")
+
+[node name="Head" type="BoneAttachment3D" parent="sentry_poses/skeleton/Skeleton3D" index="1"]
+transform = Transform3D(0.980653, 0.0906875, 0.173481, -0.123837, 0.973748, 0.190995, -0.151606, -0.208783, 0.966139, -0.0841986, 0.455027, -0.190743)
+bone_name = "Head"
+bone_idx = 20
+
+[node name="RightEye" type="MeshInstance3D" parent="sentry_poses/skeleton/Skeleton3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5gnmd")
+
+[node name="LeftEye" type="MeshInstance3D" parent="sentry_poses/skeleton/Skeleton3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.0479237, 0.1)
+mesh = SubResource("QuadMesh_5gnmd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0.40739, 0.817942, 0.406208, 0, 0, 0)
+layers = 8
+shadow_enabled = true
+shadow_caster_mask = 4294967289
+
+[editable path="sentry_poses"]

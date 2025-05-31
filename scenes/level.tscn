@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=154 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -49,6 +49,8 @@
 [ext_resource type="AudioStream" uid="uid://jfssywa3lj1s" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-002.ogg" id="45_tcyu4"]
 [ext_resource type="AudioStream" uid="uid://g0p1e6bo8t1r" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-003.ogg" id="46_vmndo"]
 [ext_resource type="AudioStream" uid="uid://ccbirgsiailx3" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-004.ogg" id="47_bo6tc"]
+[ext_resource type="Script" uid="uid://ds0u52qlo06gn" path="res://scripts/exploration/exit_area.gd" id="48_tcyu4"]
+[ext_resource type="PackedScene" uid="uid://01rv7p5kloe6" path="res://models/source_files/arch.blend" id="49_vmndo"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -429,6 +431,9 @@ size = Vector3(80, 20, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j4eoh"]
 size = Vector3(12, 20, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bo6tc"]
+size = Vector3(1, 12, 10)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
 resource_local_to_scene = true
 render_priority = 0
@@ -763,8 +768,9 @@ view_range = 180.0
 surface_material = SubResource("ShaderMaterial_wu01b")
 
 [node name="Temperance Sentry" parent="Conversation Triggers" instance=ExtResource("24_cmcjb")]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 45.8557, -9.19965, 8.47473)
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 46.1057, -9.19965, 8.57284)
 conversation = ExtResource("25_556r4")
+pose_name = "lean"
 view_range = 90.0
 view_distance = 10.0
 activation_time = 0.6
@@ -774,6 +780,7 @@ surface_material = SubResource("ShaderMaterial_w3o6u")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 66.5446, -3.19965, 49.5626)
 conversation = ExtResource("26_7agi7")
 combat_instance_health = 8
+pose_name = "sit"
 view_range = 180.0
 surface_material = SubResource("ShaderMaterial_2e2fo")
 
@@ -781,6 +788,7 @@ surface_material = SubResource("ShaderMaterial_2e2fo")
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 137.198, -10.1996, -27.2338)
 conversation = ExtResource("27_kih21")
 combat_instance_health = 12
+pose_name = "pose"
 view_range = 180.0
 view_distance = 1.5
 activation_time = 0.4
@@ -839,7 +847,7 @@ autoplay = true
 bus = &"Flickering Lights"
 
 [node name="Stutter" type="AudioStreamPlayer3D" parent="Ambient Audio"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -2, 7.2193)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.963, -9, 7.2193)
 stream = ExtResource("35_svjb4")
 attenuation_model = 2
 unit_size = 4.0
@@ -877,6 +885,7 @@ autoplay = true
 bus = &"Ambient"
 
 [node name="Room Tones" type="Node3D" parent="."]
+process_mode = 3
 script = ExtResource("43_j4eoh")
 
 [node name="Area 1" type="Area3D" parent="Room Tones"]
@@ -884,8 +893,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7807, 0, 4.69242)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 1"]
-process_mode = 3
 stream = ExtResource("44_bhb1k")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -897,8 +906,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5887, 0, 7.6785)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 2"]
-process_mode = 3
 stream = ExtResource("45_tcyu4")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -910,8 +919,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.828, -10.7838, 6.82533)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 3"]
-process_mode = 3
 stream = ExtResource("46_vmndo")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -931,8 +940,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.779, -7.80152, -28.5512)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 4"]
-process_mode = 3
 stream = ExtResource("47_bo6tc")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -942,6 +951,17 @@ shape = SubResource("BoxShape3D_3fqns")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Room Tones/Area 4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82986, 0, 7.87388)
 shape = SubResource("BoxShape3D_j4eoh")
+
+[node name="Exit Arch" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176.031, -9.95887, -28.5583)
+collision_mask = 2
+script = ExtResource("48_tcyu4")
+
+[node name="Arch" parent="Exit Arch" instance=ExtResource("49_vmndo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, 0)
+shape = SubResource("BoxShape3D_bo6tc")
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

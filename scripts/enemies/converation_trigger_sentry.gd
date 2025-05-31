@@ -4,6 +4,8 @@ extends DamageableCharacterBody3D
 @export var combat_prefab: PackedScene
 @export var head_node: BoneAttachment3D
 @export var combat_instance_health: int = 6
+@export var pose_name: String = "stand"
+@export var animator: AnimationPlayer
 
 @export_subgroup("parameters")
 @export_range(0, 180) var view_range: float = 60
@@ -19,6 +21,10 @@ func _ready() -> void:
     head_node.visible = false;
     head_node.override_pose = false;
     camera = get_viewport().get_camera_3d()
+    animator.play(pose_name)
+    animator.advance(0)
+    animator.process_mode = Node.PROCESS_MODE_ALWAYS
+    animator.pause()
 
 func _physics_process(_delta: float) -> void:
     if check_angle() && check_raycast():
@@ -48,6 +54,7 @@ func check_raycast() -> bool:
 func activate():
     if triggered: return
     triggered = true
+    animator.play()
     head_node.show()
     head_node.override_pose = true
     head_node.look_at(camera.global_position, Vector3.UP, true)
@@ -68,6 +75,7 @@ func replace_with_combat_instance() -> DamageableCharacterBody3D:
     combat_instance.maximum_health = combat_instance_health
     add_sibling(combat_instance)
     combat_instance.transform = transform
+    combat_instance.died.connect(ExitArea.notify_encounter_completed)
     queue_free()
     return combat_instance
 

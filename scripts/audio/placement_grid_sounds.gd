@@ -1,4 +1,4 @@
-extends AudioClipPlayer
+extends AudioClipPlayer3D
 
 @export var placed: AudioStream
 @export var rejected: AudioStream

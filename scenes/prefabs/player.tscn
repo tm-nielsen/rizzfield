@@ -254,7 +254,7 @@ script = ExtResource("21_sutpr")
 layer_streams = Array[AudioStreamRandomizer]([SubResource("AudioStreamRandomizer_uioab"), SubResource("AudioStreamRandomizer_sn220"), SubResource("AudioStreamRandomizer_q5e7j")])
 metadata/_custom_type_script = "uid://d0cjk6nd2i1b1"
 
-[node name="Step" type="Node3D" parent="Audio" node_paths=PackedStringArray("movement_body")]
+[node name="Step" type="Node" parent="Audio" node_paths=PackedStringArray("movement_body")]
 script = ExtResource("31_kjdff")
 movement_body = NodePath("../..")
 volume_curve = SubResource("Curve_mn10g")

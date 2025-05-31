@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cck703nj1n1ux"
+path="res://.godot/imported/HomonculusTitleScreenMain.ogg-570a85bd561c21e98e5eb23afd0738df.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Music/Title Screen/HomonculusTitleScreenMain.ogg"
+dest_files=["res://.godot/imported/HomonculusTitleScreenMain.ogg-570a85bd561c21e98e5eb23afd0738df.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,6 +1,7 @@
 extends Node
 
 signal game_started
+signal game_ended
 signal player_died
 
 signal conversation_triggered(
@@ -17,6 +18,9 @@ signal conversation_ended
 
 func notify_game_started():
     game_started.emit()
+
+func notify_game_ended():
+    game_ended.emit()
 
 func notify_player_died():
     player_died.emit.call_deferred()

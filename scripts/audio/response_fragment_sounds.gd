@@ -1,4 +1,4 @@
-extends AudioClipPlayer
+extends AudioClipPlayer3D
 
 @export var mouseover: AudioStream
 @export var grab: AudioStream
