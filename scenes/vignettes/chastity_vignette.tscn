@@ -67,7 +67,7 @@ tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.416667),
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0.0416923, -0.0289949, 0.329639), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
@@ -79,7 +79,7 @@ tracks/1/path = NodePath("Camera3D:rotation")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.416667),
+"times": PackedFloat32Array(0, 0.25, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.0749347, 0.0765279, -0.149702), Vector3(-0.147785, 0.196448, -0.15474), Vector3(-0.235165, 0.187762, -0.119657)]
@@ -173,7 +173,7 @@ tracks/0/path = NodePath("Camera3D:position")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.25),
+"times": PackedFloat32Array(0, 0.25, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0.0415801, 0.106597, 0.282203), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
@@ -185,7 +185,7 @@ tracks/1/path = NodePath("Camera3D:rotation")
 tracks/1/interp = 0
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.25),
+"times": PackedFloat32Array(0, 0.166666, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.470215, 0.0985171, -0.432987), Vector3(-0.147785, 0.196448, -0.15474), Vector3(-0.235165, 0.187762, -0.119657)]
@@ -197,7 +197,7 @@ tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:ma
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.25),
+"times": PackedFloat32Array(0, 0.25, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.2, 0.9, 0.75]
