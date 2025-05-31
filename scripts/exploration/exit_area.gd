@@ -7,6 +7,7 @@ static var encounters_completed: int
 
 
 func _ready():
+    GameModeSignalBus.player_died.connect(reset_count)
     hide()
 
 func _process(_delta: float) -> void:
@@ -21,3 +22,6 @@ func _process(_delta: float) -> void:
 
 static func notify_encounter_completed():
     encounters_completed += 1
+
+static func reset_count():
+    encounters_completed = 0
