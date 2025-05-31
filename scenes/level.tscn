@@ -894,6 +894,7 @@ collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 1"]
 stream = ExtResource("44_bhb1k")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -906,6 +907,7 @@ collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 2"]
 stream = ExtResource("45_tcyu4")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -918,6 +920,7 @@ collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 3"]
 stream = ExtResource("46_vmndo")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
@@ -938,6 +941,7 @@ collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 4"]
 stream = ExtResource("47_bo6tc")
+volume_db = -80.0
 autoplay = true
 bus = &"Room Tones"
 
