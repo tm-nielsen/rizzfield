@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd83bpnet8tbq" path="res://scripts/conversation/npc_dialogue_set.gd" id="1_6jxff"]
 [ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="2_8mi6c"]
-[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/mannequin_vignette.tscn" id="3_moirx"]
+[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/chastity_vignette.tscn" id="3_moirx"]
 
 [sub_resource type="Resource" id="Resource_qp25t"]
 script = ExtResource("1_6jxff")
