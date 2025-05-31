@@ -173,7 +173,6 @@ stretch = true
 stretch_shrink = 2
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/Display Area/VignetteViewport"]
-transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 audio_listener_enable_2d = true
