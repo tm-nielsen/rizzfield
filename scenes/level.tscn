@@ -885,6 +885,7 @@ autoplay = true
 bus = &"Ambient"
 
 [node name="Room Tones" type="Node3D" parent="."]
+process_mode = 3
 script = ExtResource("43_j4eoh")
 
 [node name="Area 1" type="Area3D" parent="Room Tones"]
@@ -892,7 +893,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7807, 0, 4.69242)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 1"]
-process_mode = 3
 stream = ExtResource("44_bhb1k")
 autoplay = true
 bus = &"Room Tones"
@@ -905,7 +905,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5887, 0, 7.6785)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 2"]
-process_mode = 3
 stream = ExtResource("45_tcyu4")
 autoplay = true
 bus = &"Room Tones"
@@ -918,7 +917,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.828, -10.7838, 6.82533)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 3"]
-process_mode = 3
 stream = ExtResource("46_vmndo")
 autoplay = true
 bus = &"Room Tones"
@@ -939,7 +937,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 136.779, -7.80152, -28.5512)
 collision_mask = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Room Tones/Area 4"]
-process_mode = 3
 stream = ExtResource("47_bo6tc")
 autoplay = true
 bus = &"Room Tones"
