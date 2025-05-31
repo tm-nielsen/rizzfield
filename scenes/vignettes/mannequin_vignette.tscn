@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dbdpk1g82cs7n"]
+[gd_scene load_steps=9 format=3 uid="uid://dbdpk1g82cs7n"]
 
-[ext_resource type="ArrayMesh" uid="uid://bck47k562vrd1" path="res://models/mannequin.res" id="1_w6n52"]
+[ext_resource type="Script" uid="uid://c6diby04iws8k" path="res://scripts/enemies/vignette_animator.gd" id="1_mtw0t"]
 [ext_resource type="Material" uid="uid://bfpsykdao7x03" path="res://resources/materials/mannequin_skin_material.tres" id="2_5gnmd"]
 [ext_resource type="Material" uid="uid://di8gh4ie604eb" path="res://resources/materials/eye.tres" id="2_hilif"]
+[ext_resource type="PackedScene" uid="uid://c1v21mtr3805d" path="res://models/source_files/sentry_poses.blend" id="2_mb8vu"]
 
 [sub_resource type="Animation" id="Animation_hilif"]
 length = 0.001
@@ -33,7 +34,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -45,7 +46,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -69,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.0567388, 0.106597, 0.180544), Vector3(0.0600145, 0.0661532, 0.279614), Vector3(0.0267763, 0.0600544, 0.23586)]
+"values": [Vector3(0.0415801, 0.106597, 0.282203), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -86,7 +87,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/pupil_size")
+tracks/2/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/pupil_size")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -98,7 +99,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Mannequin/Head/RightEye:mesh:material:shader_parameter/eye_height")
+tracks/3/path = NodePath("sentry_poses/skeleton/Skeleton3D/Head/RightEye:mesh:material:shader_parameter/eye_height")
 tracks/3/interp = 0
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -121,30 +122,75 @@ size = Vector2(0.05, 0.05)
 [node name="MannequinVignette" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.99399, 0.00508112, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999013, -0.450541, 0.887148, -0.0790314, 0.0811251, 0.180544)
+transform = Transform3D(0.99399, 0.00508112, -0.109352, 0.04476, 0.892741, 0.448341, 0.0999013, -0.450542, 0.887148, -0.0790314, 0.0811251, 0.180544)
 cull_mask = 1048569
 current = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." node_paths=PackedStringArray("body_animator")]
 libraries = {
 &"": SubResource("AnimationLibrary_5gnmd")
 }
 autoplay = "zoom"
+script = ExtResource("1_mtw0t")
+body_animator = NodePath("../sentry_poses/AnimationPlayer")
 
-[node name="Mannequin" type="MeshInstance3D" parent="."]
+[node name="sentry_poses" parent="." instance=ExtResource("2_mb8vu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
-layers = 8
-mesh = ExtResource("1_w6n52")
-surface_material_override/0 = ExtResource("2_5gnmd")
 
-[node name="Head" type="Node3D" parent="Mannequin"]
-transform = Transform3D(1, -1.75089e-07, 4.04194e-07, 8.56817e-08, 1, 2.98024e-08, -3.68804e-07, -2.98023e-08, 1, -6.24132e-08, 0.466707, 1.04827e-09)
+[node name="Skeleton3D" parent="sentry_poses/skeleton" index="0"]
+bones/1/rotation = Quaternion(0.118037, 0.0989151, -0.0463017, 0.986985)
+bones/2/rotation = Quaternion(-0.167759, -0.0161465, -0.018265, 0.985527)
+bones/3/rotation = Quaternion(0.244159, 0.268807, -0.590408, 0.720797)
+bones/4/rotation = Quaternion(-0.296929, -0.285672, 0.638868, 0.649671)
+bones/5/rotation = Quaternion(0.0828422, 0.0104934, -0.0633924, 0.994489)
+bones/6/position = Vector3(0.11739, 0.0873459, -0.0372617)
+bones/6/rotation = Quaternion(0.0628211, 0.134303, -0.985698, -0.0800938)
+bones/7/rotation = Quaternion(0.167757, 0.0082624, 0.0938534, 0.981316)
+bones/8/rotation = Quaternion(-0.00578014, 0.999974, 0.00434737, -7.02908e-05)
+bones/9/rotation = Quaternion(-0.200153, 0.848448, 0.112721, 0.476832)
+bones/10/rotation = Quaternion(-0.10823, 0.642297, -0.199991, 0.731945)
+bones/11/rotation = Quaternion(-0.237478, 0.673562, 0.151731, 0.683299)
+bones/12/rotation = Quaternion(-0.172592, 0.646417, -0.0388052, 0.742194)
+bones/13/rotation = Quaternion(0.228907, -0.682072, 0.12443, 0.683298)
+bones/14/rotation = Quaternion(0.174542, -0.455632, -0.0715684, 0.86995)
+bones/15/rotation = Quaternion(0.275267, -0.456726, 0.160163, 0.830649)
+bones/16/rotation = Quaternion(0.122597, 0.067955, 0.106145, 0.984421)
+bones/17/rotation = Quaternion(-0.472566, 0.289982, 0.00266065, 0.832217)
+bones/18/rotation = Quaternion(-0.485555, 0.0370774, -0.0538331, 0.871759)
+bones/19/rotation = Quaternion(0.0577975, 0.0161047, 0.0800338, 0.994985)
+bones/20/rotation = Quaternion(0.103719, 0.00886728, 0.107422, 0.988749)
+bones/21/position = Vector3(-0.137332, 0.0642341, -0.00837843)
+bones/21/rotation = Quaternion(-0.10576, -0.134042, 0.945632, 0.276816)
+bones/22/rotation = Quaternion(0.137525, -0.199136, 0.713689, 0.657328)
+bones/23/rotation = Quaternion(-0.0372045, 0.73671, 0.254201, 0.625504)
+bones/24/rotation = Quaternion(0.564975, 0.693044, 0.261421, -0.363529)
+bones/25/rotation = Quaternion(-0.163546, -0.43769, 0.582947, 0.66472)
+bones/26/rotation = Quaternion(-0.535023, -0.523395, -0.393948, 0.533492)
+bones/27/rotation = Quaternion(-0.405573, -0.441319, 0.35372, 0.718074)
+bones/28/rotation = Quaternion(0.461466, 0.505519, -0.436082, 0.584237)
+bones/29/rotation = Quaternion(0.540892, 0.443291, 0.228472, 0.677296)
+bones/30/rotation = Quaternion(0.320117, 0.391148, -0.366369, 0.781218)
+bones/31/rotation = Quaternion(0.452581, -0.0517927, -0.34994, 0.818554)
+bones/32/rotation = Quaternion(-0.657087, -0.545033, -0.285223, 0.435688)
+bones/33/rotation = Quaternion(0.293391, -0.325867, -0.305939, 0.845065)
+bones/34/rotation = Quaternion(-0.00399296, 0.695065, -0.00983594, 0.718868)
+bones/35/rotation = Quaternion(0.256714, 0.244003, 0.698681, 0.621615)
+bones/36/rotation = Quaternion(0.153237, -0.0198071, -0.0176703, 0.987833)
+bones/37/rotation = Quaternion(-0.72095, -0.0649207, -0.0604875, 0.687283)
 
-[node name="RightEye" type="MeshInstance3D" parent="Mannequin/Head"]
+[node name="body" parent="sentry_poses/skeleton/Skeleton3D" index="0"]
+material_override = ExtResource("2_5gnmd")
+
+[node name="Head" type="BoneAttachment3D" parent="sentry_poses/skeleton/Skeleton3D" index="1"]
+transform = Transform3D(0.933062, -0.23652, 0.271023, 0.310944, 0.909136, -0.277103, -0.180856, 0.342827, 0.921825, 0.0409245, 0.445213, -0.0328769)
+bone_name = "Head"
+bone_idx = 20
+
+[node name="RightEye" type="MeshInstance3D" parent="sentry_poses/skeleton/Skeleton3D/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0.0479237, 0.1)
 mesh = SubResource("QuadMesh_5gnmd")
 
-[node name="LeftEye" type="MeshInstance3D" parent="Mannequin/Head"]
+[node name="LeftEye" type="MeshInstance3D" parent="sentry_poses/skeleton/Skeleton3D/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.0479237, 0.1)
 mesh = SubResource("QuadMesh_5gnmd")
 
@@ -153,3 +199,5 @@ transform = Transform3D(0.913254, 0.364873, 0.181204, 0, 0.444792, -0.895634, -0
 layers = 8
 shadow_enabled = true
 shadow_caster_mask = 4294967289
+
+[editable path="sentry_poses"]
