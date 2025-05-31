@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.0416923, -0.0289949, 0.329639), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
+"values": [Vector3(0.042, 0.521, 0.33), Vector3(0.085, 0.535, 0.208), Vector3(0.067, 0.566, 0.236)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -123,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.013914, -0.0311063, 0.40301)]
+"values": [Vector3(-0.014, 0.519, 0.403)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -176,7 +176,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.0415801, 0.106597, 0.282203), Vector3(0.0853313, -0.0147415, 0.207578), Vector3(0.0668234, 0.0157234, 0.23586)]
+"values": [Vector3(0.042, 0.657, 0.282), Vector3(0.085, 0.535, 0.208), Vector3(0.067, 0.566, 0.236)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -243,7 +243,6 @@ script = ExtResource("1_0ga7y")
 body_animator = NodePath("../sentry_poses/AnimationPlayer")
 
 [node name="sentry_poses" parent="." instance=ExtResource("2_nsbhp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.55, 0)
 
 [node name="Skeleton3D" parent="sentry_poses/skeleton" index="0"]
 bones/1/rotation = Quaternion(0.118037, 0.0989151, -0.0463017, 0.986985)
