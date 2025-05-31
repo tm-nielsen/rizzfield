@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd83bpnet8tbq" path="res://scripts/conversation/npc_dialogue_set.gd" id="1_k1k65"]
 [ext_resource type="Script" uid="uid://btbkufoee38v3" path="res://scripts/conversation/conversation_definition.gd" id="2_25jot"]
-[ext_resource type="PackedScene" uid="uid://dbdpk1g82cs7n" path="res://scenes/vignettes/chastity_vignette.tscn" id="3_14jon"]
+[ext_resource type="PackedScene" uid="uid://b74fxsa5h6dku" path="res://scenes/vignettes/temperance_vignette.tscn" id="3_k1k65"]
 
 [sub_resource type="Resource" id="Resource_ca7v7"]
 script = ExtResource("1_k1k65")
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://bd83bpnet8tbq"
 
 [resource]
 script = ExtResource("2_25jot")
-vignette_prefab = ExtResource("3_14jon")
+vignette_prefab = ExtResource("3_k1k65")
 dialogue = SubResource("Resource_ca7v7")
 chastity_initial_value = 16
 chastity_maximum_value = 20
