@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch7e8r5h7a6kn"]
+[gd_scene load_steps=8 format=3 uid="uid://ch7e8r5h7a6kn"]
 
 [ext_resource type="Script" uid="uid://cuvnn7gbm0hv2" path="res://scripts/mouse_mode_manager.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://drfqwnyxq1u7d" path="res://scenes/level.tscn" id="2_o6xl0"]
 [ext_resource type="Script" uid="uid://cttswtvd8np6o" path="res://scripts/world_pauser.gd" id="2_tipki"]
 [ext_resource type="PackedScene" uid="uid://dm6nb6h5e06ie" path="res://scenes/ui/conversation_screen.tscn" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://s2wj8ldqemoo" path="res://scripts/exploration/exit_screen.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bdvqoqpcker0v" path="res://scenes/ui/fragment_collection_popup.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://cvvc0gq1ejxgq" path="res://scenes/ui/menu_screens.tscn" id="11_ya4ey"]
 
@@ -49,3 +50,14 @@ layout_mode = 1
 
 [node name="MenuScreens" parent="." instance=ExtResource("11_ya4ey")]
 layout_mode = 1
+
+[node name="Exit Screen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("7_o6xl0")

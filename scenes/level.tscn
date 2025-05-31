@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=4 uid="uid://drfqwnyxq1u7d"]
+[gd_scene load_steps=154 format=4 uid="uid://drfqwnyxq1u7d"]
 
 [ext_resource type="Script" uid="uid://bjehjdq6drphx" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ags13"]
 [ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="2_d0lv2"]
@@ -49,6 +49,8 @@
 [ext_resource type="AudioStream" uid="uid://jfssywa3lj1s" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-002.ogg" id="45_tcyu4"]
 [ext_resource type="AudioStream" uid="uid://g0p1e6bo8t1r" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-003.ogg" id="46_vmndo"]
 [ext_resource type="AudioStream" uid="uid://ccbirgsiailx3" path="res://Sound/Sound Effects/Loops/Ambient Room Tones/RoomToneLoop-004.ogg" id="47_bo6tc"]
+[ext_resource type="Script" uid="uid://ds0u52qlo06gn" path="res://scripts/exploration/exit_area.gd" id="48_tcyu4"]
+[ext_resource type="PackedScene" uid="uid://01rv7p5kloe6" path="res://models/source_files/arch.blend" id="49_vmndo"]
 
 [sub_resource type="Resource" id="Resource_apssy"]
 script = ExtResource("19_g2utk")
@@ -428,6 +430,9 @@ size = Vector3(80, 20, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j4eoh"]
 size = Vector3(12, 20, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bo6tc"]
+size = Vector3(1, 12, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_556r4"]
 resource_local_to_scene = true
@@ -945,6 +950,17 @@ shape = SubResource("BoxShape3D_3fqns")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Room Tones/Area 4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82986, 0, 7.87388)
 shape = SubResource("BoxShape3D_j4eoh")
+
+[node name="Exit Arch" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176.031, -9.95887, -28.5583)
+collision_mask = 2
+script = ExtResource("48_tcyu4")
+
+[node name="Arch" parent="Exit Arch" instance=ExtResource("49_vmndo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit Arch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, 0)
+shape = SubResource("BoxShape3D_bo6tc")
 
 [node name="Player" parent="." instance=ExtResource("21_wu01b")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

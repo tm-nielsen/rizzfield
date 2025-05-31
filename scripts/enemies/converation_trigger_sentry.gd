@@ -75,6 +75,7 @@ func replace_with_combat_instance() -> DamageableCharacterBody3D:
     combat_instance.maximum_health = combat_instance_health
     add_sibling(combat_instance)
     combat_instance.transform = transform
+    combat_instance.died.connect(ExitArea.notify_encounter_completed)
     queue_free()
     return combat_instance
 
