@@ -152,11 +152,13 @@ fade_duration = 6.0
 
 [node name="Main" type="AudioStreamPlayer" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen/Music"]
 stream = ExtResource("6_72jck")
+volume_db = -3.0
 autoplay = true
 bus = &"Music"
 
 [node name="Loop" type="AudioStreamPlayer" parent="TitleScreen/SubViewportContainer/SubViewport/Start Screen/Music"]
 stream = ExtResource("7_0u6tk")
+volume_db = -3.0
 bus = &"Music"
 
 [node name="Content Warning" type="Control" parent="TitleScreen" node_paths=PackedStringArray("next_screen")]
